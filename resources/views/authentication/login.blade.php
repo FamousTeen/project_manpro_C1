@@ -10,7 +10,7 @@
 
 <body class="bg-[#DEE1DD]">
   <div class="container-fluid h-dvh content-center w-dvw">
-    <form class="max-w-md m-auto p-14 bg-[#C4CDC1] rounded-lg">
+    <form class="max-w-md m-auto p-14 pb-5 bg-[#C4CDC1] rounded-lg">
       <div class="grid justify-items-center">
         <h1 class="text-3xl font-bold mb-10">LOGIN</h1>
       </div>
@@ -35,6 +35,9 @@
       </div>
       <div class="relative z-0 w-full mb-5 group text-center">
         Don't have an account? <span><a href="{{ route('sign_up')}}" class="font-medium underline underline-offset-2">Sign up</a></span>
+      </div>
+      <div class="grid z-0 w-full mb-3 mt-4 group justify-items-center">
+        <img src="{{asset('asset/profile-circle.256x256.png')}}" class="w-[50px] h-[50px]" alt="logo gereja">
       </div>
     </form>
   </div>
