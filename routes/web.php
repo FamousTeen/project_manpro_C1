@@ -25,3 +25,7 @@ Route::get('/signUp', function () {
 Route::get('/main', function () {
     return view('main/mainpage');
 });
+// buat testing
+Route::get('/dashboard', function () {
+    return view('admin/dashboard');
+})->name('dashboard_admin');
