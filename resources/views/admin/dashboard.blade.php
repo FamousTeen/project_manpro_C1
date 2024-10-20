@@ -1,4 +1,4 @@
-@extends('admin/base')
+@extends('base/main_navbar')
 
 @section('content')
 <div class="container-fluid m-12 me-0">

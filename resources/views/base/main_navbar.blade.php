@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Navbar</title>
     @vite('resources/css/app.css')
+    @yield('librarycss')
 </head>
 <!-- Colors: 
         1. #740001 - merah gelap 
@@ -14,8 +15,9 @@
         4. #002366 - biru terang 
         5. #20252f - biru gelap 
     -->
+
 <body class="bg-white">
-    <nav class="bg-[#20252f] text-white p-4">
+    <nav class="bg-[#20252f] text-white p-4 fixed top-0 left-0 right-0">
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo Section -->
             <a href="#" class="flex items-center">
@@ -28,12 +30,17 @@
                 <a href="#" class="hover:text-[#ae0001] transition duration-300">Home</a>
                 <a href="#" class="hover:text-[#ae0001] transition duration-300">About Us</a>
                 <a href="#" class="hover:text-[#ae0001] transition duration-300">Contact</a>
-                <a href="#" class="bg-white text-[#20252f] py-2 px-6 rounded-full hover:bg-[#ae0001] hover:text-white transition duration-300">
+                <a href="#"
+                    class="bg-white text-[#20252f] py-2 px-6 rounded-full hover:bg-[#ae0001] hover:text-white transition duration-300">
                     Login
                 </a>
             </div>
         </div>
     </nav>
+    @yield('content')
+
+    @vite('resources/js/app.js')
+    @yield('libraryjs')
 </body>
 
 </html>
