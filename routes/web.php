@@ -21,3 +21,8 @@ Route::get('/', function () {
 Route::get('/signUp', function () {
     return view('authentication/sign_up');
 })->name('sign_up');
+
+// buat testing
+Route::get('/dashboard', function () {
+    return view('admin/dashboard');
+})->name('dashboard_admin');
