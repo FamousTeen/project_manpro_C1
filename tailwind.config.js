@@ -7,7 +7,11 @@ module.exports = {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poltawski: ['Poltawski Nowy', 'sans-serif'],
+        sanchez: ['Sanchez', 'serif'],}
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

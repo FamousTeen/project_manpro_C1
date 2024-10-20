@@ -21,3 +21,7 @@ Route::get('/', function () {
 Route::get('/signUp', function () {
     return view('authentication/sign_up');
 })->name('sign_up');
+
+Route::get('/main', function () {
+    return view('main/mainpage');
+});
