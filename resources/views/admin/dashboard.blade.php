@@ -1,81 +1,114 @@
-@extends('base/main_navbar')
+@extends('base/anggota_navbar')
 
 @section('content')
-<div class="container-fluid m-12 me-0">
+
+<!-- Colors: 
+        1. #740001 - merah gelap 
+        2. #ae0001 - merah terang 
+        3. #f6f1e3 - netral 
+        4. #002366 - biru terang 
+        5. #20252f - biru gelap 
+    -->
+<div class="container-fluid m-12 me-0 mt-24">
+  <!-- Header Section -->
   <div class="grid grid-cols-12">
-    <div class="grid col-start-4 col-span-6 mt-6 justify-items-center">
-      <h1 class="font-bold text-2xl ">DASHBOARD</h1>
+    <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
+      <h1 class="font-bold text-4xl text-center">DASHBOARD</h1>
     </div>
-    <div class="grid col-start-11 col-span-2">
-      <h2>Hi, Shasaa</h2>
-      <p>Day, DD-MM-YYYY</p>
-    </div>
-  </div>
-
-  <div class="flex justify-center grid-cols-2 m-12 gap-x-12">
-    <div class="bg-[#C4CDC1] p-6 pe-16 md:p-4 rounded-xl flex justify-between gap-x-3 md:gap-x-12">
-      <div>
-        <p class="font-semibold w-fit">Tugas</p>
-        <p class=" w-fit">3</p>
-      </div>
-      <img class="w-[50px] h-[50px]" src="{{ asset('asset/task_complete.png')}}" alt="">
-    </div>
-    <div class="bg-[#C4CDC1] p-4 rounded-xl flex justify-between gap-x-3 md:gap-x-12">
-      <div>
-        <p class="font-semibold w-fit">Panitia</p>
-        <p class=" w-fit">4</p>
-      </div>
-      <img class="w-[50px] h-[50px]" src="{{ asset('asset/people.png')}}" alt="">
+    <div class="col-start-11 col-span-2 text-right mr-16 mt-8">
+      <h2 class="font-bold text-xl ">Hi, Shasa</h2>
+      <p class="font-normal" id="currentDate"></p>
     </div>
   </div>
 
-  <div>
-    <div class="grid justify-items-center">
-      <h1 class="font-bold text-xl">CALENDER</h1>
+  <!-- Main Layout: Left and Right Sides -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-8 mt-6">
+    
+    <!-- Left Side: Tugas, Panitia, and Pengumuman -->
+    <div>
+      <!-- Tugas and Panitia Section -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 ml-16 ">
+        <div class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
+          <div>
+            <p class="font-semibold w-fit text-lg">Tugas</p>
+            <p class="w-fit text-md">3</p>
+          </div>
+          <img class="w-[50px] h-[50px]" src="{{ asset('asset/task_complete.png')}}" alt="Task Icon">
+        </div>
+        <div class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
+          <div>
+            <p class="font-semibold w-fit text-lg">Panitia</p>
+            <p class="w-fit text-md">4</p>
+          </div>
+          <img class="w-[50px] h-[50px]" src="{{ asset('asset/people.png')}}" alt="People Icon">
+        </div>
+      </div>
+
+      <!-- Pengumuman Section -->
+      <h2 class="font-bold text-xl mb-4 ml-16">Pengumuman</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-16">
+        <!-- Announcement Card 1 -->
+        <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
+          <p class="font-semibold">Selasa, 15 Oktober 2024</p>
+          <p class="text-sm">Bagi Teman-Teman yang bertugas pada tanggal sekian dipersilahkan untuk latihan di gereja.
+            <br><br>
+            Tanggal : 12-09-24
+            <br>
+            Jam : 11.00 WIB
+            <br><br>
+            Sekian dan Terima Kasih</p>
+        </div>
+        <!-- Announcement Card 2 -->
+        <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
+          <p class="font-semibold">Date: 18 October 2024</p>
+          <p class="text-sm">Bagi Teman-Teman yang bertugas pada tanggal sekian dipersilahkan untuk latihan di gereja.
+            <br><br>
+            Tanggal : 12-09-24
+            <br>
+            Jam : 11.00 WIB
+            <br><br>
+            Sekian dan Terima Kasih</p>
+        </div>
+        <!-- Add more announcement cards as needed -->
+      </div>
     </div>
-    <div class="flex items-center justify-center">
-      <div class="lg:w-7/12 md:w-9/12 sm:w-10/12 mx-auto p-4 ps-0">
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-          <!-- Calendar Header -->
-          <div class="flex items-center justify-between px-6 py-3 bg-[#C4CDC1]">
-            <button id="prevMonth" class="text-black">Previous</button>
-            <h2 id="currentMonth" class="text-black text-lg md:text-xl"></h2>
-            <button id="nextMonth" class="text-black">Next</button>
-          </div>
 
-          <!-- Calendar Days Grid -->
-          <div class="grid grid-cols-7 gap-2 p-4 text-center text-sm md:text-base" id="calendar">
-            <!-- Calendar Days Go Here -->
-          </div>
+    <!-- Right Side: Calendar Section -->
+    <div class>
+      <div class="grid justify-items-center mb-6">
+        <h1 class="font-bold text-xl">CALENDAR</h1>
+      </div>
+      <div class="flex items-center justify-center">
+        <div class="lg:w-7/12 md:w-9/12 sm:w-10/12 mx-auto p-4 ps-0">
+          <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <!-- Calendar Header -->
+            <div class="flex items-center justify-between px-6 py-3 bg-[#f6f1e3]">
+              <button id="prevMonth" class="text-[#20252f]">Previous</button>
+              <h2 id="currentMonth" class="text-[#20252f] text-lg md:text-xl"></h2>
+              <button id="nextMonth" class="text-[#20252f]">Next</button>
+            </div>
 
-          <!-- Buat detail event (kalo butuh) -->
-          <!-- Modal
-              <div id="myModal" class="modal hidden fixed inset-0 flex items-center justify-center z-50">
-                <div class="modal-overlay absolute inset-0 bg-black opacity-50"></div>
-                <div
-                  class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-                  <div class="modal-content py-4 text-left px-6">
-                    <div class="flex justify-between items-center pb-3">
-                      <p class="text-2xl font-bold">Selected Date</p>
-                      <button id="closeModal"
-                        class="modal-close px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring">✕</button>
-                    </div>
-                    <div id="modalDate" class="text-xl font-semibold"></div>
-                  </div>
-                </div>
-              </div> -->
+            <!-- Calendar Days Grid -->
+            <div class="grid grid-cols-7 gap-2 p-4 text-center text-sm md:text-base" id="calendar">
+              <!-- Calendar Days Go Here -->
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
+
   </div>
-
-</div>
-
 </div>
 @endsection
 
 @section('libraryjs')
 <script>
+  // Function to display the current date in the "Hi, Shasa" section
+  const today = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
+
   // Function to generate the calendar for a specific month and year
   function generateCalendar(year, month) {
     const calendarElement = document.getElementById('calendar');
@@ -119,7 +152,7 @@
       // Check if this date is the current date
       const currentDate = new Date();
       if (year === currentDate.getFullYear() && month === currentDate.getMonth() && day === currentDate.getDate()) {
-        dayElement.classList.add('bg-[#C4CDC1]', 'text-black'); // Add classes for the indicator
+        dayElement.classList.add('bg-[#f6f1e3]', 'text-[#20252f]'); // Add classes for the indicator
       }
 
       calendarElement.appendChild(dayElement);
@@ -150,37 +183,5 @@
     }
     generateCalendar(currentYear, currentMonth);
   });
-
-  // Function to show the modal with the selected date
-  function showModal(selectedDate) {
-    const modal = document.getElementById('myModal');
-    const modalDateElement = document.getElementById('modalDate');
-    modalDateElement.innerText = selectedDate;
-    modal.classList.remove('hidden');
-  }
-
-  // Function to hide the modal
-  function hideModal() {
-    const modal = document.getElementById('myModal');
-    modal.classList.add('hidden');
-  }
-
-  // Event listener for date click events
-  const dayElements = document.querySelectorAll('.cursor-pointer');
-  dayElements.forEach(dayElement => {
-    dayElement.addEventListener('click', () => {
-      const day = parseInt(dayElement.innerText);
-      const selectedDate = new Date(currentYear, currentMonth, day);
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const formattedDate = selectedDate.toLocaleDateString(undefined, options);
-      showModal(formattedDate);
-    });
-  });
-
-  // Event listener for closing the modal
-  document.getElementById('closeModal').addEventListener('click', () => {
-    hideModal();
-  });
-
 </script>
 @endsection
