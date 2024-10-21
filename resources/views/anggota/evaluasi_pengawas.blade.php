@@ -39,13 +39,13 @@
       <div class="mt-6">
         <div class="flex flex-col">
           <p class="font-bold">Evaluasi: </p>
-          <p class="mt-0 text-sm text-justify">Nam eget molestie massa. Nunc non vestibulum ante. Morbi sem tortor, aliquam a tincidunt sit amet, pretium varius orci. Sed eu nibh sit amet arcu dignissim posuere. </p>
+          <p class="mt-0 text-sm">none</p>
         </div>
       </div>
     </div>
     <!-- Modal 1 -->
     <div id="modal1" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal1')">
-      <div class="bg-[#D1D9D1] p-8 rounded-lg w-[700px] h-[400px] relative p-12" onclick="event.stopPropagation()">
+      <div class="bg-[#D1D9D1] p-8 rounded-lg w-[700px] resize-y relative p-12" onclick="event.stopPropagation()">
           <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal1')">
               &#10005;
           </button>
@@ -64,8 +64,15 @@
                   {{-- Evaluasi --}}
                   <div class="mt-6 ms-9">
                     <div class="flex flex-col">
-                      <p class="font-bold">Evaluasi: </p>
-                      <p class="mt-0 text-sm text-justify pe-2">Nam eget molestie massa. Nunc non vestibulum ante. Morbi sem tortor, aliquam a tincidunt sit amet, pretium varius orci. Sed eu nibh sit amet arcu dignissim posuere. </p>
+                      <div class="flex flex-row justify-between items-center mr-4">
+                        <p class="font-bold">Evaluasi: </p>                     
+                      </div>
+                      <div class="mt-2 pe-2">
+                        <textarea class="w-full h-40 p-4 border border-[#002366] rounded-md focus:outline-none focus:ring-2 focus:ring-[#D2D2D2]" placeholder="Masukkan Evaluasi..."></textarea>
+                        <div class="place-items-end">
+                          <button class="bg-[#002366] text-white py-1 px-2 rounded-md hover:bg-[#740001] transition-all duration-300 text-sm mt-2">Upload</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
               </div>
@@ -78,7 +85,7 @@
                       <ul class="mr-14">
                           <li>Angel</li>
                           <li>Martin</li>
-                          <li>Shasaa</li>
+                          <li>Bobby</li>
                           <li>Jonathan</li>
                       </ul>
                       <ul>
@@ -89,7 +96,7 @@
                   </div>
                   <p class="mt-2"><span class="font-bold">Pengawas:</span></p>
                   <ul>
-                      <li>Alonso</li>
+                      <li>Shasa</li>
                       <li>Bryan</li>
                   </ul>
                   <p class="mt-2"><span class="font-bold">Perkap:</span></p>
@@ -189,9 +196,4 @@
     document.getElementById(modalId).classList.add('hidden');
   }
 </script>
-
-<style>
-  .hidden {
-      display: none;
-}
 @endsection

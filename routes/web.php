@@ -62,6 +62,11 @@ Route::get('/evaluasi', function () {
     return view('anggota/evaluasi');
 })->name('evaluasi_anggota');
 
+// Evaluasi Anggota (Pengawas)
+Route::get('/evaluasi_pengawas', function () {
+    return view('anggota/evaluasi_pengawas');
+})->name('evaluasi_pengawas_anggota');
+
 // buat testing
 Route::get('/post_pengumuman', function () {
     return view('admin/post_pengumuman');
