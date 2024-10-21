@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Page Login yang asli
 Route::get('/', function () {
     return view('authentication/login');
-});
+})->name('start_login');
 
 
 Route::get('/signUp', function () {
@@ -25,17 +29,26 @@ Route::get('/signUp', function () {
 Route::get('/main', function () {
     return view('main/mainpage');
 });
-// buat testing
-Route::get('/dashboard', function () {
-    return view('anggota/dashboard');
-})->name('dashboard_anggota');
+
+// ke fungsi "login" AuthController
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // buat testing
 Route::get('/acara', function () {
-    return view('anggota/alur_acara/acara');
+    return view('anggota/acara');
 })->name('acara_anggota');
 
-// buat testing
-Route::get('/evaluasi', function () {
-    return view('anggota/evaluasi');
-})->name('evaluasi_anggota');
+Route::resource('accounts', AccountController::class)->except(['store'])->names([
+    'index' => 'accounts.index',
+    'create' => 'accounts.create',
+    'show' => 'accounts.show',
+    'edit' => 'accounts.edit',
+    'update' => 'accounts.update',
+    'destroy' => 'accounts.destroy',
+]);
+
+Route::post('/store-account', [AccountController::class, 'store'])->name('store_account');
+
+

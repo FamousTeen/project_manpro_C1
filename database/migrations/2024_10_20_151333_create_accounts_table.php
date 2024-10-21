@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('photo');
+            $table->string('photo')->default("default.png");
             $table->boolean('status')->default(1);
             $table->string('address');
-            $table->string('birthdate');
+            $table->string('birth_place_date');
             $table->string('region');
-            $table->string('roles');
+            $table->string('roles')->nullable();
             $table->timestamps();
         });
     }

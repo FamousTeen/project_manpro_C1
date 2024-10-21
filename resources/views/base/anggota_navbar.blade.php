@@ -40,7 +40,11 @@
                 <div class="relative">
                     <button id="dropdownButton" class="flex items-center space-x-2 bg-[#20252f] hover:bg-[#ae0001] text-[#f6f1e3] p-2 transition duration-300 focus:outline-none rounded">
                         <img src="../../../asset/profile-circle.256x256.png" alt="Profile Icon" class="h-8 w-8 rounded-full bg-[#f6f1e3]">
-                        <span>Profile</span>
+                        <span>
+                            @if (isset($user) && isset($data))
+                                {{$data->name}}
+                            @endif
+                        </span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
@@ -49,7 +53,7 @@
                     <!-- Dropdown Menu -->
                     <div id="dropdownMenu" class="hidden absolute right-0 top-full w-full bg-[#20252f] text-[#f6f1e3] shadow-lg mt-1">
                         <a href="#" class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Profile</a>
-                        <a href="#" class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Logout</a>
+                        <a href="{{ route('start_login')}}" class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Logout</a>
                     </div>
                 </div>
             </div>
