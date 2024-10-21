@@ -40,6 +40,11 @@ Route::get('/acara', function () {
     return view('anggota/acara');
 })->name('acara_anggota');
 
+//Jadwal Anggota
+Route::get('/jadwal', function () {
+    return view('anggota/jadwal');
+})->name('jadwal_anggota');
+
 Route::resource('accounts', AccountController::class)->except(['store'])->names([
     'index' => 'accounts.index',
     'create' => 'accounts.create',

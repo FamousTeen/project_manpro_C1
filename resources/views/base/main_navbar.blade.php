@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Navbar</title>
     @vite('resources/css/app.css')
+
+    {{-- For Font --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poltawski+Nowy:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poltawski Nowy', serif;
+            background-color: #FCF1D5;
+        }
+    </style>
+    
     @yield('librarycss')
 </head>
 <!-- Colors: 
