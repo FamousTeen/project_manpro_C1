@@ -191,9 +191,4 @@
     document.getElementById(modalId).classList.add('hidden');
   }
 </script>
-
-<style>
-  .hidden {
-      display: none;
-}
 @endsection

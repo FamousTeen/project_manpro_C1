@@ -89,11 +89,11 @@
           Account</button>
       </div>
       <div class="relative z-0 w-full mb-5 group text-center">
-        Already have an account? <span><a href="{{ route('sign_up')}}"
+        Already have an account? <span><a href="{{ route('start_login')}}"
             class="font-medium underline underline-offset-2">Login</a></span>
       </div>
       <div class="grid z-0 w-full mt-4 group justify-items-center">
-        <img src="{{asset('asset/profile-circle.256x256.png')}}" class="w-[50px] h-[50px]" alt="logo gereja">
+        <img src="../../../images/LOGO_MISDINAR.png" class="w-[50px] h-[50px]" alt="logo gereja">
       </div>
     </form>
   </div>
