@@ -18,17 +18,17 @@ use App\Http\Controllers\DashboardController;
 
 // Page Login yang asli
 Route::get('/', function () {
-    return view('authentication/login');
-})->name('start_login');
+    return view('main/mainpage');
+})->name('main_page');
 
 
 Route::get('/signUp', function () {
     return view('authentication/sign_up');
 })->name('sign_up');
 
-Route::get('/main', function () {
-    return view('main/mainpage');
-});
+Route::get('/mainLogin', function () {
+    return view('authentication/login');
+})->name('start_login');
 
 // ke fungsi "login" AuthController
 Route::get('/login', [AuthController::class, 'login'])->name('login');

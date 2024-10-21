@@ -55,7 +55,7 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        //
+        
     }
 
     /**
