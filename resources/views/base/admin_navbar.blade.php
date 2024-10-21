@@ -72,25 +72,60 @@
             </a>
         </li>
         <li>
-            <button id="konfirmasiButton" class="flex justify-between items-center text-[#f6f1e3] w-full hover:text-[#ae0001] focus:outline-none">
+            <button id="jadwalButton" class="flex justify-between items-center text-[#f6f1e3] w-full hover:text-[#ae0001] focus:outline-none">
                 <div class="flex items-center">
                     <img src="../../../asset/schedule.png" alt="Jadwal Icon" class="h-6 w-6 mr-4">
-                    Jadwal
+                    Daftar Jadwal
                 </div>
                 <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
             </button>
             <!-- Sub-menu -->
-            <ul id="konfirmasiDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
-                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Tugasku</a></li>
-                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Konfirmasi Tugas</a></li>
+            <ul id="jadwalDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
+                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Misa</a></li>
+                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Acara</a></li>
+                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Pelatihan</a></li>
+            </ul>
+        </li>
+        <li>
+            <button id="inputButton" class="flex justify-between items-center text-[#f6f1e3] w-full hover:text-[#ae0001] focus:outline-none">
+                <div class="flex items-center">
+                    <img src="../../../asset/addIcon.png" alt="Add Jadwal Icon" class="h-6 w-6 mr-4">
+                    Input Jadwal
+                </div>
+                <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <!-- Sub-menu -->
+            <ul id="inputDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
+                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Misa</a></li>
+                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Acara</a></li>
+                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Pelatihan</a></li>
+            </ul>
+        </li>
+        <li>
+            <button id="pengurusButton" class="flex justify-between items-center text-[#f6f1e3] w-full hover:text-[#ae0001] focus:outline-none">
+                <div class="flex items-center">
+                    <img src="../../../asset/admin_only.png" alt="Add Jadwal Icon" class="h-6 w-6 mr-4">
+                    Khusus Pengurus
+                </div>
+                <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+            <!-- Sub-menu -->
+            <ul id="pengurusDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
+                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Pengumuman</a></li>
+                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Rapat</a></li>
+                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Dokumen</a></li>
             </ul>
         </li>
         <li>
             <a href="#" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
-                <img src="../../../asset/event.png" alt="Acara Icon" class="h-6 w-6 mr-4">
-                Acara
+                <img src="../../../asset/announcement.png" alt="Acara Icon" class="h-6 w-6 mr-4">
+                Pengumuman Umum
             </a>
         </li>
         <li>
@@ -150,12 +185,31 @@
             }
         });
 
-        const konfirmasiButton = document.getElementById('konfirmasiButton');
-    const konfirmasiDropdown = document.getElementById('konfirmasiDropdown');
+        //dropdown list jadwal
+        const jadwalButton = document.getElementById('jadwalButton');
+    const jadwalDropdown = document.getElementById('jadwalDropdown');
 
-    konfirmasiButton.addEventListener('click', () => {
-        konfirmasiDropdown.classList.toggle('hidden');
-        konfirmasiButton.querySelector('svg').classList.toggle('rotate-180'); // Rotate arrow icon
+    jadwalButton.addEventListener('click', () => {
+        jadwalDropdown.classList.toggle('hidden');
+        jadwalButton.querySelector('svg').classList.toggle('rotate-180'); // Rotate arrow icon
+    });
+
+    //dropdown input
+    const inputButton = document.getElementById('inputButton');
+    const inputDropdown = document.getElementById('inputDropdown');
+
+    inputButton.addEventListener('click', () => {
+        inputDropdown.classList.toggle('hidden');
+        inputButton.querySelector('svg').classList.toggle('rotate-180'); // Rotate arrow icon
+    });
+
+    //dropdown pengurus
+    const pengurusButton = document.getElementById('pengurusButton');
+    const pengurusDropdown = document.getElementById('pengurusDropdown');
+
+    pengurusButton.addEventListener('click', () => {
+        pengurusDropdown.classList.toggle('hidden');
+        pengurusButton.querySelector('svg').classList.toggle('rotate-180'); // Rotate arrow icon
     });
     </script>
 
