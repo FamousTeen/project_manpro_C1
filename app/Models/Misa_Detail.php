@@ -12,6 +12,8 @@ class Misa_Detail extends Pivot
 {
     use HasFactory;
 
+    protected $table = 'misa_details';
+
     public function account(): BelongsTo {
         return $this->belongsTo(Account::class);
     }
