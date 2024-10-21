@@ -56,7 +56,7 @@
     </nav>
 
     <!-- Sidebar -->
-<div id="sidebar" class="fixed left-0 top-0 w-64 h-full bg-[#20252f] text-white p-8 z-20 transform -translate-x-full transition-transform duration-300">
+<div id="sidebar" class="fixed left-0 top-0 w-72 h-full bg-[#20252f] text-white p-8 z-20 transform -translate-x-full transition-transform duration-300 overflow-y-auto no-scrollbar">
     <div class="flex justify-between items-center mb-8">
         <button id="sidebarClose" class="text-white p-2">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -136,6 +136,7 @@
         </li>
     </ul>
 </div>
+
 
     <!-- Dark Overlay (when sidebar is open) -->
     <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden z-10"></div>

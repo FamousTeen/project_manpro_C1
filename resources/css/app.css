@@ -3,3 +3,15 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Poltawski+Nowy&family=Sanchez&display=swap');
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    scrollbar-width: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none; 
+}
