@@ -27,5 +27,10 @@ Route::get('/main', function () {
 });
 // buat testing
 Route::get('/dashboard', function () {
-    return view('admin/dashboard');
-})->name('dashboard_admin');
+    return view('anggota/dashboard');
+})->name('dashboard_anggota');
+
+// buat testing
+Route::get('/acara', function () {
+    return view('anggota/acara');
+})->name('acara_anggota');
