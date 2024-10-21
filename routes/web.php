@@ -40,6 +40,7 @@ Route::get('/acara', function () {
     return view('anggota/acara');
 })->name('acara_anggota');
 
+<<<<<<< Updated upstream
 //Jadwal Anggota
 Route::get('/jadwal', function () {
     return view('anggota/jadwal');
@@ -57,3 +58,14 @@ Route::resource('accounts', AccountController::class)->except(['store'])->names(
 Route::post('/store-account', [AccountController::class, 'store'])->name('store_account');
 
 
+=======
+// buat testing
+Route::get('/evaluasi', function () {
+    return view('anggota/evaluasi');
+})->name('evaluasi_anggota');
+
+// buat testing
+Route::get('/post_pengumuman', function () {
+    return view('admin/post_pengumuman');
+})->name('pengumuman_admin');
+>>>>>>> Stashed changes

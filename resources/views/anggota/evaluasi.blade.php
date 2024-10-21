@@ -23,10 +23,10 @@
 </div>
 
 <!-- Eval Section -->
-<div class="flex justify-center mb-16">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-16 ">
-    <!-- Eval 1 -->
-    <div class="bg-[#f6f1e3] p-6 shadow-lg w-64 mx-8 border border-[#002366] rounded-lg cursor-pointer" onclick="openModal('modal1')">
+  <div class="flex justify-center mb-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 ">
+      <!-- Eval 1 -->
+      <div class="bg-[#f6f1e3] p-6 shadow-lg w-64 mx-8 border border-[#002366] rounded-lg cursor-pointer" onclick="openModal('modal1')">
       <!-- Date -->
   <h2 class="text-lg font-bold mb-2">Rabu, 25-12-2024</h2>
 
