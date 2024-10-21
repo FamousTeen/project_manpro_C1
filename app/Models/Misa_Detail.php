@@ -2,10 +2,24 @@
 
 namespace App\Models;
 
+// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Misa_Detail extends Model
+class Misa_Detail extends Pivot
 {
     use HasFactory;
+
+    public function account(): BelongsTo {
+        return $this->belongsTo(Account::class);
+    }
+    public function misa(): BelongsTo {
+        return $this->belongsTo(Misa::class);
+    }
+
+    public function misaPermissions(): HasMany {
+        return $this->hasMany(MisaPermission::class);
+    }
 }
