@@ -32,5 +32,10 @@ Route::get('/dashboard', function () {
 
 // buat testing
 Route::get('/acara', function () {
-    return view('anggota/acara');
+    return view('anggota/alur_acara/acara');
 })->name('acara_anggota');
+
+// buat testing
+Route::get('/evaluasi', function () {
+    return view('anggota/evaluasi');
+})->name('evaluasi_anggota');
