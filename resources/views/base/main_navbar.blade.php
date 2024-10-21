@@ -42,7 +42,7 @@
                 <a href="#" class="hover:text-[#ae0001] transition duration-300">Home</a>
                 <a href="#" class="hover:text-[#ae0001] transition duration-300">About Us</a>
                 <a href="#" class="hover:text-[#ae0001] transition duration-300">Contact</a>
-                <a href="#"
+                <a href="{{ route('start_login') }}"
                     class="bg-white text-[#20252f] py-2 px-6 rounded-full hover:bg-[#ae0001] hover:text-white transition duration-300">
                     Login
                 </a>
