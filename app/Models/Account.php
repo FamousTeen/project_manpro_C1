@@ -12,27 +12,35 @@ class Account extends Authenticatable
 {
     use HasFactory, HasApiTokens;
 
-    public function groupDetails(): HasMany {
+    protected $fillable = ['name', 'email', 'password', 'photo', 'address', 'birth_place_date', 'region', 'roles'];
+
+    public function groupDetails(): HasMany
+    {
         return $this->hasMany(GroupDetail::class);
     }
 
-    public function trainingDetails(): HasMany {
+    public function trainingDetails(): HasMany
+    {
         return $this->hasMany(TrainingDetail::class);
     }
 
-    public function eventDetails(): HasMany {
+    public function eventDetails(): HasMany
+    {
         return $this->hasMany(EventDetail::class);
     }
 
-    public function templatePermissions(): HasMany {
+    public function templatePermissions(): HasMany
+    {
         return $this->hasMany(TemplatePermission::class);
     }
 
-    public function announcementDetails(): HasMany {
+    public function announcementDetails(): HasMany
+    {
         return $this->hasMany(AnnouncementDetail::class);
     }
 
-    public function misaDetails(): HasMany {
+    public function misaDetails(): HasMany
+    {
         return $this->hasMany(Misa_Detail::class);
     }
 }

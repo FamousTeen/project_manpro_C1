@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\Account;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\StoreAccountRequest;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UpdateAccountRequest;
 
 class AccountController extends Controller
@@ -29,22 +29,33 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAccountRequest $request)
-    {   
-        if (!isset($request->user_avatar)) {
-        DB::table('accounts')->insert([
-            'name' => $request->nickname,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'address' => $request->address,
-            'birth_place_date' => $request->date_place_birth,
-            'region' => $request->region,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        $formfield = Validator::make($data, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'photo' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+            'address' => 'required',
+            'birth_place_date' => 'required',
+            'region' => 'required',
         ]);
+        $validatedData = $formfield->validate();
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photo_name = $photo->getClientOriginalName();
+            $photo->move(public_path('asset'), $photo_name);
+            $validatedData['photo'] = $photo_name;
+        } else {
+            $validatedData['photo'] = 'default.png';
+        }
+
+        Account::create($validatedData);
 
         return redirect()->route('start_login')->with('success', 'Akun berhasil di buat');
-        }
         // else {
 
         // }
@@ -55,7 +66,7 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        
+
     }
 
     /**
