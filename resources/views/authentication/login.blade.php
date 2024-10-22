@@ -12,14 +12,6 @@
   <div class="container-fluid h-dvh content-center w-dvw">
     <form action="{{ route('login')}}" method="get" class="max-w-md m-auto p-14 pb-5 bg-[#C4CDC1] rounded-lg">
       @csrf
-      <div class="">
-        <a href="{{ route('main_page')}}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-            <path fill="currentColor"
-              d="m4.296 12l8.492-8.727a.75.75 0 1 0-1.075-1.046l-9 9.25a.75.75 0 0 0 0 1.046l9 9.25a.75.75 0 1 0 1.075-1.046z" />
-          </svg>
-        </a>
-      </div>
       <div class="grid justify-items-center">
         <h1 class="text-3xl font-bold mb-10">LOGIN</h1>
       </div>
