@@ -4,6 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poltawski+Nowy&family=Sanchez&display=swap');
 
+/* scrollbar */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }

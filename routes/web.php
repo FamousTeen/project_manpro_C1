@@ -63,6 +63,11 @@ Route::get('/evaluasi', function () {
 })->name('evaluasi_anggota');
 
 // buat testing
+Route::get('/input_misa', function () {
+    return view('admin/input_misa');
+})->name('input_misa');
+
+// buat testing
 Route::get('/post_pengumuman', function () {
     return view('admin/post_pengumuman');
 })->name('pengumuman_admin');
