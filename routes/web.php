@@ -37,7 +37,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 // buat testing
 Route::get('/acara', function () {
-    return view('anggota/acara');
+    return view('anggota/alur_acara/acara');
 })->name('acara_anggota');
 
 //Jadwal Anggota
