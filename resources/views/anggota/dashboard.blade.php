@@ -16,14 +16,14 @@
       <h1 class="font-bold text-4xl text-center">DASHBOARD</h1>
     </div>
     <div class="col-start-11 col-span-2 text-right mr-16 mt-8">
-      <h2 class="font-bold text-xl ">Hi, Shasa</h2>
+      <h2 class="font-bold text-xl ">Hi, {{$data->name}}</h2>
       <p class="font-normal text-sm" id="currentDate"></p>
     </div>
   </div>
 
   <!-- Main Layout: Left and Right Sides -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-8 mt-6">
-    
+
     <!-- Left Side: Tugas, Panitia, and Pengumuman -->
     <div>
       <!-- Tugas and Panitia Section -->
@@ -31,14 +31,14 @@
         <div class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
           <div>
             <p class="font-semibold w-fit text-lg">Tugas</p>
-            <p class="w-fit text-md">3</p>
+            <p class="w-fit text-md">{{ ($data->trainingDetails->where('account_id', $data->id)->count() + $data->misaDetails->where('account_id', $data->id)->count())}}</p>
           </div>
           <img class="w-[50px] h-[50px]" src="{{ asset('asset/task_complete.png')}}" alt="Task Icon">
         </div>
         <div class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
           <div>
             <p class="font-semibold w-fit text-lg">Panitia</p>
-            <p class="w-fit text-md">4</p>
+            <p class="w-fit text-md">{{$data->eventDetails->where('account_id', $data->id)->count()}}</p>
           </div>
           <img class="w-[50px] h-[50px]" src="{{ asset('asset/people.png')}}" alt="People Icon">
         </div>
@@ -47,29 +47,28 @@
       <!-- Pengumuman Section -->
       <h2 class="font-bold text-xl mb-4 ml-16">Pengumuman</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-16">
-        <!-- Announcement Card 1 -->
-        <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
-          <p class="font-semibold">Selasa, 15 Oktober 2024</p>
-          <p class="text-sm">Bagi Teman-Teman yang bertugas pada tanggal sekian dipersilahkan untuk latihan di gereja.
-            <br><br>
-            Tanggal : 12-09-24
-            <br>
-            Jam : 11.00 WIB
-            <br><br>
-            Sekian dan Terima Kasih</p>
-        </div>
-        <!-- Announcement Card 2 -->
-        <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
-          <p class="font-semibold">Date: 18 October 2024</p>
-          <p class="text-sm">Bagi Teman-Teman yang bertugas pada tanggal sekian dipersilahkan untuk latihan di gereja.
-            <br><br>
-            Tanggal : 12-09-24
-            <br>
-            Jam : 11.00 WIB
-            <br><br>
-            Sekian dan Terima Kasih</p>
-        </div>
-        <!-- Add more announcement cards as needed -->
+
+        <?php
+        use Carbon\Carbon;
+        $announcement_details = $data->announcementDetails->where('account_id', $data->id);
+
+        Carbon::setLocale('id');
+        ?>
+
+        @foreach ($announcement_details as $announcement_detail)
+      <!-- Announcement Card 1 -->
+      <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
+        <p class="font-semibold">{{  Carbon::parse($announcement_detail->announcement->upload_time)->translatedFormat('l, j F Y')}}</p>
+        <p class="text-sm">Bagi Teman-Teman yang bertugas pada tanggal sekian dipersilahkan untuk latihan di gereja.
+        <br><br>
+        Tanggal : {{date('j-m-Y',strtotime($announcement_detail->announcement->datetime))}}
+        <br>
+        Jam : {{date('H.i',strtotime($announcement_detail->announcement->datetime))}} WIB
+        <br><br>
+        Sekian dan Terima Kasih
+        </p>
+      </div>
+    @endforeach
       </div>
     </div>
 

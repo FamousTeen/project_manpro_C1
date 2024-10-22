@@ -11,6 +11,8 @@ class Announcement extends Model
 {
     use HasFactory;
 
+    protected $table = 'announcements';
+
     public function announcementDetails(): HasMany {
         return $this->hasMany(Template::class);
     }

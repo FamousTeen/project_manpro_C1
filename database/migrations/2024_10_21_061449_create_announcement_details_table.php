@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('announcement_details', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('anc_id')->unsigned();
-            $table->foreign('anc_id')
+            $table->bigInteger('announcement_id')->unsigned();
+            $table->foreign('announcement_id')
                 ->references('id')
                 ->on('announcements');
             $table->bigInteger('account_id')->unsigned();

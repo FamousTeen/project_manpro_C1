@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TrainingDetail extends Pivot
 {
+    protected $table = 'training_details';
+
     use HasFactory;
 
     public function training(): BelongsTo {

@@ -12,6 +12,8 @@ class EventDetail extends Pivot
 {
     use HasFactory;
 
+    protected $table = 'event_details';
+
     public function event(): BelongsTo {
         return $this->belongsTo(Event::class);
     }

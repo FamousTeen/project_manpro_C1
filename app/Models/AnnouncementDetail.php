@@ -11,6 +11,8 @@ class AnnouncementDetail extends Pivot
 {
     use HasFactory;
 
+    protected $table = 'announcement_details';
+
     public function announcement(): BelongsTo {
         return $this->belongsTo(Announcement::class);
     }

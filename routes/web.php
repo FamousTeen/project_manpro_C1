@@ -37,7 +37,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 // buat testing
 Route::get('/acara', function () {
-    return view('anggota/acara');
+    return view('anggota/alur_acara/acara');
 })->name('acara_anggota');
 
 //Jadwal Anggota
@@ -61,6 +61,11 @@ Route::post('/store-account', [AccountController::class, 'store'])->name('store_
 Route::get('/evaluasi', function () {
     return view('anggota/evaluasi');
 })->name('evaluasi_anggota');
+
+// Evaluasi Anggota (Pengawas)
+Route::get('/evaluasi_pengawas', function () {
+    return view('anggota/evaluasi_pengawas');
+})->name('evaluasi_pengawas_anggota');
 
 // buat testing
 Route::get('/input_misa', function () {
