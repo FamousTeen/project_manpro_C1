@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MisaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +42,11 @@ Route::get('/acara', function () {
 })->name('acara_anggota');
 
 //Jadwal Anggota
-Route::get('/jadwal', function () {
-    return view('anggota/jadwal');
-})->name('jadwal_anggota');
+Route::get('/jadwal', [MisaController::class, 'index'])->name('jadwal_anggota');
+
+//Dashboard
+Route::get('/dashboard_anggota', [DashboardController::class, 'index'])->name('dashboard_anggota');
+
 
 Route::resource('accounts', AccountController::class)->except(['store'])->names([
     'index' => 'accounts.index',

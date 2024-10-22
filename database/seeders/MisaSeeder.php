@@ -14,10 +14,12 @@ class MisaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('misa')->insert([
+        $activityDateTime = Carbon::now()->addDays(5); // Get the datetime for 5 days from now
+
+        DB::table('misas')->insert([
             'title' => "Misa Kudus",
             'category' => "Misa Harian/Rutin",
-            'activity_datetime' => Carbon::now()->addDays(5)->format('Y-m-d H:i:s'),
+            'activity_datetime' => $activityDateTime->format('Y-m-d H:i:s'),
             'upload_datetime' => Carbon::now()->format('Y-m-d H:i:s'),
             'evaluation' => "Fusce metus erat, feugiat eu hendrerit aliquet, pulvinar eu urna. Curabitur eu sagittis diam. Maecenas faucibus scelerisque.",
             'status' => "Proses",

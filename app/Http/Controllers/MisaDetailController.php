@@ -13,7 +13,8 @@ class MisaDetailController extends Controller
      */
     public function index()
     {
-        //
+        $misa_details = Misa_Detail::all();
+        return view('anggota.jadwal', compact('misa_details'));
     }
 
     /**
