@@ -201,31 +201,24 @@
                                     <table class="w-full mt-2 table-auto border-collapse border border-gray-300">
                                         <thead>
                                             <tr class="bg-gray-200">
-                                                <th class="border border-gray-300 px-4 py-2">Nama</th>
-                                                <th class="border border-gray-300 px-4 py-2">Wilayah</th>
-                                                <th class="border border-gray-300 px-4 py-2">Tugas</th>
+                                                <th class="border border-gray-300 px-1 py-1">No.</th>
+                                                <th class="border border-gray-300 px-6 py-1">Nama</th>
+                                                <th class="border border-gray-300 px-1 py-1">Wilayah</th>
+                                                <th class="border border-gray-300 px-4 py-1">Tugas</th>
+                                                <th class="border border-gray-300 py-1">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="anggotaTableBody">
                                             <tr class="bg-white">
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                            </tr>
-                                            <tr class="bg-white">
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                            </tr>
-                                            <tr class="bg-white">
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                            </tr>
-                                            <tr class="bg-white">
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                                <th class="border border-gray-300 px-4 py-2"></th>
-                                                <th class="border border-gray-300 px-4 py-2"></th>
+                                                <th class="border border-gray-300 px-1 py-1">1.</th>
+                                                <th class="border border-gray-300 px-6 py-1"></th>
+                                                <th class="border border-gray-300 px-1 py-1"></th>
+                                                <th class="border border-gray-300 px-4 py-1"></th>
+                                                <th class="border border-gray-300 py-1">
+                                                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-[#ae0001] text-base font-medium text-white hover:bg-[#740001] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                                        Delete
+                                                    </button>
+                                                </th>
                                             </tr>
                                         </tbody>
                                     </table>
