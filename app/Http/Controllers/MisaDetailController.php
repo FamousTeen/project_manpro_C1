@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Misa_Detail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreMisa_DetailRequest;
 use App\Http\Requests\UpdateMisa_DetailRequest;
-use Illuminate\Http\Request;
 
 class MisaDetailController extends Controller
 {
@@ -39,10 +41,18 @@ class MisaDetailController extends Controller
      */
     public function show(Request $request)
     {
+        $user = Auth::user();
+
+        // Fetch data for the dashboard
+        $userData = Account::query()->where(
+            'email',
+            $user->email
+        )->where('password', $user->password)->firstOrFail();
+
         $misa = Misa_Detail::get()->where('account_id', $request->id);
         return view('anggota.evaluasi', [
             'misa' => $misa,
-            'data' => $request
+            'data' => $userData
         ]);
     }
 

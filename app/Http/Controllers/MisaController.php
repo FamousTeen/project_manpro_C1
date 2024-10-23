@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Misa;
+use App\Models\Account;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreMisaRequest;
 use App\Http\Requests\UpdateMisaRequest;
 
@@ -13,9 +15,23 @@ class MisaController extends Controller
      */
     public function index()
     {
-        $misas = Misa::with('misaDetails')->get();
-        // dd($misas);
-        return view('anggota/jadwal', compact('misas'));
+        $user = Auth::user();
+
+        // Fetch data for the dashboard
+        $userData = Account::query()->where(
+            'email',
+            $user->email
+        )->where('password', $user->password)->firstOrFail();
+
+
+        $misas = Misa::with('misaDetails')->whereHas('misaDetails', function ($query) use ($userData) {
+                $query->where('account_id', $userData->id);
+        })->get();
+
+        return view('anggota/jadwal', [
+            'misas' => $misas,
+            'data' => $userData
+        ]);
     }
 
     /**

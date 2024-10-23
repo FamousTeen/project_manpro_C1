@@ -133,13 +133,11 @@
                 </a>
             </li>
             <li>
-                @if (isset($data))
                 <a href="{{ route('evaluasi_anggota', $data) }}"
                     class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
                     <img src="../../../asset/evaluasi.png" alt="Evaluasi Icon" class="h-6 w-6 mr-4">
                     Evaluasi
                 </a>
-                @endif
             </li>
         </ul>
     </div>

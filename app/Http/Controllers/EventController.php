@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Account;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 
@@ -13,8 +15,19 @@ class EventController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+
+        // Fetch data for the dashboard
+        $userData = Account::query()->where(
+            'email',
+            $user->email
+        )->where('password', $user->password)->firstOrFail();
+        
         $events = Event::query()->where('status', 1)->get();
-        return view('anggota/alur_acara/acara', compact('events'));
+        return view('anggota/alur_acara/acara', [
+            'events' => $events,
+            'data' => $userData
+        ]);
     }
 
     /**
@@ -38,8 +51,19 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
+        $user = Auth::user();
+
+        // Fetch data for the dashboard
+        $userData = Account::query()->where(
+            'email',
+            $user->email
+        )->where('password', $user->password)->firstOrFail();
+
         $selectedEvent = Event::query()->where('id', $event->id)->firstOrFail();
-        return view('anggota/alur_acara/detail_acara', compact('selectedEvent'));
+        return view('anggota/alur_acara/detail_acara', [
+            'selectedEvent' => $selectedEvent,
+            'data' => $userData
+        ]);
     }
 
     /**
