@@ -76,3 +76,13 @@ Route::get('/input_misa', function () {
 Route::get('/post_pengumuman', function () {
     return view('admin/post_pengumuman');
 })->name('pengumuman_admin');
+
+// buat testing
+Route::get('/profile_admin', function () {
+    return view('admin/profile_admin');
+})->name('profile_admin');
+
+// buat testing
+Route::get('/profile_anggota', function () {
+    return view('anggota/profile/profile_anggota');
+})->name('profile_anggota');
