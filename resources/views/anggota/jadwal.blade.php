@@ -8,7 +8,7 @@
       <h1 class="font-bold text-4xl text-center">JADWAL</h1>
     </div>
     <div class="col-start-11 col-span-2 text-right mr-16 mt-8">
-      <h2 class="font-bold text-xl ">Hi, Shasa</h2>
+      <h2 class="font-bold text-xl">Hi, Shasa</h2>
       <p class="font-normal text-sm" id="currentDate"></p>
     </div>
   </div>
@@ -28,13 +28,12 @@
     </form>
   </div>
 
-
   <!-- Jadwal Misa Section -->
   <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 m-12 mt-5">
+    @foreach ($misas as $misa)
     <!-- Card 1 -->
     <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px] h-[200px] mx-auto">
-      @foreach ($misas as $misa)
-      <div class="flex justify-end text-sm text-gray-500" onclick="openModal('modal1')">
+      <div class="flex justify-end text-sm text-gray-500" onclick="openModal('modal{{ $misa->id }}')">
         <a class="mr-1">detail</a>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3 mt-1">
           <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
@@ -56,16 +55,16 @@
         </div>
       </div>
     </div>
-    <!-- Modal 1 -->
-    <div id="modal1" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal1')">
+
+    <!-- Modal -->
+    <div id="modal{{ $misa->id }}" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal{{ $misa->id }}')">
       <div class="bg-[#D1D9D1] p-8 rounded-lg w-[700px] h-[400px] relative p-12" onclick="event.stopPropagation()">
-        <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal1')">
+        <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal{{ $misa->id }}')">
           &#10005;
         </button>
-        <!-- Content inside the modal with two columns -->
         <div class="grid grid-cols-2 gap-4">
           <!-- Left column: Event details -->
-          <div class="text-left ">
+          <div class="text-left">
             <div class="flex items-center justify-items">
               <span class="bg-orange-500 h-7 w-7 rounded-full inline-block"></span>
               <h2 class="text-2xl font-bold ml-2">{{$misa->title}}</h2>
@@ -77,75 +76,62 @@
           </div>
 
           <!-- Right column: Task details -->
-          <!-- Right column: Task details -->
           <div class="text-left">
             <p class="text-xl font-bold">Yang bertugas saat ini:</p>
 
             @php
-            // Initialize an array to hold roles
+            $loggedInUserId = Auth::user()->id;
             $roles = [];
 
-            // Collect all unique roles from misaDetails
-            foreach ($misas as $misa) {
             foreach ($misa->misaDetails as $detail) {
-            if (!in_array($detail->roles, $roles)) {
-            $roles[] = $detail->roles; // Add unique role
-            }
-            }
+                if ($detail->account_id == $loggedInUserId && !in_array($detail->roles, $roles)) {
+                    $roles[] = $detail->roles;
+                }
             }
             @endphp
 
             @foreach ($roles as $role)
             <p class="mt-2"><span class="font-bold">{{ $role }}:</span></p>
             <ul>
-              @php
-              $found = false; // Flag to check if any personnel found for the role
-              @endphp
-
-              @foreach ($misas as $misa)
+              @php $found = false; @endphp
               @foreach ($misa->misaDetails as $detail)
-              @if ($detail->roles === $role)
-              <li>{{ $detail->account->name }}</li>
-              @php
-              $found = true; // Set flag to true if personnel found
-              @endphp
-              @endif
-              @endforeach
+                @if ($detail->roles === $role && $detail->account_id == $loggedInUserId)
+                  <li>{{ $detail->account->name }}</li>
+                  @php $found = true; @endphp
+                @endif
               @endforeach
 
               @if (!$found)
-              <li>Tidak ada personel untuk {{ $role }}</li> <!-- Message if no personnel found -->
+              <li>Tidak ada personel untuk {{ $role }}</li>
               @endif
             </ul>
             @endforeach
           </div>
         </div>
       </div>
-      @endforeach
     </div>
-
+    @endforeach
   </div>
 
-  @section('libraryjs')
-  <script>
-    // Function to display the current date in the "Hi, Shasa" section
-    const today = new Date();
-    const options = {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
+@endsection
 
-    // Modal open function
-    function openModal(modalId) {
-      document.getElementById(modalId).classList.remove('hidden');
-    }
+@section('libraryjs')
+<script>
+  const today = new Date();
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+  document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
 
-    // Modal close function
-    function closeModal(modalId) {
-      document.getElementById(modalId).classList.add('hidden');
-    }
-  </script>
-  @endsection
+  function openModal(modalId) {
+    document.getElementById(modalId).classList.remove('hidden');
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+  }
+</script>
+@endsection
