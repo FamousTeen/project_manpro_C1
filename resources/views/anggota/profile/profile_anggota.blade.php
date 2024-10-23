@@ -16,7 +16,7 @@
           <div class="flex">
             <!-- Profile Image Section -->
             <div class="relative w-1/3 p-4 ml-8">
-              <div class="bg-gray-300 rounded-lg h-48 w-full flex justify-center items-center">
+              <div class="bg-gray-300 rounded-lg h-48 w- -bottom-3 flex justify-center items-center">
                 <!-- Placeholder for profile image -->
                 <img src="../../images/dummy_foto_orang.jpg" class="rounded-lg" alt="">
               </div>
@@ -40,12 +40,13 @@
               </div>
             </div>
           </div>
-          <!-- Edit My Profile Button -->
+          <!-- Edit My Profile Button --> 
     <div class="flex justify-center mt-8">
         <button class="bg-[#002366] text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:bg-[#20252f] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
-          Edit My Profile
+          Edit My Profile 
         </button>
       </div>
         </div>
       </div>
       
+@endsection

@@ -89,3 +89,8 @@ Route::get('/profile_admin', function () {
 Route::get('/profile_anggota', function () {
     return view('anggota/profile/profile_anggota');
 })->name('profile_anggota');
+
+// buat testing
+Route::get('/edit_profile_anggota', function () {
+    return view('anggota/profile/edit_profile_anggota');
+})->name('profile_anggota');
