@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->bigInteger('misa_id')->unsigned();
             $table->foreign('misa_id')
                 ->references('id')
-                ->on('misa');
+                ->on('misas');
             $table->bigInteger('account_id')->unsigned();
             $table->foreign('account_id')
                 ->references('id')

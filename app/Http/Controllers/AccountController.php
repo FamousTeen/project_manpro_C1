@@ -53,6 +53,9 @@ class AccountController extends Controller
             $validatedData['photo'] = 'default.png';
         }
 
+        $password_encrypt = bcrypt($validatedData['password']);
+        $validatedData['password'] = $password_encrypt;
+
         Account::create($validatedData);
 
         return redirect()->route('start_login')->with('success', 'Akun berhasil di buat');
