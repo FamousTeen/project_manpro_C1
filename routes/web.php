@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\MisaController;
 use App\Http\Controllers\MisaDetailController;
 
@@ -39,15 +40,21 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 
 // buat testing
-Route::get('/acara', function () {
-    return view('anggota/alur_acara/acara');
-})->name('acara_anggota');
+Route::resource('events', EventController::class)->names([
+    'index' => 'events.index',
+    'create' => 'events.create',
+    'store' => 'events.store',
+    'show' => 'events.show',
+    'edit' => 'events.edit',
+    'update' => 'events.update',
+    'destroy' => 'events.destroy',
+]);
 
 //Jadwal Anggota
 Route::get('/jadwal', [MisaController::class, 'index'])->name('jadwal_anggota');
 
 //Dashboard
-Route::get('/dashboard_anggota', [DashboardController::class, 'index'])->name('dashboard_anggota');
+// Route::get('/dashboard_anggota', [DashboardController::class, 'index'])->name('dashboard_anggota');
 
 
 Route::resource('accounts', AccountController::class)->except(['store'])->names([
@@ -93,4 +100,4 @@ Route::get('/profile_anggota', function () {
 // buat testing
 Route::get('/edit_profile_anggota', function () {
     return view('anggota/profile/edit_profile_anggota');
-})->name('profile_anggota');
+})->name('edit_profile_anggota');

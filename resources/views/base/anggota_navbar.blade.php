@@ -57,16 +57,16 @@
                     <button id="dropdownButton"
                         class="flex items-center space-x-2 bg-[#20252f] hover:bg-[#ae0001] text-[#f6f1e3] p-2 transition duration-300 focus:outline-none rounded">
                         @if (isset($user) && isset($data))
-                            <img src="../../../asset/{{ $data->photo }}" alt="Profile Icon"
-                                class="h-8 w-8 rounded-full bg-[#f6f1e3]">
+                        <img src="../../../asset/{{ $data->photo }}" alt="Profile Icon"
+                            class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @else
-                            <img src="../../../asset/profile-circle.256x256" alt="Profile Icon"
-                                class="h-8 w-8 rounded-full bg-[#f6f1e3]">
+                        <img src="../../../asset/profile-circle.256x256" alt="Profile Icon"
+                            class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @endif
 
                         <span>
                             @if (isset($user) && isset($data))
-                                {{ $data->name }}
+                            {{ $data->name }}
                             @endif
                         </span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -102,8 +102,7 @@
         </div>
         <ul class="space-y-8">
             <li>
-                <a href="{{ route('dashboard_anggota') }}"
-                    class="flex text-[#f6f1e3] items-center hover:text-[#ae0001]">
+                <a href="{{route('dashboard')}}" class="flex text-[#f6f1e3] items-center hover:text-[#ae0001]">
                     <img src="../../../asset/dashboard.png" alt="Dashboard Icon" class="h-6 w-6 mr-4">
                     Dashboard
                 </a>
@@ -128,18 +127,18 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ route('acara_anggota') }}" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
+                <a href="{{ route('events.index') }}" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
                     <img src="../../../asset/event.png" alt="Acara Icon" class="h-6 w-6 mr-4">
                     Acara
                 </a>
             </li>
             <li>
-                @if (isset($user) && isset($data))
-                    <a href="{{ route('evaluasi_anggota', $data) }}"
-                        class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
-                        <img src="../../../asset/evaluasi.png" alt="Evaluasi Icon" class="h-6 w-6 mr-4">
-                        Evaluasi
-                    </a>
+                @if (isset($data))
+                <a href="{{ route('evaluasi_anggota', $data) }}"
+                    class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
+                    <img src="../../../asset/evaluasi.png" alt="Evaluasi Icon" class="h-6 w-6 mr-4">
+                    Evaluasi
+                </a>
                 @endif
             </li>
         </ul>

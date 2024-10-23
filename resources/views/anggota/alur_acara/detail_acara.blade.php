@@ -13,7 +13,7 @@
   <!-- Header Section -->
   <div class="grid grid-cols-12">
     <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
-      <h1 class="font-bold text-4xl text-center">ACARA</h1>
+      <h1 class="font-bold text-4xl text-center">{{$selectedEvent->title}}</h1>
     </div>
     <div class="col-start-11 col-span-2 text-right mr-16 mt-8">
       <h2 class="font-bold text-xl ">Hi, Shasa</h2>
@@ -24,29 +24,28 @@
 
 <!-- Poster Section -->
 <div class="flex justify-center mb-16">
-  <php class="grid grid-cols-1 md:grid-cols-3 gap-16 justify-items-center">
+  <php class="grid grid-cols-1 gap-16 justify-items-center">
     @php
     use Carbon\Carbon;
 
     Carbon::setLocale('id');
     @endphp
 
-    @if (isset($events))
-    <!-- Poster-poster -->
-    @foreach ($events as $event)
-    <a href="{{ route('events.show', ['event' => $event])}}">
-      <div class="bg-[#f6f1e3] p-6 shadow-lg w-auto mx-8 border border-[#002366]">
-        <img src="../../images/{{$event->poster}}" alt="Poster Acara" class="mx-auto w-64" />
-        <p class="text-center text-sm mt-2">{{ Carbon::parse($event->date)->translatedFormat('l, j F Y') }}</p>
+
+    <div class="bg-[#f6f1e3] p-6 shadow-lg w-auto mx-8 border border-[#002366] flex">
+      <div>
+        <img src="../../images/{{$selectedEvent->poster}}" alt="Poster Acara" class="mx-auto w-64" />
       </div>
-    </a>
-
-    @endforeach
-    <!-- Poster 1 -->
-
-    @else
-    <h1 class="col-span-3 ms-8">NO EVENT</h1>
-    @endif
+      <div class="ml-8 mt-3">
+        <p><span class="font-bold">Tanggal: &nbsp;</span> {{ Carbon::parse($selectedEvent->date)->translatedFormat('l, j F Y') }}</p>
+        <br>
+        <p><span class="font-bold">Contact Person: &nbsp;</span> {{$selectedEvent->contact_person}}&nbsp;(<i>{{$selectedEvent->phone_number}}</i>)</p>
+        <br>
+        <p><span class="font-bold">Description: &nbsp;</span> {{$selectedEvent->description}}</i>)</p>
+        <br>
+        <p><span class="font-bold">Evaluation: &nbsp;</span> {{$selectedEvent->evaluation}}</i>)</p>
+      </div>
+    </div>
 
 </div>
 </div>

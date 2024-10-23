@@ -40,7 +40,10 @@ class MisaDetailController extends Controller
     public function show(Request $request)
     {
         $misa = Misa_Detail::get()->where('account_id', $request->id);
-        return view('anggota.evaluasi')->with('misa', $misa);
+        return view('anggota.evaluasi', [
+            'misa' => $misa,
+            'data' => $request
+        ]);
     }
 
     /**

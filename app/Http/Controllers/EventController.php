@@ -13,7 +13,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::query()->where('status', 1)->get();
+        return view('anggota/alur_acara/acara', compact('events'));
     }
 
     /**
@@ -37,7 +38,8 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+        $selectedEvent = Event::query()->where('id', $event->id)->firstOrFail();
+        return view('anggota/alur_acara/detail_acara', compact('selectedEvent'));
     }
 
     /**
