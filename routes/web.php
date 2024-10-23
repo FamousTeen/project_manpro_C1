@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\EventDetailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaController;
+use App\Http\Controllers\MisaDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,9 +63,7 @@ Route::post('/store-account', [AccountController::class, 'store'])->name('store_
 
 
 // buat testing
-Route::get('/evaluasi', function () {
-    return view('anggota/evaluasi');
-})->name('evaluasi_anggota');
+Route::get('/evaluasi/{id}', [MisaDetailController::class, 'show'])->name('evaluasi_anggota');
 
 // Evaluasi Anggota (Pengawas)
 Route::get('/evaluasi_pengawas', function () {

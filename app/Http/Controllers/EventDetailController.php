@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\EventDetail;
 use App\Http\Requests\StoreEventDetailRequest;
 use App\Http\Requests\UpdateEventDetailRequest;
+use Illuminate\Http\Request;
 
 class EventDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
     }
 
     /**

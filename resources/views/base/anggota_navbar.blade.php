@@ -10,7 +10,8 @@
     {{-- For Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poltawski+Nowy:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poltawski+Nowy:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
     <style>
         body {
             font-family: 'Poltawski Nowy', serif;
@@ -20,12 +21,12 @@
 
     @yield('librarycss')
 </head>
-<!-- Colors: 
-        1. #740001 - merah gelap 
-        2. #ae0001 - merah terang 
-        3. #f6f1e3 - netral 
-        4. #002366 - biru terang 
-        5. #20252f - biru gelap 
+<!-- Colors:
+        1. #740001 - merah gelap
+        2. #ae0001 - merah terang
+        3. #f6f1e3 - netral
+        4. #002366 - biru terang
+        5. #20252f - biru gelap
     -->
 
 <body class="bg-white">
@@ -35,8 +36,10 @@
             <!-- Logo Section -->
             <div class="flex items-center">
                 <button id="sidebarOpen" class="text-white p-2">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </button>
                 <a href="#" class="flex items-center ml-4">
@@ -51,75 +54,93 @@
 
                 <!-- Profile Dropdown -->
                 <div class="relative">
-                    <button id="dropdownButton" class="flex items-center space-x-2 bg-[#20252f] hover:bg-[#ae0001] text-[#f6f1e3] p-2 transition duration-300 focus:outline-none rounded">
+                    <button id="dropdownButton"
+                        class="flex items-center space-x-2 bg-[#20252f] hover:bg-[#ae0001] text-[#f6f1e3] p-2 transition duration-300 focus:outline-none rounded">
                         @if (isset($user) && isset($data))
-                        <img src="../../../asset/{{$data->photo}}" alt="Profile Icon" class="h-8 w-8 rounded-full bg-[#f6f1e3]">
-                        @else 
-                        <img src="../../../asset/profile-circle.256x256" alt="Profile Icon" class="h-8 w-8 rounded-full bg-[#f6f1e3]">
+                            <img src="../../../asset/{{ $data->photo }}" alt="Profile Icon"
+                                class="h-8 w-8 rounded-full bg-[#f6f1e3]">
+                        @else
+                            <img src="../../../asset/profile-circle.256x256" alt="Profile Icon"
+                                class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @endif
-                        
+
                         <span>
                             @if (isset($user) && isset($data))
-                            {{$data->name}}
+                                {{ $data->name }}
                             @endif
                         </span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
                         </svg>
                     </button>
 
                     <!-- Dropdown Menu -->
-                    <div id="dropdownMenu" class="hidden absolute right-0 top-full w-full bg-[#20252f] text-[#f6f1e3] shadow-lg mt-1">
-                        <a href="#" class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Profile</a>
-                        <a href="{{ route('start_login')}}" class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Logout</a>
+                    <div id="dropdownMenu"
+                        class="hidden absolute right-0 top-full w-full bg-[#20252f] text-[#f6f1e3] shadow-lg mt-1">
+                        <a href="#"
+                            class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Profile</a>
+                        <a href="{{ route('start_login') }}"
+                            class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Logout</a>
                     </div>
                 </div>
             </div>
     </nav>
 
     <!-- Sidebar -->
-    <div id="sidebar" class="fixed left-0 top-0 w-64 h-full bg-[#20252f] text-white p-8 z-20 transform -translate-x-full transition-transform duration-300">
+    <div id="sidebar"
+        class="fixed left-0 top-0 w-64 h-full bg-[#20252f] text-white p-8 z-20 transform -translate-x-full transition-transform duration-300">
         <div class="flex justify-between items-center mb-8">
             <button id="sidebarClose" class="text-white p-2">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
                 </svg>
             </button>
         </div>
         <ul class="space-y-8">
             <li>
-                <a href="{{route('dashboard_anggota')}}" class="flex text-[#f6f1e3] items-center hover:text-[#ae0001]">
+                <a href="{{ route('dashboard_anggota') }}"
+                    class="flex text-[#f6f1e3] items-center hover:text-[#ae0001]">
                     <img src="../../../asset/dashboard.png" alt="Dashboard Icon" class="h-6 w-6 mr-4">
                     Dashboard
                 </a>
             </li>
             <li>
-                <button id="konfirmasiButton" class="flex justify-between items-center text-[#f6f1e3] w-full hover:text-[#ae0001] focus:outline-none">
+                <button id="konfirmasiButton"
+                    class="flex justify-between items-center text-[#f6f1e3] w-full hover:text-[#ae0001] focus:outline-none">
                     <div class="flex items-center">
                         <img src="../../../asset/schedule.png" alt="Jadwal Icon" class="h-6 w-6 mr-4">
                         Jadwal
                     </div>
-                    <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
                 <!-- Sub-menu -->
                 <ul id="konfirmasiDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
-                    <li><a href="{{ route('jadwal_anggota')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Tugasku</a></li>
+                    <li><a href="{{ route('jadwal_anggota') }}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal
+                            Tugasku</a></li>
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Konfirmasi Tugas</a></li>
                 </ul>
             </li>
             <li>
-                <a href="{{ route('acara_anggota')}}" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
+                <a href="{{ route('acara_anggota') }}" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
                     <img src="../../../asset/event.png" alt="Acara Icon" class="h-6 w-6 mr-4">
                     Acara
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
-                    <img src="../../../asset/evaluasi.png" alt="Evaluasi Icon" class="h-6 w-6 mr-4">
-                    Evaluasi
-                </a>
+                @if (isset($user) && isset($data))
+                    <a href="{{ route('evaluasi_anggota', $data) }}"
+                        class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
+                        <img src="../../../asset/evaluasi.png" alt="Evaluasi Icon" class="h-6 w-6 mr-4">
+                        Evaluasi
+                    </a>
+                @endif
             </li>
         </ul>
     </div>
