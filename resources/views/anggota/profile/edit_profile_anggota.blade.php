@@ -2,12 +2,12 @@
 
 @section('content')
     <!-- Colors:
-            1. #740001 - merah gelap
-            2. #ae0001 - merah terang
-            3. #f6f1e3 - netral
-            4. #002366 - biru terang
-            5. #20252f - biru gelap
-        -->
+                    1. #740001 - merah gelap
+                    2. #ae0001 - merah terang
+                    3. #f6f1e3 - netral
+                    4. #002366 - biru terang
+                    5. #20252f - biru gelap
+                -->
 
     <div class="flex justify-center items-center min-h-screen bg-gray-100 mt-14">
         <div class="bg-[#f6f1e3] rounded-lg p-8 shadow-lg w-full max-w-4xl">
@@ -27,7 +27,8 @@
                         <div class="flex justify-center mt-6">
                             <button
                                 class="bg-[#ae0001] text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-[#740001] focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75"
-                                onclick="document.getElementById('profilePictureModal').classList.remove('hidden')" type="button">
+                                onclick="document.getElementById('profilePictureModal').classList.remove('hidden')"
+                                type="button">
                                 Edit Profile Picture
                             </button>
                         </div>
@@ -74,7 +75,7 @@
     <!-- Modal for Editing Profile Picture -->
     <div id="profilePictureModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
         <div class="bg-white rounded-lg p-8 w-1/3">
-            <form action="{{ route('update_pp_anggota') }}" method="POST">
+            <form action="{{ route('update_pp_anggota') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <h2 class="text-xl font-bold text-gray-700 mb-6">Upload Profile Picture</h2>
@@ -86,7 +87,7 @@
                  file:text-sm file:font-semibold
                  file:bg-[#002366] file:text-white
                  hover:file:bg-[#20252f]"
-                        accept="image/*" />
+                        name="photo" />
                 </label>
 
                 <div class="flex justify-end mt-4">
