@@ -27,7 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EventPermissionSeeder::class);
         $this->call(GroupDetailSeeder::class);
         $this->call(MisaDetailSeeder::class);
-        $this->call(MisaDetailSeeder::class);
         $this->call(TemplatePermissionSeeder::class);
         $this->call(TrainingDetailSeeder::class);
     }

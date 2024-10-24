@@ -92,28 +92,102 @@ Carbon::setLocale('id');
                         <p class="text-xl font-bold">Yang bertugas saat ini:</p>
                         <p class="mt-2"><span class="font-bold">Petugas:</span></p>
                         <div class="flex flex-row">
-                            <ul class="mr-14">
-                                <li>Angel</li>
-                                <li>Martin</li>
-                                <li>Shasaa</li>
-                                <li>Jonathan</li>
+                            <ul class="list-none mr-14">
+                                @php
+                                    $count = 0;
+                                    $isMoreThanThree = false;
+                                @endphp
+                                @foreach ($ministers as $minister)
+                                    @foreach ($minister as $m2)
+                                        @if ($m2->roles == "Petugas")
+                                        <li>{{$m2->account->name}}</li>
+                                            @php
+                                            $count++;
+                                            @endphp
+                                            @if ($count == 3)
+                                                @php
+                                                    $isMoreThanThree = true;
+                                                @endphp
+                                                @break
+                                            @endif
+                                        @endif
                             </ul>
-                            <ul>
-                                <li>Angel</li>
-                                <li>Martin</li>
-                                <li>Angel</li>
+                            <ul class="list-none">
+                                        @if ($isMoreThanThree == true)
+                                            
+                                                @for ($i = $x; $i < sizeof($m2->roles); $i++)
+                                                    <li class="list-none">{{$m2[$i]->account->name}}</li>
+                                                @endfor
+                                            
+                                        @endif
+                                    @endforeach
+                                @endforeach
                             </ul>
                         </div>
                         <p class="mt-2"><span class="font-bold">Pengawas:</span></p>
-                        <ul>
-                            <li>Alonso</li>
-                            <li>Bryan</li>
-                        </ul>
+                        <ul class="list-none mr-14">
+                                @php
+                                    $count = 0;
+                                    $isMoreThanThree = false;
+                                @endphp
+                                @foreach ($ministers as $minister)
+                                    @foreach ($minister as $m2)
+                                        @if ($m2->roles == "Pengawas")
+                                        <li>{{$m2->account->name}}</li>
+                                            @php
+                                            $count++;
+                                            @endphp
+                                            @if ($count == 3)
+                                                @php
+                                                    $isMoreThanThree = true;
+                                                @endphp
+                                                @break
+                                            @endif
+                                        @endif
+                            </ul>
+                            <ul class="list-none">
+                                        @if ($isMoreThanThree == true)
+                                            
+                                                @for ($i = $x; $i < sizeof($m2->roles); $i++)
+                                                    <li class="list-none">{{$m2[$i]->account->name}}</li>
+                                                @endfor
+                                            
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </ul>
                         <p class="mt-2"><span class="font-bold">Perkap:</span></p>
-                        <ul>
-                            <li>Alonso</li>
-                            <li>Bryan</li>
-                        </ul>
+                        <ul class="list-none mr-14">
+                                @php
+                                    $count = 0;
+                                    $isMoreThanThree = false;
+                                @endphp
+                                @foreach ($ministers as $minister)
+                                    @foreach ($minister as $m2)
+                                        @if ($m2->roles == "Perkap")
+                                        <li>{{$m2->account->name}}</li>
+                                            @php
+                                            $count++;
+                                            @endphp
+                                            @if ($count == 3)
+                                                @php
+                                                    $isMoreThanThree = true;
+                                                @endphp
+                                                @break
+                                            @endif
+                                        @endif
+                            </ul>
+                            <ul class="list-none">
+                                        @if ($isMoreThanThree == true)
+                                            
+                                                @for ($i = $x; $i < sizeof($m2->roles); $i++)
+                                                    <li class="list-none">{{$m2[$i]->account->name}}</li>
+                                                @endfor
+                                            
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </ul>
                     </div>
                 </div>
             </div>

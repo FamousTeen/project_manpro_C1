@@ -50,9 +50,15 @@ class MisaDetailController extends Controller
         )->where('password', $user->password)->firstOrFail();
 
         $misa = Misa_Detail::get()->where('account_id', $user->id);
+
+        $ministers = [];
+        for ($x = 0; $x < sizeof($misa); $x++) {
+            $ministers[$x] = Misa_Detail::get()->where('misa_id', $misa[$x]->misa_id);
+        }
         return view('anggota.evaluasi', [
             'misa' => $misa,
-            'data' => $userData
+            'data' => $userData,
+            'ministers' => $ministers
         ]);
     }
 

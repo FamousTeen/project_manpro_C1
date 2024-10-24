@@ -21,5 +21,45 @@ class MisaDetailSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+
+        DB::table('misa_details')->insert([
+            'misa_id' => 1,
+            'account_id' => 2,
+            'roles' => "Petugas",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('misa_details')->insert([
+            'misa_id' => 1,
+            'account_id' => 3,
+            'roles' => "Pengawas",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('misa_details')->insert([
+            'misa_id' => 1,
+            'account_id' => 4,
+            'roles' => "Pengawas",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('misa_details')->insert([
+            'misa_id' => 1,
+            'account_id' => 5,
+            'roles' => "Perkap",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('misa_details')->insert([
+            'misa_id' => 1,
+            'account_id' => 6,
+            'roles' => "Perkap",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }

@@ -39,5 +39,57 @@ class AccountSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+
+        DB::table('accounts')->insert([
+            'name' => "Kurma",
+            'email' => "kurma@gmail.com",
+            'password' => bcrypt('user12345'),
+            'photo' => 'default.png',
+            'address' => '300 Main Street',
+            'birth_place_date' => 'Surabaya, 20-5-1995',
+            'region' => 'B',
+            'roles' => "Pengurus",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('accounts')->insert([
+            'name' => "Karina",
+            'email' => "karina@gmail.com",
+            'password' => bcrypt('user345'),
+            'photo' => 'default.png',
+            'address' => '400 Main Street',
+            'birth_place_date' => 'Surabaya, 20-5-1995',
+            'region' => 'B',
+            'roles' => "Anggota",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('accounts')->insert([
+            'name' => "Valiant",
+            'email' => "valiant@gmail.com",
+            'password' => bcrypt('345'),
+            'photo' => 'default.png',
+            'address' => '700 Main Street',
+            'birth_place_date' => 'Surabaya, 20-5-1995',
+            'region' => 'C',
+            'roles' => "Pengurus",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('accounts')->insert([
+            'name' => "Chyntia",
+            'email' => "chyntia@gmail.com",
+            'password' => bcrypt('123'),
+            'photo' => 'default.png',
+            'address' => '800 Main Street',
+            'birth_place_date' => 'Surabaya, 20-5-1995',
+            'region' => 'D',
+            'roles' => "Anggota",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }
