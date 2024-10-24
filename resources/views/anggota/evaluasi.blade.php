@@ -56,6 +56,9 @@ Carbon::setLocale('id');
             </div>
         </div>
         <!-- Modal 1 -->
+        @php
+        $index = 0;
+        @endphp
         <div id="modal{{ $m->id }}"
             class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
             onclick="closeModal('modal{{ $m->id }}')">
@@ -94,104 +97,131 @@ Carbon::setLocale('id');
                         <div class="flex flex-row">
                             <ul class="list-none mr-14">
                                 @php
-                                    $count = 0;
-                                    $isMoreThanThree = false;
+                                $count = 0;
+                                $index2 = 0;
+                                $isMoreThanThree = false;
                                 @endphp
-                                @foreach ($ministers as $minister)
-                                    @foreach ($minister as $m2)
-                                        @if ($m2->roles == "Petugas")
-                                        <li>{{$m2->account->name}}</li>
-                                            @php
-                                            $count++;
-                                            @endphp
-                                            @if ($count == 3)
-                                                @php
-                                                    $isMoreThanThree = true;
-                                                @endphp
-                                                @break
-                                            @endif
-                                        @endif
+                                @foreach ($ministers[$index] as $minister)
+                                @if ($minister->roles == "Petugas")
+                                <li>{{$minister->account->name}}</li>
+                                @php
+                                $count++;
+                                @endphp
+                                @if ($count == 3)
+                                @php
+                                $isMoreThanThree = true;
+                                @endphp
+                                @break
+                                @endif
+                                @endif
+                                @php
+                                $index2++;
+                                @endphp
+                                @endforeach
                             </ul>
                             <ul class="list-none">
-                                        @if ($isMoreThanThree == true)
-                                            
-                                                @for ($i = $x; $i < sizeof($m2->roles); $i++)
-                                                    <li class="list-none">{{$m2[$i]->account->name}}</li>
-                                                @endfor
-                                            
-                                        @endif
-                                    @endforeach
-                                @endforeach
+                                @if ($isMoreThanThree == true)
+                                @for ($i = $index2 + 1; $i < sizeof($ministers[$index]); $i++)
+                                    @if ($ministers[$index][$i]->roles == "Petugas")
+                                    <li class="list-none">{{$ministers[$index][$i]->account->name}}</li>
+                                    @endif
+                                    @endfor
+
+                                    @endif
+                                @php
+                                $count = 0;
+                                $index2 = 0;
+                                $isMoreThanThree = false;
+                                @endphp
                             </ul>
                         </div>
                         <p class="mt-2"><span class="font-bold">Pengawas:</span></p>
                         <ul class="list-none mr-14">
                                 @php
-                                    $count = 0;
-                                    $isMoreThanThree = false;
+                                $count = 0;
+                                $index2 = 0;
+                                $isMoreThanThree = false;
                                 @endphp
-                                @foreach ($ministers as $minister)
-                                    @foreach ($minister as $m2)
-                                        @if ($m2->roles == "Pengawas")
-                                        <li>{{$m2->account->name}}</li>
-                                            @php
-                                            $count++;
-                                            @endphp
-                                            @if ($count == 3)
-                                                @php
-                                                    $isMoreThanThree = true;
-                                                @endphp
-                                                @break
-                                            @endif
-                                        @endif
+                                @foreach ($ministers[$index] as $minister)
+                                @if ($minister->roles == "Pengawas")
+                                <li>{{$minister->account->name}}</li>
+                                @php
+                                $count++;
+                                @endphp
+                                @if ($count == 3)
+                                @php
+                                $isMoreThanThree = true;
+                                @endphp
+                                @break
+                                @endif
+                                @endif
+                                @php
+                                $index2++;
+                                @endphp
+                                @endforeach
                             </ul>
                             <ul class="list-none">
-                                        @if ($isMoreThanThree == true)
-                                            
-                                                @for ($i = $x; $i < sizeof($m2->roles); $i++)
-                                                    <li class="list-none">{{$m2[$i]->account->name}}</li>
-                                                @endfor
-                                            
-                                        @endif
-                                    @endforeach
-                                @endforeach
+                                @if ($isMoreThanThree == true)
+                                @for ($i = $index2 + 1; $i < sizeof($ministers[$index]); $i++)
+                                    @if ($ministers[$index][$i]->roles == "Pengawas")
+                                    <li class="list-none">{{$ministers[$index][$i]->account->name}}</li>
+                                    @endif
+                                    @endfor
+
+                                    @endif
+                                @php
+                                $count = 0;
+                                $index2 = 0;
+                                $isMoreThanThree = false;
+                                @endphp
                             </ul>
                         <p class="mt-2"><span class="font-bold">Perkap:</span></p>
                         <ul class="list-none mr-14">
                                 @php
-                                    $count = 0;
-                                    $isMoreThanThree = false;
+                                $count = 0;
+                                $index2 = 0;
+                                $isMoreThanThree = false;
                                 @endphp
-                                @foreach ($ministers as $minister)
-                                    @foreach ($minister as $m2)
-                                        @if ($m2->roles == "Perkap")
-                                        <li>{{$m2->account->name}}</li>
-                                            @php
-                                            $count++;
-                                            @endphp
-                                            @if ($count == 3)
-                                                @php
-                                                    $isMoreThanThree = true;
-                                                @endphp
-                                                @break
-                                            @endif
-                                        @endif
+                                @foreach ($ministers[$index] as $minister)
+                                @if ($minister->roles == "Perkap")
+                                <li>{{$minister->account->name}}</li>
+                                @php
+                                $count++;
+                                @endphp
+                                @if ($count == 3)
+                                @php
+                                $isMoreThanThree = true;
+                                @endphp
+                                @break
+                                @endif
+                                @endif
+                                @php
+                                $index2++;
+                                @endphp
+                                @endforeach
                             </ul>
                             <ul class="list-none">
-                                        @if ($isMoreThanThree == true)
-                                            
-                                                @for ($i = $x; $i < sizeof($m2->roles); $i++)
-                                                    <li class="list-none">{{$m2[$i]->account->name}}</li>
-                                                @endfor
-                                            
-                                        @endif
-                                    @endforeach
-                                @endforeach
+                                @if ($isMoreThanThree == true)
+                                @for ($i = $index2 + 1; $i < sizeof($ministers[$index]); $i++)
+                                    @if ($ministers[$index][$i]->roles == "Perkap")
+                                    <li class="list-none">{{$ministers[$index][$i]->account->name}}</li>
+                                    @endif
+                                    @endfor
+
+                                    @endif
+                                @php
+                                $count = 0;
+                                $index2 = 0;
+                                $isMoreThanThree = false;
+                                @endphp
                             </ul>
                     </div>
                 </div>
             </div>
         </div>
+        @php
+        $index++;
+        @endphp
         @endforeach
     </div>
 
