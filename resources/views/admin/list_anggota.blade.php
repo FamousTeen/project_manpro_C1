@@ -35,7 +35,7 @@
         </div>
 
         {{-- Tabel --}}
-        <div class="relative overflow-x-auto shadow-md sm:rounded-md sm:w-[600px] md:w-[750px] lg:w-[1000px] mt-10">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-md sm:w-[600px] md:w-[750px] lg:w-[1150px] mt-10">
             <table class="min-w-full text-sm text-left rtl:text-right text-black" style="table-layout: auto;">
                 <thead class="text-md text-black uppercase bg-gray-200">
                     <tr>
@@ -53,6 +53,9 @@
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Region
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Bertugas
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
@@ -79,6 +82,9 @@
                         <td class="px-6 py-4">
                             A
                         </td>
+                        <td class="px-6 py-4">
+                            2
+                        </td>
                         <td class="px-6 py-4" id="statusCell">
                             Active
                         </td>
@@ -95,7 +101,7 @@
                             <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal1')">
                                 &#10005;
                             </button>
-                            <div class="text-left px-10 py-5">
+                            <div class="text-left px-10">
                                 <div class="flex flex-col">
                                     <p class="font-bold text-xl">Nama: </p>
                                     <p class="font-semibold">Apple MacBook Pro 17"</p>
@@ -107,6 +113,10 @@
                                 <div class="flex flex-col mt-5">
                                     <p class="font-bold text-xl">Region: </p>
                                     <p class="font-semibold">A</p>
+                                </div>
+                                <div class="flex flex-col mt-5">
+                                    <p class="font-bold text-xl">Bertugas: </p>
+                                    <p class="font-semibold">2</p>
                                 </div>
                                 <div class="flex flex-col mt-5">
                                     <p class="font-bold text-xl">Status: </p>
@@ -139,6 +149,9 @@
                             A
                         </td>
                         <td class="px-6 py-4">
+                            1
+                        </td>
+                        <td class="px-6 py-4">
                             Active
                         </td>
                         <td class="px-6 py-4">
@@ -148,65 +161,7 @@
                             </div>
                         </td>
                     </tr>
-                    <!-- Modal 2 -->
-                    <div id="modal1" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal1')">
-                        <div class="bg-[#D1D9D1] p-8 rounded-lg w-[700px] h-[400px] relative p-12" onclick="event.stopPropagation()">
-                            <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal1')">
-                                &#10005;
-                            </button>
-                            <!-- Content inside the modal with two columns -->
-                            <div class="grid grid-cols-2 gap-4">
-                                <!-- Left column: Event details -->
-                                <div class="text-left ">
-                                    <div class="flex items-center justify-items">
-                                        <span class="bg-orange-500 h-7 w-7 rounded-full inline-block"></span>
-                                        <h2 class="text-2xl font-bold ml-2">Misa Natal</h2>
-                                    </div>
-                                    <div class="ms-9">
-                                    <p class="mt-2 text-lg">25 Desember 2024</p>
-                                    <p class="font-bold">06.00 WIB</p>
-                                    </div>
-                                    {{-- Evaluasi --}}
-                                    <div class="mt-6 ms-9">
-                                    <div class="flex flex-col">
-                                        <p class="font-bold">Evaluasi: </p>
-                                        <p class="mt-0 text-sm text-justify pe-2">Nam eget molestie massa. Nunc non vestibulum ante. Morbi sem tortor, aliquam a tincidunt sit amet, pretium varius orci. Sed eu nibh sit amet arcu dignissim posuere. </p>
-                                    </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- Right column: Task details -->
-                                <div class="text-left">
-                                    <p class="text-xl font-bold">Yang bertugas saat ini:</p>
-                                    <p class="mt-2"><span class="font-bold">Petugas:</span></p>
-                                    <div class="flex flex-row">
-                                        <ul class="mr-14">
-                                            <li>Angel</li>
-                                            <li>Martin</li>
-                                            <li>Shasaa</li>
-                                            <li>Jonathan</li>
-                                        </ul>
-                                        <ul>
-                                            <li>Angel</li>
-                                            <li>Martin</li>
-                                            <li>Angel</li>
-                                        </ul>
-                                    </div>
-                                    <p class="mt-2"><span class="font-bold">Pengawas:</span></p>
-                                    <ul>
-                                        <li>Alonso</li>
-                                        <li>Bryan</li>
-                                    </ul>
-                                    <p class="mt-2"><span class="font-bold">Perkap:</span></p>
-                                    <ul>
-                                        <li>Alonso</li>
-                                        <li>Bryan</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    
                     <tr class="odd:bg-white even:bg-[#f6f1e3] border-b hover:bg-gray-50 hover:even:bg-[#e9e5d8]">
                         <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
                             Magic Mouse
@@ -222,6 +177,9 @@
                         </td>
                         <td class="px-6 py-4">
                             A
+                        </td>
+                        <td class="px-6 py-4">
+                            0
                         </td>
                         <td class="px-6 py-4">
                             Active
@@ -245,6 +203,9 @@
                         </td>
                         <td class="px-6 py-4">
                             $2999
+                        </td>
+                        <td class="px-6 py-4">
+                            2
                         </td>
                         <td class="px-6 py-4">
                             A
@@ -273,6 +234,9 @@
                             $1999
                         </td>
                         <td class="px-6 py-4">
+                            2
+                        </td>
+                        <td class="px-6 py-4">
                             A
                         </td>
                         <td class="px-6 py-4">
@@ -299,6 +263,9 @@
                             $2999
                         </td>
                         <td class="px-6 py-4">
+                            2
+                        </td>
+                        <td class="px-6 py-4">
                             A
                         </td>
                         <td class="px-6 py-4">
@@ -314,15 +281,6 @@
                 </tbody>
             </table>
         </div>
-
-
-
-
-
-
-
-
-
     </div>
 
 

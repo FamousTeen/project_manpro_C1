@@ -97,3 +97,8 @@ Route::get('/profile_anggota', [AccountController::class, 'index'])->name('profi
 
 // buat testing
 Route::get('/edit_profile_anggota', [AccountController::class, 'edit'])->name('edit_profile_anggota');
+
+//Lihat list Anggota
+Route::get('/list_anggota', function () {
+    return view('admin/list_anggota');
+})->name('list_anggota');
