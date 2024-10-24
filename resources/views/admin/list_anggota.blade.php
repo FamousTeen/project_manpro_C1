@@ -205,10 +205,10 @@
                             $2999
                         </td>
                         <td class="px-6 py-4">
-                            2
+                            A
                         </td>
                         <td class="px-6 py-4">
-                            A
+                            2
                         </td>
                         <td class="px-6 py-4">
                             Active
@@ -234,10 +234,10 @@
                             $1999
                         </td>
                         <td class="px-6 py-4">
-                            2
+                            A
                         </td>
                         <td class="px-6 py-4">
-                            A
+                            2
                         </td>
                         <td class="px-6 py-4">
                             Active
@@ -263,10 +263,10 @@
                             $2999
                         </td>
                         <td class="px-6 py-4">
-                            2
+                            A
                         </td>
                         <td class="px-6 py-4">
-                            A
+                            4
                         </td>
                         <td class="px-6 py-4">
                             Active
