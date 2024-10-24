@@ -61,9 +61,6 @@ class AccountController extends Controller
         Account::create($validatedData);
 
         return redirect()->route('start_login')->with('success', 'Akun berhasil di buat');
-        // else {
-
-        // }
     }
 
     /**
@@ -86,9 +83,49 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAccountRequest $request, Account $account)
+    public function update(Request $request)
     {
-        //
+        $user = Auth::user();
+        $data = $request->all();
+
+        $formfield = Validator::make($data, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'address' => 'required',
+            'birth_place_date' => 'required',
+            'region' => 'required',
+        ]);
+        $validatedData = $formfield->validate();
+
+        $account = Account::find($user->id);
+        $account->update($validatedData);
+
+        return redirect()->route('profile_anggota')->with('success', 'Data berhasil di update');
+    }
+
+    public function updatePP(Request $request)
+    {
+        $user = Auth::user();
+        $data = $request->all();
+
+        $formfield = Validator::make($data, [
+            'photo' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+        ]);
+        $validatedData = $formfield->validate();
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photo_name = $photo->getClientOriginalName();
+            $photo->move(public_path('asset'), $photo_name);
+            $validatedData['photo'] = $photo_name;
+        } else {
+            $validatedData['photo'] = 'default.jpg';
+        }
+
+        $account = Account::find($user->id);
+        $account->update($validatedData);
+
+        return redirect()->route('profile_anggota')->with('success', 'Data berhasil di update');
     }
 
     /**

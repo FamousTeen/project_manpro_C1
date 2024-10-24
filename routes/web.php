@@ -95,8 +95,16 @@ Route::get('/profile_admin', function () {
 // buat testing
 Route::get('/profile_anggota', [AccountController::class, 'index'])->name('profile_anggota');
 
-// buat testing
+/* --------EDIT PROFILE ANGGOTA-------- */
+// redirect ke page edit profile anggota
 Route::get('/edit_profile_anggota', [AccountController::class, 'edit'])->name('edit_profile_anggota');
+
+// post data edit profile anggota
+Route::put('/update_profile_anggota', [AccountController::class, 'update'])->name('update_profile_anggota');
+
+// post data edit pp anggota
+Route::put('/update_pp_anggota', [AccountController::class, 'updatePP'])->name('update_pp_anggota');
+/* --------END EDIT PROFILE ANGGOTA-------- */
 
 //Lihat list Anggota
 Route::get('/list_anggota', function () {
