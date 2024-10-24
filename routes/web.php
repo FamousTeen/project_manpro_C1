@@ -70,7 +70,7 @@ Route::post('/store-account', [AccountController::class, 'store'])->name('store_
 
 
 // buat testing
-Route::get('/evaluasi/{id}', [MisaDetailController::class, 'show'])->name('evaluasi_anggota');
+Route::get('/evaluasi', [MisaDetailController::class, 'show'])->name('evaluasi_anggota');
 
 // Evaluasi Anggota (Pengawas)
 Route::get('/evaluasi_pengawas', function () {

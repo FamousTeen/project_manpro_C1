@@ -49,7 +49,7 @@ class MisaDetailController extends Controller
             $user->email
         )->where('password', $user->password)->firstOrFail();
 
-        $misa = Misa_Detail::get()->where('account_id', $request->id);
+        $misa = Misa_Detail::get()->where('account_id', $user->id);
         return view('anggota.evaluasi', [
             'misa' => $misa,
             'data' => $userData
