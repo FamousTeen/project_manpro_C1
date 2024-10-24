@@ -19,6 +19,10 @@ Carbon::setLocale('id');
         </div>
     </div>
 
+    
+    @php
+        $index = 0;
+    @endphp
     <!-- Jadwal Misa Section -->
     <div
         class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-x-4 gap-y-16 mx-32 mt-5">
@@ -56,9 +60,6 @@ Carbon::setLocale('id');
             </div>
         </div>
         <!-- Modal 1 -->
-        @php
-        $index = 0;
-        @endphp
         <div id="modal{{ $m->id }}"
             class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
             onclick="closeModal('modal{{ $m->id }}')">
@@ -101,6 +102,7 @@ Carbon::setLocale('id');
                                 $index2 = 0;
                                 $isMoreThanThree = false;
                                 @endphp
+                                
                                 @foreach ($ministers[$index] as $minister)
                                 @if ($minister->roles == "Petugas")
                                 <li>{{$minister->account->name}}</li>

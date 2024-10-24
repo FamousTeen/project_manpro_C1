@@ -61,5 +61,29 @@ class MisaDetailSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+
+        DB::table('misa_details')->insert([
+            'misa_id' => 2,
+            'account_id' => 1,
+            'roles' => "Petugas",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('misa_details')->insert([
+            'misa_id' => 2,
+            'account_id' => 2,
+            'roles' => "Pengawas",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('misa_details')->insert([
+            'misa_id' => 2,
+            'account_id' => 3,
+            'roles' => "Perkap",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }
