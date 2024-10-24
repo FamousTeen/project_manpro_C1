@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Misa;
 use App\Models\Account;
 use App\Models\Misa_Detail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreMisa_DetailRequest;
 use App\Http\Requests\UpdateMisa_DetailRequest;
 
@@ -54,7 +56,7 @@ class MisaDetailController extends Controller
         $ministers = [];
         foreach ($misa as $m) {
             // for ($x = 0; $x < sizeof($misa); $x++) {
-                array_push($ministers, Misa_Detail::get()->where('misa_id', $m->misa_id));
+            array_push($ministers, Misa_Detail::get()->where('misa_id', $m->misa_id));
             // }
         }
 
@@ -81,6 +83,23 @@ class MisaDetailController extends Controller
     public function update(UpdateMisa_DetailRequest $request, Misa_Detail $misa_Detail)
     {
         //
+    }
+
+    public function updateEval(Request $request)
+    {
+        $user = Auth::user();
+        $data = $request->all();
+        $misaDetail = Misa_Detail::where('id', $request->id)->where('account_id', $user->id)->where('roles', 'Pengawas')->first();
+
+        $formfield = Validator::make($data, [
+            'evaluation' => 'required|string',
+        ]);
+        $validatedData = $formfield->validate();
+
+        $misa = Misa::find($misaDetail->misa_id);
+        $misa->update($validatedData);
+
+        return redirect()->route('evaluasi_anggota')->with('success', 'Evaluation updated successfully.');
     }
 
     /**

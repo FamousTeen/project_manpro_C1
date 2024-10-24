@@ -110,3 +110,6 @@ Route::put('/update_pp_anggota', [AccountController::class, 'updatePP'])->name('
 Route::get('/list_anggota', function () {
     return view('admin/list_anggota');
 })->name('list_anggota');
+
+// update isi evaluasi
+Route::put('/update_evaluasi/{id}', [MisaDetailController::class, 'updateEval'])->name('update_evaluasi');
