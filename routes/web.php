@@ -93,11 +93,7 @@ Route::get('/profile_admin', function () {
 })->name('profile_admin');
 
 // buat testing
-Route::get('/profile_anggota', function () {
-    return view('anggota/profile/profile_anggota');
-})->name('profile_anggota');
+Route::get('/profile_anggota', [AccountController::class, 'index'])->name('profile_anggota');
 
 // buat testing
-Route::get('/edit_profile_anggota', function () {
-    return view('anggota/profile/edit_profile_anggota');
-})->name('edit_profile_anggota');
+Route::get('/edit_profile_anggota', [AccountController::class, 'edit'])->name('edit_profile_anggota');

@@ -79,7 +79,7 @@
                     <!-- Dropdown Menu -->
                     <div id="dropdownMenu"
                         class="hidden absolute right-0 top-full w-full bg-[#20252f] text-[#f6f1e3] shadow-lg mt-1">
-                        <a href="#"
+                        <a href="{{ route('profile_anggota') }}"
                             class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Profile</a>
                         <a href="{{ route('start_login') }}"
                             class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Logout</a>

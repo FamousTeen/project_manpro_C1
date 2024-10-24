@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\UpdateAccountRequest;
 
@@ -15,7 +16,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        return view('anggota.profile.profile_anggota', $user);
     }
 
     /**
@@ -77,7 +79,8 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        //
+        $user = Auth::user();
+        return view('anggota.profile.edit_profile_anggota', $user);
     }
 
     /**
