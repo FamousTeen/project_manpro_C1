@@ -58,7 +58,7 @@
 
     <!-- Modal -->
     <div id="modal{{ $misa->id }}" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal{{ $misa->id }}')">
-      <div class="bg-[#D1D9D1] p-8 rounded-lg w-[700px] h-[400px] relative p-12" onclick="event.stopPropagation()">
+      <div class="bg-[#f6f1e3] p-8 rounded-lg w-[700px] h-[400px] relative p-12" onclick="event.stopPropagation()">
         <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal{{ $misa->id }}')">
           &#10005;
         </button>
