@@ -69,16 +69,16 @@
                     <tbody>
                         <tr class="odd:bg-white even:bg-gray-100 border-b hover:odd:bg-gray-200 hover:even:bg-gray-200">
                             <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                Apple MacBook Pro 17"
+                                Sasha
                             </th>
                             <td class="px-6 py-4">
-                                Silverasdashdbd
+                                sasha@gmail.com
                             </td>
                             <td class="px-6 py-4">
-                                Laptopfasfsafsaf ajsfjasfsf ajsfjasfhasfuhaf
+                                100 Main Street
                             </td>
                             <td class="px-6 py-4">
-                                $2999
+                                Surabaya, 10-10-2000
                             </td>
                             <td class="px-6 py-4">
                                 A
@@ -105,11 +105,11 @@
                                 <div class="text-left px-10">
                                     <div class="flex flex-col">
                                         <p class="font-bold text-xl">Nama: </p>
-                                        <p class="font-semibold">Apple MacBook Pro 17"</p>
+                                        <p class="font-semibold">Sasha</p>
                                     </div>
                                     <div class="flex flex-col mt-5">
                                         <p class="font-bold text-xl">Email: </p>
-                                        <p class="font-semibold">Silverasdashdbd</p>
+                                        <p class="font-semibold">sasha@gmail.com</p>
                                     </div>
                                     <div class="flex flex-col mt-5">
                                         <p class="font-bold text-xl">Region: </p>
@@ -132,19 +132,19 @@
                                 </div>
                             </div>
                         </div>
-    
+
                         <tr class="odd:bg-white even:bg-gray-100 border-b hover:odd:bg-gray-200 hover:even:bg-gray-200">
                             <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                Microsoft Surface Pro
+                                Kevin
                             </th>
                             <td class="px-6 py-4">
-                                White
+                                kevin@gmail.com
                             </td>
                             <td class="px-6 py-4">
-                                Laptop PC
+                                200 Main Street
                             </td>
                             <td class="px-6 py-4">
-                                $1999
+                                Surabaya, 20-05-1995
                             </td>
                             <td class="px-6 py-4">
                                 A
@@ -157,7 +157,37 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex flex-row gap-2">
-                                    <button class="bg-[#002366] text-white py-1 px-2 rounded-md hover:bg-[#20252f] transition-all duration-300 text-sm mt-2 " onclick="openModal('modal1')">Edit</button>
+                                    <button class="bg-[#002366] text-white py-1 px-2 rounded-md hover:bg-[#20252f] transition-all duration-300 text-sm mt-2">Edit</button>
+                                    <button class="bg-[#ae0001] text-white py-1 px-2 rounded-md hover:bg-[#740001] transition-all duration-300 text-sm mt-2">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+    
+                        <tr class="odd:bg-white even:bg-gray-100 border-b hover:odd:bg-gray-200 hover:even:bg-gray-200">
+                            <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
+                                Kurma
+                            </th>
+                            <td class="px-6 py-4">
+                                kurma@gmail.com
+                            </td>
+                            <td class="px-6 py-4">
+                                300 Main Street
+                            </td>
+                            <td class="px-6 py-4">
+                                Surabaya, 20-05-1995
+                            </td>
+                            <td class="px-6 py-4">
+                                B
+                            </td>
+                            <td class="px-6 py-4">
+                                1
+                            </td>
+                            <td class="px-6 py-4">
+                                Active
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex flex-row gap-2">
+                                    <button class="bg-[#002366] text-white py-1 px-2 rounded-md hover:bg-[#20252f] transition-all duration-300 text-sm mt-2">Edit</button>
                                     <button class="bg-[#ae0001] text-white py-1 px-2 rounded-md hover:bg-[#740001] transition-all duration-300 text-sm mt-2">Delete</button>
                                 </div>
                             </td>
@@ -165,19 +195,49 @@
                         
                         <tr class="odd:bg-white even:bg-gray-100 border-b hover:odd:bg-gray-200 hover:even:bg-gray-200">
                             <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                Magic Mouse
+                                Karina
                             </th>
                             <td class="px-6 py-4">
-                                Silverasdashdbd
+                                karina@gmail.com
                             </td>
                             <td class="px-6 py-4">
-                                Laptopfasfsafsaf ajsfjasfsf ajsfjasfhasfuhaf
+                                400 Main Street
                             </td>
                             <td class="px-6 py-4">
-                                $2999
+                                Surabaya, 20-5
                             </td>
                             <td class="px-6 py-4">
-                                A
+                                B
+                            </td>
+                            <td class="px-6 py-4">
+                                2
+                            </td>
+                            <td class="px-6 py-4">
+                                Active
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex flex-row gap-2">
+                                    <button class="bg-[#002366] text-white py-1 px-2 rounded-md hover:bg-[#20252f] transition-all duration-300 text-sm mt-2">Edit</button>
+                                    <button class="bg-[#ae0001] text-white py-1 px-2 rounded-md hover:bg-[#740001] transition-all duration-300 text-sm mt-2">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="odd:bg-white even:bg-gray-100 border-b hover:odd:bg-gray-200 hover:even:bg-gray-200">
+                            <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
+                                Valiant
+                            </th>
+                            <td class="px-6 py-4">
+                                valiant@gmail.com
+                            </td>
+                            <td class="px-6 py-4">
+                                700 Main Street
+                            </td>
+                            <td class="px-6 py-4">
+                                Surabaya, 20-5
+                            </td>
+                            <td class="px-6 py-4">
+                                C
                             </td>
                             <td class="px-6 py-4">
                                 0
@@ -192,82 +252,25 @@
                                 </div>
                             </td>
                         </tr>
+
                         <tr class="odd:bg-white even:bg-gray-100 border-b hover:odd:bg-gray-200 hover:even:bg-gray-200">
                             <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                Apple MacBook Pro 17"
+                                Chyntia
                             </th>
                             <td class="px-6 py-4">
-                                Silverasdashdbd
+                                chyntia@gmail.com
                             </td>
                             <td class="px-6 py-4">
-                                Laptopfasfsafsaf ajsfjasfsf ajsfjasfhasfuhaf
+                                800 Main Street
                             </td>
                             <td class="px-6 py-4">
-                                $2999
+                                Surabaya, 20-5
                             </td>
                             <td class="px-6 py-4">
-                                A
+                                D
                             </td>
                             <td class="px-6 py-4">
-                                2
-                            </td>
-                            <td class="px-6 py-4">
-                                Active
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-row gap-2">
-                                    <button class="bg-[#002366] text-white py-1 px-2 rounded-md hover:bg-[#20252f] transition-all duration-300 text-sm mt-2">Edit</button>
-                                    <button class="bg-[#ae0001] text-white py-1 px-2 rounded-md hover:bg-[#740001] transition-all duration-300 text-sm mt-2">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="odd:bg-white even:bg-gray-100 border-b hover:odd:bg-gray-200 hover:even:bg-gray-200">
-                            <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                Microsoft Surface Pro
-                            </th>
-                            <td class="px-6 py-4">
-                                White
-                            </td>
-                            <td class="px-6 py-4">
-                                Laptop PC
-                            </td>
-                            <td class="px-6 py-4">
-                                $1999
-                            </td>
-                            <td class="px-6 py-4">
-                                A
-                            </td>
-                            <td class="px-6 py-4">
-                                2
-                            </td>
-                            <td class="px-6 py-4">
-                                Active
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-row gap-2">
-                                    <button class="bg-[#002366] text-white py-1 px-2 rounded-md hover:bg-[#20252f] transition-all duration-300 text-sm mt-2">Edit</button>
-                                    <button class="bg-[#ae0001] text-white py-1 px-2 rounded-md hover:bg-[#740001] transition-all duration-300 text-sm mt-2">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="odd:bg-white even:bg-gray-100 border-b hover:odd:bg-gray-200 hover:even:bg-gray-200">
-                            <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
-                                Magic Mouse
-                            </th>
-                            <td class="px-6 py-4">
-                                Silverasdashdbd
-                            </td>
-                            <td class="px-6 py-4">
-                                Laptopfasfsafsaf ajsfjasfsf ajsfjasfhasfuhaf
-                            </td>
-                            <td class="px-6 py-4">
-                                $2999
-                            </td>
-                            <td class="px-6 py-4">
-                                A
-                            </td>
-                            <td class="px-6 py-4">
-                                4
+                                3
                             </td>
                             <td class="px-6 py-4">
                                 Active
