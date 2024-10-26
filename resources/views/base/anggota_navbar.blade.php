@@ -123,7 +123,7 @@
                 <ul id="konfirmasiDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
                     <li><a href="{{ route('jadwal_anggota') }}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal
                             Tugasku</a></li>
-                    <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Konfirmasi Tugas</a></li>
+                    <li><a href="{{ route('konfirmasi')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Konfirmasi Tugas</a></li>
                 </ul>
             </li>
             <li>

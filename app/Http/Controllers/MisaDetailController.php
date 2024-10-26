@@ -102,6 +102,16 @@ class MisaDetailController extends Controller
         return redirect()->route('evaluasi_anggota')->with('success', 'Evaluation updated successfully.');
     }
 
+    public function updateConfirmation($id, $answer)
+    {
+        $misa = Misa_Detail::where('id', '=', $id)->first();
+        $misa->update([
+            'confirmation' => $answer
+        ]);
+
+        return redirect()->route('konfirmasi')->with('success', 'Konfirmasi kehadiran berhasil.');
+    }
+
     /**
      * Remove the specified resource from storage.
      */

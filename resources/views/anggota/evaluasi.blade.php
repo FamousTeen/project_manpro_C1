@@ -1,7 +1,9 @@
+
 @extends('base/anggota_navbar')
 
 @section('content')
     <?php
+    use Illuminate\Support\Facades\Auth;
     use App\Models\Misa_Detail;
     use Carbon\Carbon;
     
@@ -28,6 +30,7 @@
             class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-x-4 gap-y-16 mx-32 mt-5">
             @foreach ($misa as $m)
                 <?php
+                
                 $user = Auth::user();
                 $role = Misa_Detail::where('account_id', $user->id)
                     ->where('misa_id', $m->misa->id)

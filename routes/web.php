@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\EventDetailController;
+use App\Models\Account;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EventController;
 use App\Http\Controllers\MisaController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
+use App\Http\Controllers\EventDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +51,8 @@ Route::resource('events', EventController::class)->names([
     'update' => 'events.update',
     'destroy' => 'events.destroy',
 ]);
+
+
 
 //Jadwal Anggota
 Route::get('/jadwal', [MisaController::class, 'index'])->name('jadwal_anggota');
@@ -114,7 +118,18 @@ Route::get('/list_anggota', function () {
 // update isi evaluasi
 Route::put('/update_evaluasi/{id}', [MisaDetailController::class, 'updateEval'])->name('update_evaluasi');
 
+Route::get('/update_evaluasi/{id}/{answer}', [MisaDetailController::class, 'updateConfirmation'])->name('update_konfirmasi');
+
 //Lihat list Anggota
 Route::get('/konfirmasi', function () {
-    return view('anggota/konfirmasi');
+    $user = Auth::user();
+
+    // Fetch data for the dashboard
+    $userData = Account::query()->where(
+        'email',
+        $user->email
+    )->where('password', $user->password)->firstOrFail();
+
+
+    return view('anggota/konfirmasi',compact('userData'));
 })->name('konfirmasi');
