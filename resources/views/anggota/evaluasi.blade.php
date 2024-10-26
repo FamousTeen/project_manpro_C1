@@ -45,7 +45,7 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <p class="font-bold" style="font-size: 18px">
-                            {{ Carbon::parse($m->misa->date)->translatedFormat('l, j F Y') }}
+                            {{ Carbon::parse($m->misa->activity_datetime)->translatedFormat('l, j F Y') }}
                         </p>
                     </div>
                     <div class="mt-2">
