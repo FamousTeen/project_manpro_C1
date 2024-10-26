@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime('upload_datetime');
             $table->string('evaluation');
             $table->string('status');
+            $table->bigInteger('active')->default(1);
             $table->timestamps();
         });
     }

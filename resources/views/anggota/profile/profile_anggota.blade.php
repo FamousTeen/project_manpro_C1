@@ -17,7 +17,7 @@
                 <div class="relative w-1/3 p-4 ml-8">
                     <div class="bg-gray-300 rounded-lg h-48 w- -bottom-3 flex justify-center items-center">
                         <!-- Placeholder for profile image -->
-                        <img src="asset/{{ $photo }}" class="rounded-lg" alt="">
+                        <img src="asset/{{ $user->photo }}" class="rounded-lg" alt="">
                     </div>
                 </div>
 
@@ -25,15 +25,15 @@
                 <div class="w-2/3 p-4">
                     <div class="grid grid-cols-2 ml-8 gap-y-8">
                         <div class="text-gray-600 font-semibold">Nama Panggilan</div>
-                        <div class="text-gray-700">{{ $name }}</div>
+                        <div class="text-gray-700">{{ $user->name }}</div>
                         <div class="text-gray-600 font-semibold">Email</div>
-                        <div class="text-gray-700">{{ $email }}</div>
+                        <div class="text-gray-700">{{ $user->email }}</div>
                         <div class="text-gray-600 font-semibold">Alamat</div>
-                        <div class="text-gray-700">{{ $address }}</div>
+                        <div class="text-gray-700">{{ $user->address }}</div>
                         <div class="text-gray-600 font-semibold">Tempat, Tanggal Lahir</div>
-                        <div class="text-gray-700">{{ $birth_place_date }}</div>
+                        <div class="text-gray-700">{{ $user->birth_place_date }}</div>
                         <div class="text-gray-600 font-semibold">Wilayah</div>
-                        <div class="text-gray-700">{{ $region }}</div>
+                        <div class="text-gray-700">{{ $user->region }}</div>
                     </div>
                 </div>
             </div>

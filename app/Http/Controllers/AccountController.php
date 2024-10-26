@@ -17,7 +17,11 @@ class AccountController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('anggota.profile.profile_anggota', $user);
+        $data = Account::find($user->id);
+        return view('anggota.profile.profile_anggota', [
+            'user' => $user,
+            'data' => $data
+        ]);
     }
 
     /**

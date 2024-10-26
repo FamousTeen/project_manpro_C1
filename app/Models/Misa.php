@@ -11,6 +11,8 @@ class Misa extends Model
     use HasFactory;
     protected $fillable = ['title', 'category', 'activity_datetime', 'upload_datetime', 'evaluation', 'status'];
 
+    protected $table = 'misas';
+
     public function misaDetails(): HasMany
     {
         return $this->hasMany(Misa_Detail::class);
