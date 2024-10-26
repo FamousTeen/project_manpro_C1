@@ -60,7 +60,7 @@
                             <img src="../../../asset/{{ $data->photo }}" alt="Profile Icon"
                                 class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @else
-                            <img src="../../../asset/profile-circle.256x256" alt="Profile Icon"
+                            <img src="../../../asset/profile-circle.256x256.png" alt="Profile Icon"
                                 class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @endif
 
