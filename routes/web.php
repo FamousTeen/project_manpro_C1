@@ -113,3 +113,8 @@ Route::get('/list_anggota', function () {
 
 // update isi evaluasi
 Route::put('/update_evaluasi/{id}', [MisaDetailController::class, 'updateEval'])->name('update_evaluasi');
+
+//Lihat list Anggota
+Route::get('/konfirmasi', function () {
+    return view('anggota/konfirmasi');
+})->name('konfirmasi');
