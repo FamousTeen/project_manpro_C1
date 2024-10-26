@@ -5,12 +5,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+
+  {{-- For Font --}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poltawski+Nowy:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet">
+  <style>
+      body {
+          font-family: 'Poltawski Nowy', serif;
+          background-color: #FCF1D5;
+      }
+  </style>
+
   @vite('resources/css/app.css')
 </head>
 
-<body class="bg-[#DEE1DD]">
+<!-- Colors:
+                1. #740001 - merah gelap
+                2. #ae0001 - merah terang
+                3. #f6f1e3 - netral
+                4. #002366 - biru terang // #001742 - biru hover
+                5. #20252f - biru gelap
+            -->
+
+<body class="bg-[#20252f]">
   <div class="container-fluid h-dvh content-center w-dvw">
-    <form action="{{ route('login')}}" method="get" class="max-w-md m-auto p-14 pb-5 bg-[#C4CDC1] rounded-lg">
+    <form action="{{ route('login')}}" method="get" class="max-w-md m-auto p-14 pb-5 bg-[#f6f1e3] rounded-lg">
       @csrf
       <div class="grid justify-items-center">
         <h1 class="text-3xl font-bold mb-10">LOGIN</h1>
@@ -43,7 +64,7 @@
     @endif
       <div class="relative mt-14 z-0 w-full mb-5 group">
         <button type="submit"
-          class="inline-block text-white bg-[#2F575D] hover:bg-[#103A38] focus:ring-4 focus:outline-none focus:ring-[#0A3431] font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-[#2F575D] dark:hover:bg-[#103A38] dark:focus:ring-[#0A3431]">Login</button>
+          class="inline-block text-white bg-[#002366] hover:bg-[#001742] focus:ring-4 focus:outline-none focus:ring-[#0A3431] font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-[#2F575D] dark:hover:bg-[#103A38] dark:focus:ring-[#0A3431]">Login</button>
       </div>
       <div class="relative z-0 w-full mb-5 group text-center">
         Don't have an account? <span><a href="{{ route('accounts.create')}}"
