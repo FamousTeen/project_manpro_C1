@@ -45,12 +45,10 @@
       <div class="flex flex-row items-center gap-x-6">
         <p class="text-sm text-gray-600 text-start flex-auto flex-nowrap mb-4">sisa waktu konfirmasi</p>
         <div class="flex flex-row text-sm text-gray-600 countdown">
-          <!-- <p
-            class="countdown-element days font-semibold tracking-[15.36px] max-w-[44px] text-center z-20">
-          </p>:&nbsp;&nbsp;&nbsp;&nbsp; -->
+          &nbsp;&nbsp;
           <p
             class="countdown-element hours font-bold tracking-[15.36px] max-w-[44px] text-center z-20 h-fit">
-          </p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+          </p>&nbsp;&nbsp;&nbsp;&nbsp;:
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <p
             class="countdown-element minutes font-bold  tracking-[15.36px] max-w-[44px] text-center z-20 h-fit">
@@ -65,7 +63,8 @@
       @endphp
       <!-- Javascript buat countdown -->
       <script>
-        let dest = new Date("{{Carbon::parse($misa->misa->activity_datetime)->translatedFormat('M j, Y H:i:s')}}").getTime();
+        let dest = new Date("{{Carbon::parse($misa->misa->activity_datetime)->subDays(3)->translatedFormat('M j, Y H:i:s')}}").getTime();
+        console.log(dest);
         let x = setInterval(function() {
           let now = new Date().getTime();
           let diff = dest - now;
@@ -77,7 +76,6 @@
           }
 
           // let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-          console.log(diff);
           let hours = Math.floor(diff / (1000 * 60 * 60));
           let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
           let seconds = Math.floor((diff % (1000 * 60)) / 1000);
