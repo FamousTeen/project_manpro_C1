@@ -16,7 +16,11 @@ class RedirectBasedOnRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('admin')->check() || Auth::guard('account')->check()) {
+        if (Auth::guard('admin')->check()) {
+            // Only admin access
+            return $next($request);
+        } elseif (Auth::guard('account')->check()) {
+            // Only account access
             return $next($request);
         }
 

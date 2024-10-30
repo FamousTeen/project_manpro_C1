@@ -19,11 +19,10 @@ class AccountController extends Controller
         $user = null;
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
-        }
-        elseif (Auth::guard('account')->check()) {
+        } elseif (Auth::guard('account')->check()) {
             $user = Auth::guard('account')->user();
         }
-        
+
         $data = Account::find($user->id);
         return view('anggota.profile.profile_anggota', [
             'user' => $user,
@@ -77,10 +76,7 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Account $account)
-    {
-
-    }
+    public function show(Account $account) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -145,5 +141,21 @@ class AccountController extends Controller
     public function destroy(Account $account)
     {
         //
+    }
+
+    public function dashboard()
+    {
+
+        // if (Auth::guard('account')->check()) {
+        $user = Auth::guard('account')->user();
+
+        // Fetch data specific to account user
+        $dashboardData = Account::find($user->id);
+
+        // Pass the data to the account dashboard view
+        return view('anggota.dashboard', [
+            'user' => $user,
+            'data' => $dashboardData
+        ]);
     }
 }

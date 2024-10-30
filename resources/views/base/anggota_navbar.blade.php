@@ -102,7 +102,7 @@
         </div>
         <ul class="space-y-8">
             <li>
-                <a href="{{ route('dashboard') }}" class="flex text-[#f6f1e3] items-center hover:text-[#ae0001]">
+                <a href="{{ route('account.dashboard') }}" class="flex text-[#f6f1e3] items-center hover:text-[#ae0001]">
                     <img src="../../../asset/dashboard.png" alt="Dashboard Icon" class="h-6 w-6 mr-4">
                     Dashboard
                 </a>

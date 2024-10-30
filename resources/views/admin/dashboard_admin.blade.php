@@ -50,14 +50,21 @@ use App\Models\Training;
                     class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
                     <div>
                         <p class="font-semibold w-fit text-lg">Panitia</p>
-                        <p class="w-fit text-md">{{
-                        $data->eventPermissions->eventDetail->account->count() }}</p>
+                        @php
+                        $userCount = 0;
+                        @endphp
+                        @foreach ($data->eventPermissions as $eventPermission)
+                          @php
+                            $userCount += $eventPermission->eventDetail->account->where('status', 1)->count()
+                          @endphp  
+                        @endforeach
+                        <p class="w-fit text-md">{{$userCount}}</p>
                     </div>
-                    <img class="w-[50px] h-[50px]" src="{{ asset('asset/people.png') }}" alt="People Icon">
+                    <!-- <img class="w-[50px] h-[50px]" src="{{ asset('asset/people.png') }}" alt="People Icon"> -->
                 </div>
             </div>
 
-            <!-- Pengumuman Section -->
+              <!-- Pengumuman Section -->
             <h2 class="font-bold text-xl mb-4 ml-16">Pengumuman</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-16">
 

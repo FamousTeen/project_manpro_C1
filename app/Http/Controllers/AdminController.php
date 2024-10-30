@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 
@@ -62,5 +63,22 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         //
+    }
+
+    public function dashboard()
+    {
+
+        // if (Auth::guard('account')->check()) {
+        $user = Auth::guard('admin')->user();
+
+        // Fetch data specific to account user
+        $dashboardData = Admin::find($user->id);
+
+        // Pass the data to the account dashboard view
+        return view('admin.dashboard_admin', [
+            'user' => $user,
+            'data' => $dashboardData
+        ]);
+        // }
     }
 }

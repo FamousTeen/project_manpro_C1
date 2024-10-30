@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MisaController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\DashboardController;
@@ -42,7 +43,13 @@ Route::get('/mainLogin', function () {
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 // });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['redirect.role', 'auth:admin,account']);
+Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
+Route::middleware(['auth:account'])->group(function () {
+    Route::get('/account/dashboard', [AccountController::class, 'dashboard'])->name('account.dashboard');
+});
 
 // buat testing
 Route::resource('events', EventController::class)->names([
