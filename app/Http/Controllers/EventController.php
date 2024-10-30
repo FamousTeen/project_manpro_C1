@@ -15,14 +15,20 @@ class EventController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        $user = null;
+        if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+        }
+        elseif (Auth::guard('account')->check()) {
+            $user = Auth::guard('account')->user();
+        }
 
         // Fetch data for the dashboard
         $userData = Account::query()->where(
             'email',
             $user->email
         )->where('password', $user->password)->firstOrFail();
-        
+
         $events = Event::query()->where('status', 1)->get();
         return view('anggota/alur_acara/acara', [
             'events' => $events,
@@ -51,7 +57,13 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        $user = Auth::user();
+        $user = null;
+        if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+        }
+        elseif (Auth::guard('account')->check()) {
+            $user = Auth::guard('account')->user();
+        }
 
         // Fetch data for the dashboard
         $userData = Account::query()->where(

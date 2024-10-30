@@ -29,6 +29,7 @@ class DashboardController extends Controller
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
 
+            dd($user);
             // Fetch data specific to admin
             $dashboardData = Admin::find($user->id);
 
@@ -45,9 +46,7 @@ class DashboardController extends Controller
 
             // Fetch data specific to account user
             $dashboardData = Account::find($user->id);
-
-            // dd($dashboardData);
-
+            
             // Pass the data to the account dashboard view
             return view('anggota/dashboard', [
                 'user' => $user,

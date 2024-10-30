@@ -39,7 +39,7 @@ Route::get('/mainLogin', function () {
 
 
 // Route::middleware('redirect.role')->group(callback: function () {
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login');
 // });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['redirect.role', 'auth:admin,account']);
@@ -125,7 +125,12 @@ Route::get('/update_evaluasi/{id}/{answer}', [MisaDetailController::class, 'upda
 
 //Lihat list Anggota
 Route::get('/konfirmasi', function () {
-    $user = Auth::user();
+    $user = null;
+    if (Auth::guard('admin')->check()) {
+        $user = Auth::guard('admin')->user();
+    } elseif (Auth::guard('account')->check()) {
+        $user = Auth::guard('account')->user();
+    }
 
     // Fetch data for the dashboard
     $userData = Account::query()->where(
@@ -134,5 +139,5 @@ Route::get('/konfirmasi', function () {
     )->where('password', $user->password)->firstOrFail();
 
 
-    return view('anggota/konfirmasi',compact('userData'));
+    return view('anggota/konfirmasi', compact('userData'));
 })->name('konfirmasi');

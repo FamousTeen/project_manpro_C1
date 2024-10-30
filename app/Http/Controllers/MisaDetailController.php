@@ -43,7 +43,13 @@ class MisaDetailController extends Controller
      */
     public function show(Request $request)
     {
-        $user = Auth::user();
+        $user = null;
+        if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+        }
+        elseif (Auth::guard('account')->check()) {
+            $user = Auth::guard('account')->user();
+        }
 
         // Fetch data for the dashboard
         $userData = Account::query()->where(
@@ -87,7 +93,14 @@ class MisaDetailController extends Controller
 
     public function updateEval(Request $request)
     {
-        $user = Auth::user();
+        $user = null;
+        if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+        }
+        elseif (Auth::guard('account')->check()) {
+            $user = Auth::guard('account')->user();
+        }
+        
         $data = $request->all();
         $misaDetail = Misa_Detail::where('id', $request->id)->where('account_id', $user->id)->where('roles', 'Pengawas')->first();
 

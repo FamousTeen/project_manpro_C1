@@ -24,12 +24,7 @@ class AuthController extends Controller
         //     return redirect()->route('dashboard');
         // }
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('dashboard');
-        }
-        // Try to authenticate as account
-        elseif (Auth::guard('account')->attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials) || Auth::guard('account')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }

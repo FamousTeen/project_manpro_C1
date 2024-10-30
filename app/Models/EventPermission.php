@@ -11,6 +11,8 @@ class EventPermission extends Pivot
 {
     use HasFactory;
 
+    protected $table = 'event_permissions';
+
     public function eventDetail(): BelongsTo {
         return $this->belongsTo(EventDetail::class);
     }

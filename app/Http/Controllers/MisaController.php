@@ -15,7 +15,13 @@ class MisaController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
+        $user = null;
+        if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+        }
+        elseif (Auth::guard('account')->check()) {
+            $user = Auth::guard('account')->user();
+        }
 
         // Fetch data for the dashboard
         $userData = Account::query()->where(

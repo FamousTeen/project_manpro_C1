@@ -80,13 +80,21 @@
             <p class="text-xl font-bold">Yang bertugas saat ini:</p>
 
             @php
-            $loggedInUserId = Auth::user()->id;
+            $user = null;
+            if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+            }
+            elseif (Auth::guard('account')->check()) {
+            $user = Auth::guard('account')->user();
+            }
+
+            $loggedInUserId = $user->id;
             $roles = [];
 
             foreach ($misa->misaDetails as $detail) {
-                if ($detail->account_id == $loggedInUserId && !in_array($detail->roles, $roles)) {
-                    $roles[] = $detail->roles;
-                }
+            if ($detail->account_id == $loggedInUserId && !in_array($detail->roles, $roles)) {
+            $roles[] = $detail->roles;
+            }
             }
             @endphp
 
@@ -95,10 +103,10 @@
             <ul>
               @php $found = false; @endphp
               @foreach ($misa->misaDetails as $detail)
-                @if ($detail->roles === $role && $detail->account_id == $loggedInUserId)
-                  <li>{{ $detail->account->name }}</li>
-                  @php $found = true; @endphp
-                @endif
+              @if ($detail->roles === $role && $detail->account_id == $loggedInUserId)
+              <li>{{ $detail->account->name }}</li>
+              @php $found = true; @endphp
+              @endif
               @endforeach
 
               @if (!$found)
@@ -113,25 +121,25 @@
     @endforeach
   </div>
 
-@endsection
+  @endsection
 
-@section('libraryjs')
-<script>
-  const today = new Date();
-  const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  };
-  document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
+  @section('libraryjs')
+  <script>
+    const today = new Date();
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+    document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
 
-  function openModal(modalId) {
-    document.getElementById(modalId).classList.remove('hidden');
-  }
+    function openModal(modalId) {
+      document.getElementById(modalId).classList.remove('hidden');
+    }
 
-  function closeModal(modalId) {
-    document.getElementById(modalId).classList.add('hidden');
-  }
-</script>
-@endsection
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.add('hidden');
+    }
+  </script>
+  @endsection
