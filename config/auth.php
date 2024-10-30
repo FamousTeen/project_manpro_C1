@@ -35,13 +35,28 @@ return [
     |
     */
 
+    // 'guards' => [
+    //     'web' => [
+    //         'driver' => 'session',
+    //         'provider' => 'accounts',
+    //     ],
+    // ],
+
+
     'guards' => [
-        'web' => [
+        'account' => [
             'driver' => 'session',
             'provider' => 'accounts',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'accounts', // or set as per your default user type
+        ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -59,16 +74,27 @@ return [
     |
     */
 
+    // 'providers' => [
+    //     'accounts' => [
+    //         'driver' => 'eloquent',
+    //         'model' => App\Models\Account::class,
+    //     ],
+
+    //     // 'users' => [
+    //     //     'driver' => 'database',
+    //     //     'table' => 'users',
+    //     // ],
+    // ],
+
     'providers' => [
         'accounts' => [
             'driver' => 'eloquent',
             'model' => App\Models\Account::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
 
     /*

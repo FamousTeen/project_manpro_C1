@@ -22,7 +22,7 @@ use App\Http\Controllers\EventDetailController;
 |
 */
 
-// Page Login yang asli
+
 Route::get('/', function () {
     return view('main/mainpage');
 })->name('main_page');
@@ -32,14 +32,17 @@ Route::get('/signUp', function () {
     return view('authentication/sign_up');
 })->name('sign_up');
 
+// Page Login yang asli
 Route::get('/mainLogin', function () {
     return view('authentication/login');
 })->name('start_login');
 
-// ke fungsi "login" AuthController
-Route::get('/login', [AuthController::class, 'login'])->name('login');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+// Route::middleware('redirect.role')->group(callback: function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+// });
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware(['redirect.role', 'auth:admin,account']);
 
 // buat testing
 Route::resource('events', EventController::class)->names([

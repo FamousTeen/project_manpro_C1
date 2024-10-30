@@ -63,7 +63,7 @@
       @endphp
       <!-- Javascript buat countdown -->
       <script>
-        let dest = new Date("{{Carbon::parse($misa->misa->activity_datetime)->subDays(3)->translatedFormat('M j, Y H:i:s')}}").getTime();
+        let dest = new Date("{{Carbon::parse($misa->misa->upload_datetime)->addDays(3)->translatedFormat('M j, Y H:i:s')}}").getTime();
         console.log(dest);
         let x = setInterval(function() {
           let now = new Date().getTime();

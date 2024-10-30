@@ -16,11 +16,21 @@ class AuthController extends Controller
         ]);
 
         // Attempt login
-        if (Auth::guard('web')->attempt($credentials)) {
-            // Authentication passed
-            $request->session()->regenerate();
+        // if (Auth::guard('web')->attempt($credentials)) {
+        //     // Authentication passed
+        //     $request->session()->regenerate();
 
-            // Redirect to the dashboard with user-specific data
+        //     // Redirect to the dashboard with user-specific data
+        //     return redirect()->route('dashboard');
+        // }
+
+        if (Auth::guard('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
+        }
+        // Try to authenticate as account
+        elseif (Auth::guard('account')->attempt($credentials)) {
+            $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
 
