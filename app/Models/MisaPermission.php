@@ -11,6 +11,8 @@ class MisaPermission extends Pivot
 {
     use HasFactory;
 
+    protected $table = 'misa_permissions';
+
     public function misaDetail(): BelongsTo {
         return $this->belongsTo(Misa_Detail::class);
     }

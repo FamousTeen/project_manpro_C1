@@ -35,62 +35,95 @@ use App\Models\Training;
                 <div
                     class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
                     <div>
-                        <p class="font-semibold w-fit text-lg">Tugas</p>
-                        <p class="w-fit text-md">
-                            {{ Training::where('status', 1)->whereHas('trainingDetails', function ($query) use ($data) {
-        $query->where('account_id', $data->id);})
-    ->count() + Misa::where('active', 1)->whereHas('misaDetails', function ($query) use ($data) {
-        $query->where('account_id', $data->id);})
-    ->count()}}
-                        </p>
-                    </div>
-                    <img class="w-[50px] h-[50px]" src="{{ asset('asset/task_complete.png') }}" alt="Task Icon">
-                </div>
-                <div
-                    class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
-                    <div>
-                        <p class="font-semibold w-fit text-lg">Panitia</p>
+                        <p class="font-semibold w-fit text-lg">Anggota</p>
                         @php
                         $userCount = 0;
                         @endphp
                         @foreach ($data->eventPermissions as $eventPermission)
-                          @php
-                            $userCount += $eventPermission->eventDetail->account->where('status', 1)->count()
-                          @endphp  
+                        @php
+                        $userCount += $eventPermission->eventDetail->account->where('status', 1)->count()
+                        @endphp
                         @endforeach
                         <p class="w-fit text-md">{{$userCount}}</p>
                     </div>
-                    <!-- <img class="w-[50px] h-[50px]" src="{{ asset('asset/people.png') }}" alt="People Icon"> -->
+                    <img class="w-[50px] h-[50px]" src="{{ asset('asset/people.png') }}" alt="People Icon">
                 </div>
+                <div
+                    class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
+                    <div>
+                        <p class="font-semibold w-fit text-lg">Acara</p>
+                        @php
+                        $eventCount = 0;
+                        @endphp
+                        @foreach ($data->eventPermissions as $eventPermission)
+                        @php
+                        $eventCount += $eventPermission->eventDetail->event->where('status', 1)->count()
+                        @endphp
+                        @endforeach
+                        <p class="w-fit text-md">{{$eventCount}}</p>
+                    </div>
+                    <img class="w-[50px] h-[50px]" src="{{ asset('asset/task_complete.png') }}" alt="Task Icon">
+                </div>
+
             </div>
 
-              <!-- Pengumuman Section -->
-            <h2 class="font-bold text-xl mb-4 ml-16">Pengumuman</h2>
+            <!-- Pengumuman Section -->
+            <h2 class="font-bold text-xl mb-4 ml-16 text-center">THIS WEEK</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-16">
 
                 <?php
 
                 use Carbon\Carbon;
 
-                $announcement_details = $data->announcementDetails->where('account_id', $data->id);
+                $misa_permissions = $data->misaPermissions;
+                $event_permissions = $data->eventPermissions;
 
-                Carbon::setLocale('id');
+                Carbon::setLocale('en');
                 ?>
 
-                @foreach ($announcement_details as $announcement_detail)
+                @foreach ($misa_permissions as $misa_permission)
                 <!-- Announcement Card 1 -->
                 <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
-                    <p class="font-semibold">
-                        {{ Carbon::parse($announcement_detail->announcement->upload_time)->translatedFormat('l, j F Y') }}
-                    </p>
-                    <p class="text-sm">{{ $announcement_detail->announcement->description }}
-                        <br><br>
-                        Tanggal : {{ date('j-m-Y', strtotime($announcement_detail->announcement->datetime)) }}
-                        <br>
-                        Jam : {{ date('H.i', strtotime($announcement_detail->announcement->datetime)) }} WIB
-                        <br><br>
-                        Sekian dan Terima Kasih
-                    </p>
+                    <div class="flex items-center">
+                        <div class="bg-[#DE8F46] w-4 h-4 rounded-full"></div>
+                        <p class="font-semibold w-fit ms-3">
+                            {{$misa_permission->misaDetail->misa->title}}
+                        </p>
+                    </div>
+                    <div class="flex justify-between">
+                        <p class="text-sm w-fit">
+                            <br>
+                            {{ date('j-m-Y', strtotime($misa_permission->misaDetail->misa->activity_datetime)) }}
+                        </p>
+                        <p class="text-sm w-fit">
+                            <br>
+                            {{ date('H.i', strtotime($misa_permission->misaDetail->misa->activity_datetime)) }} WIB
+                        </p>
+                    </div>
+
+                </div>
+                @endforeach
+                @foreach ($event_permissions as $event_permission)
+                <!-- Announcement Card 1 -->
+                <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
+                    <div class="flex items-center">
+                        <div class="bg-[#4E65F7] w-4 h-4 rounded-full"></div>
+                        <p class="font-semibold w-fit ms-3">
+                            {{$event_permission->eventDetail->event->title}}
+                        </p>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <p class="text-sm w-fit">
+                            <br>
+                            {{ date('j-m-Y', strtotime($event_permission->eventDetail->event->date)) }}
+                        </p>
+                        <p class="text-sm w-fit">
+                            <br>
+                            {{ date('H.i', strtotime($event_permission->eventDetail->event->date)) }} WIB
+                        </p>
+                    </div>
+
                 </div>
                 @endforeach
             </div>
