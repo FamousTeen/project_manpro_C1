@@ -17,27 +17,25 @@ class MisaController extends Controller
     {
         $user = null;
         if (Auth::guard('admin')->check()) {
-            $user = Auth::guard('admin')->user();
-        }
-        elseif (Auth::guard('account')->check()) {
+            return view('admin/input_misa');
+        } elseif (Auth::guard('account')->check()) {
             $user = Auth::guard('account')->user();
-        }
-
-        // Fetch data for the dashboard
-        $userData = Account::query()->where(
-            'email',
-            $user->email
-        )->where('password', $user->password)->firstOrFail();
+            // Fetch data for the dashboard
+            $userData = Account::query()->where(
+                'email',
+                $user->email
+            )->where('password', $user->password)->firstOrFail();
 
 
-        $misas = Misa::with('misaDetails')->whereHas('misaDetails', function ($query) use ($userData) {
+            $misas = Misa::with('misaDetails')->whereHas('misaDetails', function ($query) use ($userData) {
                 $query->where('account_id', $userData->id);
-        })->get();
+            })->get();
 
-        return view('anggota/jadwal', [
-            'misas' => $misas,
-            'data' => $userData
-        ]);
+            return view('anggota/jadwal', [
+                'misas' => $misas,
+                'data' => $userData
+            ]);
+        }
     }
 
     /**

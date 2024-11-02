@@ -44,6 +44,8 @@ Route::get('/mainLogin', function () {
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 // });
 
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
