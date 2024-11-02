@@ -13,8 +13,15 @@ class Announcement extends Model
 
     protected $table = 'announcements';
 
+    protected $fillable = [
+        'admin_id',
+        'datetime',
+        'description',
+        'upload_time'
+    ];
+
     public function announcementDetails(): HasMany {
-        return $this->hasMany(Template::class);
+        return $this->hasMany(AnnouncementDetail::class);
     }
 
     public function admin(): BelongsTo {

@@ -45,7 +45,7 @@ class MisaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin/input_misa');
     }
 
     /**

@@ -22,5 +22,23 @@ class AnnouncementSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+
+        DB::table('announcements')->insert([
+            'admin_id' => 1,
+            'datetime' => Carbon::now()->addDays(5)->format('Y-m-d H:i:s'),
+            'upload_time' => Carbon::now()->format('Y-m-d H:i:s'),
+            'description' => "Wow gile bgt",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('announcements')->insert([
+            'admin_id' => 1,
+            'datetime' => Carbon::now()->addDays(5)->format('Y-m-d H:i:s'),
+            'upload_time' => Carbon::now()->format('Y-m-d H:i:s'),
+            'description' => "Buat yang pengurus-pengurus aja",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }

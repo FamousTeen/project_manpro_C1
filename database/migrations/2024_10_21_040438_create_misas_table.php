@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('category');
             $table->dateTime('activity_datetime');
-            $table->dateTime('upload_datetime');
+            $table->dateTime('upload_datetime')->nullable();
             $table->string('evaluation');
             $table->string('status');
             $table->bigInteger('active')->default(1);

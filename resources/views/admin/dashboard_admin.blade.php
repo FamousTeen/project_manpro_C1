@@ -3,7 +3,7 @@ use App\Models\Misa;
 use App\Models\Training;
 @endphp
 
-@extends('base/anggota_navbar')
+@extends('base/admin_navbar')
 
 @section('content')
 <!-- Colors:

@@ -113,7 +113,7 @@
             </button>
             <!-- Sub-menu -->
             <ul id="inputDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
-                <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Misa</a></li>
+                <li><a href="{{route('misas.create')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Misa</a></li>
                 <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Acara</a></li>
                 <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Pelatihan</a></li>
             </ul>
@@ -136,7 +136,7 @@
             </ul>
         </li>
         <li>
-            <a href="#" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
+            <a href="{{ route('announcements.create')}}" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
                 <img src="../../../asset/announcement.png" alt="Acara Icon" class="h-6 w-6 mr-4">
                 Pengumuman Umum
             </a>

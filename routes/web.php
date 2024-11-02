@@ -8,6 +8,7 @@ use App\Http\Controllers\MisaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
 use App\Http\Controllers\EventDetailController;
@@ -91,10 +92,17 @@ Route::get('/evaluasi_pengawas', function () {
     return view('anggota/evaluasi_pengawas');
 })->name('evaluasi_pengawas_anggota');
 
-// buat testing
-Route::get('/input_misa', function () {
-    return view('admin/input_misa');
-})->name('input_misa');
+Route::resource('misas', MisaController::class)->names([
+    'index' => 'misas.index',
+    'create' => 'misas.create',
+    'store' => 'misas.store',
+    'show' => 'misas.show',
+    'edit' => 'misas.edit',
+    'update' => 'misas.update',
+    'destroy' => 'misas.destroy',
+]);
+
+Route::resource('announcements', AnnouncementController::class);
 
 // buat testing
 Route::get('/post_pengumuman', function () {
