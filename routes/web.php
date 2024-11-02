@@ -158,3 +158,13 @@ Route::get('/konfirmasi', function () {
 
     return view('anggota/konfirmasi', compact('userData'));
 })->name('konfirmasi');
+
+//Input jadwal admin
+Route::get('/input_misa', function () {
+    return view('admin/input_misa');
+})->name('input_misa');
+
+//Input foto admin
+Route::get('/input_foto', function () {
+    return view('admin/input_foto');
+})->name('input_foto');
