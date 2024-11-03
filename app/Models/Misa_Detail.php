@@ -13,6 +13,7 @@ class Misa_Detail extends Pivot
     use HasFactory;
 
     protected $table = 'misa_details';
+    protected $fillable = ['misa_id', 'account_id', 'roles','participation','confirmation'];
 
     public function account(): BelongsTo {
         return $this->belongsTo(Account::class);
