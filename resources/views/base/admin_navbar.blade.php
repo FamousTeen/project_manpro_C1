@@ -55,7 +55,7 @@
                     <button id="dropdownButton"
                         class="flex items-center space-x-2 bg-[#20252f] hover:bg-[#ae0001] text-[#f6f1e3] p-2 transition duration-300 focus:outline-none rounded">
                         @if (isset($user) && isset($data))
-                        <img src="../../../asset/{{ $data->photo }}" alt="Profile Icon"
+                        <img src="{{asset('asset/'.$user->photo)}}" alt="Profile Icon"
                             class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @else
                         <img src="../../../asset/profile-circle.256x256.png" alt="Profile Icon"
@@ -77,7 +77,7 @@
                     <!-- Dropdown Menu -->
                     <div id="dropdownMenu"
                         class="hidden absolute right-0 top-full w-full bg-[#20252f] text-[#f6f1e3] shadow-lg mt-1">
-                        <a href="{{ route('profile_anggota') }}"
+                        <a href="{{ route('profile_admin') }}"
                             class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Profile</a>
                         <a href="{{ route('logout') }}"
                             class="block px-4 py-2 text-sm hover:bg-[#ae0001] transition duration-300">Logout</a>
@@ -113,7 +113,7 @@
                     </svg>
                 </button>
                 <!-- Sub-menu -->
-                <ul id="jadwalDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
+                <ul id="jadwalDropdown" class="ml-8 mt-4 space-y-4 hidden">
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Misa</a></li>
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Acara</a></li>
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Pelatihan</a></li>
@@ -130,7 +130,7 @@
                     </svg>
                 </button>
                 <!-- Sub-menu -->
-                <ul id="inputDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
+                <ul id="inputDropdown" class="ml-8 mt-4 space-y-4 hidden">
                     <li><a href="{{route('misas.index')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Misa</a></li>
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Acara</a></li>
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Pelatihan</a></li>
@@ -147,7 +147,7 @@
                     </svg>
                 </button>
                 <!-- Sub-menu -->
-                <ul id="pengurusDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
+                <ul id="pengurusDropdown" class="ml-8 mt-4 space-y-4 hidden">
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Pengumuman</a></li>
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Rapat</a></li>
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Dokumen</a></li>
