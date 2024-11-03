@@ -12,6 +12,15 @@ class Admin extends Authenticatable
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'address',
+        'birthdate',
+        'region',
+        'photo'
+    ];
+
     public function misaPermissions(): HasMany {
         return $this->hasMany(MisaPermission::class);
     }

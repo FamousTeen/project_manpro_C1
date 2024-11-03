@@ -83,7 +83,7 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        $user = Auth::user();
+        $user = Auth::guard('account')->user();
         return view('anggota.profile.edit_profile_anggota', $user);
     }
 
@@ -92,7 +92,7 @@ class AccountController extends Controller
      */
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::guard('account')->user();
         $data = $request->all();
 
         $formfield = Validator::make($data, [
@@ -112,7 +112,7 @@ class AccountController extends Controller
 
     public function updatePP(Request $request)
     {
-        $user = Auth::user();
+        $user = Auth::guard('account')->user();
         $data = $request->all();
 
         $formfield = Validator::make($data, [
