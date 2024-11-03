@@ -19,6 +19,14 @@ $misas = App\Models\Misa::all();
         </div>
     </div>
 
+@endphp
+<div class="container mx-auto py-8 mt-8 mb-8 justify-items-center">
+    <div class="grid grid-cols-12">
+        <div class="col-start-4 col-span-6 mt-8 mb-8 justify-items-center">
+            <h2 class="font-bold text-3xl text-center">Input Jadwal Misa</h2>
+        </div>
+    </div>
+
     <!-- Input Jadwal Section -->
     <div class="flex justify-center mb-16">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
@@ -53,6 +61,19 @@ $misas = App\Models\Misa::all();
                     <p class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($misa->upload_datetime)->translatedFormat('l') }},
                         {{ \Carbon\Carbon::parse($misa->upload_datetime)->format('d-M-Y') }}
                     </p>
+            <!-- Card Jadwal Button -->
+            <div class="w-64 h-64 bg-[#f6f1e3] p-6 border border-gray-300 rounded-lg shadow-lg flex flex-col justify-between cursor-pointer" onclick="openModal('modal1', 'Misa Mingguan', '18.00 WIB', 'Minggu, 15-09-2024')">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-lg font-bold">Minggu, 15-09-2024</h2>
+                </div>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-700 flex items-center">
+                        <span class="inline-block w-2.5 h-2.5 bg-orange-500 rounded-full mr-2"></span> Misa Mingguan
+                    </p>
+                    <p class="text-sm text-gray-700 mt-1">18.00 WIB</p>
+                </div>
+                <div class="mt-4">
+                    <p class="text-xs text-gray-500">Senin, 10 April 2024</p>
                 </div>
                 <div class="mt-4">
                     <button class="w-full bg-[#002366] text-white py-2 rounded-lg hover:bg-[#20252f] transition-all duration-300">Upload</button>
@@ -64,6 +85,10 @@ $misas = App\Models\Misa::all();
             <div id="modal{{ $misa->id }}" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal{{ $misa->id }}')">
                 <div class="bg-[#f6f1e3] p-8 rounded-lg w-[700px] h-[400px] relative p-12" onclick="event.stopPropagation()">
                     <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal{{ $misa->id }}')">
+            <!-- Modal -->
+            <div id="modal1" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal1')">
+                <div class="bg-[#f6f1e3] p-8 rounded-lg w-[700px] h-[400px] relative p-12" onclick="event.stopPropagation()">
+                    <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal1')">
                         &#10005;
                     </button>
                     <!-- Content inside the modal with two columns -->
@@ -78,6 +103,11 @@ $misas = App\Models\Misa::all();
                                     {{ \Carbon\Carbon::parse($misa->activity_datetime)->format('d-M-Y') }}
                                 </p> <!-- Date -->
                                 <p class="font-bold">{{ \Carbon\Carbon::parse($misa->activity_datetime)->format('H:i') }} WIB</p> <!-- Time -->
+                                <h2 class="text-2xl font-bold ml-2" id="modalTitle">Misa Mingguan</h2> <!-- Title -->
+                            </div>
+                            <div class="ms-9">
+                                <p class="mt-2 text-lg" id="modalDate">Minggu, 15-09-2024</p> <!-- Date -->
+                                <p class="font-bold" id="modalTime">18.00 WIB</p> <!-- Time -->
                             </div>
                         </div>
 
@@ -98,12 +128,53 @@ $misas = App\Models\Misa::all();
                                 @endforeach
                             </ul>
                             @endforeach
+                            <p class="mt-2"><span class="font-bold">Petugas:</span></p>
+                            <div class="flex flex-row">
+                                <ul class="mr-14">
+                                    <li>Angel</li>
+                                    <li>Martin</li>
+                                    <li>Shasaa</li>
+                                    <li>Jonathan</li>
+                                </ul>
+                                <ul>
+                                    <li>Angel</li>
+                                    <li>Martin</li>
+                                    <li>Angel</li>
+                                </ul>
+                            </div>
+                            <p class="mt-2"><span class="font-bold">Pengawas:</span></p>
+                            <ul>
+                                <li>Alonso</li>
+                                <li>Bryan</li>
+                            </ul>
+                            <p class="mt-2"><span class="font-bold">Perkap:</span></p>
+                            <ul>
+                                <li>Alonso</li>
+                                <li>Bryan</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
             @endforeach
             
+            <!-- Modal with two sections (Jadwal Misa and Anggota) -->
+            <div id="modalJadwal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+                <div class="flex items-center justify-center min-h-screen">
+                    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="closeModal('modalJadwal')"></div>
+                    <div class="bg-[#f6f1e3] rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+                        <div class="p-6">
+
+                            <!-- Toggle buttons -->
+                            <div class="mt-4 flex space-x-4">
+                                <button id="btnJadwalMisa" class="w-full bg-[#002366] text-white py-2 rounded-lg hover:bg-[#20252f] transition-all duration-300" onclick="showSection('jadwalMisa')">
+                                    Jadwal Misa
+                                </button>
+                                <button id="btnAnggota" class="w-full bg-[#002366] text-white py-2 rounded-lg hover:bg-[#20252f] transition-all duration-300" onclick="showSection('anggota')">
+                                    Anggota
+                                </button>
+                            </div>
+
             <!-- Modal with two sections (Jadwal Misa and Anggota) -->
             <div id="modalJadwal" class="fixed z-10 inset-0 overflow-y-auto hidden">
                 <div class="flex items-center justify-center min-h-screen">
@@ -306,6 +377,20 @@ $misas = App\Models\Misa::all();
                     const tugasSelect = document.getElementById('tugasAnggota');
                     const customTugasField = document.getElementById('customTugasField');
                     const tableBody = document.getElementById('anggotaTableBody');
+                    const anggotaData = [];
+
+
+                    // Get the selected option's value
+                    const selectedValue = parseInt(namaSelect.value, 10);
+                    const selectedValue2 = tugasSelect.value;
+
+                    // Add the selected value to the array
+                    selectedOptionsArray.push(selectedValue);
+                    selectedOptionsArray2.push(selectedValue2);
+
+                    // Update the hidden input field with the array as a JSON string
+                    selectedOptionsInput.value = selectedOptionsArray;
+                    selectedOptionsInput2.value = selectedOptionsArray2;
 
                     // Loop through all selected options in the namaSelect
                     for (const option of namaSelect.selectedOptions) {
@@ -345,6 +430,7 @@ $misas = App\Models\Misa::all();
                 <td class="border border-gray-300 px-1 py-1">${tableBody.children.length + 1}.</td>
                 <td name="anggota[]" class="border border-gray-300 px-6 py-1">${nameOnly}</td>
                 <td class="border border-gray-300 px-1 py-1">${wilayah}</td>
+                <td  class="border border-gray-300 px-1 py-1">${wilayah}</td>
                 <td name="roles[]" class="border border-gray-300 px-4 py-1">${tugas}</td>
                 <td name="customTugas" class="border border-gray-300 py-1">
                     <button type="button" class="delete-btn w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-[#ae0001] text-base font-medium text-white hover:bg-[#740001] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
@@ -362,6 +448,24 @@ $misas = App\Models\Misa::all();
                             row.querySelector('.delete-btn').addEventListener('click', function() {
                                 // Enable the option in the dropdown again when the row is deleted
                                 option.disabled = false;
+
+                                // Remove the row from the table
+                                tableBody.removeChild(row);
+                                updateRowNumbers(); // Update row numbers
+                            });
+                            // Store row data in the array
+                            anggotaData.push({
+                                name: nameOnly,
+                                region: wilayah,
+                                tugas: tugas
+                            });
+
+                            // Add event listener for delete button
+                            row.querySelector('.delete-btn').addEventListener('click', function() {
+                                // Find the index of the row in the array
+                                const index = Array.from(tableBody.rows).indexOf(row);
+                                // Remove the row data from the array
+                                anggotaData.splice(index, 1);
 
                                 // Remove the row from the table
                                 tableBody.removeChild(row);

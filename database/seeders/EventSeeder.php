@@ -16,7 +16,9 @@ class EventSeeder extends Seeder
     {
         DB::table('events')->insert([
             'title' => "Acara Misdinar",
-            'date' => Carbon::now()->addDays(2),
+            'date' => Carbon::now()->addDays(2)->format('Y-m-d'),
+            'start_time' => Carbon::now()->addDays(2)->format('H:i:s'),
+            'finished_time' => Carbon::now()->addDays(2)->addHours(2)->format('H:i:s'),
             'place' => 'Ruang Midinar',
             'contact_person' => 'Margareth',
             'phone_number' => '081929302947',
