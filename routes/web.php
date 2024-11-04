@@ -14,6 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
 use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\MeetController;
 use App\Http\Resources\EventResource;
 
 /*
@@ -225,3 +226,6 @@ Route::get('/dokumen_pengurus', function () {
 Route::get('/jadwal_pengurus', function () {
     return view('admin/khusus_pengurus/jadwal_pengurus');
 })->name('jadwal_pengurus');
+
+
+Route::resource('meets', MeetController::class);

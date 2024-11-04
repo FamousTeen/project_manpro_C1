@@ -44,7 +44,7 @@
         $query->where('event_id', $event_id)->where('roles', 'Ketua');
         })->firstOrFail();
         @endphp
-        <div class="mt-6 rounded-xl py-6 pe-6 ps-12 ms-5 flex bg-[#C4CDC1]">
+        <div class="my-6 rounded-xl py-6 pe-6 ps-12 ms-5 flex bg-[#C4CDC1]">
             <img src="{{asset('images/contoh_poster.jpg')}}" class="w-64" alt="">
             <div class="flex justify-between w-full">
                 <div class="flex flex-col ms-10">

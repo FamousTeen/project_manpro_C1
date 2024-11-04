@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Event;
 use App\Models\Account;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use App\Models\EventDetail;
 
 class EventController extends Controller
 {
@@ -98,7 +100,31 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'date' => 'required|date',
+            'start_time' => 'required',
+            'finished_time' => 'required',
+            'event_chief' => 'required',
+            'contact_person' => 'required'
+        ]);
+
+        $event->update([
+            'title' => $request->title,
+            'date' => $request->date,
+            'start_time' => $request->start_time,
+            'finished_time' => $request->finished_time,
+            'contact_person' => $request->contact_person,
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        $chiefDetail = EventDetail::where('event_id', $event->id)->where('roles', 'Ketua');
+
+        $chiefDetail->update([
+            'account_id' => $request->event_chief
+        ]);
+
+        return redirect()->route('events.index')->with('success', 'Announcement berhasil diupdate.');
     }
 
     /**

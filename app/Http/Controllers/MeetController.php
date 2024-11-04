@@ -37,7 +37,9 @@ class MeetController extends Controller
      */
     public function show(Meet $meet)
     {
-        //
+        return view('admin.detail_rapat', [
+            'meet' => $meet
+        ]);
     }
 
     /**

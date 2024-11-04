@@ -10,6 +10,17 @@ class Event extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'date',
+        'start_time',
+        'finished_time',
+        'event_chief',
+        'contact_person',
+        'place',
+        'phone_number'
+    ];
+
     public function trainings(): HasMany {
         return $this->hasMany(Training::class);
     }
