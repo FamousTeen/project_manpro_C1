@@ -182,6 +182,6 @@ Route::get('/pengumuman_pengurus', function () {
 })->name('pengumuman_pengurus');
 
 //dokumen
-Route::get('/pengumuman_pengurus', function () {
+Route::get('/dokumen_pengurus', function () {
     return view('admin/khusus_pengurus/dokumen_pengurus');
-})->name('pengumuman_pengurus');
+})->name('dokumen_pengurus');
