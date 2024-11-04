@@ -178,7 +178,6 @@ Route::get('/input_foto', function () {
     return view('admin/input_foto');
 })->name('input_foto');
 
-<<<<<<< Updated upstream
 //KHUSUS PENGURUS
 //pengumuman
 Route::get('/pengumuman_pengurus', function () {
@@ -189,11 +188,9 @@ Route::get('/pengumuman_pengurus', function () {
 Route::get('/pengumuman_pengurus', function () {
     return view('admin/khusus_pengurus/dokumen_pengurus');
 })->name('pengumuman_pengurus');
-=======
 Route::get('/events/search/{detail}', function (string $detail) {
     return EventResource::collection(Event::query()
     ->where('title', 'LIKE', '%' . $detail . '%')
     ->orWhere('date', 'LIKE', '%' . $detail . '%')
     ->get());
 });
->>>>>>> Stashed changes
