@@ -16,7 +16,6 @@
 
 <!-- Card Grid -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mx-16">
-    @for ($i = 0; $i < 3; $i++)
     <div class="bg-[#f6f1e3] border border-[#002366] rounded-lg shadow-md p-6 space-y-2">
         <h2 class="text-lg font-semibold text-gray-800">Rapat Evaluasi</h2>
         <p class="text-gray-600">Minggu, 25-12-2024</p>
@@ -24,13 +23,12 @@
         <p class="text-gray-600">Catatan: xxx</p>
         <div class="flex justify-end pt-4">
             <button class="editButton bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg" data-nama="Rapat Evaluasi" data-tanggal="2024-12-25" data-lokasi="xxx" data-catatan="xxx">Edit</button>
-            <button class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg ml-2">Delete</button>
+            <button class="deleteButton bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg ml-2" data-nama="Rapat Evaluasi">Delete</button>
         </div>
     </div>
-    @endfor
 </div>
 
-<!-- Modal -->
+<!-- Modal for Add/Edit -->
 <div id="myModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white rounded-lg p-6 w-96">
         <h2 id="modalTitle" class="text-lg font-semibold mb-4">Tambahkan Jadwal Khusus Pengurus</h2>
@@ -53,10 +51,25 @@
     </div>
 </div>
 
+<!-- Confirmation Modal -->
+<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg p-6 w-96 flex flex-col items-center">
+        <h2 class="text-lg font-semibold mb-4 text-center">Konfirmasi Penghapusan</h2>
+        <p id="deleteMessage" class="mb-4 text-center">Apakah Anda yakin ingin menghapus "<span id="scheduleName"></span>"?</p>
+        <div class="flex justify-center w-full">
+            <button id="cancelDelete" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
+            <button id="confirmDelete" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg">Hapus</button>
+        </div>
+    </div>
+</div>
+
+
 <script>
     const modal = document.getElementById('myModal');
+    const deleteModal = document.getElementById('deleteModal');
     const addButton = document.getElementById('addButton');
     const closeButton = document.getElementById('closeModal');
+    const deleteButtons = document.querySelectorAll('.deleteButton');
     const editButtons = document.querySelectorAll('.editButton');
     const modalTitle = document.getElementById('modalTitle');
 
@@ -96,6 +109,28 @@
         }
     });
 
+    // Show confirmation modal when delete button is clicked
+    deleteButtons.forEach(button => {
+        button.onclick = function() {
+            const scheduleName = button.getAttribute('data-nama');
+            document.getElementById('scheduleName').innerText = scheduleName;
+            deleteModal.classList.remove('hidden');
+        }
+    });
+
+    // Cancel delete action
+    document.getElementById('cancelDelete').onclick = function() {
+        deleteModal.classList.add('hidden');
+    }
+
+    // Confirm delete action
+    document.getElementById('confirmDelete').onclick = function() {
+        // Here you can handle the deletion logic, such as making an API call
+        alert('Jadwal telah dihapus: ' + document.getElementById('scheduleName').innerText);
+        deleteModal.classList.add('hidden');
+        // Optionally, you can also remove the card from the DOM if necessary
+    }
+
     // Close modal when close button is clicked
     closeButton.onclick = function() {
         modal.classList.add('hidden');
@@ -105,6 +140,9 @@
     window.onclick = function(event) {
         if (event.target === modal) {
             modal.classList.add('hidden');
+        }
+        if (event.target === deleteModal) {
+            deleteModal.classList.add('hidden');
         }
     }
 </script>
