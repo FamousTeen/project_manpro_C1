@@ -29,5 +29,20 @@ class EventSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+        DB::table('events')->insert([
+            'title' => "Christmas Event",
+            'date' => Carbon::now()->addDays(2)->format('Y-m-d'),
+            'start_time' => Carbon::now()->addDays(2)->format('H:i:s'),
+            'finished_time' => Carbon::now()->addDays(2)->addHours(3)->format('H:i:s'),
+            'place' => 'Ruang Natal',
+            'contact_person' => 'Luna',
+            'phone_number' => '081929302947',
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce metus erat, feugiat eu hendrerit aliquet, pulvinar eu urna. Curabitur eu sagittis diam. Maecenas faucibus scelerisque.',
+            'poster' => 'event.png',
+            'rundown_image' => "rundown.png",
+            'evaluation' => "Fusce metus erat, feugiat eu hendrerit aliquet, pulvinar eu urna. Curabitur eu sagittis diam. Maecenas faucibus scelerisque.",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }
