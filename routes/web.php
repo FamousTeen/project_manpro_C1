@@ -195,3 +195,8 @@ Route::get('/dokumen_pengurus', function () {
     return view('admin/khusus_pengurus/dokumen_pengurus');
 })->name('dokumen_pengurus');
 
+
+//jadwal
+Route::get('/jadwal_pengurus', function () {
+    return view('admin/khusus_pengurus/jadwal_pengurus');
+})->name('jadwal_pengurus');
