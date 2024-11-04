@@ -10,7 +10,7 @@
             -->
 
 <div class="container mx-auto py-8 mt-8 flex items-center">
-    <h2 class="ml-4 p-6 mt-4 text-2xl font-semibold flex-1">Dokumen Khusus Pengurus</h2>
+    <h2 class="ml-4 p-6 mt-4 text-2xl font-semibold flex-1">Jadwal Khusus Pengurus</h2>
     <button id="addButton" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg mr-16 mt-12">+ Tambah</button>
 </div>
 

@@ -146,9 +146,9 @@
                 </button>
                 <!-- Sub-menu -->
                 <ul id="pengurusDropdown" class="ml-8 mt-4 space-y-4 hidden">
-                    <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Pengumuman</a></li>
-                    <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Rapat</a></li>
-                    <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Dokumen</a></li>
+                    <li><a href="{{route('pengumuman_pengurus')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Pengumuman</a></li>
+                    <li><a href="{{route('jadwal_pengurus')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Rapat</a></li>
+                    <li><a href="{{route('dokumen_pengurus')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Dokumen</a></li>
                 </ul>
             </li>
             <li>
