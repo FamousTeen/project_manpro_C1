@@ -130,7 +130,7 @@
                 <!-- Sub-menu -->
                 <ul id="inputDropdown" class="ml-8 mt-4 space-y-4 hidden">
                     <li><a href="{{route('misas.index')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Misa</a></li>
-                    <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Acara</a></li>
+                    <li><a href="{{route('input_event')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Acara</a></li>
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Pelatihan</a></li>
                 </ul>
             </li>

@@ -178,6 +178,11 @@ Route::get('/input_foto', function () {
     return view('admin/input_foto');
 })->name('input_foto');
 
+//input event
+Route::get('/input_event', function () {
+    return view('admin/input_event');
+})->name('input_event');
+
 //KHUSUS PENGURUS
 //pengumuman
 Route::get('/pengumuman_pengurus', function () {
