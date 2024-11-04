@@ -28,16 +28,6 @@ $index = 1;
         @endif
         <form class="max-w ml-4 mb-4" method="post" action="{{ route('announcements.store')}}">
             @csrf
-            <div class="flex gap-x-5">
-                <div class="my-5 w-1/2">
-                    <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                    <input type="date" id="date" name="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                </div>
-                <div class="my-5">
-                    <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</label>
-                    <input type="time" id="time" name="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-                </div>
-            </div>
             <textarea class="w-full h-40 p-4 border border-[#002366] rounded-md focus:outline-none focus:ring-2 focus:ring-[#002366]" placeholder="Masukkan Deskripsi Pengumuman..." name="eventDesc"></textarea>
             <div class="text-right mt-4">
                 <button type="submit" class="bg-[#002366] text-white py-2 px-4 rounded-md hover:bg-[#740001] transition-all duration-300">Unggah</button>
@@ -68,18 +58,18 @@ $index = 1;
     <div class="flex justify-center mb-16">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-16 ">
             @foreach ($announcements as $announcement)
-            @php 
+            @php
 
-                $distinct_announcement_details = $announcement->announcementDetails->groupBy('announcement_id')
-                ->map(function ($items) use (&$usedAnnouncement) {
-                    foreach($items as $item) {
-                        if($item->account->roles == "Anggota") {
-                            return $item;
-                        }
-                    }
+            $distinct_announcement_details = $announcement->announcementDetails->groupBy('announcement_id')
+            ->map(function ($items) use (&$usedAnnouncement) {
+            foreach($items as $item) {
+            if($item->account->roles == "Anggota") {
+            return $item;
+            }
+            }
 
-                    return $items->first();
-                });
+            return $items->first();
+            });
             @endphp
             @foreach ($distinct_announcement_details as $detail)
             @if ($detail->account->roles == "Anggota")
@@ -96,11 +86,7 @@ $index = 1;
                 </div>
                 <div class="mt-4">
                     <p class="text-gray-700 text-sm">
-                        {{$announcement->description}}
-                        <br><br>
-                        Tanggal : {{ Carbon::parse($announcement->datetime)->translatedFormat('j-m-Y') }}
-                        <br>
-                        Jam : {{ Carbon::parse($announcement->datetime)->translatedFormat('H.i') }} WIB
+                        {!! urldecode($announcement->description) !!}
                         <br><br>
                         Sekian dan Terima Kasih
                     </p>
@@ -119,23 +105,14 @@ $index = 1;
                     </button>
 
                     <!-- Modal Content -->
-                    <h2 class="text-xl font-bold">Rabu, 25-12-2024</h2>
+                    <h2 class="text-xl font-bold">{{ Carbon::parse($announcement->upload_time)->translatedFormat('l, j-m-Y') }}</h2>
 
 
                     <form class="max-w" method="post" action="{{ route('announcements.update', ['announcement' => $announcement])}}">
                         @csrf
                         @method('PUT')
-                        <div class="flex gap-x-5">
-                            <div class="my-5 w-1/2">
-                                <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                                <input type="date" id="date" name="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ Carbon::parse($announcement->datetime)->translatedFormat('Y-m-d') }}" required />
-                            </div>
-                            <div class="my-5">
-                                <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</label>
-                                <input type="time" id="time" name="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ Carbon::parse($announcement->datetime)->translatedFormat('H:i') }}" required />
-                            </div>
-                        </div>
-                        <textarea id="eventDesc" name="eventDesc" class="mt-4 w-full h-32 border border-gray-300 rounded p-2" placeholder="Masukkan pengumuman">{{$announcement->description}}</textarea>
+                        <textarea id="eventDesc{{$index}}" class="mt-4 w-full h-32 border border-gray-300 rounded p-2" placeholder="Masukkan pengumuman" oninput="readTextarea({{$index}})">{!! urldecode($announcement->description) !!}</textarea>
+                        <input type="hidden" name="eventDesc" id="eventDesc{{$index}}{{$index}}"></input>
                         <!-- Buttons -->
                         <div class="mt-6 flex justify-end space-x-4">
                             <button class="bg-[#002366] text-white px-4 py-2 rounded" type="submit">Simpan</button>
@@ -200,6 +177,12 @@ $index = 1;
                 function deleteAnnouncement() {
                     console.log('Announcement deleted');
                     closeDeleteConfirm();
+                }
+
+                function readTextarea(index) {
+                    const textareaValue = document.getElementById(`eventDesc${index}`).value;
+                    document.getElementById(`eventDesc${index}${index}`).value = encodeURIComponent(textareaValue);
+                    console.log(document.getElementById(`eventDesc${index}${index}`).value);
                 }
             </script>
             @endsection

@@ -173,7 +173,6 @@
     @yield('content')
 
     @vite('resources/js/app.js')
-    <script src="../../../node_modules/flowbite/dist/flowbite.min.js"></script>
     @yield('libraryjs')
 
     <!-- JavaScript to control sidebar -->

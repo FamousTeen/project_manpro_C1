@@ -4,6 +4,14 @@
 <link href="./node_modules/pagedone/src/css/pagedone.css" rel="stylesheet" />
 @endsection
 
+<!-- Colors:
+                1. #740001 - merah gelap
+                2. #ae0001 - merah terang
+                3. #f6f1e3 - netral
+                4. #002366 - biru terang
+                5. #20252f - biru gelap
+            -->
+
 @section('content')
 <div class="container-fluid m-12 me-0 mt-24">
   <!-- Header Section -->
@@ -153,13 +161,13 @@
       {{-- Button Konfirmasi --}}
       <div class="mt-6">
         <div class="flex flex-row justify-center gap-6 mt-6">
-          <a href="{{ route('update_konfirmasi', ['id' => $misa->id, 'answer' => true])}}" class="flex items-center justify-center rounded-md bg-green-600 border border-green-700 p-2 transition-all shadow-sm hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-none active:bg-green-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+          <a href="{{ route('update_konfirmasi', ['id' => $misa->id, 'answer' => true])}}" class="flex items-center justify-center rounded-md bg-[#002366] border border-[#002366] p-2 transition-all shadow-sm hover:bg-[#00112e] hover:shadow-lg focus:bg-[#00112e] focus:shadow-none active:bg-green-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </a>
-          <a href="{{ route('update_konfirmasi', ['id' => $misa->id, 'answer' => 0])}}" class="flex items-center justify-center rounded-md bg-red-600 border border-red-700 p-2 transition-all shadow-sm hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-red-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+          <a href="{{ route('update_konfirmasi', ['id' => $misa->id, 'answer' => 0])}}" class="flex items-center justify-center rounded-md bg-[#ae0001] border border-[#ae0001] p-2 transition-all shadow-sm hover:bg-[#740001] hover:shadow-lg focus:bg-[#740001] focus:shadow-none active:bg-red-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>

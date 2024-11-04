@@ -17,10 +17,9 @@ return new class extends Migration
             $table->foreign('admin_id')
                 ->references('id')
                 ->on('admins');
-            $table->dateTime('datetime');
             $table->dateTime('upload_time');
             $table->boolean('status')->default(1);
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }

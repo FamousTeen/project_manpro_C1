@@ -31,19 +31,12 @@ class AnnouncementController extends Controller
     public function store(StoreAnnouncementRequest $request)
     {
         $request->validate([
-            'date' => 'required|date',
-            'time' => 'required',
             'eventDesc' => 'required'
         ]);
-
-        $dateMerge = $request->date . ' ' . $request->time;
-
-        $datetime = Carbon::createFromFormat('Y-m-d H:i', $dateMerge);
 
 
         $created_announcement = Announcement::create([
             'admin_id' => Auth::guard('admin')->user()->id,
-            'datetime' => $datetime,
             'upload_time' => Carbon::now()->format('Y-m-d H:i:s'),
             'description' => $request->eventDesc,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
@@ -83,17 +76,10 @@ class AnnouncementController extends Controller
     public function update(UpdateAnnouncementRequest $request, Announcement $announcement)
     {
         $request->validate([
-            'date' => 'required|date',
-            'time' => 'required',
             'eventDesc' => 'required'
         ]);
 
-        $dateMerge = $request->date . ' ' . $request->time;
-
-        $datetime = Carbon::createFromFormat('Y-m-d H:i', $dateMerge);
-
-        Announcement::where('id', $announcement->id)->update([
-            'datetime' => $datetime,
+        $announcement->update([
             'description' => $request->eventDesc,
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

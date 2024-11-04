@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Event;
+use Illuminate\Support\Facades\Log;
 use App\Models\Account;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -8,10 +10,11 @@ use App\Http\Controllers\MisaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
 use App\Http\Controllers\EventDetailController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Resources\EventResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -180,8 +183,15 @@ Route::get('/input_foto', function () {
 Route::get('/pengumuman_pengurus', function () {
     return view('admin/khusus_pengurus/pengumuman_pengurus');
 })->name('pengumuman_pengurus');
+Route::get('/events/search/{detail}', function (string $detail) {
+    return EventResource::collection(Event::query()
+    ->where('title', 'LIKE', '%' . $detail . '%')
+    ->orWhere('date', 'LIKE', '%' . $detail . '%')
+    ->get());
+});
 
 //dokumen
 Route::get('/dokumen_pengurus', function () {
     return view('admin/khusus_pengurus/dokumen_pengurus');
 })->name('dokumen_pengurus');
+
