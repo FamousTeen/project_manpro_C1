@@ -35,36 +35,45 @@
             <input type="text" id="search" placeholder="Search Something..." class="border-transparent border-none bg-transparent focus:bg-transparent focus:outline-none bg-none input-no-bg" />
         </div>
     </div>
-    @foreach ($events as $event)
-    @php
-    $event_id = $event->id;
-    $chief = Account::whereHas('eventDetails', function ($query) use ($event_id) {
-    $query->where('event_id', $event_id)->where('roles', 'Ketua');
-    })->firstOrFail();
-    @endphp
-    <div class="mt-6 rounded-xl py-6 pe-6 ps-12 ms-5 flex bg-[#C4CDC1]">
-        <img src="{{asset('images/contoh_poster.jpg')}}" class="w-64" alt="">
-        <div class="flex justify-between w-full">
-            <div class="flex flex-col ms-10">
-                <p class="font-semibold text-xl">
-                    {{ Carbon::parse($event->date)->translatedFormat('j F Y') }}
-                </p>
-                <p>{{ Carbon::parse($event->start_time)->translatedFormat('H.i') }} WIB - {{ Carbon::parse($event->finished_time)->translatedFormat('H.i') }} WIB</p>
-                <h1 class="text-3xl mt-16">{{$event->title}}</h1>
-                <p class="mt-20">Ketua Acara : {{$chief->name}}</p>
-                <p>Contact Person : {{$event->contact_person}}</p>
-            </div>
-            <div class="flex items-end">
-                <!-- Edit button -->
-                <a href="{{route('events.edit', ['event' => $event])}}"><button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button></a>
-                <!-- Delete button -->
-                <a href=""><button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button></a>
+
+    <div id="ajaxResult">
+        @foreach ($events as $event)
+        @php
+        $event_id = $event->id;
+        $chief = Account::whereHas('eventDetails', function ($query) use ($event_id) {
+        $query->where('event_id', $event_id)->where('roles', 'Ketua');
+        })->firstOrFail();
+        @endphp
+        <div class="mt-6 rounded-xl py-6 pe-6 ps-12 ms-5 flex bg-[#C4CDC1]">
+            <img src="{{asset('images/contoh_poster.jpg')}}" class="w-64" alt="">
+            <div class="flex justify-between w-full">
+                <div class="flex flex-col ms-10">
+                    <p class="font-semibold text-xl">
+                        {{ Carbon::parse($event->date)->translatedFormat('j F Y') }}
+                    </p>
+                    <p>{{ Carbon::parse($event->start_time)->translatedFormat('H.i') }} WIB - {{ Carbon::parse($event->finished_time)->translatedFormat('H.i') }} WIB</p>
+                    <h1 class="text-3xl mt-16">{{$event->title}}</h1>
+                    <p class="mt-20">Ketua Acara : {{$chief->name}}</p>
+                    <p>Contact Person : {{$event->contact_person}}</p>
+                </div>
+                <div class="flex items-end">
+                    <!-- Edit button -->
+                    <a href="{{route('events.edit', ['event' => $event])}}"><button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button></a>
+                    <!-- Delete button -->
+                    <a href=""><button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button></a>
+                </div>
             </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
 </div>
 @endsection
+
+@php
+// Fetch all accounts and store them in a variable
+$accounts = Account::with('eventDetails')->get();
+
+@endphp
 
 @section('libraryjs')
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -78,27 +87,56 @@
         $(".content-body").css("margin-top", MarginTop);
     });
 
-    $("#search").on("input", function(event) {
+    $("#search").on("keyup", function(event) {
         var detail = $('#search').val();
-        var url = '{{ url('') }}/events/search/' + detail;
+        var url;
+
+        if (detail == "") {
+            url = '{{ url('') }}/events/searchs/all';
+        } else {
+            url = '{{ url('') }}/events/search/' + detail;
+        }
+
+        console.log(url);
 
         $.ajax({
             url: url,
             success: function(result) {
                 console.log(result);
-                // var dogNameHtml = "";
-                // if (result.data.length > 0) {
-                //     for (var i = 0; i < result.data.length; i++) {
-                //         console.log(result.data[i]);
-                //         dogNameHtml += "<option value='" + result.data[i].id + "'>";
-                //         dogNameHtml += result.data[i].name;
-                //         dogNameHtml += "</option>";
-                //     }
-                // }
-                // $("select[name=dog]").html(dogNameHtml);
-                // $("select[name=dog]").select2({
-                //     placeholder: 'Select an option'
-                // });
+                var eventsCardHtml = "";
+                if (result.data.length > 0) {
+                    for (var i = 0; i < result.data.length; i++) {
+                        eventsCardHtml += `
+        <div class="mt-6 rounded-xl py-6 pe-6 ps-12 ms-5 flex bg-[#C4CDC1]">
+            <img src="{{ asset('images/contoh_poster.jpg') }}" class="w-64" alt="">
+            <div class="flex justify-between w-full">
+                <div class="flex flex-col ms-10">
+                <p class="font-semibold text-xl">
+                    ${new Date(result.data[i].date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </p>
+                <p>${new Date(`1970-01-01T${result.data[i].start_time}`).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace(":", ".")} WIB - 
+                   ${new Date(`1970-01-01T${result.data[i].finished_time}`).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace(":", ".")} WIB
+                </p>
+                <h1 class="text-3xl mt-16">${result.data[i].title}</h1>
+                <p class="mt-20">Ketua Acara : ${result.data[i].chief.name}</p>
+                <p>Contact Person : ${result.data[i].contact_person}</p>
+            </div>
+            <div class="flex items-end">
+                <!-- Edit button -->
+                <a href="/events/${result.data[i].id}/edit">
+                    <button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
+                </a>
+                <!-- Delete button -->
+                <a href="#">
+                    <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                </a>
+            </div>
+        </div>
+    </div>
+`;
+                    }
+                }
+                $("#ajaxResult").html(eventsCardHtml);
             }
         });
     });

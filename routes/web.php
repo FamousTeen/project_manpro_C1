@@ -188,11 +188,31 @@ Route::get('/input_event', function () {
 Route::get('/pengumuman_pengurus', function () {
     return view('admin/khusus_pengurus/pengumuman_pengurus');
 })->name('pengumuman_pengurus');
+
 Route::get('/events/search/{detail}', function (string $detail) {
-    return EventResource::collection(Event::query()
-    ->where('title', 'LIKE', '%' . $detail . '%')
-    ->orWhere('date', 'LIKE', '%' . $detail . '%')
-    ->get());
+    $events = Event::where('title', 'LIKE', '%' . $detail . '%')
+        ->orWhere('date', 'LIKE', '%' . $detail . '%')
+        ->with('eventDetails.account')
+        ->get();
+
+    return EventResource::collection($events);
+});
+
+Route::get('/events/searchs/all', function () {
+    Log::info('events/all route accessed');
+    $events2 = Event::where('status', 1)->with('eventDetails.account')->get();
+
+
+    return EventResource::collection(resource: $events2);
+});
+
+Route::get('/events/search', function (string $detail) {
+    $events = Event::where('title', 'LIKE', '%' . $detail . '%')
+        ->orWhere('date', 'LIKE', '%' . $detail . '%')
+        ->with('eventDetails.account')
+        ->get();
+
+    return EventResource::collection($events);
 });
 
 //dokumen
