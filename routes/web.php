@@ -174,3 +174,14 @@ Route::get('/input_misa', function () {
 Route::get('/input_foto', function () {
     return view('admin/input_foto');
 })->name('input_foto');
+
+//KHUSUS PENGURUS
+//pengumuman
+Route::get('/pengumuman_pengurus', function () {
+    return view('admin/khusus_pengurus/pengumuman_pengurus');
+})->name('pengumuman_pengurus');
+
+//dokumen
+Route::get('/pengumuman_pengurus', function () {
+    return view('admin/khusus_pengurus/dokumen_pengurus');
+})->name('pengumuman_pengurus');
