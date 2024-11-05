@@ -75,7 +75,7 @@ use App\Models\Training;
                     <p class="font-semibold">
                         {{ Carbon::parse($announcement_detail->announcement->upload_time)->translatedFormat('l, j F Y') }}
                     </p>
-                    <p class="text-sm">{{ $announcement_detail->announcement->description }}
+                    <p class="text-sm">{!! urldecode($announcement_detail->announcement->description) !!}
                         <br><br>
                         Tanggal : {{ date('j-m-Y', strtotime($announcement_detail->announcement->datetime)) }}
                         <br>

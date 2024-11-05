@@ -47,7 +47,7 @@ class MeetController extends Controller
      */
     public function edit(Meet $meet)
     {
-        //
+        return view('admin.edit_rapat', compact('meet'));
     }
 
     /**
@@ -55,7 +55,15 @@ class MeetController extends Controller
      */
     public function update(UpdateMeetRequest $request, Meet $meet)
     {
-        //
+        $request->validate([
+            'meetNotulen' => 'required',
+        ]);
+
+        $meet->update([
+            'notulen' => $request->meetNotulen
+        ]);
+
+        return redirect()->route('meets.show', compact('meet'))->with('success', 'Rapat berhasil diupdate.');
     }
 
     /**

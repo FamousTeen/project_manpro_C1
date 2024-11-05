@@ -106,7 +106,9 @@ class EventController extends Controller
             'start_time' => 'required',
             'finished_time' => 'required',
             'event_chief' => 'required',
-            'contact_person' => 'required'
+            'contact_person' => 'required',
+            'phone_number' => 'required',
+            'place' => 'required'
         ]);
 
         $event->update([
@@ -115,6 +117,8 @@ class EventController extends Controller
             'start_time' => $request->start_time,
             'finished_time' => $request->finished_time,
             'contact_person' => $request->contact_person,
+            'phone_number' => $request->phone_number,
+            'place' => $request->place,
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
@@ -124,7 +128,7 @@ class EventController extends Controller
             'account_id' => $request->event_chief
         ]);
 
-        return redirect()->route('events.index')->with('success', 'Announcement berhasil diupdate.');
+        return redirect()->route('events.index')->with('success', 'Rapat berhasil diupdate.');
     }
 
     /**

@@ -10,6 +10,12 @@ class Meet extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'date',
+        'notulen'
+    ];
+
     public function event(): BelongsTo {
         return $this->belongsTo(Event::class);
     }

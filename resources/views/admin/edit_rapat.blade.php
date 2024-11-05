@@ -27,28 +27,16 @@
         <p>{{ Carbon::parse($meet->date)->translatedFormat('l, d/m/Y') }}</p>
     </div>
 
-    @if (session('success'))
-    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-        role="alert">
-        {{ session('success')}}
-    </div>
-    @endif
-
-    <div class="my-6 rounded-xl py-6 pe-6 ps-12 flex justify-between items-start bg-[#C4CDC1]">
-        <div>
-            <p class="text-md">
-                {{ $meet->notulen }}
-            </p>
+    <form action="{{route('meets.update', ['meet' => $meet])}}" method="post" class="my-6 rounded-xl pb-6 pe-6 ps-12 bg-[#C4CDC1]">
+        @csrf
+        @method('put')
+        <div class="w-full">
+            <textarea name="meetNotulen" id="meetNotulen" class="mt-4 w-full h-32 border border-gray-300 rounded p-2" placeholder="Masukkan pengumuman" ">{!! urldecode($meet->notulen) !!}</textarea>
         </div>
-        <div>
-            <a href="{{route('meets.edit', ['meet' => $meet])}}" class="text-[#20252f] hover:text-gray-500">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M17.414 2.586a2 2 0 010 2.828L8.828 14l-4 1 1-4 8.586-8.586a2 2 0 012.828 0z" />
-                    <path fill-rule="evenodd" d="M3 18a1 1 0 001 1h12a1 1 0 001-1V8a1 1 0 00-2 0v9H5V7H4v11z" clip-rule="evenodd" />
-                </svg>
-            </a>
-        </div>
-    </div>
+        <div class=" flex col-span-2 mt-4 items-start justify-center">
+                <button type="submit" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
+            </div>
+    </form>
 </div>
 @endsection
 

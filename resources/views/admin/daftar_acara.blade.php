@@ -36,6 +36,13 @@
         </div>
     </div>
 
+    @if (session('success'))
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+        role="alert">
+        {{ session('success')}}
+    </div>
+    @endif
+
     <div id="ajaxResult">
         @foreach ($events as $event)
         @php
@@ -54,7 +61,8 @@
                     <p>{{ Carbon::parse($event->start_time)->translatedFormat('H.i') }} WIB - {{ Carbon::parse($event->finished_time)->translatedFormat('H.i') }} WIB</p>
                     <h1 class="text-3xl mt-16">{{$event->title}}</h1>
                     <p class="mt-20">Ketua Acara : {{$chief->name}}</p>
-                    <p>Contact Person : {{$event->contact_person}}</p>
+                    <p>Contact Person : {{$event->contact_person}} ({{$event->phone_number}})</p>
+                    <p>Tempat Acara : {{$event->place}}</p>
                 </div>
                 <div class="flex items-end">
                     <!-- Edit button -->
@@ -119,7 +127,8 @@ $accounts = Account::with('eventDetails')->get();
                 </p>
                 <h1 class="text-3xl mt-16">${result.data[i].title}</h1>
                 <p class="mt-20">Ketua Acara : ${result.data[i].chief.name}</p>
-                <p>Contact Person : ${result.data[i].contact_person}</p>
+                <p>Contact Person : ${result.data[i].contact_person} (${result.data[i].phone_number})</p>
+                <p>Tempat Acara : ${result.data[i].place}</p>
             </div>
             <div class="flex items-end">
                 <!-- Edit button -->
