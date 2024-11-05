@@ -13,7 +13,7 @@
             -->
 
 @section('content')
-<div class="container-fluid m-12 me-0 mt-24">
+<div class="container-fluid m-12 mt-24">
   <!-- Header Section -->
   <div class="grid grid-cols-12">
     <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
@@ -47,7 +47,7 @@
   @endphp
 
   <!-- Jadwal Misa Section -->
-  <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-x-4 gap-y-16 mx-32 mt-5">
+  <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-16 m-6 mt-5">
     @foreach ($dataMisa as $misa)
     <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[350px] mx-auto resize-y">
       <div class="flex flex-row items-center gap-x-6">

@@ -13,7 +13,7 @@ use App\Models\Training;
                 4. #002366 - biru terang
                 5. #20252f - biru gelap
             -->
-<div class="container-fluid m-12 me-0 mt-24">
+<div class="container-fluid m-12 mt-24">
     <!-- Header Section -->
     <div class="grid grid-cols-12">
         <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
@@ -31,7 +31,7 @@ use App\Models\Training;
         <!-- Left Side: Tugas, Panitia, and Pengumuman -->
         <div>
             <!-- Tugas and Panitia Section -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 ml-16 ">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 ml-12 ">
                 <div
                     class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
                     <div>
@@ -57,8 +57,8 @@ use App\Models\Training;
             </div>
 
             <!-- Pengumuman Section -->
-            <h2 class="font-bold text-xl mb-4 ml-16">Pengumuman</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-16">
+            <h2 class="font-bold text-xl mb-4 ml-12">Pengumuman</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-12">
 
                 <?php
 
