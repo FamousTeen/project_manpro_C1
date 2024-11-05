@@ -86,9 +86,8 @@ $index = 1;
                 </div>
                 <div class="mt-4">
                     <p class="text-gray-700 text-sm">
-                        {!! urldecode($announcement->description) !!}
+                        {!! nl2br(e(urldecode($announcement->description))) !!}
                         <br><br>
-                        Sekian dan Terima Kasih
                     </p>
                 </div>
             </div>
