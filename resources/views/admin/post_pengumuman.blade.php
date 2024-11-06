@@ -28,7 +28,8 @@ $index = 1;
         @endif
         <form class="max-w ml-4 mb-4" method="post" action="{{ route('announcements.store')}}">
             @csrf
-            <textarea class="w-full h-40 p-4 border border-[#002366] rounded-md focus:outline-none focus:ring-2 focus:ring-[#002366]" placeholder="Masukkan Deskripsi Pengumuman..." name="eventDesc"></textarea>
+            <textarea class="w-full h-40 p-4 border border-[#002366] rounded-md focus:outline-none focus:ring-2 focus:ring-[#002366]" placeholder="Masukkan Deskripsi Pengumuman..." oninput="readTextarea2()" id="eventDesc0"></textarea>
+            <input type="hidden" name="eventDesc" id="eventDesc00"></input>
             <div class="text-right mt-4">
                 <button type="submit" class="bg-[#002366] text-white py-2 px-4 rounded-md hover:bg-[#740001] transition-all duration-300">Unggah</button>
             </div>
@@ -178,10 +179,18 @@ $index = 1;
                     closeDeleteConfirm();
                 }
 
+                // buat edit pengumuman
                 function readTextarea(index) {
                     const textareaValue = document.getElementById(`eventDesc${index}`).value;
                     document.getElementById(`eventDesc${index}${index}`).value = encodeURIComponent(textareaValue);
                     console.log(document.getElementById(`eventDesc${index}${index}`).value);
+                }
+
+                // buat input pengumuman
+                function readTextarea2() {
+                    const textareaValue = document.getElementById(`eventDesc0`).value;
+                    document.getElementById(`eventDesc00`).value = encodeURIComponent(textareaValue);
+                    console.log(document.getElementById(`eventDesc00`).value);
                 }
             </script>
             @endsection
