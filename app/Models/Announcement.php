@@ -17,7 +17,8 @@ class Announcement extends Model
         'admin_id',
         'datetime',
         'description',
-        'upload_time'
+        'upload_time',
+        'status'
     ];
 
     public function announcementDetails(): HasMany {

@@ -59,8 +59,8 @@ $index = 1;
     <div class="flex justify-center mb-16">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-16 ">
             @foreach ($announcements as $announcement)
+            @if ($announcement->status == 1)
             @php
-
             $distinct_announcement_details = $announcement->announcementDetails->groupBy('announcement_id')
             ->map(function ($items) use (&$usedAnnouncement) {
             foreach($items as $item) {
@@ -97,8 +97,7 @@ $index = 1;
             <div id="modal{{$index}}" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal{{$index}}')">
                 <div class="bg-white p-8 rounded-lg w-1/2 relative" onclick="event.stopPropagation()">
                     <!-- Trash Icon for Deletion -->
-                    <button class="absolute top-8 right-8 text-red-600 hover:text-red-800" onclick="confirmDelete('modal{{$index}}')">
-
+                    <button onclick="confirmDelete('modal{{$index}}')" class="absolute top-8 right-8 text-red-600 hover:text-red-800">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#20252f">
                             <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
                         </svg>
@@ -127,13 +126,19 @@ $index = 1;
                 <div class="bg-white p-6 rounded-lg w-1/3">
                     <h3 class="text-lg font-semibold text-center mb-4">Apakah mau dihapus?</h3>
                     <div class="flex justify-center space-x-4">
-                        <button class="bg-red-600 text-white px-4 py-2 rounded" onclick="deleteAnnouncement()">Iya, Dihapus</button>
+                        <form method="post" action="{{ route('announcements.destroy', ['announcement' => $announcement])}}">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Iya, Dihapus</button>
+                        </form>
                         <button class="bg-gray-600 text-white px-4 py-2 rounded" onclick="closeDeleteConfirm()">Tidak</button>
                     </div>
                 </div>
             </div>
             @endif
             @endforeach
+            @endif
+
             @endforeach
 
 

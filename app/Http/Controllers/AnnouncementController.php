@@ -92,6 +92,10 @@ class AnnouncementController extends Controller
      */
     public function destroy(Announcement $announcement)
     {
-        //
+        $isUpdated = $announcement->update([
+            'status' => 0,
+        ]);
+
+        return redirect()->route('announcements.create')->with('success', 'Announcement berhasil dihapus.');
     }
 }
