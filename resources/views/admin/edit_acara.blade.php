@@ -67,7 +67,7 @@
                 <select id="chiefs" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="event_chief">
                     <option value="{{$chief->id}}" selected>{{$chief->name}}</option>
                     @foreach ($accounts as $account)
-                        <option value="{{$account->id}}">{{$account->name}}</option>
+                    <option value="{{$account->id}}">{{$account->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -105,6 +105,7 @@
 
     <div class="relative py-6 ps-6 overflow-x-auto sm:rounded-lg">
         <h1 class="ms-3 mt-9 mb-3 text-2xl">INFORMASI RAPAT & KEGIATAN UNTUK ACARA</h1>
+        @if (!($meets->all() == null))
         <table class="w-full text-md text-left rtl:text-right  text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-[#C4CDC1] dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -137,6 +138,12 @@
                 @endforeach
             </tbody>
         </table>
+        @else
+        <div class="p-4 mb-4 text-sm flex justify-center text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span class="font-medium">Data Rapat tidak ditemukan
+        </div>
+        @endif
+
     </div>
 
 </div>

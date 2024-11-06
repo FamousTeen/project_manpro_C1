@@ -35,9 +35,9 @@
     @endif
 
     <div class="my-6 rounded-xl py-6 pe-6 ps-12 flex justify-between items-start bg-[#C4CDC1]">
-        <div>
+        <div>   
             <p class="text-md">
-                {{ $meet->notulen }}
+            {!! nl2br(e(urldecode($meet->notulen))) !!}
             </p>
         </div>
         <div>

@@ -1,8 +1,9 @@
 @extends('base/admin_navbar')
 
 <style>
-    .input-no-bg:focus {
-        background-color: transparent !important;
+    #search {
+        outline: none;
+        box-shadow: none;
     }
 </style>
 

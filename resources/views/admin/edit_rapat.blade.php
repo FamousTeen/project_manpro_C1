@@ -31,7 +31,8 @@
         @csrf
         @method('put')
         <div class="w-full">
-            <textarea name="meetNotulen" id="meetNotulen" class="mt-4 w-full h-32 border border-gray-300 rounded p-2" placeholder="Masukkan pengumuman" ">{!! urldecode($meet->notulen) !!}</textarea>
+            <textarea id="meetNotulen" class="mt-4 w-full h-32 border border-gray-300 rounded p-2" placeholder="Masukkan pengumuman" " oninput="readTextarea()">{!! urldecode($meet->notulen) !!}</textarea>
+            <input type="hidden" name="meetNotulen" id="meetNotulen1"></input>
         </div>
         <div class=" flex col-span-2 mt-4 items-start justify-center">
                 <button type="submit" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
@@ -57,5 +58,11 @@ $accounts = Account::with('eventDetails')->get();
         console.log(MarginTop);
         $(".content-body").css("margin-top", MarginTop);
     });
+
+    function readTextarea() {
+                    const textareaValue = document.getElementById(`meetNotulen`).value;
+                    document.getElementById(`meetNotulen1`).value = encodeURIComponent(textareaValue);
+                    console.log(document.getElementById(`meetNotulen1`).value);
+                }
 </script>
 @endsection
