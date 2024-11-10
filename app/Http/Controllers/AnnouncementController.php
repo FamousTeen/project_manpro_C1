@@ -46,12 +46,12 @@ class AnnouncementController extends Controller
         $account_count = Account::where('status', 1)->count();
 
         for ($i = 1; $i <= $account_count; $i++) {
-            if ((Account::where('id', $i)->firstOrFail()->roles) == "Anggota") {
+            // if ((Account::where('id', $i)->firstOrFail()->roles) == "Anggota") {
                 AnnouncementDetail::create([
                     'announcement_id' => $created_announcement->id,
                     'account_id' => $i
                 ]);
-            }
+            // }
         }
 
         return redirect()->route('announcements.create')->with('success2', 'Announcement berhasil dibuat dan disebarkan ke seluruh anggota dan pengurus.');
