@@ -22,7 +22,8 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        return view('admin/post_pengumuman');
+        $user = Auth::guard('admin')->user();
+        return view('admin/post_pengumuman', compact('user'));
     }
 
     /**

@@ -18,7 +18,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('admins');
             $table->string('title');
-            $table->string('file');
+            $table->string('file')->default('dokumen.pdf');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

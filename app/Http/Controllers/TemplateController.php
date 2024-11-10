@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Template;
 use App\Http\Requests\StoreTemplateRequest;
 use App\Http\Requests\UpdateTemplateRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class TemplateController extends Controller
 {
@@ -13,7 +15,8 @@ class TemplateController extends Controller
      */
     public function index()
     {
-        //
+        $templates = Template::where('status', 1)->get();
+        return view('admin.khusus_pengurus.dokumen_pengurus', compact('templates'));
     }
 
     /**
@@ -29,7 +32,34 @@ class TemplateController extends Controller
      */
     public function store(StoreTemplateRequest $request)
     {
-        //
+        $user = Auth::guard('admin')->user();
+
+        $data = $request->all();
+
+        $formfield = Validator::make($data, [
+            'fileName' => 'required',
+            'file' => 'required|file|mimes:pdf',
+        ]);
+        $validatedData = $formfield->validate();
+
+        $title = pathinfo($validatedData['fileName'], PATHINFO_FILENAME);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $file_name = $file->getClientOriginalName();
+            $file->move(public_path('asset'), $file_name);
+            $validatedData['file'] = $file_name;
+        } else {
+            $validatedData['file'] = 'dokumen.pdf';
+        }
+
+        Template::create([
+            'admin_id' => $user->id,
+            'title' => $title,
+            'file' => $validatedData['file'], 
+        ]);
+
+        return redirect()->route('templates.index')->with('success', 'Template berhasil di upload');
     }
 
     /**
@@ -37,7 +67,9 @@ class TemplateController extends Controller
      */
     public function show(Template $template)
     {
-        //
+        $templates = Template::all();
+
+        return view('admin.khusus_pengurus.dokumen_pengurus', compact(['template', 'templates']));
     }
 
     /**
@@ -61,6 +93,10 @@ class TemplateController extends Controller
      */
     public function destroy(Template $template)
     {
-        //
+        $template->update([
+            'status' => 0
+        ]);
+
+        return redirect()->route('templates.index')->with('success', 'Template berhasil dihapus.');
     }
 }
