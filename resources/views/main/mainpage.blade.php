@@ -128,66 +128,44 @@
                 </div>
     </section>
 
-<!-- 7 pillar -->
 <section class="bg-[#f6f1e3] py-16" id="section3">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-extrabold text-center text-[#20252f] mb-8">7 PILAR</h2>
         
         <!-- Flexbox for the 7 cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-6">
-            
-            <!-- Card 1 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <img src="https://via.placeholder.com/150" alt="Pillar 1" class="mb-4 mx-auto rounded-full">
-                <h3 class="text-xl font-semibold text-[#20252f]">Pillar 1</h3>
-                <p class="text-gray-600">Short description for pillar 1</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#20252f]">Menjaga ketertiban sakristi</h4>
             </div>
 
-            <!-- Card 2 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <img src="https://via.placeholder.com/150" alt="Pillar 2" class="mb-4 mx-auto rounded-full">
-                <h3 class="text-xl font-semibold text-[#20252f]">Pillar 2</h3>
-                <p class="text-gray-600">Short description for pillar 2</p>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#20252f]">Peka kepada lingkungan sekitar</h4>
             </div>
 
-            <!-- Card 3 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <img src="https://via.placeholder.com/150" alt="Pillar 3" class="mb-4 mx-auto rounded-full">
-                <h3 class="text-xl font-semibold text-[#20252f]">Pillar 3</h3>
-                <p class="text-gray-600">Short description for pillar 3</p>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#20252f]">5S : Senyum, Sapa, Salam, Sopan, Santun</h4>
             </div>
 
-            <!-- Card 4 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <img src="https://via.placeholder.com/150" alt="Pillar 4" class="mb-4 mx-auto rounded-full">
-                <h3 class="text-xl font-semibold text-[#20252f]">Pillar 4</h3>
-                <p class="text-gray-600">Short description for pillar 4</p>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#20252f]">Jaga kebersihan sarana & prasarana yang digunakan oleh misdinar</h4>
             </div>
 
-            <!-- Card 5 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <img src="https://via.placeholder.com/150" alt="Pillar 5" class="mb-4 mx-auto rounded-full">
-                <h3 class="text-xl font-semibold text-[#20252f]">Pillar 5</h3>
-                <p class="text-gray-600">Short description for pillar 5</p>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#20252f]">Menuju integritas dalam melayani sesama</h4>
             </div>
 
-            <!-- Card 6 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <img src="https://via.placeholder.com/150" alt="Pillar 6" class="mb-4 mx-auto rounded-full">
-                <h3 class="text-xl font-semibold text-[#20252f]">Pillar 6</h3>
-                <p class="text-gray-600">Short description for pillar 6</p>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#20252f]">Kerja cepat tanggap tepat</h4>
             </div>
 
-            <!-- Card 7 -->
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <img src="https://via.placeholder.com/150" alt="Pillar 7" class="mb-4 mx-auto rounded-full">
-                <h3 class="text-xl font-semibold text-[#20252f]">Pillar 7</h3>
-                <p class="text-gray-600">Short description for pillar 7</p>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#20252f]">Terbuka, Komunikasi, Kompak, Inisiatif, Peka</h4>
             </div>
-
         </div>
     </div>
 </section>
+
+
 
 <!-- acara yang diadakan -->
 <section class="bg-[#002366] py-16 p-8 text-center" id="section4">
@@ -235,17 +213,23 @@
     
     <h2 class="text-3xl font-bold text-[#20252f] mb-8">PERSEMBAHAN KASIH / KOLEKTE</h2>
     
-    <div class="container mx-auto px-4 flex items-center justify-center space-x-16">
+    <div class="container mx-auto px-4 flex items-center justify-center space-x-4 ml-24">
       <!-- QR Code Section (Left) -->
-      <div class="w-[400px] flex-shrink-0">
-        <img src="https://via.placeholder.com/400x400" alt="QR Code" class="w-full h-full object-cover rounded-lg">
+      <div class="w-[300px] flex-shrink-0">
+        <img src="../../images/QRIS_MISDINAR_RK.png" alt="QR Code" class="w-64 h-full object-cover rounded-lg">
       </div>
   
       <!-- Description Section (Right) -->
-      <div class="w-[450px] text-left self-start mt-8">
-        <p class="font-bold text-[#ae0001]">
+      <div class="w-[450px] text-left self-start mt-4">
+        <p class="font-bold text-[#ae0001] text-xl">
           Dapat melalui Transfer
-        </p>
+        </p><br>
+        <p class="font-bold text-black">
+            No. Rek BCA a/n 
+            <br><br>
+            Clarissa Aurelia Gunawan
+          </p><br>
+          <p class="text-[#ae0001] text-xl">6751119108</p>
       </div>
     </div>
   </section> 
@@ -259,14 +243,15 @@
     <!-- Instagram Card -->
     <div class="bg-[#f6f1e3] p-6 rounded-xl shadow-lg w-48 h-60">
       <h2 class="text-pink-600 text-2xl font-semibold mb-4">Instagram</h2>
-      <img src="instagram-logo-url" alt="Instagram Logo" class="mx-auto w-12 h-12 mb-2">
-      <p class="text-black font-semibold">@ig_misdinar</p>
+      <img src="../../images/logoIG.png" alt="Instagram Logo" class="mx-auto w-64 mb-2">
+      <p class="text-black font-semibold">@misdinar_rk
+    </p>
     </div>
 
-    <!-- YouTube Card -->
+    <!-- TIKTOK Card -->
     <div class="bg-[#f6f1e3] p-6 rounded-xl shadow-lg w-48 h-60">
-      <h2 class="text-gray-800 text-2xl font-semibold mb-4">YouTube</h2>
-      <img src="youtube-logo-url" alt="YouTube Logo" class="mx-auto w-12 h-12 mb-2">
-      <p class="text-black font-semibold">@yt_misdinar</p>
+      <h2 class="text-gray-800 text-2xl font-semibold mb-4">Tiktok</h2>
+      <img src="../../images/logoTiktok.png" alt="YouTube Logo" class="mx-auto w-48 mb-6">
+      <p class="text-black font-semibold">@misdinar_rk</p>
     </div>
 </section>
