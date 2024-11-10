@@ -15,7 +15,7 @@
 </div>
 
 <!-- Card Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mx-16">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mx-16">
     <div class="bg-[#f6f1e3] border border-[#002366] rounded-lg shadow-md p-6 space-y-2">
         <h2 class="text-lg font-semibold text-gray-800">Rapat Evaluasi</h2>
         <p class="text-gray-600">Minggu, 25-12-2024</p>

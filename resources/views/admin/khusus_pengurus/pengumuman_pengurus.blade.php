@@ -33,7 +33,7 @@
 
     <!-- Pengumuman Section -->
     <div class="flex justify-center mb-16">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-16 ">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16">
             <!-- Example Announcement -->
             <div class="bg-[#f6f1e3] p-6 shadow-lg w-64 mx-8 border border-[#002366] rounded-lg cursor-pointer">
                 <div class="flex justify-between items-center">

@@ -21,7 +21,7 @@ $misas = App\Models\Misa::all();
 
     <!-- Input Jadwal Section -->
     <div class="flex justify-center mb-16">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16">
             <!-- Input Button -->
             <div class="flex items-center justify-center">
                 <div class="w-64 h-64 bg-gray-200 border-2 border-dashed border-gray-400 flex flex-col justify-center items-center rounded-lg cursor-pointer hover:bg-gray-300 transition duration-300"

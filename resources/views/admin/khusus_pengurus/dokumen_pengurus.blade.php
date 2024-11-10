@@ -12,9 +12,9 @@
             <div class="container mx-auto py-8 mt-8">
                 <div class="p-6 mb-8 bg-[#f6f1e3] border border-[#002366] shadow-lg">
                     <h2 class="ml-4 mt-4 text-2xl font-semibold mb-2">Dokumen Khusus Pengurus</h2>
-                    <div class="flex items-center justify-center space-x-4 mt-8 mx-8">
+                    <div class="flex flex-col items-center justify-center space-x-4 mt-8 mx-8 md:flex-row">
                         <!-- Add File Button -->
-                        <button onclick="openUploadModal()" class="bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded-lg flex flex items-center justify-center w-1/5 h-20">
+                        <button onclick="openUploadModal()" class="bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded-lg flex flex items-center justify-center w-15 h-20">
                             <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-3 gap-8 w-full max-w-3xl mx-auto">
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full max-w-3xl mx-auto p-8">
                     <button onclick="showModal('template-lpj-url')" class="bg-[#f6f1e3] text-[#20252f] hover:bg-[#20252f] hover:text-white px-4 py-2 rounded shadow">Template LPJ</button>
                     <button onclick="showModal('template-proposal1-url')" class="bg-[#f6f1e3] text-[#20252f] hover:bg-[#20252f] hover:text-white px-4 py-2 rounded shadow">Template Proposal</button>
                     <button onclick="showModal('template-proposal2-url')" class="bg-[#f6f1e3] text-[#20252f] hover:bg-[#20252f] hover:text-white px-4 py-2 rounded shadow">Template Proposal</button>
