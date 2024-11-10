@@ -58,7 +58,7 @@ class AdminController extends Controller
     public function edit(Admin $admin)
     {
         $user = Auth::guard('admin')->user();
-        return view('admin.edit_profile_admin', $user);
+        return view('admin.edit_profile_admin', compact('user'));
     }
 
     /**

@@ -20,7 +20,7 @@
                     <div class="relative w-1/3 p-4 ml-8 mt-16">
                         <div class="bg-gray-300 rounded-lg h-48 w-full flex justify-center items-center">
                             <!-- Placeholder for profile image -->
-                            <img src="asset/{{ $photo }}" class="rounded-lg" alt="">
+                            <img src="asset/{{ $user->photo }}" class="rounded-lg" alt="">
                         </div>
 
                         <!-- Edit Profile Picture Button -->
@@ -39,23 +39,23 @@
                         <div class="grid grid-cols-2 ml-8 gap-y-8">
                             <div class="text-gray-600 font-semibold">Nama Panggilan</div>
                             <input type="text" class="border border-gray-300 rounded-lg p-2 text-gray-700"
-                                value="{{ $name }}" name="name" />
+                                value="{{ $user->name }}" name="name" />
 
                             <div class="text-gray-600 font-semibold">Email</div>
                             <input type="email" class="border border-gray-300 rounded-lg p-2 text-gray-700"
-                                value="{{ $email }}" name="email" />
+                                value="{{ $user->email }}" name="email" />
 
                             <div class="text-gray-600 font-semibold">Alamat</div>
                             <input type="text" class="border border-gray-300 rounded-lg p-2 text-gray-700"
-                                value="{{ $address }}" name="address" />
+                                value="{{ $user->address }}" name="address" />
 
                             <div class="text-gray-600 font-semibold">Tanggal Lahir</div>
                             <input type="text" class="border border-gray-300 rounded-lg p-2 text-gray-700"
-                                value="{{ $birthdate }}" name="birthdate" />
+                                value="{{ $user->birthdate }}" name="birthdate" />
 
                             <div class="text-gray-600 font-semibold">Wilayah</div>
                             <input type="text" class="border border-gray-300 rounded-lg p-2 text-gray-700"
-                                value="{{ $region }}" name="region" />
+                                value="{{ $user->region }}" name="region" />
                         </div>
                     </div>
                 </div>

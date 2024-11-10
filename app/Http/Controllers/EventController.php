@@ -39,7 +39,7 @@ class EventController extends Controller
             $events = Event::query()->where('status', 1)->get();
             return view('anggota/alur_acara/acara', [
                 'events' => $events,
-                'data' => $userData
+                'user' => $userData
             ]);
         }
     }
@@ -81,7 +81,7 @@ class EventController extends Controller
         $selectedEvent = Event::query()->where('id', $event->id)->firstOrFail();
         return view('anggota/alur_acara/detail_acara', [
             'selectedEvent' => $selectedEvent,
-            'data' => $userData
+            'user' => $userData
         ]);
     }
 

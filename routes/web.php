@@ -166,7 +166,9 @@ Route::get('/konfirmasi', function () {
     )->where('password', $user->password)->firstOrFail();
 
 
-    return view('anggota/konfirmasi', compact('userData'));
+    return view('anggota/konfirmasi', [
+        'user' => $userData
+    ]);
 })->name('konfirmasi');
 
 //Input jadwal admin

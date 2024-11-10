@@ -84,7 +84,7 @@ class AccountController extends Controller
     public function edit(Account $account)
     {
         $user = Auth::guard('account')->user();
-        return view('anggota.profile.edit_profile_anggota', $user);
+        return view('anggota.profile.edit_profile_anggota', compact('user'));
     }
 
     /**

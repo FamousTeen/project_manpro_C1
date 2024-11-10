@@ -41,7 +41,7 @@
   use App\Models\Misa_Detail;
   use Carbon\Carbon;
 
-  $dataMisa = Misa_Detail::query()->where('account_id', $userData->id)->where('confirmation', NULL)->get();
+  $dataMisa = Misa_Detail::query()->where('account_id', $user->id)->where('confirmation', NULL)->get();
 
 
   @endphp

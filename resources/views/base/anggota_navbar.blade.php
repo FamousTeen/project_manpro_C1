@@ -56,8 +56,8 @@
                 <div class="relative">
                     <button id="dropdownButton"
                         class="flex items-center space-x-2 bg-[#20252f] hover:bg-[#ae0001] text-[#f6f1e3] p-2 transition duration-300 focus:outline-none rounded">
-                        @if (isset($user) && isset($data))
-                            <img src="../../../asset/{{ $data->photo }}" alt="Profile Icon"
+                        @if (isset($user) || isset($data))
+                            <img src="../../../asset/{{ $user->photo }}" alt="Profile Icon"
                                 class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @else
                             <img src="../../../asset/profile-circle.256x256.png" alt="Profile Icon"

@@ -72,16 +72,11 @@ use App\Models\Training;
                 @foreach ($announcement_details as $announcement_detail)
                 <!-- Announcement Card 1 -->
                 <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
-                    <p class="font-semibold">
+                    <p class="font-semibold mb-4">
                         {{ Carbon::parse($announcement_detail->announcement->upload_time)->translatedFormat('l, j F Y') }}
                     </p>
-                    <p class="text-sm">{!! urldecode($announcement_detail->announcement->description) !!}
-                        <br><br>
-                        Tanggal : {{ date('j-m-Y', strtotime($announcement_detail->announcement->datetime)) }}
-                        <br>
-                        Jam : {{ date('H.i', strtotime($announcement_detail->announcement->datetime)) }} WIB
-                        <br><br>
-                        Sekian dan Terima Kasih
+                    <p class="text-sm">
+                    {!! nl2br(e(urldecode($announcement_detail->announcement->description))) !!}
                     </p>
                 </div>
                 @endforeach
