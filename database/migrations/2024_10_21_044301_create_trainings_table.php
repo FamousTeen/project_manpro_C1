@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->foreign('admin_id')
                 ->references('id')
                 ->on('admins');
-            $table->dateTime('date');
+            $table->dateTime('training_date');
             $table->string('place');
             $table->string('contact_person');
             $table->string('phone_number');

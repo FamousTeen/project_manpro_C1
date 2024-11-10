@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Navbar with Sidebar</title>
+    <title>{{env('APP_NAME')}}</title>
     @vite('resources/css/app.css')
 
     {{-- For Font --}}
@@ -114,7 +114,7 @@
                 <ul id="jadwalDropdown" class="ml-8 mt-4 space-y-4 hidden">
                     <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Misa</a></li>
                     <li><a href="{{ route('events.index')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Acara</a></li>
-                    <li><a href="#" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Pelatihan</a></li>
+                    <li><a href="{{route('trainings.index')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Pelatihan</a></li>
                 </ul>
             </li>
             <li>

@@ -136,6 +136,10 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->update([
+            'status' => 0
+        ]);
+
+        return redirect()->route('events.index')->with('success', 'Acara berhasil dihapus.');
     }
 }

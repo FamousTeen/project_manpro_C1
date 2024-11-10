@@ -18,7 +18,8 @@ class Event extends Model
         'event_chief',
         'contact_person',
         'place',
-        'phone_number'
+        'phone_number',
+        'status'
     ];
 
     public function trainings(): HasMany {

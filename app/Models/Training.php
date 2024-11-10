@@ -12,6 +12,14 @@ class Training extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'training_date',
+        'contact_person',
+        'phone_number',
+        'place',
+        'status'
+    ];
+
     public function event(): BelongsTo {
         return $this->belongsTo(Event::class);
     }

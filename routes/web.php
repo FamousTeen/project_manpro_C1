@@ -1,21 +1,25 @@
 <?php
 
 use App\Models\Event;
-use Illuminate\Support\Facades\Log;
 use App\Models\Account;
+use App\Models\Training;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\EventResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MeetController;
 use App\Http\Controllers\MisaController;
+use App\Http\Resources\TrainingResource;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
 use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\AnnouncementController;
-use App\Http\Controllers\MeetController;
-use App\Http\Resources\EventResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +62,7 @@ Route::middleware(['auth:account'])->group(function () {
     Route::get('/account/dashboard', [AccountController::class, 'dashboard'])->name('account.dashboard');
 });
 
-// buat testing
+// buat acara
 Route::resource('events', EventController::class)->names([
     'index' => 'events.index',
     'create' => 'events.create',
@@ -70,6 +74,16 @@ Route::resource('events', EventController::class)->names([
 ]);
 
 
+// buat pelatihan
+Route::resource('trainings', TrainingController::class)->names([
+    'index' => 'trainings.index',
+    'create' => 'trainings.create',
+    'store' => 'trainings.store',
+    'show' => 'trainings.show',
+    'edit' => 'trainings.edit',
+    'update' => 'trainings.update',
+    'destroy' => 'trainings.destroy',
+]);
 
 //Jadwal Anggota
 Route::get('/jadwal', [MisaController::class, 'index'])->name('jadwal_anggota');
@@ -201,6 +215,7 @@ Route::get('/events/search/{detail}', function (string $detail) {
     return EventResource::collection($events);
 });
 
+// buat ajax event
 Route::get('/events/searchs/all', function () {
     Log::info('events/all route accessed');
     $events2 = Event::where('status', 1)->with('eventDetails.account')->get();
@@ -216,6 +231,30 @@ Route::get('/events/search', function (string $detail) {
         ->get();
 
     return EventResource::collection($events);
+});
+
+// buat ajax peltihan
+Route::get('/trainings/searchs/all', function () {
+    Log::info('trainings/searchs/all route accessed');
+    $events2 = Training::where('status', 1)
+    ->with('event')->get();
+
+
+    return TrainingResource::collection($events2);
+});
+
+Route::get('/trainings/search/{detail}', function (string $detail) {
+    $trainings = Training::with('event')
+    ->whereHas('event', function ($query) use ($detail) {
+        $query->where('title', 'LIKE', '%' . $detail . '%');
+    })
+    ->orWhere('training_date', 'LIKE', '%' . $detail . '%')
+    ->with('event')
+    ->get();
+
+    Log::info(gettype($trainings));
+
+    return TrainingResource::collection($trainings);
 });
 
 //dokumen
