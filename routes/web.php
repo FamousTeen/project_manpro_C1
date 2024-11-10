@@ -20,6 +20,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
 use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\TemplateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +121,16 @@ Route::resource('misas', MisaController::class)->names([
     'edit' => 'misas.edit',
     'update' => 'misas.update',
     'destroy' => 'misas.destroy',
+]);
+
+// 'edit' => 'misas.edit',
+// 'update' => 'misas.update',
+
+Route::resource('templates', TemplateController::class)->names([
+    'index' => 'templates.index',
+    'store' => 'templates.store',
+    'show' => 'templates.show',
+    'destroy' => 'templates.destroy'
 ]);
 
 Route::resource('announcements', AnnouncementController::class);

@@ -17,7 +17,6 @@ class TemplateSeeder extends Seeder
         DB::table('templates')->insert([
             'admin_id' => 1,
             'title' => "LPJ",
-            'file' => "lpj.pdf",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
