@@ -16,7 +16,7 @@
 <div class="max-w-full mx-auto px-16 rounded-lg">
     <!-- Main Grid Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
+ 
         <!-- Left Column: Data Acara Section -->
         <div class="bg-[#f6f1e3] p-6 rounded-lg">
             <h3 class="text-xl font-bold mb-4">Data Acara</h3>
@@ -63,11 +63,12 @@
                     <h3 class="text-xl font-bold absolute top-4 left-6">Poster Acara</h3>
                     <div class="flex items-center justify-center h-36 mt-8">
                         <label for="file-upload" class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-gray-600 flex flex-col items-center justify-center cursor-pointer w-full h-full">
-                            <svg class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg id="upload-icon" class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
-                            <span>Tekan atau drop file untuk unggah foto</span>
-                            <input id="file-upload" type="file" class="hidden" />
+                            <span id="upload-text">Tekan untuk unggah foto</span>
+                            <input id="file-upload" type="file" class="hidden" onchange="handleFileUpload(event)" />
+                            <span id="file-name" class="hidden mt-2 text-gray-800 font-semibold"></span>
                         </label>
                     </div>
                 </div>
@@ -120,6 +121,7 @@
                         <th class="pb-2">Nama</th>
                         <th class="pb-2">Wilayah</th>
                         <th class="pb-2">Divisi</th>
+                        <th class="pb-2"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -128,12 +130,18 @@
                         <td class="py-2">Example Nama</td>
                         <td class="py-2">Example Wilayah</td>
                         <td class="py-2">Example Divisi</td>
+                        <td class="py-2">
+                            <button onclick="deleteRow(this)" class="bg-[#ae0001] hover:bg-[#740001] text-white text-sm px-4 py-1 rounded">Delete</button>
+                        </td>
                     </tr>
                     <tr class="border-b ">
                         <td class="py-2">2</td>
                         <td class="py-2">Example Nama</td>
                         <td class="py-2">Example Wilayah</td>
                         <td class="py-2">Example Divisi</td>
+                        <td class="py-2">
+                            <button onclick="deleteRow(this)" class="bg-[#ae0001] hover:bg-[#740001] text-white text-sm px-4 py-1 rounded">Delete</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -170,11 +178,12 @@
                     <h3 class="text-xl font-bold absolute top-4 left-6">Rundown Acara</h3>
                     <div class="flex items-center justify-center h-52 mt-8">
                         <label for="file-upload" class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-gray-600 flex flex-col items-center justify-center cursor-pointer w-full h-full">
-                            <svg class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg id="upload-icon" class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
-                            <span>Tekan atau drop file untuk unggah foto</span>
-                            <input id="file-upload" type="file" class="hidden" />
+                            <span id="upload-text">Tekan untuk unggah foto</span>
+                            <input id="file-upload" type="file" class="hidden" onchange="handleFileUpload(event)" />
+                            <span id="file-name" class="hidden mt-2 text-gray-800 font-semibold"></span>
                         </label>
                     </div>
                 </div>
@@ -194,6 +203,7 @@
                             <th class="pb-2">No.</th>
                             <th class="pb-2">Nama</th>
                             <th class="pb-2">Email</th>
+                            <th class="pb-2"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -201,6 +211,9 @@
                             <td class="py-2">1</td>
                             <td class="py-2">Example Name</td>
                             <td class="py-2">example@email.com</td>
+                            <td class="py-2">
+                                <button onclick="deleteRow(this)" class="bg-[#ae0001] hover:bg-[#740001] text-white text-sm px-4 py-1 rounded">Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -230,38 +243,43 @@
 </div>
 
         <!-- Jadwal Rapat Input Section -->
-<div class="bg-[#f6f1e3] h-72 p-6 rounded-lg">
-    <div class="flex items-center justify-between mb-6">
-        <h2 class="text-xl font-bold">Jadwal Rapat</h2>
-        <button onclick="openRapatModal()" class="bg-[#002366] hover:bg-[#20252f] text-white text-sm px-4 py-1 rounded">Tambah +</button>
-    </div>
-    <div class="no-scrollbar overflow-y-auto max-h-52">
-        <table class="w-full">
-            <thead>
-                <tr class="text-left border-b-2 border-black">
-                    <th class="pb-2">No.</th>
-                    <th class="pb-2">Kegiatan</th>
-                    <th class="pb-2">Tanggal & Waktu</th>
-                    <th class="pb-2">Lokasi</th>
-                </tr>
-            </thead>
-            <tbody id="rapat-table-body">
-                <tr class="border-b border-black">
-                    <td class="py-2">1</td>
-                    <td class="py-2">Example Kegiatan</td>
-                    <td class="py-2">Example Tanggal & Waktu</td>
-                    <td class="py-2">Example Lokasi</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-</div>
+        <div class="bg-[#f6f1e3] h-72 p-6 rounded-lg">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold">Jadwal Rapat</h2>
+                <button onclick="openRapatModal()" class="bg-[#002366] hover:bg-[#20252f] text-white text-sm px-4 py-1 rounded">Tambah +</button>
+            </div>
+            <div class="no-scrollbar overflow-y-auto max-h-52">
+                <table class="w-full">
+                    <thead>
+                        <tr class="text-left border-b-2 border-black">
+                            <th class="pb-2">No.</th>
+                            <th class="pb-2">Kegiatan</th>
+                            <th class="pb-2">Tanggal & Waktu</th>
+                            <th class="pb-2"></th>
+                            <th class="pb-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="rapat-table-body">
+                        <tr class="border-b border-black">
+                            <td class="py-2">1</td>
+                            <td class="py-2">Example Kegiatan</td>
+                            <td class="py-2">Example Tanggal & Waktu</td>
+                            <td class="py-2">
+                                <button onclick="editRapat(this)" class="bg-[#002366] hover:bg-[#20252f] text-white text-sm px-4 py-1 rounded">Edit</button>
+                            </td>
+                            <td class="py-2">
+                                <button onclick="deleteRow(this)" class="bg-[#ae0001] hover:bg-[#740001] text-white text-sm px-4 py-1 rounded">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
 <!-- Rapat Input Modal -->
 <div id="rapatModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" style="z-index: 1000;">
     <div class="bg-white rounded-lg p-6 w-96">
-        <h2 class="text-xl font-bold mb-4">Input Jadwal Rapat</h2>
+        <h2 class="text-xl font-bold mb-4">Edit Jadwal Rapat</h2>
         <div class="mb-4">
             <label for="kegiatan" class="block text-sm font-medium">Kegiatan</label>
             <input type="text" id="kegiatan" class="mt-1 block w-full border-gray-300 rounded-md" required>
@@ -283,18 +301,17 @@
             <textarea id="catatan" class="mt-1 block w-full border-gray-300 rounded-md" rows="3"></textarea>
         </div>
         <div class="flex justify-end mt-4">
-            <button onclick="addRapat()" class="bg-[#002366] hover:bg-[#20252f] text-white  px-4 py-2 rounded">Simpan</button>
-            <button onclick="closeRapatModal()" class="bg-gray-300 hover:bg-gray-400 text-black  px-4 py-2 rounded ml-2">Batal</button>
+            <button onclick="saveRapatChanges()" class="bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded">Simpan</button>
+            <button onclick="closeRapatModal()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded ml-2">Batal</button>
         </div>
     </div>
 </div>
-
-
-    <!-- Save Button -->
-    <div class="text-right mt-4 mb-8">
-        <button class="bg-[#002366] hover:bg-[#20252f] w-32 text-white px-6 py-2 rounded-md">Simpan</button>
-    </div>
 </div>
+    <!-- Save Button -->
+    <div class="text-center mt-4 mb-12">
+        <button class="bg-[#002366] hover:bg-[#20252f] w-64 text-white px-6 py-3 rounded-md">Simpan</button>
+    </div>
+    
 @endsection
 @section('libraryjs')
 <script>
@@ -312,20 +329,18 @@ function openSearchModal() {
 
     function closeSearchModal() {
         document.getElementById('searchModal').classList.add('hidden');
-        document.getElementById('name-dropdown').selectedIndex = 0; // Reset dropdown selection
+        document.getElementById('name-dropdown').selectedIndex = 0; 
     }
 
     function addSelectedName() {
         const dropdown = document.getElementById('name-dropdown');
         const selectedValue = dropdown.value;
         if (selectedValue) {
-            // Implement your logic for adding the selected name to the table or wherever needed
-            console.log("Selected Name:", selectedValue); // Replace this with your own logic
+            console.log("Selected Name:", selectedValue);
             
-            // Example: Adding selected name to the table (You can customize this)
             const tableBody = document.querySelector('table tbody');
             const newRow = document.createElement('tr');
-            const rowCount = tableBody.rows.length + 1; // Get new row number
+            const rowCount = tableBody.rows.length + 1; 
 
             newRow.innerHTML = `<td class="py-2">${rowCount}</td>
                                 <td class="py-2">${selectedValue}</td>
@@ -333,7 +348,7 @@ function openSearchModal() {
             tableBody.appendChild(newRow);
             closeSearchModal();
         } else {
-            alert("Silakan pilih nama dari dropdown."); // Alert if no name is selected
+            alert("Silakan pilih nama dari dropdown."); 
         }
     }    
     function openRapatModal() {
@@ -342,7 +357,7 @@ function openSearchModal() {
 
     function closeRapatModal() {
         document.getElementById('rapatModal').classList.add('hidden');
-        document.getElementById('rapatModal').reset(); // Reset modal inputs
+        document.getElementById('rapatModal').reset(); 
     }
 
     function addRapat() {
@@ -354,7 +369,7 @@ function openSearchModal() {
 
         if (kegiatan && tanggal && waktu && lokasi) {
             const tableBody = document.getElementById('rapat-table-body');
-            const rowCount = tableBody.rows.length + 1; // Get new row number
+            const rowCount = tableBody.rows.length + 1; 
             const newRow = document.createElement('tr');
 
             newRow.innerHTML = `<td class="py-2">${rowCount}</td>
@@ -364,8 +379,72 @@ function openSearchModal() {
             tableBody.appendChild(newRow);
             closeRapatModal();
         } else {
-            alert("Silakan lengkapi semua informasi yang diperlukan."); // Alert if fields are incomplete
+            alert("Silakan lengkapi semua informasi yang diperlukan.");
         }
     }
+    let currentRow;
+
+function editRapat(button) {
+    currentRow = button.closest('tr');
+    document.getElementById('kegiatan').value = currentRow.cells[1].innerText;
+    document.getElementById('tanggal').value = ""; 
+    document.getElementById('waktu').value = ""; 
+    document.getElementById('lokasi').value = currentRow.cells[3].innerText;
+    
+    document.getElementById('rapatModal').classList.remove('hidden');
+}
+
+function closeRapatModal() {
+    document.getElementById('rapatModal').classList.add('hidden');
+}
+
+function saveRapatChanges() {
+    currentRow.cells[1].innerText = document.getElementById('kegiatan').value;
+    currentRow.cells[2].innerText = document.getElementById('tanggal').value + ' ' + document.getElementById('waktu').value;
+    currentRow.cells[3].innerText = document.getElementById('lokasi').value;
+
+    closeRapatModal();
+}
+//button delete di list tabel"
+        function deleteRow(button) {
+        var row = button.closest('tr');
+        row.remove();
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const fileInput = document.getElementById('file-upload');
+    const fileNameDisplay = document.getElementById('file-name');
+    const uploadIcon = document.getElementById('upload-icon');
+    const uploadText = document.getElementById('upload-text');
+
+    fileInput.addEventListener('change', function(event) {
+        if (fileInput.files.length > 0) {
+            const fileName = fileInput.files[0].name;
+
+            fileNameDisplay.textContent = fileName;
+            fileNameDisplay.classList.remove('hidden');
+
+            uploadIcon.classList.add('hidden');
+            uploadText.classList.add('hidden');
+        }
+    });
+});
+
+function handleFileUpload(event) {
+    const fileInput = event.target;
+    const fileNameDisplay = document.getElementById('file-name');
+    const uploadIcon = document.getElementById('upload-icon');
+    const uploadText = document.getElementById('upload-text');
+
+    if (fileInput.files.length > 0) {
+        const fileName = fileInput.files[0].name;
+
+        fileNameDisplay.textContent = fileName;
+        fileNameDisplay.classList.remove('hidden');
+
+        uploadIcon.classList.add('hidden');
+        uploadText.classList.add('hidden');
+    }
+}
 </script>
 @endsection
