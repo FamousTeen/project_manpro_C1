@@ -62,13 +62,13 @@
                 <div class="bg-[#f6f1e3] p-6 rounded-lg h-56 relative">
                     <h3 class="text-xl font-bold absolute top-4 left-6">Poster Acara</h3>
                     <div class="flex items-center justify-center h-36 mt-8">
-                        <label for="file-upload" class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-gray-600 flex flex-col items-center justify-center cursor-pointer w-full h-full">
+                        <label for="file-upload-poster" class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-gray-600 flex flex-col items-center justify-center cursor-pointer w-full h-full">
                             <svg id="upload-icon" class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
-                            <span id="upload-text">Tekan untuk unggah foto</span>
-                            <input id="file-upload" type="file" class="hidden" onchange="handleFileUpload(event)" />
-                            <span id="file-name" class="hidden mt-2 text-gray-800 font-semibold"></span>
+                            <span id="upload-text-poster">Tekan untuk unggah foto</span>
+                            <input id="file-upload-poster" type="file" class="hidden" onchange="handleFileUploadPoster(event)" />
+                            <span id="file-name-poster" class="hidden mt-2 text-gray-800 font-semibold"></span>
                         </label>
                     </div>
                 </div>
@@ -411,40 +411,38 @@ function saveRapatChanges() {
         row.remove();
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
-    const fileInput = document.getElementById('file-upload');
-    const fileNameDisplay = document.getElementById('file-name');
-    const uploadIcon = document.getElementById('upload-icon');
-    const uploadText = document.getElementById('upload-text');
+    // Handle file upload for Rundown Acara
+    function handleFileUpload(event) {
+        var fileInput = event.target;
+        var fileNameSpan = document.getElementById('file-name');
+        var uploadIcon = document.getElementById('upload-icon');
+        var uploadText = document.getElementById('upload-text');
 
-    fileInput.addEventListener('change', function(event) {
-        if (fileInput.files.length > 0) {
-            const fileName = fileInput.files[0].name;
+        // Hide icon and text
+        uploadIcon.style.display = 'none';
+        uploadText.style.display = 'none';
 
-            fileNameDisplay.textContent = fileName;
-            fileNameDisplay.classList.remove('hidden');
-
-            uploadIcon.classList.add('hidden');
-            uploadText.classList.add('hidden');
-        }
-    });
-});
-
-function handleFileUpload(event) {
-    const fileInput = event.target;
-    const fileNameDisplay = document.getElementById('file-name');
-    const uploadIcon = document.getElementById('upload-icon');
-    const uploadText = document.getElementById('upload-text');
-
-    if (fileInput.files.length > 0) {
-        const fileName = fileInput.files[0].name;
-
-        fileNameDisplay.textContent = fileName;
-        fileNameDisplay.classList.remove('hidden');
-
-        uploadIcon.classList.add('hidden');
-        uploadText.classList.add('hidden');
+        // Show file name
+        var fileName = fileInput.files[0].name;
+        fileNameSpan.textContent = fileName;
+        fileNameSpan.style.display = 'block';
     }
-}
+
+    // Handle file upload for Poster Acara
+    function handleFileUploadPoster(event) {
+        var fileInput = event.target;
+        var fileNameSpan = document.getElementById('file-name-poster');
+        var uploadIcon = document.getElementById('upload-icon');
+        var uploadText = document.getElementById('upload-text-poster');
+
+        // Hide icon and text
+        uploadIcon.style.display = 'none';
+        uploadText.style.display = 'none';
+
+        // Show file name
+        var fileName = fileInput.files[0].name;
+        fileNameSpan.textContent = fileName;
+        fileNameSpan.style.display = 'block';
+    }
 </script>
 @endsection
