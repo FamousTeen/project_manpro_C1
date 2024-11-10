@@ -63,7 +63,7 @@
                     <h3 class="text-xl font-bold absolute top-4 left-6">Poster Acara</h3>
                     <div class="flex items-center justify-center h-36 mt-8">
                         <label for="file-upload-poster" class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-gray-600 flex flex-col items-center justify-center cursor-pointer w-full h-full">
-                            <svg id="upload-icon" class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg id="upload-icon-poster" class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
                             <span id="upload-text-poster">Tekan untuk unggah foto</span>
@@ -189,6 +189,7 @@
                 </div>
             </div>
         </div>
+        
 
         <!-- Akses Input Section -->
         <div class="bg-[#f6f1e3] h-72 p-6 rounded-lg">
@@ -411,38 +412,44 @@ function saveRapatChanges() {
         row.remove();
     }
 
-    // Handle file upload for Rundown Acara
+     // Handle file upload for Rundown Acara
     function handleFileUpload(event) {
         var fileInput = event.target;
         var fileNameSpan = document.getElementById('file-name');
         var uploadIcon = document.getElementById('upload-icon');
         var uploadText = document.getElementById('upload-text');
 
-        // Hide icon and text
-        uploadIcon.style.display = 'none';
-        uploadText.style.display = 'none';
+        // Check if file is selected
+        if (fileInput.files.length > 0) {
+            // Hide icon and text
+            uploadIcon.style.display = 'none';
+            uploadText.style.display = 'none';
 
-        // Show file name
-        var fileName = fileInput.files[0].name;
-        fileNameSpan.textContent = fileName;
-        fileNameSpan.style.display = 'block';
+            // Show file name
+            var fileName = fileInput.files[0].name;
+            fileNameSpan.textContent = fileName;
+            fileNameSpan.style.display = 'block';
+        }
     }
 
     // Handle file upload for Poster Acara
     function handleFileUploadPoster(event) {
         var fileInput = event.target;
         var fileNameSpan = document.getElementById('file-name-poster');
-        var uploadIcon = document.getElementById('upload-icon');
+        var uploadIcon = document.getElementById('upload-icon-poster');
         var uploadText = document.getElementById('upload-text-poster');
 
-        // Hide icon and text
-        uploadIcon.style.display = 'none';
-        uploadText.style.display = 'none';
+        // Check if file is selected
+        if (fileInput.files.length > 0) {
+            // Hide icon and text
+            uploadIcon.style.display = 'none';
+            uploadText.style.display = 'none';
 
-        // Show file name
-        var fileName = fileInput.files[0].name;
-        fileNameSpan.textContent = fileName;
-        fileNameSpan.style.display = 'block';
+            // Show file name
+            var fileName = fileInput.files[0].name;
+            fileNameSpan.textContent = fileName;
+            fileNameSpan.style.display = 'block';
+        }
     }
 </script>
 @endsection
