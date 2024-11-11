@@ -17,6 +17,7 @@ class AnnouncementSeeder extends Seeder
         DB::table('announcements')->insert([
             'admin_id' => 1,
             'upload_time' => Carbon::now()->format('Y-m-d H:i:s'),
+            'type' => 1,
             'description' => "Fusce metus erat, feugiat eu hendrerit aliquet, pulvinar eu urna. Curabitur eu sagittis diam. Maecenas faucibus scelerisque.",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -33,6 +34,7 @@ class AnnouncementSeeder extends Seeder
         DB::table('announcements')->insert([
             'admin_id' => 1,
             'upload_time' => Carbon::now()->format('Y-m-d H:i:s'),
+            'type' => 1,
             'description' => "Buat yang pengurus-pengurus aja",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')

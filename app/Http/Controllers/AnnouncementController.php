@@ -8,14 +8,18 @@ use App\Http\Requests\StoreAnnouncementRequest;
 use App\Http\Requests\UpdateAnnouncementRequest;
 use App\Models\Account;
 use App\Models\AnnouncementDetail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AnnouncementController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index() {}
+    public function index()
+    {
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -48,10 +52,10 @@ class AnnouncementController extends Controller
 
         for ($i = 1; $i <= $account_count; $i++) {
             // if ((Account::where('id', $i)->firstOrFail()->roles) == "Anggota") {
-                AnnouncementDetail::create([
-                    'announcement_id' => $created_announcement->id,
-                    'account_id' => $i
-                ]);
+            AnnouncementDetail::create([
+                'announcement_id' => $created_announcement->id,
+                'account_id' => $i
+            ]);
             // }
         }
 
@@ -61,15 +65,58 @@ class AnnouncementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Announcement $announcement)
+    public function showForPengurus(Announcement $announcement)
     {
-        //
+        $admin = Auth::guard('admin')->user();
+        $announcement = Announcement::get()->where('type', 1);
+        return view('admin.khusus_pengurus.pengumuman_pengurus')->with('announcement', $announcement)->with('admin', $admin);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Announcement $announcement) {}
+    public function post_pengumuman_pengurus(Request $request)
+    {
+        $admin = Auth::guard('admin')->user();
+        $data = $request->all();
+        $formField = Validator::make($data, [
+            'description' => 'required|string'
+        ]);
+        $validated_data = $formField->validate();
+        $data = [
+            'admin_id' => $admin->id,
+            'upload_time' => Carbon::now()->format('Y-m-d H:i:s'),
+            'description' => $validated_data['description'],
+            'type' => 1
+        ];
+
+        Announcement::create($data);
+        return redirect()->route('pengumuman_pengurus')->with('success', 'Pengumuman berhasil dibuat.');
+    }
+
+    public function update_pengumuman_pengurus(Request $request, $id)
+    {
+        $data = $request->all();
+        $formField = Validator::make($data, [
+            'description' => 'required|string'
+        ]);
+        $validated_data = $formField->validate();
+        $data = [
+            'upload_time' => Carbon::now()->format('Y-m-d H:i:s'),
+            'description' => $validated_data['description']
+        ];
+
+        $ann = Announcement::find($id);
+        $ann->update($data);
+        return redirect()->route('pengumuman_pengurus')->with('success', 'Pengumuman berhasil diupdate.');
+    }
+
+    public function delete_pengumuman_pengurus($id)
+    {
+        $ann = Announcement::find($id);
+        $ann->delete();
+        return redirect()->route('pengumuman_pengurus')->with('success', 'Pengumuman berhasil didelete.');
+    }
 
     /**
      * Update the specified resource in storage.

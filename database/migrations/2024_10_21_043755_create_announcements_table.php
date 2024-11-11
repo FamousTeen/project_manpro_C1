@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('admin_id')->unsigned();
+            $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')
                 ->references('id')
                 ->on('admins');
             $table->dateTime('upload_time');
             $table->boolean('status')->default(1);
+            $table->boolean('type')->default(0);
             $table->text('description');
             $table->timestamps();
         });
