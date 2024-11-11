@@ -67,33 +67,51 @@ class MisaController extends Controller
 
     public function store(Request $request)
     {
+        // Debugging to inspect input data, remove once confirmed.
+        // dd($request->all());
+
         $accounts = Account::all();
+        // Decode JSON strings from the selected options
+        $selectedOptions = json_decode($request->input('selectedOptions')[0], true);
+        $selectedOptions2 = json_decode($request->input('selectedOptions2')[0], true);
 
-        $selectedOptions = $request->input('selectedOptions');
-        $selectedOptions2 = $request->input('selectedOptions2');
+        // Validate that decoding was successful
+        if (!is_array($selectedOptions) || !is_array($selectedOptions2)) {
+            return back()->withErrors(['selectedOptions' => 'Invalid format for selected options.']);
+        }
 
-        $memberIdArray = explode(",", $selectedOptions[0]);
-        $rolesArray = explode(",", $selectedOptions2[0]);
+        // Now you have arrays of IDs and roles
+        $memberIdArray = $selectedOptions;
+        $rolesArray = $selectedOptions2;
 
         // Validate inputs
         $request->validate([
             'title' => 'required|string|max:255',
             'category' => 'required|string|max:255',
-            'activity_datetime' => 'required|date', // Date validation
-            'activity_time' => 'required|date_format:H:i', // Time validation
+            'activity_datetime' => 'required|date',
+            'activity_time' => 'required|date_format:H:i',
             'upload_datetime' => 'nullable|date',
             'upload_time' => 'nullable|date_format:H:i',
-
+            'deadline_datetime' => 'nullable|date',
             'customTugas' => 'array',
-            'customTugas.*' => 'nullable|string|max:255', // Optional custom tasks
+            'customTugas.*' => 'nullable|string|max:255',
         ]);
-        // Merge activity date and time into a single Carbon instance
-        $activityDateTime = Carbon::createFromFormat('Y-m-d H:i', $request->activity_datetime . ' ' . $request->activity_time);
+
+        // Merge activity date and time
+        try {
+            $activityDateTime = Carbon::createFromFormat('Y-m-d H:i', $request->activity_datetime . ' ' . $request->activity_time);
+        } catch (\Exception $e) {
+            return back()->withErrors(['activity_datetime' => 'Invalid activity date or time format.']);
+        }
 
         // Merge upload date and time, defaulting to current date/time if not provided
         $uploadDate = $request->input('upload_datetime') ?? Carbon::now()->format('Y-m-d');
         $uploadTime = $request->input('upload_time') ?? Carbon::now()->format('H:i');
-        $uploadDateTime = Carbon::createFromFormat('Y-m-d H:i', "$uploadDate $uploadTime");
+        try {
+            $uploadDateTime = Carbon::createFromFormat('Y-m-d H:i', "$uploadDate $uploadTime");
+        } catch (\Exception $e) {
+            return back()->withErrors(['upload_datetime' => 'Invalid upload date or time format.']);
+        }
 
         // Insert into the `Misa` table
         $misa = Misa::create([
@@ -101,28 +119,25 @@ class MisaController extends Controller
             'category' => $request->input('category'),
             'activity_datetime' => $activityDateTime->format('Y-m-d H:i'),
             'upload_datetime' => $uploadDateTime->format('Y-m-d H:i:s'),
+            'deadline_datetime' => $request->input('deadline_datetime') ?? null,
             'evaluation' => "",
             'status' => "Proses",
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
 
-        // If there are `anggota` entries, store each `Misa_Detail` record
-        for ($i = 0; $i < count($memberIdArray); $i++) {
-            // Get corresponding role and custom task (if any)
-            $role = $rolesArray[$i];
-            $account_id = $memberIdArray[$i];
+        // Store each `Misa_Detail` record
+        foreach ($memberIdArray as $index => $account_id) {
+            $role = $rolesArray[$index] ?? null;
 
-            // Prepare data for `Misa_Detail` entry
             $misaDetailData = [
-                'misa_id' => $misa->id, // Associate with created Misa
+                'misa_id' => $misa->id,
                 'account_id' => $account_id,
                 'roles' => $role,
                 'participation' => null,
                 'confirmation' => null
             ];
 
-            // Insert into the `Misa_Detail` table
             Misa_Detail::create($misaDetailData);
         }
 
@@ -133,35 +148,211 @@ class MisaController extends Controller
 
 
 
+
     /**
      * Display the specified resource.
      */
-    public function show(Misa $misa)
-    {
-        //
-    }
+    public function show(Misa $misa) {}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Misa $misa)
+    // Example Controller Method
+    public function edit($id)
     {
-        //
+        $misa = Misa::findOrFail($id); // Retrieve the misa record by its ID
+        $misaDetails = Misa_Detail::where('misa_id', $misa->id)->get(); // Fetch related misa_details
+        $accounts = Account::all(); // Fetch accounts for the dropdown if needed
+
+
+
+
+        return view('admin.misaDetails.edit', compact('misa', 'misaDetails', 'accounts')); // Pass data to the view
     }
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMisaRequest $request, Misa $misa)
+    public function update(Request $request, Misa $misa)
+
     {
-        //
+
+        // Validate input data for misa
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'activity_datetime' => 'required|date',
+            'upload_datetime' => 'required|date',
+            'evaluation' => 'required|string|max:1000',
+            'status' => 'required|string',
+            'misa_details' => 'array', // Expect an array for misa_details
+            'misa_details.*.account_id' => 'required|exists:accounts,id',
+            'misa_details.*.roles' => 'required|string|max:255',
+            'misa_details.*.participation' => 'nullable|boolean',
+            'misa_details.*.confirmation' => 'nullable|boolean',
+        ]);
+
+        // Update the main misa record
+        $misa->update([
+            'title' => $request->input('title'),
+            'category' => $request->input('category'),
+            'activity_datetime' => Carbon::parse($request->input('activity_datetime')),
+            'upload_datetime' => Carbon::parse($request->input('upload_datetime')),
+            'evaluation' => $request->input('evaluation'),
+            'status' => $request->input('status'),
+        ]);
+
+        // Update or create misa_details
+        if ($request->has('misa_details')) {
+            foreach ($request->input('misa_details') as $index => $detailData) {
+                Misa_Detail::updateOrCreate(
+                    [
+                        'misa_id' => $misa->id,
+                        'account_id' => $detailData['account_id'], // Correct account_id reference
+                    ],
+                    [
+                        'roles' => $detailData['roles'], // Correct roles reference
+                        'participation' => $detailData['participation'] ?? false, // Default to false if not set
+                        'confirmation' => $detailData['confirmation'] ?? false, // Default to false if not set
+                    ]
+                );
+            }
+        }
+
+        return redirect()->route('admin.jadwal_misa', $misa->id)
+            ->with('success', __('Misa and its details updated successfully.'));
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Misa $misa)
     {
-        //
+        $misa->update([
+            'active' => 0
+        ]);
+        return back()->with('success', 'Acara berhasil dihapus.');
+    }
+
+    public function showMisaList()
+    {
+        $user = null;
+    
+        if (Auth::guard('admin')->check()) {
+            $user = Auth::guard('admin')->user();
+            $misas = Misa::where('active', 1)->with('misaDetails')->get();
+    
+            // Loop through each misa to update its status
+            foreach ($misas as $misa) {
+                // Count the number of members with confirmation = 0
+                $pendingCount = $misa->misaDetails->where('confirmation', 0)->count();
+    
+                // Check if all members have confirmation = 1
+                $allConfirmed = $misa->misaDetails->every(function ($detail) {
+                    return $detail->confirmation == 1;
+                });
+    
+                // Ensure deadline is parsed correctly
+                $deadline = Carbon::parse($misa->deadline_datetime);
+    
+                // Check if deadline has passed
+                $deadlinePassed = Carbon::now()->greaterThan($deadline);
+    
+                // Debugging output to check the current time and deadline time
+                logger("Current time: " . Carbon::now());
+                logger("Misa deadline: " . $deadline);
+                logger("Deadline passed? " . ($deadlinePassed ? 'Yes' : 'No'));
+                logger("Pending count: " . $pendingCount);
+                logger("All confirmed? " . ($allConfirmed ? 'Yes' : 'No'));
+    
+                // Set the status based on conditions
+                if ($pendingCount > 0 && $deadlinePassed) {
+                    $status = "Tertunda"; // If deadline has passed and there are pending confirmations
+                } elseif ($pendingCount > 0 && !$deadlinePassed) {
+                    $status = "Proses"; // If still pending confirmations and deadline hasn't passed
+                } elseif ($allConfirmed) {
+                    $status = "Berhasil"; // If all members have confirmed, set status to 'Berhasil'
+                } else {
+                    $status = "Proses"; // Default status if still in progress
+                }
+    
+                // Update the misa status in the database
+                $misa->status = $status;
+                $misa->save();  // Save the updated status to the database
+            }
+    
+            return view('admin.jadwal_misa', [
+                'user' => $user,
+                'misas' => $misas
+            ]);
+        } elseif (Auth::guard('account')->check()) {
+            $user = Auth::guard('account')->user();
+    
+            $userData = Account::query()
+                ->where('email', $user->email)
+                ->where('password', $user->password)
+                ->firstOrFail();
+    
+            $misas = Misa::query()->where('active', 1)->with('misaDetails')->get();
+    
+            // Loop through each misa to update its status
+            foreach ($misas as $misa) {
+                $pendingCount = $misa->misaDetails->where('confirmation', 0)->count();
+    
+                $allConfirmed = $misa->misaDetails->every(function ($detail) {
+                    return $detail->confirmation == 1;
+                });
+    
+                // Ensure deadline is parsed correctly
+                $deadline = Carbon::parse($misa->deadline_datetime);
+    
+                // Check if deadline has passed
+                $deadlinePassed = Carbon::now()->greaterThan($deadline);
+    
+                // Set the status based on conditions
+                if ($pendingCount > 0 && $deadlinePassed) {
+                    $status = "Tertunda"; // If deadline has passed and there are pending confirmations
+                } elseif ($pendingCount > 0 && !$deadlinePassed) {
+                    $status = "Proses"; // If still pending confirmations and deadline hasn't passed
+                } elseif ($allConfirmed) {
+                    $status = "Berhasil"; // If all members have confirmed, set status to 'Berhasil'
+                } else {
+                    $status = "Proses"; // Default status if still in progress
+                }
+    
+                $misa->status = $status;
+                $misa->save(); // Update status in the database
+            }
+    
+            return view('anggota.jadwal', [
+                'misas' => $misas,
+                'user' => $userData
+            ]);
+        }
+    }
+    
+
+    public function addAnggota(Request $request, Misa $misa)
+    {
+        // Validate the input
+        $request->validate([
+            'account_id' => 'required|exists:accounts,id',
+            'role' => 'required|string',
+        ]);
+
+        // Determine the role, using custom task if applicable
+        $role = $request->input('role') === 'custom' ? $request->input('custom_task') : $request->input('role');
+
+        // Add the new detail to the misa
+        $misa->misaDetails()->create([
+            'account_id' => $request->input('account_id'),
+            'roles' => $role,
+            'confirmation' => 0, // default confirmation status
+        ]);
+
+        return redirect()->back()->with('success', 'Anggota berhasil ditambahkan');
     }
 }

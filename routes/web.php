@@ -122,6 +122,9 @@ Route::resource('misas', MisaController::class)->names([
     'update' => 'misas.update',
     'destroy' => 'misas.destroy',
 ]);
+Route::get('/jadwal_misa', [MisaController::class, 'showMisaList'])->name('admin.jadwal_misa');
+Route::post('/misas/{misa}/add-anggota', [MisaController::class, 'addAnggota'])->name('misas.addAnggota');
+
 
 // 'edit' => 'misas.edit',
 // 'update' => 'misas.update',
@@ -287,7 +290,3 @@ Route::get('/jadwal_pengurus', function () {
 
 Route::resource('meets', MeetController::class);
 
-//jadwal_misa (konfirmasi admin)
-Route::get('/jadwal_misa', function () {
-    return view('admin/jadwal_misa');
-})->name('jadwal_misa');

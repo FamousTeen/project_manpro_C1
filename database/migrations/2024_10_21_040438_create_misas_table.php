@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('category');
             $table->dateTime('activity_datetime');
             $table->dateTime('upload_datetime')->nullable();
+            $table->dateTime('deadline_datetime')->nullable();
             $table->string('evaluation');
             $table->string('status');
             $table->bigInteger('active')->default(1);
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

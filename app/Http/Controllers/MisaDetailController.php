@@ -75,20 +75,27 @@ class MisaDetailController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Misa_Detail $misa_Detail)
+    public function edit($id)
     {
-        //
+        $misaDetail = Misa_Detail::findOrFail($id);  // Retrieve specific Misa_Detail entry by ID
+        $accounts = Account::all();  // List of all accounts for dropdown selection
+        return view('misaDetails.edit', compact('misaDetail', 'accounts'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateMisa_DetailRequest $request, Misa_Detail $misa_Detail)
+    
+    public function update(Request $request, $id)
     {
-        //
+        $misaDetail = Misa_Detail::findOrFail($id);
+    
+        $validated = $request->validate([
+            'account_id' => 'required|exists:accounts,id',
+            'roles' => 'required|string',
+            'participation' => 'nullable|boolean',
+            'confirmation' => 'nullable|boolean',
+        ]);
+    
+        $misaDetail->update($validated);
+    
+        return redirect()->route('misaDetails.index')->with('success', 'Misa detail updated successfully');
     }
 
     public function updateEval(Request $request)
