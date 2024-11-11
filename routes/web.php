@@ -219,6 +219,7 @@ Route::post('/post_pengumuman_pengurus', [AnnouncementController::class, 'post_p
 
 Route::put('/update_pengumuman_pengurus/{id}', [AnnouncementController::class, 'update_pengumuman_pengurus'])->name('update_pengumuman_pengurus');
 
+Route::get('/delete_pengumuman_pengurus/{id}', [AnnouncementController::class, 'delete_pengumuman_pengurus'])->name('delete_pengumuman_pengurus');
 //end pengumuman
 
 Route::get('/events/search/{detail}', function (string $detail) {

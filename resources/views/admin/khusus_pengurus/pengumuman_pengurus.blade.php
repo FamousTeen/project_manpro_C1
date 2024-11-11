@@ -7,12 +7,12 @@
     Carbon::setLocale('id');
     ?>
     <!-- Colors:
-                                                        1. #740001 - merah gelap
-                                                        2. #ae0001 - merah terang
-                                                        3. #f6f1e3 - netral
-                                                        4. #002366 - biru terang
-                                                        5. #20252f - biru gelap
-                                                    -->
+                                                                                        1. #740001 - merah gelap
+                                                                                        2. #ae0001 - merah terang
+                                                                                        3. #f6f1e3 - netral
+                                                                                        4. #002366 - biru terang
+                                                                                        5. #20252f - biru gelap
+                                                                                    -->
 
     <div class="container mx-auto py-8 mt-8">
         <!-- Input Pengumuman Section -->
@@ -75,7 +75,7 @@
                         onclick="closeModal('modal{{ $ann->id }}')">
                         <div class="bg-white p-8 rounded-lg w-1/2 relative" onclick="event.stopPropagation()">
                             <button class="absolute top-8 right-8 text-red-600 hover:text-red-800"
-                                onclick="confirmDelete('modal{{ $ann->id }}')">
+                                onclick="confirmDelete('deleteConfirm{{ $ann->id }}')">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                                     width="24px" fill="#20252f">
                                     <path
@@ -90,9 +90,10 @@
                                 action="{{ route('update_pengumuman_pengurus', $ann->id) }}">
                                 @csrf
                                 @method('put')
-                                <textarea id="eventDesc" class="mt-4 w-full h-32 border border-gray-300 rounded p-2" placeholder="Masukkan pengumuman">{{ $ann->description }}</textarea>
+                                <textarea id="eventDesc" class="mt-4 w-full h-32 border border-gray-300 rounded p-2" placeholder="Masukkan pengumuman"
+                                    name="description">{{ $ann->description }}</textarea>
                                 <div class="mt-6 flex justify-end space-x-4">
-                                    <button class="bg-[#002366] text-white px-4 py-2 rounded" type="button">Simpan</button>
+                                    <button class="bg-[#002366] text-white px-4 py-2 rounded" type="submit">Simpan</button>
                                     <button type="button" class="bg-[#ae0001] text-white px-4 py-2 rounded"
                                         onclick="closeModal('modal{{ $ann->id }}')">Tutup</button>
                                 </div>
@@ -101,13 +102,14 @@
                     </div>
 
                     <!-- Confirmation Pop-Up for Deletion -->
-                    <div id="deleteConfirm"
+                    <div id="deleteConfirm{{ $ann->id }}"
                         class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
                         <div class="bg-white p-6 rounded-lg w-1/3">
                             <h3 class="text-lg font-semibold text-center mb-4">Apakah mau dihapus?</h3>
                             <div class="flex justify-center space-x-4">
-                                <button class="bg-red-600 text-white px-4 py-2 rounded" type="submit">Iya,
-                                    Dihapus</button>
+                                <a href="{{ route('delete_pengumuman_pengurus', $ann->id) }}"><button
+                                        class="bg-red-600 text-white px-4 py-2 rounded" type="submit">Iya,
+                                        Dihapus</button></a>
                                 <button class="bg-gray-600 text-white px-4 py-2 rounded"
                                     onclick="closeDeleteConfirm()">Tidak</button>
                             </div>
@@ -131,7 +133,7 @@
 
         function confirmDelete(modalId) {
             closeModal(modalId);
-            document.getElementById('deleteConfirm').classList.remove('hidden');
+            document.getElementById(modalId).classList.remove('hidden');
         }
 
         function closeDeleteConfirm() {

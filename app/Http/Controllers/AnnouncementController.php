@@ -94,9 +94,28 @@ class AnnouncementController extends Controller
         return redirect()->route('pengumuman_pengurus')->with('success', 'Pengumuman berhasil dibuat.');
     }
 
-    public function update_pengumuman_pengurus(Request $request)
+    public function update_pengumuman_pengurus(Request $request, $id)
     {
+        $data = $request->all();
+        $formField = Validator::make($data, [
+            'description' => 'required|string'
+        ]);
+        $validated_data = $formField->validate();
+        $data = [
+            'upload_time' => Carbon::now()->format('Y-m-d H:i:s'),
+            'description' => $validated_data['description']
+        ];
 
+        $ann = Announcement::find($id);
+        $ann->update($data);
+        return redirect()->route('pengumuman_pengurus')->with('success', 'Pengumuman berhasil diupdate.');
+    }
+
+    public function delete_pengumuman_pengurus($id)
+    {
+        $ann = Announcement::find($id);
+        $ann->delete();
+        return redirect()->route('pengumuman_pengurus')->with('success', 'Pengumuman berhasil didelete.');
     }
 
     /**
