@@ -211,11 +211,15 @@ Route::get('/input_event', function () {
     return view('admin/input_event');
 })->name('input_event');
 
-//KHUSUS PENGURUS
+/* KHUSUS PENGURUS */
 //pengumuman
-Route::get('/pengumuman_pengurus', function () {
-    return view('admin/khusus_pengurus/pengumuman_pengurus');
-})->name('pengumuman_pengurus');
+Route::get('/pengumuman_pengurus', [AnnouncementController::class, 'showForPengurus'])->name('pengumuman_pengurus');
+
+Route::post('/post_pengumuman_pengurus', [AnnouncementController::class, 'post_pengumuman_pengurus'])->name('post_pengumuman_pengurus');
+
+Route::put('/update_pengumuman_pengurus/{id}', [AnnouncementController::class, 'update_pengumuman_pengurus'])->name('update_pengumuman_pengurus');
+
+//end pengumuman
 
 Route::get('/events/search/{detail}', function (string $detail) {
     $events = Event::where('title', 'LIKE', '%' . $detail . '%')
@@ -248,7 +252,7 @@ Route::get('/events/search', function (string $detail) {
 Route::get('/trainings/searchs/all', function () {
     Log::info('trainings/searchs/all route accessed');
     $events2 = Training::where('status', 1)
-    ->with('event')->get();
+        ->with('event')->get();
 
 
     return TrainingResource::collection($events2);
@@ -256,12 +260,12 @@ Route::get('/trainings/searchs/all', function () {
 
 Route::get('/trainings/search/{detail}', function (string $detail) {
     $trainings = Training::with('event')
-    ->whereHas('event', function ($query) use ($detail) {
-        $query->where('title', 'LIKE', '%' . $detail . '%');
-    })
-    ->orWhere('training_date', 'LIKE', '%' . $detail . '%')
-    ->with('event')
-    ->get();
+        ->whereHas('event', function ($query) use ($detail) {
+            $query->where('title', 'LIKE', '%' . $detail . '%');
+        })
+        ->orWhere('training_date', 'LIKE', '%' . $detail . '%')
+        ->with('event')
+        ->get();
 
     Log::info(gettype($trainings));
 

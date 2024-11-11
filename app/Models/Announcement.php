@@ -18,6 +18,7 @@ class Announcement extends Model
         'datetime',
         'description',
         'upload_time',
+        'type',
         'status'
     ];
 
