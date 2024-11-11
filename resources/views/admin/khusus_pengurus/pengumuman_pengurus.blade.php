@@ -7,12 +7,12 @@
     Carbon::setLocale('id');
     ?>
     <!-- Colors:
-                                                                                        1. #740001 - merah gelap
-                                                                                        2. #ae0001 - merah terang
-                                                                                        3. #f6f1e3 - netral
-                                                                                        4. #002366 - biru terang
-                                                                                        5. #20252f - biru gelap
-                                                                                    -->
+                                                                                                        1. #740001 - merah gelap
+                                                                                                        2. #ae0001 - merah terang
+                                                                                                        3. #f6f1e3 - netral
+                                                                                                        4. #002366 - biru terang
+                                                                                                        5. #20252f - biru gelap
+                                                                                                    -->
 
     <div class="container mx-auto py-8 mt-8">
         <!-- Input Pengumuman Section -->
@@ -26,7 +26,8 @@
             <form class="max-w ml-4 mb-4 mt-8" method="POST" action="{{ route('post_pengumuman_pengurus') }}">
                 @csrf
                 <textarea class="w-full h-40 p-4 border border-[#002366] rounded-md focus:outline-none focus:ring-2 focus:ring-[#002366]"
-                    placeholder="Masukkan Deskripsi Pengumuman..." name="description"></textarea>
+                    placeholder="Masukkan Deskripsi Pengumuman..." oninput="readTextarea2()" id="eventDesc0"></textarea>
+                <input type="hidden" name="description" id="eventDesc00"></input>
                 <div class="text-right mt-4">
                     <button type="submit"
                         class="bg-[#002366] text-white py-2 px-4 rounded-md hover:bg-[#20252f] transition-all duration-300">Unggah</button>
@@ -64,7 +65,7 @@
                         </div>
                         <div class="mt-4">
                             <p class="text-gray-700 text-sm">
-                                {{ $ann->description }}
+                                {!! nl2br(e(urldecode($ann->description))) !!}
                             </p>
                         </div>
                     </div>
@@ -90,8 +91,10 @@
                                 action="{{ route('update_pengumuman_pengurus', $ann->id) }}">
                                 @csrf
                                 @method('put')
-                                <textarea id="eventDesc" class="mt-4 w-full h-32 border border-gray-300 rounded p-2" placeholder="Masukkan pengumuman"
-                                    name="description">{{ $ann->description }}</textarea>
+                                <textarea id="eventDesc{{ $ann->id }}" class="mt-4 w-full h-32 border border-gray-300 rounded p-2"
+                                    placeholder="Masukkan pengumuman" oninput="readTextarea({{ $ann->id }})">{!! urldecode($ann->description) !!}</textarea>
+                                <input type="hidden" name="description"
+                                    id="eventDesc{{ $ann->id }}{{ $ann->id }}"></input>
                                 <div class="mt-6 flex justify-end space-x-4">
                                     <button class="bg-[#002366] text-white px-4 py-2 rounded" type="submit">Simpan</button>
                                     <button type="button" class="bg-[#ae0001] text-white px-4 py-2 rounded"
@@ -138,6 +141,20 @@
 
         function closeDeleteConfirm() {
             document.getElementById('deleteConfirm').classList.add('hidden');
+        }
+
+        // buat edit pengumuman
+        function readTextarea(index) {
+            const textareaValue = document.getElementById(`eventDesc${index}`).value;
+            document.getElementById(`eventDesc${index}${index}`).value = encodeURIComponent(textareaValue);
+            console.log(document.getElementById(`eventDesc${index}${index}`).value);
+        }
+
+        // buat input pengumuman
+        function readTextarea2() {
+            const textareaValue = document.getElementById(`eventDesc0`).value;
+            document.getElementById(`eventDesc00`).value = encodeURIComponent(textareaValue);
+            console.log(document.getElementById(`eventDesc00`).value);
         }
     </script>
 @endsection
