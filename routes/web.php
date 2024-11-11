@@ -281,3 +281,8 @@ Route::get('/jadwal_pengurus', function () {
 
 
 Route::resource('meets', MeetController::class);
+
+//jadwal_misa (konfirmasi admin)
+Route::get('/jadwal_misa', function () {
+    return view('admin/jadwal_misa');
+})->name('jadwal_misa');
