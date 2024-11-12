@@ -28,7 +28,7 @@
   <div class="grid grid-cols-1 md:grid-cols-3 justify-center mx-32 mt-5 mb-4">
     @if (session()->has('success'))
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-        {{ session('success')}}
+      {{ session('success')}}
     </div>
     @endif
 
@@ -72,7 +72,6 @@
       <!-- Javascript buat countdown -->
       <script>
         let dest = new Date("{{Carbon::parse($misa->misa->upload_datetime)->addDays(3)->translatedFormat('M j, Y H:i:s')}}").getTime();
-        console.log(dest);
         let x = setInterval(function() {
           let now = new Date().getTime();
           let diff = dest - now;

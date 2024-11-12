@@ -103,7 +103,7 @@ $misas = App\Models\Misa::all();
                 </div>
             </div>
             @endforeach
-            
+
             <!-- Modal with two sections (Jadwal Misa and Anggota) -->
             <div id="modalJadwal" class="fixed z-10 inset-0 overflow-y-auto hidden">
                 <div class="flex items-center justify-center min-h-screen">
@@ -307,86 +307,63 @@ $misas = App\Models\Misa::all();
                     const customTugasField = document.getElementById('customTugasField');
                     const tableBody = document.getElementById('anggotaTableBody');
 
-                    // Loop through all selected options in the namaSelect
-                    for (const option of namaSelect.selectedOptions) {
-                        const namaValue = option.value;
+                    let tugas = tugasSelect.value;
+                    if (tugas === 'custom') {
+                        tugas = customTugasField.value;
+                    }
+
+                    // If there's a valid selection
+                    if (namaSelect.value && tugas) {
+                        const option = namaSelect.options[namaSelect.selectedIndex];
                         const namaDetails = option.getAttribute('data-details');
-                        let tugas = tugasSelect.value;
+                        const [nameOnly, wilayah, dutyCount] = namaDetails.split(' - ');
 
-                        // If 'custom' is selected, use the value from the custom field
-                        if (tugas === 'custom') {
-                            tugas = customTugasField.value;
-                        }
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+            <td class="border border-gray-300 px-1 py-1">${tableBody.children.length + 1}.</td>
+            <td class="border border-gray-300 px-6 py-1">${nameOnly}</td>
+            <td class="border border-gray-300 px-1 py-1">${wilayah}</td>
+            <td class="border border-gray-300 px-4 py-1">${tugas}</td>
+            <td class="border border-gray-300 py-1">
+                <button type="button" class="delete-btn">Delete</button>
+            </td>
+        `;
 
-                        if (namaValue && (tugas || tugasSelect.value !== 'custom')) {
-                            // Extract the name, region, and duty count from data-details
-                            const [nameOnly, wilayah, dutyCount] = namaDetails.split(' - ');
+                        tableBody.appendChild(row);
 
-                            // Check if the name already exists in the table
-                            let nameExists = false;
-                            for (let row of tableBody.rows) {
-                                const nameCell = row.cells[1]; // Assuming name is in the second cell
-                                if (nameCell.textContent.trim() === nameOnly) {
-                                    nameExists = true;
-                                    break;
-                                }
-                            }
+                        // Disable the selected option in the dropdown
+                        option.disabled = true;
 
-                            if (nameExists) {
-                                alert(`The name "${nameOnly}" already exists in the table.`);
-                                continue; // Skip this iteration if the name exists
-                            }
+                        // Add member ID and role to the arrays
+                        selectedOptionsArray.push(namaSelect.value);
+                        selectedOptionsArray2.push(tugas);
 
-                            // Add a new row to the table
-                            const row = document.createElement('tr');
-                            row.style.backgroundColor = 'white';
+                        // Update the hidden inputs
+                        selectedOptionsInput.value = JSON.stringify(selectedOptionsArray);
+                        selectedOptionsInput2.value = JSON.stringify(selectedOptionsArray2);
 
-                            row.innerHTML = `
-                <td class="border border-gray-300 px-1 py-1">${tableBody.children.length + 1}.</td>
-                <td name="anggota[]" class="border border-gray-300 px-6 py-1">${nameOnly}</td>
-                <td class="border border-gray-300 px-1 py-1">${wilayah}</td>
-                <td name="roles[]" class="border border-gray-300 px-4 py-1">${tugas}</td>
-                <td name="customTugas" class="border border-gray-300 py-1">
-                    <button type="button" class="delete-btn w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-1 bg-[#ae0001] text-base font-medium text-white hover:bg-[#740001] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        Delete
-                    </button>
-                </td>
-            `;
-
-                            tableBody.appendChild(row);
-
-                            // Disable the selected option in the dropdown
-                            option.disabled = true;
-
-                            // Add event listener for delete button
-                            row.querySelector('.delete-btn').addEventListener('click', function() {
-                                // Enable the option in the dropdown again when the row is deleted
-                                option.disabled = false;
-
-                                // Remove the row from the table
-                                tableBody.removeChild(row);
-                                updateRowNumbers(); // Update row numbers
-                            });
-                        } else {
-                            alert('Please fill out all fields.');
-                        }
+                        // Add delete button functionality
+                        row.querySelector('.delete-btn').addEventListener('click', function() {
+                            option.disabled = false;
+                            tableBody.removeChild(row);
+                            updateRowNumbers();
+                        });
+                    } else {
+                        alert('Please fill out all fields.');
                     }
 
-                    // Clear the form fields after adding multiple entries
-                    const anggotaForm = document.getElementById('anggotaForm');
-                    if (anggotaForm) {
-                        anggotaForm.reset();
-                    }
-                    document.getElementById('customTugasInput').classList.add('hidden'); // Hide custom field again
+                    // Reset form fields and hide custom input
+                    document.getElementById('anggotaForm').reset();
+                    document.getElementById('customTugasInput').classList.add('hidden');
                 }
 
-                // Function to update row numbers after deletion
                 function updateRowNumbers() {
                     const rows = document.querySelectorAll('#anggotaTableBody tr');
                     rows.forEach((row, index) => {
                         row.cells[0].textContent = `${index + 1}.`;
                     });
                 }
+
 
                 // Function to delete a row from the table
                 function deleteRow(button, name, wilayah, dutyCount) {

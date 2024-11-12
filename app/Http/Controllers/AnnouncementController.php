@@ -26,8 +26,8 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        $user = Auth::guard('admin')->user();
-        return view('admin/post_pengumuman', compact('user'));
+        $announcement = Announcement::get()->where('type', 0)->where('status', 1);
+        return view('admin.post_pengumuman')->with('announcements', $announcement);
     }
 
     /**
@@ -67,9 +67,8 @@ class AnnouncementController extends Controller
      */
     public function showForPengurus(Announcement $announcement)
     {
-        $admin = Auth::guard('admin')->user();
-        $announcement = Announcement::get()->where('type', 1);
-        return view('admin.khusus_pengurus.pengumuman_pengurus')->with('announcement', $announcement)->with('admin', $admin);
+        $announcement = Announcement::get()->where('type', 1)->where('status', 1);
+        return view('admin.khusus_pengurus.pengumuman_pengurus')->with('announcement', $announcement);
     }
 
     /**
@@ -114,7 +113,10 @@ class AnnouncementController extends Controller
     public function delete_pengumuman_pengurus($id)
     {
         $ann = Announcement::find($id);
-        $ann->delete();
+        $data = [
+            'status' => 0
+        ];
+        $ann->update($data);
         return redirect()->route('pengumuman_pengurus')->with('success', 'Pengumuman berhasil didelete.');
     }
 
