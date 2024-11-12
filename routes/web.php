@@ -291,3 +291,8 @@ Route::resource('meets', MeetController::class);
 Route::get('/jadwal_misa', function () {
     return view('admin/jadwal_misa');
 })->name('jadwal_misa');
+
+//list evaluasi ( admin)
+Route::get('/list_evaluasi', function () {
+    return view('admin/list_evaluasi');
+})->name('list_evaluasi');

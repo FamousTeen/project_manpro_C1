@@ -158,7 +158,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
+                <a href="{{ route('list_evaluasi') }}" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
                     <img src="../../../asset/evaluasi.png" alt="Evaluasi Icon" class="h-6 w-6 mr-4">
                     Evaluasi
                 </a>
@@ -167,7 +167,6 @@
     </div>
 
 
-    <!-- Dark Overlay (when sidebar is open) -->
     <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden z-10"></div>
 
     @yield('content')
