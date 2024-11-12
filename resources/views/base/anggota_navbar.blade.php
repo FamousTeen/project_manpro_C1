@@ -124,6 +124,7 @@
                     <li><a href="{{ route('jadwal_anggota') }}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal
                             Tugasku</a></li>
                     <li><a href="{{ route('konfirmasi')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Konfirmasi Tugas</a></li>
+                    <li><a href="{{ route('jadwal_pelatihan')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Pelatihan</a></li>
                 </ul>
             </li>
             <li>

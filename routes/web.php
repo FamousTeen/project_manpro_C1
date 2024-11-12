@@ -211,7 +211,10 @@ Route::get('/input_foto', function () {
 
 //input event
 Route::get('/input_event', function () {
-    return view('admin/input_event');
+    $accounts = Account::all();
+    return view('admin/input_event', [
+        'accounts' => $accounts
+    ]);
 })->name('input_event');
 
 /* KHUSUS PENGURUS */
@@ -299,3 +302,8 @@ Route::get('/jadwal_misa', function () {
 Route::get('/list_evaluasi', function () {
     return view('admin/list_evaluasi');
 })->name('list_evaluasi');
+
+//jadwal pelatihan(anggota)
+Route::get('jadwal_pelatihan', function () {
+    return view('anggota/jadwal_pelatihan');
+})->name('jadwal_pelatihan');
