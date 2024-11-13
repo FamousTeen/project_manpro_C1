@@ -1,6 +1,11 @@
 @extends('base/admin_navbar')
 
 @section('content')
+<?php
+use Carbon\Carbon;
+
+Carbon::setLocale('id');
+?>
     <div class="container-fluid m-12 mt-24">
         <div class="grid grid-cols-12">
             <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
@@ -27,8 +32,9 @@
 
     <!-- Jadwal Misa Section -->
     <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-16 m-12 mt-10">
+        @foreach ($misa as $m)
         <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px] mx-auto resize-y">
-            <div class="flex justify-end text-sm text-gray-500" onclick="openModal('modal1')">
+            <div class="flex justify-end text-sm text-gray-500" onclick="openModal('modal{{$m->id}}')">
                 <a class="mr-1">detail</a>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-3 mt-1">
@@ -38,7 +44,7 @@
             </div>
             <div class="flex justify-between items-center">
                 <p class="font-bold" style="font-size: 18px">
-                    Jumat, 1 Januari 2024
+                    {{ Carbon::parse($m->misa->activity_datetime)->translatedFormat('l, j F Y') }}
                 </p>
             </div>
             <div class="mt-2">
@@ -107,6 +113,7 @@
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 
     <script>

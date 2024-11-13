@@ -75,6 +75,13 @@ class MisaDetailController extends Controller
         ]);
     }
 
+    /* SHOW EVALUATION FOR ADMIN */
+    public function showEvalAdmin() {
+        $misa = Misa::all();
+        return view('admin.list_evaluasi')->with('misa', $misa);
+    }
+
+
     public function edit($id)
     {
         $misaDetail = Misa_Detail::findOrFail($id);  // Retrieve specific Misa_Detail entry by ID

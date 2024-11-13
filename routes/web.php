@@ -299,9 +299,7 @@ Route::get('/jadwal_misa', function () {
 })->name('jadwal_misa');
 
 //list evaluasi ( admin)
-Route::get('/list_evaluasi', function () {
-    return view('admin/list_evaluasi');
-})->name('list_evaluasi');
+Route::get('/list_evaluasi', [MisaDetailController::class, 'showEvalAdmin'])->name('list_evaluasi');
 
 //jadwal pelatihan(anggota)
 Route::get('jadwal_pelatihan', function () {
