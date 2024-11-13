@@ -52,7 +52,7 @@
         $query->where('event_id', $event_id)->where('roles', 'Ketua');
         })->firstOrFail();
         @endphp
-        <div class="my-6 rounded-xl py-6 pe-6 ps-12 ms-5 flex bg-[#C4CDC1]">
+        <div class="my-6 rounded-xl py-6 pe-6 ps-12 ms-5 flex bg-[#f6f1e3]">
             <img src="{{asset('images/contoh_poster.jpg')}}" class="w-auto sm:w-48 md:w-64" alt="">
             <div class="flex justify-between w-full">
                 <div class="flex flex-col ms-10">
@@ -67,12 +67,12 @@
                 </div>
                 <div class="flex items-end">
                     <!-- Edit button -->
-                    <a href="{{route('events.edit', ['event' => $event])}}"><button type="button" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button></a>
+                    <a href="{{route('events.edit', ['event' => $event])}}"><button type="button" class="text-white bg-[#002366] hover:bg-[#20252f] font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Edit</button></a>
                     <!-- Delete button -->
                     <form class="mb-0" action="{{route('events.destroy', ['event' => $event])}}" method="post">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                            <button type="submit" class="text-white bg-[#ae0001] hover:bg-[#740001] font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
                                 Delete</button>
                     </form>
                 </div>

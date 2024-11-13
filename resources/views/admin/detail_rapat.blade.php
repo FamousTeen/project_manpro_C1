@@ -28,13 +28,13 @@
     </div>
 
     @if (session('success'))
-    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
         role="alert">
         {{ session('success')}}
     </div>
     @endif
 
-    <div class="my-6 rounded-xl py-6 pe-6 ps-12 flex justify-between items-start bg-[#C4CDC1]">
+    <div class="my-6 rounded-xl py-6 pe-6 ps-12 flex justify-between items-start bg-[#f6f1e3]">
         <div>   
             <p class="text-md">
             {!! nl2br(e(urldecode($meet->notulen))) !!}

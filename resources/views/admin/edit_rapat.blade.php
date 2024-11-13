@@ -27,7 +27,7 @@
         <p>{{ Carbon::parse($meet->date)->translatedFormat('l, d/m/Y') }}</p>
     </div>
 
-    <form action="{{route('meets.update', ['meet' => $meet])}}" method="post" class="my-6 rounded-xl pb-6 pe-6 ps-12 bg-[#C4CDC1]">
+    <form action="{{route('meets.update', ['meet' => $meet])}}" method="post" class="my-6 rounded-xl pb-6 pe-6 ps-12 bg-[#f6f1e3]">
         @csrf
         @method('put')
         <div class="w-full">
@@ -35,7 +35,7 @@
             <input type="hidden" name="meetNotulen" id="meetNotulen1"></input>
         </div>
         <div class=" flex col-span-2 mt-4 items-start justify-center">
-                <button type="submit" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
+                <button type="submit" class="text-white bg-[#002366] hover:bg-[#20252f] font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
             </div>
     </form>
 </div>
