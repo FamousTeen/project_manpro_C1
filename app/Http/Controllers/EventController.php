@@ -177,8 +177,6 @@ class EventController extends Controller
         $selectedAdmin = json_decode($request->input('selectedAdmin')[0], true);
         $selectedRapat = json_decode($request->input('selectedRapat')[0], true);
 
-        $array_event_details = [];
-
         foreach ($selectedCommittee as $index => $account_id) {
             if ($selectedCommittee[$index] == null) {
                 continue;
@@ -191,10 +189,10 @@ class EventController extends Controller
                 'roles' => $division,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]);
-
-            array_push($array_event_details, $event_detailTemp);   
+            ]); 
         }
+
+        $array_event_details = EventDetail::where('event_id', $event->id)->get();
 
         $index_temp = 0;
 
