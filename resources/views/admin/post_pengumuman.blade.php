@@ -133,7 +133,7 @@
                                         Dihapus</button>
                                 </form>
                                 <button class="bg-gray-600 text-white px-4 py-2 rounded"
-                                    onclick="closeDeleteConfirm()">Tidak</button>
+                                    onclick="closeDeleteConfirm('deleteConfirm{{ $announcement->id }}')">Tidak</button>
                             </div>
                         </div>
                     </div>
@@ -172,8 +172,8 @@
         }
 
         // Close delete confirmation
-        function closeDeleteConfirm() {
-            document.getElementById('deleteConfirm').classList.add('hidden');
+        function closeDeleteConfirm(id) {
+            document.getElementById(id).classList.add('hidden');
         }
 
         // Delete announcement function

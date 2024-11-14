@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin;
 use App\Models\Event;
 use App\Models\Account;
 use App\Models\Training;
@@ -15,12 +16,12 @@ use App\Http\Resources\TrainingResource;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
 use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\AnnouncementController;
-use App\Http\Controllers\TemplateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -211,9 +212,14 @@ Route::get('/input_foto', function () {
 
 //input event
 Route::get('/input_event', function () {
+    $user = Auth::guard('admin')->user();
     $accounts = Account::all();
+
+    $admins = Admin::where('id', '!=', $user->id)->get();
+    
     return view('admin/input_event', [
-        'accounts' => $accounts
+        'accounts' => $accounts,
+        'admins' => $admins
     ]);
 })->name('input_event');
 

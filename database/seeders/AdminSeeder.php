@@ -36,5 +36,16 @@ class AdminSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+        DB::table('admins')->insert([
+            'name' => "Adi",
+            'email' => "adi@gmail.com",
+            'password' => bcrypt('123'),
+            'photo' => 'default.png',
+            'address' => '200 Wise Street',
+            'birthdate' => '27-11-1999',
+            'region' => 'A',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }

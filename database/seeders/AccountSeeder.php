@@ -91,5 +91,29 @@ class AccountSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
+        DB::table('accounts')->insert([
+            'name' => "Warren",
+            'email' => "warren@gmail.com",
+            'password' => bcrypt('123'),
+            'photo' => 'default.jpg',
+            'address' => '1000 Main Street',
+            'birth_place_date' => 'Surabaya, 20-5-1995',
+            'region' => 'E',
+            'roles' => "Anggota",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('accounts')->insert([
+            'name' => "Richard",
+            'email' => "richard@gmail.com",
+            'password' => bcrypt('123'),
+            'photo' => 'default.jpg',
+            'address' => '1050 Main Street',
+            'birth_place_date' => 'Surabaya, 20-5-1995',
+            'region' => 'F',
+            'roles' => "Pengurus",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }

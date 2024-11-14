@@ -11,8 +11,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class EventDetail extends Pivot
 {
     use HasFactory;
+    protected $primaryKey = 'id';
+    public $incrementing = true;
 
     protected $table = 'event_details';
+
+    protected $fillable = [
+        'event_id',
+        'account_id',
+        'roles'
+    ];
 
     public function event(): BelongsTo {
         return $this->belongsTo(Event::class);

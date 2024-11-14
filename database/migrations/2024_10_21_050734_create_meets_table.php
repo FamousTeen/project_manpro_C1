@@ -19,6 +19,7 @@ return new class extends Migration
                 ->on('events');
             $table->string('title');
             $table->dateTime('date');
+            $table->string('place');
             $table->boolean('status')->default(1);
             $table->string('notulen');
             $table->timestamps();

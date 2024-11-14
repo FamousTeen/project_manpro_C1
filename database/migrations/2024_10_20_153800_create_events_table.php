@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('poster');
             $table->boolean('status')->default(1);
             $table->string('rundown_image');
-            $table->string('evaluation');
+            $table->string('evaluation')->nullable();
             $table->timestamps();
         });
     }

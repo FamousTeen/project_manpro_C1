@@ -11,9 +11,11 @@ class Meet extends Model
     use HasFactory;
 
     protected $fillable = [
+        'event_id',
         'title',
         'date',
-        'notulen'
+        'notulen',
+        'place'
     ];
 
     public function event(): BelongsTo {

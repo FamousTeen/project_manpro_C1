@@ -19,6 +19,9 @@ class Event extends Model
         'contact_person',
         'place',
         'phone_number',
+        'description',
+        'poster',
+        'rundown_image',
         'status'
     ];
 

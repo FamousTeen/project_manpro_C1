@@ -114,7 +114,7 @@
                                         class="bg-red-600 text-white px-4 py-2 rounded" type="submit">Iya,
                                         Dihapus</button></a>
                                 <button class="bg-gray-600 text-white px-4 py-2 rounded"
-                                    onclick="closeDeleteConfirm()">Tidak</button>
+                                    onclick="closeDeleteConfirm('deleteConfirm{{ $ann->id }}')">Tidak</button>
                             </div>
                         </div>
                     </div>
@@ -139,8 +139,8 @@
             document.getElementById(modalId).classList.remove('hidden');
         }
 
-        function closeDeleteConfirm() {
-            document.getElementById('deleteConfirm').classList.add('hidden');
+        function closeDeleteConfirm(id) {
+            document.getElementById(id).classList.add('hidden');
         }
 
         // buat edit pengumuman

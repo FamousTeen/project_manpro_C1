@@ -14,6 +14,11 @@ class EventPermission extends Pivot
 
     protected $table = 'event_permissions';
 
+    protected $fillable = [
+        'event_detail_id',
+        'admin_id'
+    ];
+
     public function eventDetail(): BelongsTo {
         return $this->belongsTo(EventDetail::class);
     }
