@@ -22,6 +22,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
 use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\AnnouncementController;
+use App\Models\Misa;
 
 /*
 |--------------------------------------------------------------------------
@@ -301,7 +302,8 @@ Route::resource('meets', MeetController::class);
 
 //jadwal_misa (konfirmasi admin)
 Route::get('/jadwal_misa', function () {
-    return view('admin/jadwal_misa');
+    $misas = Misa::where('active', 1)->get();
+    return view('admin/jadwal_misa',compact('misas'));
 })->name('jadwal_misa');
 
 //list evaluasi ( admin)
