@@ -247,6 +247,7 @@ $misas = App\Models\Misa::all();
             <script>
                 let selectedOptionsArray = [];
                 let selectedOptionsArray2 = [];
+
                 // Function to open the modal
                 function openModal(modalId) {
                     document.getElementById(modalId).classList.remove('hidden');
@@ -272,17 +273,11 @@ $misas = App\Models\Misa::all();
                 }
 
                 document.addEventListener("DOMContentLoaded", function() {
-
                     const addToArrayButton = document.getElementById("addToArrayButton");
-
-                    // Initialize an array to store selected options
-
 
                     // Add event listener to "Add to Array" button
                     addToArrayButton.addEventListener("click", function() {
-
-
-                        // Update the hidden input field with the array as a JSON string
+                        const selectedOptionsInput = document.getElementById("selectedOptionsInput");
                         selectedOptionsInput.value = JSON.stringify(selectedOptionsArray);
                     });
                 });
@@ -295,8 +290,6 @@ $misas = App\Models\Misa::all();
                         customInput.classList.add('hidden');
                     }
                 });
-                // Define an array to store the table data
-                const anggotaData = [];
 
                 function addAnggota() {
                     const selectedOptionsInput = document.getElementById("selectedOptionsInput");
@@ -320,14 +313,14 @@ $misas = App\Models\Misa::all();
 
                         const row = document.createElement('tr');
                         row.innerHTML = `
-            <td class="border border-gray-300 px-1 py-1">${tableBody.children.length + 1}.</td>
-            <td class="border border-gray-300 px-6 py-1">${nameOnly}</td>
-            <td class="border border-gray-300 px-1 py-1">${wilayah}</td>
-            <td class="border border-gray-300 px-4 py-1">${tugas}</td>
-            <td class="border border-gray-300 py-1">
-                <button type="button" class="delete-btn">Delete</button>
-            </td>
-        `;
+                <td class="border border-gray-300 px-1 py-1">${tableBody.children.length + 1}.</td>
+                <td class="border border-gray-300 px-6 py-1">${nameOnly}</td>
+                <td class="border border-gray-300 px-1 py-1">${wilayah}</td>
+                <td class="border border-gray-300 px-4 py-1">${tugas}</td>
+                <td class="border border-gray-300 py-1">
+                    <button type="button" class="delete-btn">Delete</button>
+                </td>
+            `;
 
                         tableBody.appendChild(row);
 
@@ -344,8 +337,24 @@ $misas = App\Models\Misa::all();
 
                         // Add delete button functionality
                         row.querySelector('.delete-btn').addEventListener('click', function() {
+                            // Enable the previously selected option in the dropdown
                             option.disabled = false;
+
+                            // Remove the row from the table
                             tableBody.removeChild(row);
+
+                            // Find and remove the corresponding value in selectedOptionsArray
+                            const index = selectedOptionsArray.indexOf(namaSelect.value);
+                            if (index > -1) {
+                                selectedOptionsArray.splice(index, 1);
+                                selectedOptionsArray2.splice(index, 1); // Remove the corresponding tugas entry
+                            }
+
+                            // Update the hidden inputs
+                            selectedOptionsInput.value = JSON.stringify(selectedOptionsArray);
+                            selectedOptionsInput2.value = JSON.stringify(selectedOptionsArray2);
+
+                            // Update the row numbers
                             updateRowNumbers();
                         });
                     } else {
@@ -363,24 +372,6 @@ $misas = App\Models\Misa::all();
                         row.cells[0].textContent = `${index + 1}.`;
                     });
                 }
-
-
-                // Function to delete a row from the table
-                function deleteRow(button, name, wilayah, dutyCount) {
-                    const row = button.closest('tr'); // Get the row of the button
-                    const tableBody = document.getElementById('anggotaTableBody');
-
-                    // Construct the full value of the option in the dropdown
-                    const fullValue = `${name} - ${wilayah} - ${dutyCount}`;
-
-                    // Remove the row from the table
-                    tableBody.removeChild(row);
-
-                    // Enable the option again in the dropdown
-                    const selectOption = document.querySelector(`#namaAnggota option[value="${fullValue}"]`);
-                    if (selectOption) {
-                        selectOption.disabled = false; // Enable the option
-                    }
-                }
             </script>
+
             @endsection
