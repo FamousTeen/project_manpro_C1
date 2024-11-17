@@ -30,6 +30,10 @@
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
       {{ session('success')}}
     </div>
+    @elseif (session()->has('decline'))
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+      {{ session('decline')}}
+    </div>
     @endif
 
     <div class="md:col-span-3 text-left">
@@ -160,7 +164,7 @@
       {{-- Button Konfirmasi --}}
       <div class="mt-6">
         <div class="flex flex-row justify-center gap-6 mt-6">
-          <a href="{{ route('update_konfirmasi', ['id' => $misa->id, 'answer' => true])}}" class="flex items-center justify-center rounded-md bg-[#002366] border border-[#002366] p-2 transition-all shadow-sm hover:bg-[#00112e] hover:shadow-lg focus:bg-[#00112e] focus:shadow-none active:bg-green-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+          <a href="{{ route('update_konfirmasi', ['id' => $misa->id, 'answer' => 1])}}" class="flex items-center justify-center rounded-md bg-[#002366] border border-[#002366] p-2 transition-all shadow-sm hover:bg-[#00112e] hover:shadow-lg focus:bg-[#00112e] focus:shadow-none active:bg-green-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
               <polyline points="20 6 9 17 4 12" />
             </svg>

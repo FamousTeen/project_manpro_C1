@@ -136,7 +136,12 @@ class MisaDetailController extends Controller
             'confirmation' => $answer
         ]);
 
-        return redirect()->route('konfirmasi')->with('success', 'Konfirmasi kehadiran berhasil.');
+        if($answer == true){
+            return redirect()->route('konfirmasi')->with('success', 'Konfirmasi kehadiran berhasil.');
+        }
+        else {
+            return redirect()->route('konfirmasi')->with('decline', 'Konfirmasi kehadiran ditolak.');
+        }
     }
 
     /**

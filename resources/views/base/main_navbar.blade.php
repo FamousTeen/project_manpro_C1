@@ -34,7 +34,7 @@
             <!-- Logo Section -->
             <a href="#" class="flex items-center">
                 <img src="../../../images/LOGO_MISDINAR.png" alt="Logo" class="h-12 w-12 mr-2 ml-4">
-                <span class="font-bold text-md xl:text-xl hidden md:inline">MISDINAR ST. TARSISIUS GEREJA KATOLIK ROH KUDUS</span>
+                <span class="font-bold text-md lg:text-xl hidden md:inline">MISDINAR ST. TARSISIUS GEREJA KATOLIK ROH KUDUS</span>
             </a>
 
             <!-- Navbar Buttons -->
