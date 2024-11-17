@@ -34,16 +34,16 @@
             <!-- Logo Section -->
             <a href="#" class="flex items-center">
                 <img src="../../../images/LOGO_MISDINAR.png" alt="Logo" class="h-12 w-12 mr-2 ml-4">
-                <span class="font-bold text-xl">MISDINAR ST. TARSISIUS GEREJA KATOLIK ROH KUDUS</span>
+                <span class="font-bold text-md xl:text-xl hidden md:inline">MISDINAR ST. TARSISIUS GEREJA KATOLIK ROH KUDUS</span>
             </a>
 
             <!-- Navbar Buttons -->
-            <div class="flex space-x-8 items-center mr-4">
-                <a href="#" class="hover:text-[#ae0001] transition duration-300">Home</a>
-                <a href="#" class="hover:text-[#ae0001] transition duration-300">About Us</a>
-                <a href="#" class="hover:text-[#ae0001] transition duration-300">Contact</a>
+            <div class="flex space-x-8 items-center ms-5 mr-4">
+                <a href="#" class="hover:text-[#ae0001] transition duration-300 text-sm md:text-md lg:text-lg">Home</a>
+                <a href="#" class="hover:text-[#ae0001] transition duration-300 text-sm md:text-md lg:text-lg">About Us</a>
+                <a href="#" class="hover:text-[#ae0001] transition duration-300 text-sm md:text-md lg:text-lg">Contact</a>
                 <a href="{{ route('start_login') }}"
-                    class="bg-white text-[#20252f] py-2 px-6 rounded-full hover:bg-[#ae0001] hover:text-white transition duration-300">
+                    class="bg-white text-[#20252f] text-sm md:text-md lg:text-lg xl:text-xl py-2 px-6 rounded-full hover:bg-[#ae0001] hover:text-white transition duration-300">
                     Login
                 </a>
             </div>
