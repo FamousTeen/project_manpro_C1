@@ -30,7 +30,7 @@ Carbon::setLocale('id');
         <p class="text-gray-600">Lokasi: {{$meet->place}}</p>
         <p class="text-gray-600">Catatan: {!! nl2br(e(urldecode($meet->notulen))) !!}</p>
         <div class="flex justify-end pt-4">
-            <button class="editButton bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg" data-nama="{{$meet->title}}" data-tanggal="{{ Carbon::parse($meet->date)->translatedFormat('Y-m-j') }}" data-lokasi="{{$meet->place}}" data-catatan="{!! nl2br(e(urldecode($meet->notulen))) !!}">Edit</button>
+            <button id="" class="editButton bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg" data-nama="{{$meet->title}}" data-tanggal="{{ Carbon::parse($meet->date)->translatedFormat('Y-m-j') }}" data-lokasi="{{$meet->place}}" data-catatan="{!! nl2br(e(urldecode($meet->notulen))) !!}">Edit</button>
             <button class="deleteButton bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg ml-2" data-nama="Rapat Evaluasi">Delete</button>
         </div>
     </div>

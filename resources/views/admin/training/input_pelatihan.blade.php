@@ -15,8 +15,7 @@
         <h2 class="ml-4 p-6 mt-4 text-2xl font-semibold">Input Jadwal Pelatihan</h2>
     </div>
     
-
-    <div class="bg-[#f6f1e3] p-6 mx-12 rounded-lg">
+    <div class="bg-[#f6f1e3] p-6 mx-12 rounded-lg mb-8">
         <form method="post" action="{{route('events.store')}}" class="grid grid-cols-1 gap-4" enctype="multipart/form-data">
             @csrf
             <div>
@@ -59,4 +58,12 @@
                 <textarea id="description" class="mt-1 block w-full border-gray-300 rounded-md h-24" oninput="readTextarea()"></textarea>
                 <input type="hidden" name="description" id="eventDesc" required></input>
             </div>
+            <div class="text-center mt-4">
+                <button type="submit" class="px-8 py-2 bg-[#002366] hover:bg-[#20252f] text-white font-semibold rounded-md transition duration-300">
+                    Save
+                </button>
+            </div>            
+        </form>
     </div>
+</body>
+</html>

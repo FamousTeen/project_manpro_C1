@@ -53,7 +53,8 @@
                         {{ Carbon::parse($training->training_date)->translatedFormat('j F Y') }}
                     </p>
                     <p>{{ Carbon::parse($training->training_date)->translatedFormat('H.i') }} WIB</p>
-                    <h1 class="text-3xl mt-16">{{$training->event->title}}</h1>
+                    {{-- ini salah harusnya nama kelompok --}}
+                    <h1 class="text-3xl mt-12 mb-8">{{$training->event->title}}</h1> 
                     <p>Contact Person : {{$training->contact_person}} ({{$training->phone_number}})</p>
                     <p>Tempat Pelatihan : {{$training->place}}</p>
                 </div>
