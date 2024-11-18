@@ -313,3 +313,7 @@ Route::get('/list_evaluasi', [MisaDetailController::class, 'showEvalAdmin'])->na
 Route::get('jadwal_pelatihan', function () {
     return view('anggota/jadwal_pelatihan');
 })->name('jadwal_pelatihan');
+
+Route::get('/list_anggota', function() {
+    return view('admin/list_anggota');
+})->name('list_anggota');
