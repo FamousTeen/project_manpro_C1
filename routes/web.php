@@ -316,7 +316,13 @@ Route::get('/jadwal_pelatihan', function () {
     return view('anggota/jadwal_pelatihan');
 })->name('jadwal_pelatihan');
 
+/* LIST ANGGOTA DI ADMIN PAGE */
+// show list anggota
 Route::get('/list_anggota', [AdminController::class, 'showListAnggota'])->name('list_anggota');
+
+// update status anggota
+Route::get('/update_status_anggota/{id}', [AdminController::class, 'updateStatusAnggota'])->name('updateStatusAnggota');
+/* END LIST ANGGOTA DI ADMIN PAGE */
 
 Route::get('/delete_anggota/{id}', [AdminController::class, 'deleteAnggota'])->name('delete_anggota');
 // //jadwal pelatihan(admin)

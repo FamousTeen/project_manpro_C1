@@ -12,7 +12,7 @@ class Account extends Authenticatable
 {
     use HasFactory, HasApiTokens;
 
-    protected $fillable = ['name', 'email', 'password', 'photo', 'address', 'birth_place_date', 'region', 'roles'];
+    protected $fillable = ['name', 'email', 'password', 'photo', 'status', 'address', 'birth_place_date', 'region', 'roles'];
 
     public function groupDetails(): HasMany
     {

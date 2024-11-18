@@ -2,12 +2,12 @@
 
 @section('content')
     <!-- Colors:
-            1. #740001 - merah gelap
-            2. #ae0001 - merah terang
-            3. #f6f1e3 - netral
-            4. #002366 - biru terang
-            5. #20252f - biru gelap
-        -->
+                                                1. #740001 - merah gelap
+                                                2. #ae0001 - merah terang
+                                                3. #f6f1e3 - netral
+                                                4. #002366 - biru terang
+                                                5. #20252f - biru gelap
+                                            -->
 
     <?php use App\Models\Misa_Detail; ?>
     <div class="container mx-auto p-20 mt-8 mb-8 flex flex-col items-center">
@@ -151,16 +151,23 @@
                                             <div class="flex flex-row m">
                                                 @if ($l->status == 0)
                                                     <p id="statusLabel">Inactive</p>
+                                                    <label class="inline-flex items-center cursor-pointer ms-5">
+                                                        <input type="checkbox" name="status" class="sr-only peer"
+                                                            id="statusToggle" onchange="update('{{ $l->id }}')">
+                                                        <div
+                                                            class="relative w-14 h-7 bg-[#740001] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#002366] dark:peer-focus:ring-[#002366] rounded-full peer dark:bg-[#740001] peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-[#002366] duration-700">
+                                                        </div>
+                                                    </label>
                                                 @else
                                                     <p id="statusLabel">Active</p>
+                                                    <label class="inline-flex items-center cursor-pointer ms-5">
+                                                        <input type="checkbox" name="status" class="sr-only peer"
+                                                            id="statusToggle" onchange="update('{{ $l->id }}')" checked>
+                                                        <div
+                                                            class="relative w-14 h-7 bg-[#740001] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#002366] dark:peer-focus:ring-[#002366] rounded-full peer dark:bg-[#740001] peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-[#002366] duration-700">
+                                                        </div>
+                                                    </label>
                                                 @endif
-                                                <label class="inline-flex items-center cursor-pointer ms-5">
-                                                    <input type="checkbox" value="" class="sr-only peer"
-                                                        id="statusToggle" onchange="updateStatus()" checked>
-                                                    <div
-                                                        class="relative w-14 h-7 bg-[#740001] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#002366] dark:peer-focus:ring-[#002366] rounded-full peer dark:bg-[#740001] peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all dark:border-gray-600 peer-checked:bg-[#002366] duration-700">
-                                                    </div>
-                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -173,21 +180,23 @@
         </div>
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
-        function updateStatus() {
-            const toggle = document.getElementById('statusToggle');
-            const statusLabel = document.getElementById('statusLabel');
-            const statusCell = document.getElementById('statusCell');
-
-            // Periksa apakah toggle diaktifkan atau dinonaktifkan
-            if (toggle.checked) {
-                statusLabel.textContent = 'Active';
-                statusCell.textContent = 'Active';
-            } else {
-                statusLabel.textContent = 'Inactive';
-                statusCell.textContent = 'Inactive';
-            }
+        function update(id) {
+            var url = '{{ url('') }}/update_status_anggota/' + id;
+            $.ajax({
+                url: url,
+                success: function(result) {
+                    if (result == 0) {
+                        document.getElementById('statusLabel').innerHTML = "Inactive";
+                        document.getElementById('statusCell').innerHTML = "Inactive";
+                    } else {
+                        document.getElementById('statusLabel').innerHTML = "Active";
+                        document.getElementById('statusCell').innerHTML = "Active";
+                    }
+                }
+            });
         }
 
         // Modal open function

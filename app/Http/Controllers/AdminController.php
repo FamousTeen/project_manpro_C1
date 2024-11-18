@@ -65,6 +65,16 @@ class AdminController extends Controller
         return redirect()->route('list_anggota')->with('success', 'Data berhasil dihapus');
     }
 
+    public function updateStatusAnggota($id) {
+        $id = Account::find($id);
+        if ($id->status == 1) {
+            $id->update(['status' => 0]);
+        } else {
+            $id->update(['status' => 1]);
+        }
+        return json_encode($id->status);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
