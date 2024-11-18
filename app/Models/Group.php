@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Group extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'training_id',
+        'name',
+    ];
     
     public function training(): BelongsTo {
         return $this->belongsTo(Training::class);

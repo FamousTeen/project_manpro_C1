@@ -16,7 +16,7 @@ class GroupSeeder extends Seeder
     {
         DB::table('groups')->insert([
             'training_id' => 1,
-            'name' => "Pelatihan 1",
+            'name' => "Kelompok 1",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);

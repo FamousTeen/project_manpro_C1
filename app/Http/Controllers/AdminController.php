@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Admin;
+use App\Models\Account;
+use App\Models\Training;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreAdminRequest;
-use App\Models\Account;
-use Illuminate\Http\Request;
+use App\Models\Group;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -74,6 +76,47 @@ class AdminController extends Controller
         }
         return json_encode($id->status);
     }
+
+    public function storeTraining(Request $request) {
+        $data = $request->all();
+        $admin = Auth::guard('admin')->user();
+        $formfield = Validator::make($data, [
+            'id' => 'required',
+            'training_date' => 'required',
+            'start_time' => 'required',
+            'place' => 'required',
+            'contact_person' => 'required',
+            'phone_number' => 'required',
+            'description' => 'required',
+        ]);
+        
+        if ($formfield->fails()) {
+            return back()->withErrors($formfield)->withInput();
+        }
+
+        $training = [
+            'admin_id' => $admin->id,
+            'training_date' => Carbon::parse($data['training_date'] . ' ' . $data['start_time']),
+            'place' => $data['place'],
+            'contact_person' => $data['contact_person'],
+            'phone_number' => $data['phone_number'],
+            'description' => $data['description'],
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ];
+
+        $pelatihan = Training::create($training);
+        Group::create([
+            'training_id' => $pelatihan->id,
+            'name' => 'Kelompok '.$pelatihan->id,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        return redirect()->route('input_pelatihan')->with('success', 'Training berhasil di tambahkan');
+    }
+
+
 
     /**
      * Show the form for editing the specified resource.

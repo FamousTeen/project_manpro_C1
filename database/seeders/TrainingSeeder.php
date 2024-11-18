@@ -15,7 +15,6 @@ class TrainingSeeder extends Seeder
     public function run(): void
     {
         DB::table('trainings')->insert([
-            'event_id' => 1,
             'admin_id' => 1,
             'training_date' => Carbon::now()->addDays(2),
             'place' => 'Ruang Midinar',

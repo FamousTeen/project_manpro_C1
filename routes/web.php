@@ -267,19 +267,19 @@ Route::get('/events/search', function (string $detail) {
 Route::get('/trainings/searchs/all', function () {
     Log::info('trainings/searchs/all route accessed');
     $events2 = Training::where('status', 1)
-        ->with('event')->get();
+        ->with('groups')->get();
 
 
     return TrainingResource::collection($events2);
 });
 
 Route::get('/trainings/search/{detail}', function (string $detail) {
-    $trainings = Training::with('event')
-        ->whereHas('event', function ($query) use ($detail) {
-            $query->where('title', 'LIKE', '%' . $detail . '%');
+    $trainings = Training::with('groups')
+        ->whereHas('name', function ($query) use ($detail) {
+            $query->where('name', 'LIKE', '%' . $detail . '%');
         })
         ->orWhere('training_date', 'LIKE', '%' . $detail . '%')
-        ->with('event')
+        ->with('groups')
         ->get();
 
     Log::info(gettype($trainings));
@@ -325,10 +325,17 @@ Route::get('/update_status_anggota/{id}', [AdminController::class, 'updateStatus
 /* END LIST ANGGOTA DI ADMIN PAGE */
 
 Route::get('/delete_anggota/{id}', [AdminController::class, 'deleteAnggota'])->name('delete_anggota');
-// //jadwal pelatihan(admin)
-Route::get('input_pelatihan', function () {
-    return view('/admin/training/input_pelatihan');
+
+//jadwal pelatihan(admin)
+Route::get('input_pelatihan', function() {
+    return view('admin/training/input_pelatihan');
 })->name('input_pelatihan');
+
+Route::get('/input_anggota_pelatihan', function() {
+    return view('/admin/training/input_anggota_pelatihan');
+})->name('input_anggota_pelatihan');
+
+Route::post('/store_training', [AdminController::class, 'storeTraining'])->name('store_training');
 
 Route::get('/input_anggota_pelatihan', function() {
     return view('/admin/training/input_anggota_pelatihan');

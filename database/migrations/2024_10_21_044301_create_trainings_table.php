@@ -12,10 +12,6 @@ return new class extends Migration {
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('event_id')->unsigned();
-            $table->foreign('event_id')
-                ->references('id')
-                ->on('events');
             $table->bigInteger('admin_id')->unsigned();
             $table->foreign('admin_id')
                 ->references('id')

@@ -13,11 +13,13 @@ class Training extends Model
     use HasFactory;
 
     protected $fillable = [
+        'admin_id',
         'training_date',
         'contact_person',
         'phone_number',
         'place',
-        'status'
+        'status',
+        'description',
     ];
 
     public function event(): BelongsTo {
