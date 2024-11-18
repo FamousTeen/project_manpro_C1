@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreAdminRequest;
+use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -52,6 +53,18 @@ class AdminController extends Controller
         //
     }
 
+    public function showListAnggota()
+    {
+        $list_anggota = Account::get()->where('roles', 'Anggota');
+        return view('admin/list_anggota')->with('list_anggota', $list_anggota);
+    }
+
+    public function deleteAnggota($id) {
+        $id = Account::find($id);
+        $id->delete();
+        return redirect()->route('list_anggota')->with('success', 'Data berhasil dihapus');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -79,7 +92,7 @@ class AdminController extends Controller
 
         $validatedData = [];
 
-        foreach($formfield->validate() as $key => $updateData) {
+        foreach ($formfield->validate() as $key => $updateData) {
             $validatedData[$key] = $updateData;
         }
 

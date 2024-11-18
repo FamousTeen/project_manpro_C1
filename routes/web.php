@@ -217,7 +217,7 @@ Route::get('/input_event', function () {
     $accounts = Account::all();
 
     $admins = Admin::where('id', '!=', $user->id)->get();
-    
+
     return view('admin/input_event', [
         'accounts' => $accounts,
         'admins' => $admins
@@ -303,7 +303,7 @@ Route::resource('meets', MeetController::class);
 //jadwal_misa (konfirmasi admin)
 Route::get('/jadwal_misa', function () {
     $misas = Misa::where('active', 1)->get();
-    return view('admin/jadwal_misa',compact('misas'));
+    return view('admin/jadwal_misa', compact('misas'));
 })->name('jadwal_misa');
 
 //list evaluasi ( admin)
@@ -314,6 +314,6 @@ Route::get('jadwal_pelatihan', function () {
     return view('anggota/jadwal_pelatihan');
 })->name('jadwal_pelatihan');
 
-Route::get('/list_anggota', function() {
-    return view('admin/list_anggota');
-})->name('list_anggota');
+Route::get('/list_anggota', [AdminController::class, 'showListAnggota'])->name('list_anggota');
+
+Route::get('/delete_anggota/{id}', [AdminController::class, 'deleteAnggota'])->name('delete_anggota');
