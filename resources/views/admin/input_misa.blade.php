@@ -3,26 +3,21 @@
 @section('content')
 @php
 $accounts = App\Models\Account::all();
-// Count the duties for each account by counting occurrences in misa_details
 $dutyCounts = DB::table('misa_details')
 ->select('account_id', DB::raw('count(*) as duty_count'))
 ->groupBy('account_id')
 ->get()
-->keyBy('account_id'); // Key the result by account_id for easier access
+->keyBy('account_id');
 $misas = App\Models\Misa::all();
 
 @endphp
-<div class="container mx-auto py-8 mt-8 mb-8 justify-items-center">
-    <div class="grid grid-cols-12">
-        <div class="col-start-4 col-span-6 mt-8 mb-8 justify-items-center">
-            <h2 class="font-bold text-3xl text-center">Input Jadwal Misa</h2>
-        </div>
-    </div>
+<div class="container mx-auto mt-20">
+    <h2 class="ml-4 p-6 mt-4 text-2xl font-semibold">Input Jadwal Misa</h2>
+</div>
 
-    <!-- Input Jadwal Section -->
+
     <div class="flex justify-center mb-16">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16">
-            <!-- Input Button -->
             <div class="flex items-center justify-center">
                 <div class="w-64 h-64 bg-gray-200 border-2 border-dashed border-gray-400 flex flex-col justify-center items-center rounded-lg cursor-pointer hover:bg-gray-300 transition duration-300"
                     onclick="openModal('modalJadwal')">
@@ -34,7 +29,6 @@ $misas = App\Models\Misa::all();
             </div>
 
             @foreach ($misas as $misa)
-            <!-- Card for each misa -->
             <div class="w-64 h-64 bg-[#f6f1e3] p-6 border border-gray-300 rounded-lg shadow-lg flex flex-col justify-between cursor-pointer"
                 onclick="openModal('modal{{ $misa->id }}')">
                 <div class="flex justify-between items-center">
@@ -59,14 +53,11 @@ $misas = App\Models\Misa::all();
                 </div>
             </div>
 
-
-            <!-- Modal for each misa -->
             <div id="modal{{ $misa->id }}" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal{{ $misa->id }}')">
                 <div class="bg-[#f6f1e3] p-8 rounded-lg w-[700px] h-[400px] relative p-12" onclick="event.stopPropagation()">
                     <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal{{ $misa->id }}')">
                         &#10005;
                     </button>
-                    <!-- Content inside the modal with two columns -->
                     <div class="grid grid-cols-2 gap-4">
                         <div class="text-left">
                             <div class="flex items-center justify-items">
@@ -76,17 +67,15 @@ $misas = App\Models\Misa::all();
                             <div class="ms-9">
                                 <p class="mt-2 text-lg">{{ \Carbon\Carbon::parse($misa->activity_datetime)->translatedFormat('l') }},
                                     {{ \Carbon\Carbon::parse($misa->activity_datetime)->format('d-M-Y') }}
-                                </p> <!-- Date -->
+                                </p>
                                 <p class="font-bold">{{ \Carbon\Carbon::parse($misa->activity_datetime)->format('H:i') }} WIB</p> <!-- Time -->
                             </div>
                         </div>
 
-                        <!-- Right column: Task details -->
                         <div class="text-left">
                             <p class="text-xl font-bold">Yang bertugas saat ini:</p>
 
                             @php
-                            // Group the misaDetails by roles
                             $roles = $misa->misaDetails->groupBy('roles');
                             @endphp
 
@@ -103,15 +92,11 @@ $misas = App\Models\Misa::all();
                 </div>
             </div>
             @endforeach
-
-            <!-- Modal with two sections (Jadwal Misa and Anggota) -->
             <div id="modalJadwal" class="fixed z-10 inset-0 overflow-y-auto hidden">
                 <div class="flex items-center justify-center min-h-screen">
                     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="closeModal('modalJadwal')"></div>
                     <div class="bg-[#f6f1e3] rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
                         <div class="p-6">
-
-                            <!-- Toggle buttons -->
                             <div class="mt-4 flex space-x-4">
                                 <button id="btnJadwalMisa" class="w-full bg-[#002366] text-white py-2 rounded-lg hover:bg-[#20252f] transition-all duration-300" onclick="showSection('jadwalMisa')">
                                     Jadwal Misa
@@ -120,12 +105,9 @@ $misas = App\Models\Misa::all();
                                     Anggota
                                 </button>
                             </div>
-
-                            <!-- Container to ensure both sections have equal height -->
                             <div class="relative mt-6 flex flex-col justify-between min-h-[300px]">
                                 <form id="jadwalMisaForm" class="space-y-4" method="POST" action="{{ route('misas.store') }}">
                                     @csrf
-                                    <!-- Jadwal Misa Section -->
                                     <div id="jadwalMisaSection">
                                         <div>
                                             <label for="title" class="block text-sm font-medium text-gray-700">Nama Kegiatan</label>
@@ -166,10 +148,7 @@ $misas = App\Models\Misa::all();
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Anggota Section (Initially hidden) -->
-                                    <!-- Anggota Section -->
                                     <div id="anggotaSection" class="hidden">
-                                        <!-- Nama Dropdown -->
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700">Nama Anggota</label>
                                             <select id="namaAnggota" class="block appearance-none w-full p-2 border border-gray-300 rounded-md bg-white">
@@ -181,7 +160,6 @@ $misas = App\Models\Misa::all();
                                             </select>
                                             <input type="hidden" name="selectedOptions[]" id="selectedOptionsInput">
                                         </div>
-                                        <!-- Tugas Dropdown or Custom Input -->
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700">Tugas</label>
                                             <div class="mt-1 relative">
@@ -195,7 +173,6 @@ $misas = App\Models\Misa::all();
                                             </div>
                                         </div>
 
-                                        <!-- Text field for custom Tugas (hidden by default) -->
                                         <div id="customTugasInput" class="hidden">
                                             <label class="block text-sm font-medium text-gray-700">Tugas Custom</label>
                                             <input name="customTugas[]" type="text" id="customTugasField" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Tugas lainnya">
@@ -204,8 +181,6 @@ $misas = App\Models\Misa::all();
                                         <button type="button" class="w-full bg-[#740001] text-white py-2 rounded-lg hover:bg-[#20252f] transition-all duration-300" onclick="addAnggota()">
                                             Tambah Anggota
                                         </button>
-
-                                        <!-- Table to show added anggota -->
                                         <div class="mt-6 overflow-y-auto max-h-60">
                                             <h3 class="text-lg font-semibold">Daftar Anggota</h3>
                                             <table class="w-full mt-2 table-auto border-collapse border border-gray-300">
@@ -219,7 +194,6 @@ $misas = App\Models\Misa::all();
                                                     </tr>
                                                 </thead>
                                                 <tbody id="anggotaTableBody">
-                                                    <!-- Table rows will be added here -->
                                                 </tbody>
                                             </table>
                                         </div>
@@ -247,18 +221,13 @@ $misas = App\Models\Misa::all();
             <script>
                 let selectedOptionsArray = [];
                 let selectedOptionsArray2 = [];
-
-                // Function to open the modal
                 function openModal(modalId) {
                     document.getElementById(modalId).classList.remove('hidden');
                 }
-
-                // Function to close the modal
                 function closeModal(modalId) {
                     document.getElementById(modalId).classList.add('hidden');
                 }
 
-                // Function to show Jadwal Misa section and hide Anggota section
                 function showSection(section) {
                     const jadwalMisaSection = document.getElementById('jadwalMisaSection');
                     const anggotaSection = document.getElementById('anggotaSection');
@@ -274,8 +243,6 @@ $misas = App\Models\Misa::all();
 
                 document.addEventListener("DOMContentLoaded", function() {
                     const addToArrayButton = document.getElementById("addToArrayButton");
-
-                    // Add event listener to "Add to Array" button
                     addToArrayButton.addEventListener("click", function() {
                         const selectedOptionsInput = document.getElementById("selectedOptionsInput");
                         selectedOptionsInput.value = JSON.stringify(selectedOptionsArray);
@@ -305,7 +272,6 @@ $misas = App\Models\Misa::all();
                         tugas = customTugasField.value;
                     }
 
-                    // If there's a valid selection
                     if (namaSelect.value && tugas) {
                         const option = namaSelect.options[namaSelect.selectedIndex];
                         const namaDetails = option.getAttribute('data-details');
@@ -323,45 +289,34 @@ $misas = App\Models\Misa::all();
             `;
 
                         tableBody.appendChild(row);
-
-                        // Disable the selected option in the dropdown
                         option.disabled = true;
 
-                        // Add member ID and role to the arrays
                         selectedOptionsArray.push(namaSelect.value);
                         selectedOptionsArray2.push(tugas);
 
-                        // Update the hidden inputs
                         selectedOptionsInput.value = JSON.stringify(selectedOptionsArray);
                         selectedOptionsInput2.value = JSON.stringify(selectedOptionsArray2);
 
-                        // Add delete button functionality
                         row.querySelector('.delete-btn').addEventListener('click', function() {
-                            // Enable the previously selected option in the dropdown
                             option.disabled = false;
 
-                            // Remove the row from the table
                             tableBody.removeChild(row);
 
-                            // Find and remove the corresponding value in selectedOptionsArray
                             const index = selectedOptionsArray.indexOf(namaSelect.value);
                             if (index > -1) {
                                 selectedOptionsArray.splice(index, 1);
-                                selectedOptionsArray2.splice(index, 1); // Remove the corresponding tugas entry
+                                selectedOptionsArray2.splice(index, 1);
                             }
 
-                            // Update the hidden inputs
                             selectedOptionsInput.value = JSON.stringify(selectedOptionsArray);
                             selectedOptionsInput2.value = JSON.stringify(selectedOptionsArray2);
 
-                            // Update the row numbers
                             updateRowNumbers();
                         });
                     } else {
                         alert('Please fill out all fields.');
                     }
 
-                    // Reset form fields and hide custom input
                     document.getElementById('anggotaForm').reset();
                     document.getElementById('customTugasInput').classList.add('hidden');
                 }
