@@ -61,23 +61,23 @@ Carbon::setLocale('id');
 </div>
 
 <!-- Modal for Edit -->
-<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden" style="z-index: 1000;">
     <div class="bg-white rounded-lg p-6 w-96">
-        <h2 id="modalTitle" class="text-lg font-semibold mb-4">Tambahkan Jadwal Khusus Pengurus</h2>
+        <h2 id="editModalTitle" class="text-lg font-semibold mb-4"></h2>
         <label class="block mb-2">Nama Jadwal:</label>
-        <input id="namaJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan nama jadwal">
+        <input id="editNamaJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan nama jadwal">
 
         <label class="block mb-2">Tanggal:</label>
-        <input id="tanggalJadwal" type="date" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
+        <input id="editTanggalJadwal" type="date" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
 
         <label class="block mb-2">Lokasi:</label>
-        <input id="lokasiJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan lokasi">
+        <input id="editLokasiJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan lokasi">
 
         <label class="block mb-2">Catatan:</label>
-        <textarea id="catatanJadwal" class="border border-gray-300 rounded-lg w-full p-2 mb-4" rows="4" placeholder="Masukkan catatan"></textarea>
+        <textarea id="editCatatanJadwal" class="border border-gray-300 rounded-lg w-full p-2 mb-4" rows="4" placeholder="Masukkan catatan"></textarea>
 
         <div class="flex justify-end">
-            <button id="closeModal" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
+            <button id="closeEditModal" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
             <button id="saveButton" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg">Simpan</button>
         </div>
     </div>
@@ -102,20 +102,29 @@ Carbon::setLocale('id');
     const deleteModal = document.getElementById('deleteModal');
     const addButton = document.getElementById('addButton');
     const closeButton = document.getElementById('closeModal');
+    const closeEditButton = document.getElementById('closeEditModal');
     const deleteButtons = document.querySelectorAll('.deleteButton');
     const editButtons = document.querySelectorAll('.editButton');
     const modalTitle = document.getElementById('modalTitle');
+    const editModalTitle = document.getElementById('editModalTitle');
+
+    console.log('Before removing hidden:', editModal.classList);
+editModal.classList.remove('hidden');
+console.log('After removing hidden:', editModal.classList);
 
     // Function to show the modal and populate with data if editing
     function showModal(editMode = false, data = {}) {
-        addModal.classList.remove('hidden');
         if (editMode) {
-            modalTitle.innerText = 'Edit Jadwal Khusus Pengurus';
-            document.getElementById('namaJadwal').value = data.nama;
-            document.getElementById('tanggalJadwal').value = data.tanggal;
-            document.getElementById('lokasiJadwal').value = data.lokasi;
-            document.getElementById('catatanJadwal').value = data.catatan;
+            editModal.classList.remove('hidden');
+            editModal.classList.remove('flex');
+            console.log(editModal.classList);
+            editModalTitle.innerText = 'Edit Jadwal Khusus Pengurus';
+            document.getElementById('editNamaJadwal').value = data.nama;
+            document.getElementById('editTanggalJadwal').value = data.tanggal;
+            document.getElementById('editLokasiJadwal').value = data.lokasi;
+            document.getElementById('editCatatanJadwal').value = data.catatan;
         } else {
+            addModal.classList.remove('hidden');
             modalTitle.innerText = 'Tambahkan Jadwal Khusus Pengurus';
             document.getElementById('namaJadwal').value = '';
             document.getElementById('tanggalJadwal').value = '';
@@ -169,11 +178,19 @@ Carbon::setLocale('id');
         addModal.classList.add('hidden');
     }
 
+    closeEditButton.onclick = function() {
+        editModal.classList.add('hidden');
+    }
+
     // Close modal when clicking outside of the modal
     window.onclick = function(event) {
-        if (event.target === modal) {
+        if (event.target === addModal) {
             addModal.classList.add('hidden');
         }
+        else if (event.target === editModal) {
+            editModal.classList.add('hidden');
+        }
+        else
         if (event.target === deleteModal) {
             deleteModal.classList.add('hidden');
         }
