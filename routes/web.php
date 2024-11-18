@@ -318,3 +318,7 @@ Route::get('/jadwal_pelatihan', function () {
 Route::get('input_pelatihan', function() {
     return view('/admin/training/input_pelatihan');
 })->name('input_pelatihan');
+
+Route::get('/list_anggota', function() {
+    return view('admin/list_anggota');
+})->name('list_anggota');
