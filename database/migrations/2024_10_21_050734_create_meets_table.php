@@ -21,6 +21,7 @@ return new class extends Migration
             $table->dateTime('date');
             $table->string('place');
             $table->boolean('status')->default(1);
+            $table->boolean('permission')->default(0);
             $table->string('notulen');
             $table->timestamps();
         });

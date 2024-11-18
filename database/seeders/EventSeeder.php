@@ -17,8 +17,8 @@ class EventSeeder extends Seeder
         DB::table('events')->insert([
             'title' => "Acara Misdinar",
             'date' => Carbon::now()->addDays(2)->format('Y-m-d'),
-            'start_time' => Carbon::now()->addDays(2)->format('H:i:s'),
-            'finished_time' => Carbon::now()->addDays(2)->addHours(2)->format('H:i:s'),
+            'start_time' => Carbon::now()->format('H:i:s'),
+            'finished_time' => Carbon::now()->addHours(2)->format('H:i:s'),
             'place' => 'Ruang Midinar',
             'contact_person' => 'Margareth',
             'phone_number' => '081929302947',
@@ -31,9 +31,9 @@ class EventSeeder extends Seeder
         ]);
         DB::table('events')->insert([
             'title' => "Christmas Event",
-            'date' => Carbon::now()->addDays(2)->format('Y-m-d'),
-            'start_time' => Carbon::now()->addDays(2)->format('H:i:s'),
-            'finished_time' => Carbon::now()->addDays(2)->addHours(3)->format('H:i:s'),
+            'date' => Carbon::now()->format('Y-m-d'),
+            'start_time' => Carbon::now()->addHours(3)->format('H:i:s'),
+            'finished_time' => Carbon::now()->addHours(4)->format('H:i:s'),
             'place' => 'Ruang Natal',
             'contact_person' => 'Luna',
             'phone_number' => '081929302947',

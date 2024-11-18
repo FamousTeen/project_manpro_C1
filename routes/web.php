@@ -22,6 +22,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
 use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\AnnouncementController;
+use App\Models\Meet;
 use App\Models\Misa;
 
 /*
@@ -294,7 +295,8 @@ Route::get('/dokumen_pengurus', function () {
 
 //jadwal
 Route::get('/jadwal_pengurus', function () {
-    return view('admin/khusus_pengurus/jadwal_pengurus');
+    $meets = Meet::where('permission', 1)->get();
+    return view('admin/khusus_pengurus/jadwal_pengurus', compact('meets'));
 })->name('jadwal_pengurus');
 
 

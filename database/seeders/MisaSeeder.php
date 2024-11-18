@@ -14,7 +14,7 @@ class MisaSeeder extends Seeder
      */
     public function run(): void
     {
-        $activityDateTime = Carbon::now()->addDays(5); // Get the datetime for 5 days from now
+        $activityDateTime = Carbon::now()->addDays(5);
 
         DB::table('misas')->insert([
             'title' => "Misa Kudus",
@@ -31,6 +31,17 @@ class MisaSeeder extends Seeder
             'title' => "Misa Natal",
             'category' => "Misa Acara Besar",
             'activity_datetime' => $activityDateTime->format('Y-m-d H:i:s'),
+            'upload_datetime' => Carbon::now()->format('Y-m-d H:i:s'),
+            'evaluation' => "Fusce metus erat, feugiat eu hendrerit aliquet, pulvinar eu urna. Curabitur eu sagittis diam. Maecenas faucibus scelerisque.",
+            'status' => "Proses",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('misas')->insert([
+            'title' => "Misa Natal 2",
+            'category' => "Misa Acara Besar",
+            'activity_datetime' => $activityDateTime->subDays(2)->format('Y-m-d H:i:s'),
             'upload_datetime' => Carbon::now()->format('Y-m-d H:i:s'),
             'evaluation' => "Fusce metus erat, feugiat eu hendrerit aliquet, pulvinar eu urna. Curabitur eu sagittis diam. Maecenas faucibus scelerisque.",
             'status' => "Proses",

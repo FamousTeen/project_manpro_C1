@@ -1,8 +1,3 @@
-@php
-    use App\Models\Misa;
-    use App\Models\Training;
-@endphp
-
 @extends('base/admin_navbar')
 
 @section('content')
@@ -75,58 +70,70 @@
                 <h2 class="font-bold text-xl mb-4 ml-16 text-center">THIS WEEK</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-16">
 
-                    <?php
-                    
-                    use Carbon\Carbon;
-                    
-                    $misa_permissions = $data->misaPermissions;
-                    $event_permissions = $data->eventPermissions;
-                    
-                    Carbon::setLocale('en');
-                    ?>
+                @php
 
-                    @foreach ($misa_permissions as $misa_permission)
-                        <!-- Announcement Card 1 -->
-                        <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
-                            <div class="flex items-center">
-                                <div class="bg-[#DE8F46] w-4 h-4 rounded-full"></div>
-                                <p class="font-semibold w-fit ms-3">
-                                    {{ $misa_permission->misaDetail->misa->title }}
-                                </p>
-                            </div>
-                            <div class="flex justify-between">
-                                <p class="text-sm w-fit">
-                                    <br>
-                                    {{ date('j-m-Y', strtotime($misa_permission->misaDetail->misa->activity_datetime)) }}
-                                </p>
-                                <p class="text-sm w-fit">
-                                    <br>
-                                    {{ date('H.i', strtotime($misa_permission->misaDetail->misa->activity_datetime)) }} WIB
-                                </p>
-                            </div>
+                use Carbon\Carbon;
+                use App\Models\Misa;
+                use App\Models\Event;
 
-                        </div>
-                    @endforeach
-                    @foreach ($event_permissions as $event_permission)
-                        <!-- Announcement Card 1 -->
-                        <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
-                            <div class="flex items-center">
-                                <div class="bg-[#4E65F7] w-4 h-4 rounded-full"></div>
-                                <p class="font-semibold w-fit ms-3">
-                                    {{ $event_permission->eventDetail->event->title }}
-                                </p>
-                            </div>
+                // misa sort by date ascending and happening this week
+                $misasThisWeek = Misa::where('active', 1)->where('activity_datetime', '<=', Carbon::now()->addWeek()->format('Y-m-d'))
+                ->where('activity_datetime', '>=', Carbon::now()->format('Y-m-d'))
+                ->orderBy('activity_datetime', 'asc')
+                ->get();
 
-                            <div class="flex justify-between">
-                                <p class="text-sm w-fit">
-                                    <br>
-                                    {{ date('j-m-Y', strtotime($event_permission->eventDetail->event->date)) }}
-                                </p>
-                                <p class="text-sm w-fit">
-                                    <br>
-                                    {{ date('H.i', strtotime($event_permission->eventDetail->event->date)) }} WIB
-                                </p>
-                            </div>
+                // Event sort by date ascending and happening this week
+                $eventsThisWeek = Event::where('status', 1)->where('date', '<=', Carbon::now()->endOfWeek()->format('Y-m-d'))
+                ->where('date', '>=', Carbon::now()->format('Y-m-d'))
+                ->orderBy('date', 'asc')
+                ->orderBy('start_time', 'asc')
+                ->get();
+
+                Carbon::setLocale('en');
+                @endphp
+
+                @foreach ($misasThisWeek as $misa)
+                <!-- Announcement Card 1 -->
+                <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
+                    <div class="flex items-center">
+                        <div class="bg-[#DE8F46] w-4 h-4 rounded-full"></div>
+                        <p class="font-semibold w-fit ms-3">
+                            {{$misa->title}}
+                        </p>
+                    </div>
+                    <div class="flex justify-between">
+                        <p class="text-sm w-fit">
+                            <br>
+                            {{ date('j-m-Y', strtotime($misa->activity_datetime)) }}
+                        </p>
+                        <p class="text-sm w-fit">
+                            <br>
+                            {{ date('H.i', strtotime($misa->activity_datetime)) }} WIB
+                        </p>
+                    </div>
+
+                </div>
+                @endforeach
+                @foreach ($eventsThisWeek as $event)
+                <!-- Announcement Card 1 -->
+                <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
+                    <div class="flex items-center">
+                        <div class="bg-[#4E65F7] w-4 h-4 rounded-full"></div>
+                        <p class="font-semibold w-fit ms-3">
+                            {{$event->title}}
+                        </p>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <p class="text-sm w-fit">
+                            <br>
+                            {{ date('j-m-Y', strtotime($event->date)) }}
+                        </p>
+                        <p class="text-sm w-fit">
+                            <br>
+                            {{ date('H.i', strtotime($event->date)) }} WIB
+                        </p>
+                    </div>
 
                         </div>
                     @endforeach
