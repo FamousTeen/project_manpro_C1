@@ -30,8 +30,31 @@ Carbon::setLocale('id');
         <p class="text-gray-600">Lokasi: {{$meet->place}}</p>
         <p class="text-gray-600">Catatan: {!! nl2br(e(urldecode($meet->notulen))) !!}</p>
         <div class="flex justify-end pt-4">
-            <button id="" class="editButton bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg" data-nama="{{$meet->title}}" data-tanggal="{{ Carbon::parse($meet->date)->translatedFormat('Y-m-j') }}" data-lokasi="{{$meet->place}}" data-catatan="{!! nl2br(e(urldecode($meet->notulen))) !!}">Edit</button>
+            <button class="editButton bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg" data-nama="{{$meet->title}}" data-tanggal="{{ Carbon::parse($meet->date)->translatedFormat('Y-m-j') }}" data-lokasi="{{$meet->place}}" data-catatan="{!! nl2br(e(urldecode($meet->notulen))) !!}" onclick="openEditModal('editModal{{$meet->id}}')">Edit</button>
             <button class="deleteButton bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg ml-2" data-nama="Rapat Evaluasi">Delete</button>
+        </div>
+    </div>
+
+    <!-- Modal for Edit -->
+    <div id="editModal{{$meet->id}}" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-6 w-96">
+            <h2 id="modalTitle" class="text-lg font-semibold mb-4">Tambahkan Jadwal Khusus Pengurus</h2>
+            <label class="block mb-2">Nama Jadwal:</label>
+            <input id="namaJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan nama jadwal">
+
+            <label class="block mb-2">Tanggal:</label>
+            <input id="tanggalJadwal" type="date" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
+
+            <label class="block mb-2">Lokasi:</label>
+            <input id="lokasiJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan lokasi">
+
+            <label class="block mb-2">Catatan:</label>
+            <textarea id="catatanJadwal" class="border border-gray-300 rounded-lg w-full p-2 mb-4" rows="4" placeholder="Masukkan catatan"></textarea>
+
+            <div class="flex justify-end">
+                <button id="closeModal" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
+                <button id="saveButton" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg">Simpan</button>
+            </div>
         </div>
     </div>
     @endforeach
@@ -60,29 +83,6 @@ Carbon::setLocale('id');
     </div>
 </div>
 
-<!-- Modal for Edit -->
-<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 items-center justify-center hidden" style="z-index: 1000;">
-    <div class="bg-white rounded-lg p-6 w-96">
-        <h2 id="editModalTitle" class="text-lg font-semibold mb-4"></h2>
-        <label class="block mb-2">Nama Jadwal:</label>
-        <input id="editNamaJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan nama jadwal">
-
-        <label class="block mb-2">Tanggal:</label>
-        <input id="editTanggalJadwal" type="date" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
-
-        <label class="block mb-2">Lokasi:</label>
-        <input id="editLokasiJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan lokasi">
-
-        <label class="block mb-2">Catatan:</label>
-        <textarea id="editCatatanJadwal" class="border border-gray-300 rounded-lg w-full p-2 mb-4" rows="4" placeholder="Masukkan catatan"></textarea>
-
-        <div class="flex justify-end">
-            <button id="closeEditModal" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
-            <button id="saveButton" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg">Simpan</button>
-        </div>
-    </div>
-</div>
-
 <!-- Confirmation Modal -->
 <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white rounded-lg p-6 w-96 flex flex-col items-center">
@@ -104,13 +104,8 @@ Carbon::setLocale('id');
     const closeButton = document.getElementById('closeModal');
     const closeEditButton = document.getElementById('closeEditModal');
     const deleteButtons = document.querySelectorAll('.deleteButton');
-    const editButtons = document.querySelectorAll('.editButton');
     const modalTitle = document.getElementById('modalTitle');
     const editModalTitle = document.getElementById('editModalTitle');
-
-    console.log('Before removing hidden:', editModal.classList);
-editModal.classList.remove('hidden');
-console.log('After removing hidden:', editModal.classList);
 
     // Function to show the modal and populate with data if editing
     function showModal(editMode = false, data = {}) {
@@ -139,17 +134,14 @@ console.log('After removing hidden:', editModal.classList);
     }
 
     // Show modal when edit button is clicked
-    editButtons.forEach(button => {
-        button.onclick = function() {
-            const data = {
-                nama: button.getAttribute('data-nama'),
-                tanggal: button.getAttribute('data-tanggal'),
-                lokasi: button.getAttribute('data-lokasi'),
-                catatan: button.getAttribute('data-catatan')
-            };
-            showModal(true, data);
-        }
-    });
+    function openEditModal () {
+        const data = {
+        nama: button.getAttribute('data-nama'),
+        tanggal: button.getAttribute('data-tanggal'),
+        lokasi: button.getAttribute('data-lokasi'),
+        catatan: button.getAttribute('data-catatan')
+        };
+    }
 
     // Show confirmation modal when delete button is clicked
     deleteButtons.forEach(button => {
@@ -186,11 +178,9 @@ console.log('After removing hidden:', editModal.classList);
     window.onclick = function(event) {
         if (event.target === addModal) {
             addModal.classList.add('hidden');
-        }
-        else if (event.target === editModal) {
+        } else if (event.target === editModal) {
             editModal.classList.add('hidden');
-        }
-        else
+        } else
         if (event.target === deleteModal) {
             deleteModal.classList.add('hidden');
         }

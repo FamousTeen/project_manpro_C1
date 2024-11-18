@@ -263,7 +263,15 @@ Route::get('/events/search', function (string $detail) {
     return EventResource::collection($events);
 });
 
-// buat ajax peltihan
+Route::put('/events/search/delete/{id}', function (string $id) {
+    $training = Event::where('id', (int)$id)->firstOrFail();
+    $training->update(['status' => 0]);
+
+    return redirect()->route('events.index')->with('success', 'Pelatihan berhasil dihapus');
+});
+
+
+// buat ajax pelatihan
 Route::get('/trainings/searchs/all', function () {
     Log::info('trainings/searchs/all route accessed');
     $events2 = Training::where('status', 1)
@@ -275,16 +283,22 @@ Route::get('/trainings/searchs/all', function () {
 
 Route::get('/trainings/search/{detail}', function (string $detail) {
     $trainings = Training::with('groups')
-        ->whereHas('name', function ($query) use ($detail) {
+        ->whereHas('groups', function ($query) use ($detail) {
             $query->where('name', 'LIKE', '%' . $detail . '%');
         })
         ->orWhere('training_date', 'LIKE', '%' . $detail . '%')
-        ->with('groups')
         ->get();
 
     Log::info(gettype($trainings));
 
     return TrainingResource::collection($trainings);
+});
+
+Route::put('/trainings/search/delete/{id}', function (string $id) {
+    $training = Training::where('id', (int)$id)->firstOrFail();
+    $training->update(['status' => 0]);
+
+    return redirect()->route('trainings.index')->with('success', 'Pelatihan berhasil dihapus');
 });
 
 //dokumen
