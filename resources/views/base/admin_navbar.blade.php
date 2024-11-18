@@ -132,6 +132,7 @@
                     <li><a href="{{route('misas.index')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Misa</a></li>
                     <li><a href="{{route('input_event')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Acara</a></li>
                     <li><a href="{{route('input_pelatihan')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Input Jadwal Pelatihan</a></li>
+                    <li><a href="{{route('input_anggota_pelatihan')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Daftar Anggota Pelatihan</a></li>
                 </ul>
             </li>
             <li>

@@ -330,3 +330,6 @@ Route::get('input_pelatihan', function () {
     return view('/admin/training/input_pelatihan');
 })->name('input_pelatihan');
 
+Route::get('/input_anggota_pelatihan', function() {
+    return view('/admin/training/input_anggota_pelatihan');
+})->name('input_anggota_pelatihan');
