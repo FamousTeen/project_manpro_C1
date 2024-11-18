@@ -310,10 +310,15 @@ Route::get('/jadwal_misa', function () {
 Route::get('/list_evaluasi', [MisaDetailController::class, 'showEvalAdmin'])->name('list_evaluasi');
 
 //jadwal pelatihan(anggota)
-Route::get('jadwal_pelatihan', function () {
+Route::get('/jadwal_pelatihan', function () {
     return view('anggota/jadwal_pelatihan');
 })->name('jadwal_pelatihan');
 
 Route::get('/list_anggota', [AdminController::class, 'showListAnggota'])->name('list_anggota');
 
 Route::get('/delete_anggota/{id}', [AdminController::class, 'deleteAnggota'])->name('delete_anggota');
+// //jadwal pelatihan(admin)
+Route::get('input_pelatihan', function () {
+    return view('/admin/training/input_pelatihan');
+})->name('input_pelatihan');
+

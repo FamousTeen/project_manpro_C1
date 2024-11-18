@@ -21,7 +21,7 @@
     @php
     $training_id = $training->id;
     @endphp
-    <form class="mt-6 rounded-xl py-6 pe-6 ms-5 flex bg-[#C4CDC1]" method="POST" action="{{ route('trainings.update', ['training' => $training]) }}" enctype="multipart/form-data">
+    <form class="mt-6 rounded-xl py-6 pe-6 ms-5 flex bg-[#f6f1e3]" method="POST" action="{{ route('trainings.update', ['training' => $training]) }}" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="grid ms-10 gap-4 grid-cols-2 w-full">
@@ -54,7 +54,7 @@
             </div>
 
             <div class="flex col-span-2 mt-4 items-start justify-center">
-                <button type="submit" class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
+                <button type="submit" class="px-8 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg">Edit</button>
             </div>
         </div>
     </form>
