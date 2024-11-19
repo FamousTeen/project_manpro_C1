@@ -79,15 +79,16 @@ Route::resource('events', EventController::class)->names([
 
 
 // buat pelatihan
-Route::resource('trainings', TrainingController::class)->names([
+Route::resource('trainings', TrainingController::class)->except('edit')->names([
     'index' => 'trainings.index',
     'create' => 'trainings.create',
     'store' => 'trainings.store',
     'show' => 'trainings.show',
-    'edit' => 'trainings.edit',
     'update' => 'trainings.update',
     'destroy' => 'trainings.destroy',
 ]);
+
+Route::get('/trainings/edit/{group}/{training}', [TrainingController::class, 'edit'])->name('trainings.edit');
 
 //Jadwal Anggota
 Route::get('/jadwal', [MisaController::class, 'index'])->name('jadwal_anggota');

@@ -7,6 +7,7 @@ use App\Models\Training;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTrainingRequest;
 use App\Http\Requests\UpdateTrainingRequest;
+use App\Models\Group;
 
 class TrainingController extends Controller
 {
@@ -69,11 +70,12 @@ class TrainingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Training $training)
+    public function edit($training, $g)
     {
-        return view('admin.training.edit_pelatihan', [
-            'training' => $training
-        ]);
+        $trainings = Training::find($training);
+        $groups = Group::find($g);
+
+        return view('admin.training.edit_pelatihan')->with('training', $trainings)->with('group', $groups);
     }
 
     /**

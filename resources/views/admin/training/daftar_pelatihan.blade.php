@@ -9,12 +9,12 @@
 
 @section('content')
     <!-- Colors:
-                            1. #740001 - merah gelap
-                            2. #ae0001 - merah terang
-                            3. #f6f1e3 - netral
-                            4. #002366 - biru terang
-                            5. #20252f - biru gelap
-                        -->
+                                    1. #740001 - merah gelap
+                                    2. #ae0001 - merah terang
+                                    3. #f6f1e3 - netral
+                                    4. #002366 - biru terang
+                                    5. #20252f - biru gelap
+                                -->
 
     <div class="container-fluid content-body mx-12 ">
         @php
@@ -51,34 +51,42 @@
                 @php
                     $index = 0;
                 @endphp
-                <div class="my-6 rounded-xl py-6 pe-6 ms-5 flex bg-[#f6f1e3]">
-                    <div class="flex justify-between w-full">
-                        <div class="flex flex-col ms-10">
-                            <p class="font-semibold text-xl">
-                                {{ Carbon::parse($training->training_date)->translatedFormat('j F Y') }}
-                            </p>
-                            <p>{{ Carbon::parse($training->training_date)->translatedFormat('H.i') }} WIB</p>
-                            {{-- ini salah harusnya nama kelompok --}}
-                            <h1 class="text-3xl mt-12 mb-8">{{ $training->groups[$index++]->name }}</h1>
-                            <p>Contact Person : {{ $training->contact_person }} ({{ $training->phone_number }})</p>
-                            <p>Tempat Pelatihan : {{ $training->place }}</p>
-                        </div>
-                        <div class="flex items-end justify-end space-x-2 mt-4">
-                            <a href="{{ route('trainings.edit', ['training' => $training]) }}"><button type="button"
-                                    class="px-6 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg">Edit</button></a>
-                            <div class="">
-                                <form class="mb-0" action="{{ route('trainings.destroy', ['training' => $training]) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit"
-                                        class="px-4 py-2 bg-[#ae0001] hover:bg-[#740001] text-white rounded-lg">
-                                        Delete</button>
-                                </form>
+                @if ($training->groups->count() > 0)
+                    @foreach ($training->groups as $g)
+                        <div class="my-6 rounded-xl py-6 pe-6 ms-5 flex bg-[#f6f1e3]">
+                            <div class="flex justify-between w-full">
+                                <div class="flex flex-col ms-10">
+                                    <p class="font-semibold text-xl">
+                                        {{ Carbon::parse($training->training_date)->translatedFormat('j F Y') }}
+                                    </p>
+                                    <p>{{ Carbon::parse($training->training_date)->translatedFormat('H.i') }} WIB</p>
+                                    {{-- ini salah harusnya nama kelompok --}}
+                                    @if ($training->groups->count() >= 1)
+                                        <h1 class="text-3xl mt-12 mb-8">{{ $g->name }}</h1>
+                                    @endif
+                                    <p>Contact Person : {{ $training->contact_person }} ({{ $training->phone_number }})</p>
+                                    <p>Tempat Pelatihan : {{ $training->place }}</p>
+                                </div>
+                                <div class="flex items-end justify-end space-x-2 mt-4">
+                                    <a href="{{ route('trainings.edit', [$training, $g]) }}"><button
+                                            type="button"
+                                            class="px-6 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg">Edit</button></a>
+                                    <div class="">
+                                        <form class="mb-0"
+                                            action="{{ route('trainings.destroy', ['training' => $training]) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit"
+                                                class="px-4 py-2 bg-[#ae0001] hover:bg-[#740001] text-white rounded-lg">
+                                                Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
             @endforeach
         </div>
     </div>
