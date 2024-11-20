@@ -317,6 +317,8 @@ Route::get('/jadwal_pengurus', function () {
 
 Route::resource('meets', MeetController::class);
 
+Route::put('updateMeetPengurus', [MeetController::class, 'updatePengurus'])->name('meets_updatePengurus');
+
 //jadwal_misa (konfirmasi admin)
 Route::get('/jadwal_misa', function () {
     $misas = Misa::where('active', 1)->get();

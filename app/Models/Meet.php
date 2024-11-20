@@ -15,7 +15,8 @@ class Meet extends Model
         'title',
         'date',
         'notulen',
-        'place'
+        'place',
+        'permission'
     ];
 
     public function event(): BelongsTo {

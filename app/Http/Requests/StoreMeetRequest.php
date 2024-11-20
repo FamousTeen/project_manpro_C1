@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreMeetRequest extends FormRequest
@@ -11,6 +12,9 @@ class StoreMeetRequest extends FormRequest
      */
     public function authorize(): bool
     {
+        if(Auth::guard('admin')->check()) {
+            return true;
+        }
         return false;
     }
 

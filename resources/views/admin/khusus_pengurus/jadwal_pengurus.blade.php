@@ -82,25 +82,35 @@ Carbon::setLocale('id');
 
 <!-- Modal for Add -->
 <div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-lg p-6 w-96">
+    <form action="{{route('meets.store')}}" method="post" class="bg-white rounded-lg p-6 w-96">
+        @csrf
         <h2 id="modalTitle" class="text-lg font-semibold mb-4">Tambahkan Jadwal Khusus Pengurus</h2>
         <label class="block mb-2">Nama Jadwal:</label>
-        <input id="namaJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan nama jadwal">
+        <input name="namaJadwal" id="namaJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan nama jadwal">
 
-        <label class="block mb-2">Tanggal:</label>
-        <input id="tanggalJadwal" type="date" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
+        <div class="flex gap-x-6">
+            <div class="flex flex-col">
+                <label class="block mb-2">Tanggal:</label>
+                <input name="tanggalJadwal" id="tanggalJadwal" type="date" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
+            </div>
+            <div class="flex flex-col">
+                <label class="block mb-2">Waktu:</label>
+                <input name="waktuJadwal" id="waktuJadwal" type="time" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
+            </div>
+        </div>
 
         <label class="block mb-2">Lokasi:</label>
-        <input id="lokasiJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan lokasi">
+        <input id="lokasiJadwal" name="lokasiJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan lokasi">
 
         <label class="block mb-2">Catatan:</label>
-        <textarea id="catatanJadwal" class="border border-gray-300 rounded-lg w-full p-2 mb-4" rows="4" placeholder="Masukkan catatan"></textarea>
+        <textarea id="catatanJadwal" class="border border-gray-300 rounded-lg w-full p-2 mb-4" rows="4" placeholder="Masukkan catatan" oninput="readTextarea2()"></textarea>
+        <input type="hidden" name="meetDesc" id="meetDesc"></input>
 
         <div class="flex justify-end">
-            <button id="closeModal" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
-            <button id="saveButton" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg">Simpan</button>
+            <button type="button" id="closeModal" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
+            <button type="submit" id="saveButton" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg">Simpan</button>
         </div>
-    </div>
+    </form>
 </div>
 
 <!-- Confirmation Modal -->
@@ -131,11 +141,18 @@ Carbon::setLocale('id');
         document.getElementById('tanggalJadwal').value = '';
         document.getElementById('lokasiJadwal').value = '';
         document.getElementById('catatanJadwal').value = '';
+        document.getElementById('meetDesc').value = '';
     }
 
     // Show modal when add button is clicked
     addButton.onclick = function() {
         showModal(false);
+    }
+
+    function readTextarea2() {
+        const textareaValue = document.getElementById(`catatanJadwal`).value;
+        document.getElementById(`meetDesc`).value = encodeURIComponent(textareaValue);
+        console.log(document.getElementById(`meetDesc`).value);
     }
 
     function readTextarea(index) {
@@ -159,7 +176,7 @@ Carbon::setLocale('id');
         document.getElementById(`editTanggalJadwal${id}`).value = data.tanggal;
         document.getElementById(`editWaktuJadwal${id}`).value = data.waktu;
         document.getElementById(`editLokasiJadwal${id}`).value = data.lokasi;
-        document.getElementById(`editCatatanJadwal${id}`).value = data.catatan;
+        document.getElementById(`editCatatanJadwal${id}`).value = decodeURIComponent(data.catatan);
         document.getElementById(`meetDesc${id}${id}`).value = data.catatan;
 
         modal.classList.remove('hidden');
