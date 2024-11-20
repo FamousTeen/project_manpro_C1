@@ -13,6 +13,14 @@
     <h2 class="ml-4 p-6 mt-4 text-2xl font-semibold flex-1">Jadwal Khusus Pengurus</h2>
     <button id="addButton" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg mr-16 mt-12">+ Tambah</button>
 </div>
+
+@if (session('success'))
+<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+    role="alert">
+    {{ session('success') }}
+</div>
+@endif
+
 @php
 use Carbon\Carbon;
 
@@ -30,32 +38,44 @@ Carbon::setLocale('id');
         <p class="text-gray-600">Lokasi: {{$meet->place}}</p>
         <p class="text-gray-600">Catatan: {!! nl2br(e(urldecode($meet->notulen))) !!}</p>
         <div class="flex justify-end pt-4">
-            <button class="editButton bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg" data-nama="{{$meet->title}}" data-tanggal="{{ Carbon::parse($meet->date)->translatedFormat('Y-m-j') }}" data-lokasi="{{$meet->place}}" data-catatan="{!! nl2br(e(urldecode($meet->notulen))) !!}" onclick="openEditModal('editModal{{$meet->id}}')">Edit</button>
+            <button id="editButton{{$meet->id}}" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg" data-nama="{{$meet->title}}" data-tanggal="{{ Carbon::parse($meet->date)->translatedFormat('Y-m-j') }}" data-waktu="{{ Carbon::parse($meet->date)->translatedFormat('H:i') }}" data-lokasi="{{$meet->place}}" data-catatan="{{$meet->notulen}}" onclick="openEditModal('{{$meet->id}}')">Edit</button>
             <button class="deleteButton bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg ml-2" data-nama="Rapat Evaluasi">Delete</button>
         </div>
     </div>
 
     <!-- Modal for Edit -->
     <div id="editModal{{$meet->id}}" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg p-6 w-96">
-            <h2 id="modalTitle" class="text-lg font-semibold mb-4">Tambahkan Jadwal Khusus Pengurus</h2>
+        <form action="{{route('meets_updatePengurus', ['meet' => $meet])}}" class="bg-white rounded-lg p-6 w-96" method="post">
+            @csrf
+            @method('put')
+            <h2 id="modalTitle" class="text-lg font-semibold mb-4">Edit Jadwal Khusus Pengurus</h2>
             <label class="block mb-2">Nama Jadwal:</label>
-            <input id="namaJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan nama jadwal">
+            <input name="namaJadwal" id="editNamaJadwal{{$meet->id}}" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan nama jadwal">
 
-            <label class="block mb-2">Tanggal:</label>
-            <input id="tanggalJadwal" type="date" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
+            <div class="flex gap-x-6">
+                <div class="flex flex-col">
+                    <label class="block mb-2">Tanggal:</label>
+                    <input name="tanggalJadwal" id="editTanggalJadwal{{$meet->id}}" type="date" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
+                </div>
+                <div class="flex flex-col">
+                    <label class="block mb-2">Waktu:</label>
+                    <input name="waktuJadwal" id="editWaktuJadwal{{$meet->id}}" type="time" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
+                </div>
+            </div>
+
 
             <label class="block mb-2">Lokasi:</label>
-            <input id="lokasiJadwal" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan lokasi">
+            <input name="lokasiJadwal" id="editLokasiJadwal{{$meet->id}}" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan lokasi">
 
             <label class="block mb-2">Catatan:</label>
-            <textarea id="catatanJadwal" class="border border-gray-300 rounded-lg w-full p-2 mb-4" rows="4" placeholder="Masukkan catatan"></textarea>
+            <textarea id="editCatatanJadwal{{$meet->id}}" class="border border-gray-300 rounded-lg w-full p-2 mb-4" rows="4" placeholder="Masukkan catatan" oninput="readTextarea('{{$meet->id}}')">{!! nl2br(e(urldecode($meet->notulen))) !!}</textarea>
+            <input type="hidden" name="meetDesc" id="meetDesc{{$meet->id}}{{$meet->id}}"></input>
 
             <div class="flex justify-end">
-                <button id="closeModal" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
-                <button id="saveButton" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg">Simpan</button>
+                <button type="button" onclick="closeModal('editModal{{$meet->id}}')" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
+                <button id="submit" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg">Simpan</button>
             </div>
-        </div>
+        </form>
     </div>
     @endforeach
 </div>
@@ -98,34 +118,19 @@ Carbon::setLocale('id');
 
 <script>
     const addModal = document.getElementById('addModal');
-    const editModal = document.getElementById('editModal');
     const deleteModal = document.getElementById('deleteModal');
     const addButton = document.getElementById('addButton');
     const closeButton = document.getElementById('closeModal');
-    const closeEditButton = document.getElementById('closeEditModal');
     const deleteButtons = document.querySelectorAll('.deleteButton');
-    const modalTitle = document.getElementById('modalTitle');
-    const editModalTitle = document.getElementById('editModalTitle');
 
     // Function to show the modal and populate with data if editing
     function showModal(editMode = false, data = {}) {
-        if (editMode) {
-            editModal.classList.remove('hidden');
-            editModal.classList.remove('flex');
-            console.log(editModal.classList);
-            editModalTitle.innerText = 'Edit Jadwal Khusus Pengurus';
-            document.getElementById('editNamaJadwal').value = data.nama;
-            document.getElementById('editTanggalJadwal').value = data.tanggal;
-            document.getElementById('editLokasiJadwal').value = data.lokasi;
-            document.getElementById('editCatatanJadwal').value = data.catatan;
-        } else {
-            addModal.classList.remove('hidden');
-            modalTitle.innerText = 'Tambahkan Jadwal Khusus Pengurus';
-            document.getElementById('namaJadwal').value = '';
-            document.getElementById('tanggalJadwal').value = '';
-            document.getElementById('lokasiJadwal').value = '';
-            document.getElementById('catatanJadwal').value = '';
-        }
+        addModal.classList.remove('hidden');
+        modalTitle.innerText = 'Tambahkan Jadwal Khusus Pengurus';
+        document.getElementById('namaJadwal').value = '';
+        document.getElementById('tanggalJadwal').value = '';
+        document.getElementById('lokasiJadwal').value = '';
+        document.getElementById('catatanJadwal').value = '';
     }
 
     // Show modal when add button is clicked
@@ -133,14 +138,37 @@ Carbon::setLocale('id');
         showModal(false);
     }
 
+    function readTextarea(index) {
+        const textareaValue = document.getElementById(`editCatatanJadwal${index}`).value;
+        document.getElementById(`meetDesc${index}${index}`).value = encodeURIComponent(textareaValue);
+        console.log(document.getElementById(`meetDesc${index}${index}`).value);
+    }
+
     // Show modal when edit button is clicked
-    function openEditModal () {
+    function openEditModal(id) {
+        const button = document.getElementById(`editButton${id}`);
+        const modal = document.getElementById(`editModal${id}`);
         const data = {
-        nama: button.getAttribute('data-nama'),
-        tanggal: button.getAttribute('data-tanggal'),
-        lokasi: button.getAttribute('data-lokasi'),
-        catatan: button.getAttribute('data-catatan')
+            nama: button.getAttribute('data-nama'),
+            tanggal: button.getAttribute('data-tanggal'),
+            waktu: button.getAttribute('data-waktu'),
+            lokasi: button.getAttribute('data-lokasi'),
+            catatan: button.getAttribute('data-catatan')
         };
+        document.getElementById(`editNamaJadwal${id}`).value = data.nama;
+        document.getElementById(`editTanggalJadwal${id}`).value = data.tanggal;
+        document.getElementById(`editWaktuJadwal${id}`).value = data.waktu;
+        document.getElementById(`editLokasiJadwal${id}`).value = data.lokasi;
+        document.getElementById(`editCatatanJadwal${id}`).value = data.catatan;
+        document.getElementById(`meetDesc${id}${id}`).value = data.catatan;
+
+        modal.classList.remove('hidden');
+
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.classList.add('hidden');
+            }
+        }
     }
 
     // Show confirmation modal when delete button is clicked
@@ -170,17 +198,16 @@ Carbon::setLocale('id');
         addModal.classList.add('hidden');
     }
 
-    closeEditButton.onclick = function() {
-        editModal.classList.add('hidden');
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.add('hidden');
     }
 
     // Close modal when clicking outside of the modal
     window.onclick = function(event) {
         if (event.target === addModal) {
             addModal.classList.add('hidden');
-        } else if (event.target === editModal) {
-            editModal.classList.add('hidden');
-        } else
+        }
         if (event.target === deleteModal) {
             deleteModal.classList.add('hidden');
         }
