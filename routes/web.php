@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Meet;
+use App\Models\Misa;
 use App\Models\Admin;
 use App\Models\Event;
 use App\Models\Account;
@@ -15,6 +17,7 @@ use App\Http\Controllers\MisaController;
 use App\Http\Resources\TrainingResource;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\TrainingController;
@@ -22,8 +25,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MisaDetailController;
 use App\Http\Controllers\EventDetailController;
 use App\Http\Controllers\AnnouncementController;
-use App\Models\Meet;
-use App\Models\Misa;
 
 /*
 |--------------------------------------------------------------------------
@@ -344,16 +345,22 @@ Route::get('/update_status_anggota/{id}', [AdminController::class, 'updateStatus
 Route::get('/delete_anggota/{id}', [AdminController::class, 'deleteAnggota'])->name('delete_anggota');
 
 //jadwal pelatihan(admin)
-Route::get('input_pelatihan', function() {
+Route::get('input_pelatihan', function () {
     return view('admin/training/input_pelatihan');
 })->name('input_pelatihan');
 
-Route::get('/input_anggota_pelatihan', function() {
+Route::get('/input_anggota_pelatihan', function () {
     return view('/admin/training/input_anggota_pelatihan');
 })->name('input_anggota_pelatihan');
 
 Route::post('/store_training', [AdminController::class, 'storeTraining'])->name('store_training');
 
-Route::get('/input_anggota_pelatihan', function() {
-    return view('/admin/training/input_anggota_pelatihan');
-})->name('input_anggota_pelatihan');
+
+Route::get('/input_anggota_pelatihan', [GroupController::class, 'inputAnggotaPelatihan'])
+    ->name('input_anggota_pelatihan');
+
+
+Route::post('/add-group', [GroupController::class, 'store'])->name('groups.store');
+Route::post('/groups/{group}/members', [GroupController::class, 'addMember'])->name('groups.addMember');
+Route::put('/groups/{group}/update-members', [GroupController::class, 'updateMembers'])->name('groups.updateMembers');
+Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
