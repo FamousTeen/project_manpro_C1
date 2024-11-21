@@ -3,12 +3,24 @@
 @section('content')
 
     <!-- Colors:
-        1. #740001 - merah gelap
-        2. #ae0001 - merah terang
-        3. #f6f1e3 - netral
-        4. #002366 - biru terang
-        5. #20252f - biru gelap
-    -->
+                            1. #740001 - merah gelap
+                            2. #ae0001 - merah terang
+                            3. #f6f1e3 - netral
+                            4. #002366 - biru terang
+                            5. #20252f - biru gelap
+                        -->
+
+    @php
+        use Carbon\Carbon;
+        use App\Models\Misa;
+
+        Carbon::setLocale('id');
+        $all_misas = Misa::all();
+        $misas = $all_misas->whereBetween('activity_datetime', [
+            Carbon::now()->startOfWeek(),
+            Carbon::now()->endOfWeek(),
+        ])->sortBy('activity_datetime');
+    @endphp
 
     <!-- dokumentasi -->
     <section class="bg-blue-500 text-white h-screen flex items-center justify-center" id="documentation">
@@ -21,111 +33,23 @@
     <section class="bg-[#002366] h-screen p-8" id="jadwal-misa">
         <h2 class="text-3xl font-extrabold mb-4 text-center my-8 text-white">Jadwal Misa</h2>
         <div class="max-w-4xl mx-auto">
-            <!-- Card 1 -->
-            <div class="my-8 bg-[#f6f1e3] text-[#20252f] rounded-xl shadow-lg p-4">
-                <h3 class="ml-12 text-xl font-semibold mb-2">Misa Harian</h3>
-                <hr class="border-[#ae0001] mb-4">
-                <div class="flex place-content-center space-x-32">
-                    <div>
+            @foreach ($misas as $misa)
+                <!-- Card 1 -->
+                <div class="my-8 bg-[#f6f1e3] text-[#20252f] rounded-xl shadow-lg p-4">
+                    <h3 class="ml-12 text-xl font-semibold mb-2">{{ $misa->title }}</h3>
+                    <hr class="border-[#ae0001] mb-4">
+                    <div class="flex ml-12 space-x-32">
                         <div>
-                            <p>Senin-Sabtu</p>
-                        </div>
-                        <div>
-                            <!-- List of hours displayed horizontally -->
-                            <ul class="flex space-x-4">
-                                <li>06.00 WIB</li>
-                                <li>09.00 WIB</li>
-                                <li>15.00 WIB</li>
-                                <li>19.00 WIB</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>Senin-Sabtu</p>
-                        </div>
-                        <div>
-                            <!-- List of hours displayed horizontally -->
-                            <ul class="flex space-x-4 ">
-                                <li>06.00 WIB</li>
-                                <li>09.00 WIB</li>
-                                <li>15.00 WIB</li>
-                                <li>19.00 WIB</li>
-                            </ul>
+                            <div>
+                                <p>{{ Carbon::parse($misa->activity_datetime)->translatedFormat('l, j F Y') }}</p>
+                            </div>
+                            <div>
+                                <p>{{ Carbon::parse($misa->activity_datetime)->translatedFormat('H.i') }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="my-8 bg-[#f6f1e3] text-[#20252f] rounded-xl shadow-lg p-4">
-                <h1 class="ml-12 text-xl font-semibold mb-2">Misa Harian</h1>
-                <hr class="border-[#ae0001] mb-4">
-                <div class="flex place-content-center space-x-32">
-                    <div>
-                        <div>
-                            <p>Senin-Sabtu</p>
-                        </div>
-                        <div>
-                            <!-- List of hours displayed horizontally -->
-                            <ul class="flex space-x-4">
-                                <li>06.00 WIB</li>
-                                <li>09.00 WIB</li>
-                                <li>15.00 WIB</li>
-                                <li>19.00 WIB</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>Senin-Sabtu</p>
-                        </div>
-                        <div>
-                            <!-- List of hours displayed horizontally -->
-                            <ul class="flex space-x-4 ">
-                                <li>06.00 WIB</li>
-                                <li>09.00 WIB</li>
-                                <li>15.00 WIB</li>
-                                <li>19.00 WIB</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="my-8 bg-[#f6f1e3] text-[#20252f] rounded-xl shadow-lg p-4">
-                <h1 class="ml-12 text-xl font-semibold mb-2">Misa Harian</h1>
-                <hr class="border-[#ae0001] mb-4">
-                <div class="flex place-content-center space-x-32">
-                    <div>
-                        <div>
-                            <p>Senin-Sabtu</p>
-                        </div>
-                        <div>
-                            <!-- List of hours displayed horizontally -->
-                            <ul class="flex space-x-4">
-                                <li>06.00 WIB</li>
-                                <li>09.00 WIB</li>
-                                <li>15.00 WIB</li>
-                                <li>19.00 WIB</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p>Senin-Sabtu</p>
-                        </div>
-                        <div>
-                            <!-- List of hours displayed horizontally -->
-                            <ul class="flex space-x-4 ">
-                                <li>06.00 WIB</li>
-                                <li>09.00 WIB</li>
-                                <li>15.00 WIB</li>
-                                <li>19.00 WIB</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            @endforeach
     </section>
 
     <section class="bg-[#f6f1e3] py-16" id="section3">
@@ -183,10 +107,7 @@
             </div>
 
             @php
-                use Carbon\Carbon;
                 use App\Models\Event;
-
-                Carbon::setLocale('id');
                 $events = Event::all();
                 $index = 0;
             @endphp
