@@ -29,24 +29,9 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'group_name' => 'required|string|max:255',
-            'anggota' => 'required|array',
-            'anggota.*' => 'exists:accounts,id', // Ensure all members exist in the Account table
-        ]);
-
-        $group = Group::create([
-            'name' => $validated['group_name'],
-        ]);
-
-        // Attach members
-        $group->members()->attach($validated['anggota']);
-
-        return response()->json([
-            'message' => 'Group created successfully',
-            'group' => $group
-        ]);
+        
     }
+
 
 
 
@@ -111,29 +96,38 @@ class GroupController extends Controller
             'member' => $groupDetail,
         ]);
     }
+
     public function updateMembers(Request $request, $groupId)
     {
-        // Fetch the group or fail if not found
-        dd($request->all());
-        $group = Group::findOrFail($groupId);
+        // Debug the request data to ensure 'member_ids' is an array
 
-        // Validate the input data
+
+        // Validate the request data
         $request->validate([
-            'member_ids' => 'required|array',
-            'member_ids.*' => 'exists:accounts,id', // Ensure IDs are valid
+            'member_ids' => 'required|array',  // Ensure it's an array
+            'member_ids.*' => 'integer|exists:accounts,id', // Validate each account_id
         ]);
 
-        // Remove all existing members from the group
-        $group->groupDetails()->delete();
+        // Retrieve the group by its ID
+        $group = Group::findOrFail($groupId);
 
-        // Add new members to the group
-        foreach ($request->member_ids as $accountId) {
-            $group->groupDetails()->create([
-                'account_id' => $accountId, // Directly use account_id
-            ]);
+        // Get the array of account IDs from the request
+        $accountIds = $request->input('member_ids');
+
+        // Loop through the account IDs and add or update the group_details table
+        foreach ($accountIds as $accountId) {
+            // Check if a record exists in group_details for the group and account
+            $existingGroupDetail = $group->groupDetails()->where('account_id', $accountId)->first();
+
+            if (!$existingGroupDetail) {
+                // If no existing record, create a new entry in group_details
+                $group->groupDetails()->create([
+                    'account_id' => $accountId,
+                ]);
+            }
         }
 
-        return redirect()->route('input_anggota_pelatihan', $groupId)
-            ->with('success', 'Group members updated successfully.');
+        // Optionally, return a response or redirect after the update
+        return redirect()->route('input_anggota_pelatihan')->with('success', 'Group members updated successfully.');
     }
 }
