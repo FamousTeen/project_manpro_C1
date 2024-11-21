@@ -44,7 +44,7 @@
                                 <p>{{ Carbon::parse($misa->activity_datetime)->translatedFormat('l, j F Y') }}</p>
                             </div>
                             <div>
-                                <p>{{ Carbon::parse($misa->activity_datetime)->translatedFormat('H.i') }}</p>
+                                <p>{{ Carbon::parse($misa->activity_datetime)->translatedFormat('H.i') }} WIB</p>
                             </div>
                         </div>
                     </div>
