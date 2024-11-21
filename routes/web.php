@@ -364,3 +364,11 @@ Route::post('/add-group', [GroupController::class, 'store'])->name('groups.store
 Route::post('/groups/{group}/members', [GroupController::class, 'addMember'])->name('groups.addMember');
 Route::put('/groups/{group}/update-members', [GroupController::class, 'updateMembers'])->name('groups.updateMembers');
 Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
+
+/* DOKUMENTASI */
+// input dokumentasi
+Route::get('/input_dokumentasi', function () {
+    return view('admin/input_foto');
+})->name('documentations');
+// end input dokumentasi
+/* END DOKUMENTASI */
