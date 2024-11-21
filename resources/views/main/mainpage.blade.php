@@ -3,12 +3,12 @@
 @section('content')
 
     <!-- Colors:
-                                1. #740001 - merah gelap
-                                2. #ae0001 - merah terang
-                                3. #f6f1e3 - netral
-                                4. #002366 - biru terang
-                                5. #20252f - biru gelap
-                            -->
+        1. #740001 - merah gelap
+        2. #ae0001 - merah terang
+        3. #f6f1e3 - netral
+        4. #002366 - biru terang
+        5. #20252f - biru gelap
+    -->
 
     <!-- dokumentasi -->
     <section class="bg-blue-500 text-white h-screen flex items-center justify-center" id="documentation">
@@ -186,6 +186,7 @@
                 use Carbon\Carbon;
                 use App\Models\Event;
 
+                Carbon::setLocale('id');
                 $events = Event::all();
                 $index = 0;
             @endphp

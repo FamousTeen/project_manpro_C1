@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('documentations', function (Blueprint $table) {
             $table->id();
+            $table->string('foto');
             $table->timestamps();
         });
     }

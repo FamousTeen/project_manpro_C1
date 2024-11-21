@@ -266,7 +266,7 @@ Route::get('/events/search', function (string $detail) {
 });
 
 Route::put('/events/search/delete/{id}', function (string $id) {
-    $training = Event::where('id', (int)$id)->firstOrFail();
+    $training = Event::where('id', (int) $id)->firstOrFail();
     $training->update(['status' => 0]);
 
     return redirect()->route('events.index')->with('success', 'Pelatihan berhasil dihapus');
@@ -297,7 +297,7 @@ Route::get('/trainings/search/{detail}', function (string $detail) {
 });
 
 Route::put('/trainings/search/delete/{id}', function (string $id) {
-    $training = Training::where('id', (int)$id)->firstOrFail();
+    $training = Training::where('id', (int) $id)->firstOrFail();
     $training->update(['status' => 0]);
 
     return redirect()->route('trainings.index')->with('success', 'Pelatihan berhasil dihapus');
@@ -366,9 +366,18 @@ Route::put('/groups/{group}/update-members', [GroupController::class, 'updateMem
 Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
 
 /* DOKUMENTASI */
-// input dokumentasi
-Route::get('/input_dokumentasi', function () {
+// dokumentasi page
+Route::get('/admin/input_dokumentasi', function () {
     return view('admin/input_foto');
 })->name('documentations');
-// end input dokumentasi
+// end dokumentasi page
+
+// insert dokumentasi
+Route::post('/admin/insert', [AdminController::class, 'insertDokumentasi'])->name('insert_photos');
+// end insert dokumentasi
+
+// delete dokumentasi
+Route::get('/admin/delete_dokumentasi/{id}', [AdminController::class, 'deleteDokumentasi'])->name('delete_dokumentasi');
+// end delete dokumentasi
+
 /* END DOKUMENTASI */
