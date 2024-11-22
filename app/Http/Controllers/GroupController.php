@@ -22,16 +22,53 @@ class GroupController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+        // Fetch all accounts
+        $accounts = Account::all();
+
+        // Fetch IDs of existing members in the group (if any)
+        $existingMemberIds = GroupDetail::pluck('account_id')->toArray();
+
+        // Return the view with the data
+        return view('add-group', [
+            'accounts' => $accounts,
+            'existingMemberIds' => $existingMemberIds,
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        
-    }
+        // Decode 'accounts' if it is a JSON string
+        if (is_string($request->accounts)) {
+            $request->merge([
+                'accounts' => json_decode($request->accounts, true),
+            ]);
+        }
 
+        // Validate
+        $validatedData = $request->validate([
+            'group_name' => 'required|string|max:255',
+            'accounts' => 'required|array',
+            'accounts.*' => 'exists:accounts,id',
+        ]);
+
+        // Create group
+        $group = Group::create([
+            'name' => $validatedData['group_name'],
+            'training_id' => null,
+        ]);
+
+        // Attach members
+        foreach ($validatedData['accounts'] as $accountId) {
+            $group->groupDetails()->create(['account_id' => $accountId]);
+        }
+
+        return redirect()->route('input_anggota_pelatihan')->with('success', 'Kelompok berhasil ditambahkan');
+    }
 
 
 
@@ -82,6 +119,7 @@ class GroupController extends Controller
 
     public function addMember(Request $request, Group $group)
     {
+
         $request->validate([
             'account_id' => 'required|exists:accounts,id',
         ]);
@@ -99,35 +137,37 @@ class GroupController extends Controller
 
     public function updateMembers(Request $request, $groupId)
     {
-        // Debug the request data to ensure 'member_ids' is an array
-
-
-        // Validate the request data
+        // Validate the input
+        dd( $request->all());
         $request->validate([
-            'member_ids' => 'required|array',  // Ensure it's an array
-            'member_ids.*' => 'integer|exists:accounts,id', // Validate each account_id
+            'member_ids' => 'required|array',
+            'member_ids.*' => 'exists:accounts,id',  // Validate that each member ID exists in the accounts table
         ]);
-
-        // Retrieve the group by its ID
+    
+        // Get the group
         $group = Group::findOrFail($groupId);
-
-        // Get the array of account IDs from the request
-        $accountIds = $request->input('member_ids');
-
-        // Loop through the account IDs and add or update the group_details table
-        foreach ($accountIds as $accountId) {
-            // Check if a record exists in group_details for the group and account
-            $existingGroupDetail = $group->groupDetails()->where('account_id', $accountId)->first();
-
-            if (!$existingGroupDetail) {
-                // If no existing record, create a new entry in group_details
+    
+        // Convert the comma-separated string back into an array (since the JavaScript now joins with commas)
+        $memberIds = explode(',', $request->input('member_ids')[0]); // Assuming member_ids is an array of strings
+    
+        // Ensure all member IDs are integers
+        $memberIds = array_map('intval', $memberIds);
+    
+        // Sync the group members (this will remove any members not in the new list)
+        // First, delete members that are no longer in the list
+        $group->groupDetails()->whereNotIn('account_id', $memberIds)->delete();
+    
+        // Then, add members that are not already part of the group
+        foreach ($memberIds as $accountId) {
+            // Only add the member if it's not already in the group
+            if (!$group->groupDetails()->where('account_id', $accountId)->exists()) {
                 $group->groupDetails()->create([
                     'account_id' => $accountId,
                 ]);
             }
         }
-
-        // Optionally, return a response or redirect after the update
+    
         return redirect()->route('input_anggota_pelatihan')->with('success', 'Group members updated successfully.');
     }
+    
 }
