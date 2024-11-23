@@ -190,7 +190,7 @@ $accounts = App\Models\Account::all();
                 <label class="block text-sm font-medium text-gray-700">Tambah Anggota</label>
                 <select class="block appearance-none w-full p-2 border border-gray-300 rounded-md bg-white" id="addMemberSelect{{ $group->id }}">
                     @foreach($accounts as $account)
-                @php
+                    @php
                     $isInGroup = $groups->some(fn($group) => $group->groupDetails->contains('account_id', $account->id));
                     @endphp
                     @if (! $isInGroup)
@@ -274,60 +274,60 @@ $accounts = App\Models\Account::all();
         });
     });
 
-document.querySelectorAll("[id^=editModal]").forEach((modal) => {
-    const groupId = modal.id.replace("editModal", "");
-    const addMemberButton = document.getElementById(`addMemberButton${groupId}`);
-    const memberDropdown = document.getElementById(`addMemberSelect${groupId}`);
-    const anggotaTableBody = document.getElementById(`anggotaTableBody${groupId}`);
-    const accountsInput = document.createElement("input");
+    document.querySelectorAll("[id^=editModal]").forEach((modal) => {
+        const groupId = modal.id.replace("editModal", "");
+        const addMemberButton = document.getElementById(`addMemberButton${groupId}`);
+        const memberDropdown = document.getElementById(`addMemberSelect${groupId}`);
+        const anggotaTableBody = document.getElementById(`anggotaTableBody${groupId}`);
+        const accountsInput = document.createElement("input");
 
-    let selectedAccounts = []; // Scoped to each modal
+        let selectedAccounts = []; // Scoped to each modal
 
-    // Hidden input to hold account IDs
-    accountsInput.type = "hidden";
-    accountsInput.name = "member_ids[]";
-    modal.querySelector("form").appendChild(accountsInput);
+        // Hidden input to hold account IDs
+        accountsInput.type = "hidden";
+        accountsInput.name = "member_ids[]";
+        modal.querySelector("form").appendChild(accountsInput);
 
-    // Fetch the group details for this specific groupId
-    const groupDetails = @json($groups);
-    const group = groupDetails.find(group => group.id == groupId);
-    const existingMembers = group.group_details;
+        // Fetch the group details for this specific groupId
+        const groupDetails = @json($groups);
+        const group = groupDetails.find(group => group.id == groupId);
+        const existingMembers = group.group_details;
 
-    // Initialize selectedAccounts with existing group members
-    existingMembers.forEach(member => {
-        selectedAccounts.push(member.account_id);
-    });
-
-    // Update hidden input field with existing member IDs
-    accountsInput.value = selectedAccounts.join(',');
-
-    // Update dropdown based on existing members (exclude existing members)
-    function updateDropdown() {
-        // Filter out the accounts that are already in group_details
-        Array.from(memberDropdown.options).forEach(option => {
-            if (selectedAccounts.includes(parseInt(option.value))) {
-                option.disabled = true; // Disable options already added
-            } else {
-                option.disabled = false;
-            }
+        // Initialize selectedAccounts with existing group members
+        existingMembers.forEach(member => {
+            selectedAccounts.push(member.account_id);
         });
-    }
 
-    // Call the function to update the dropdown options when the modal is opened
-    updateDropdown();
+        // Update hidden input field with existing member IDs
+        accountsInput.value = selectedAccounts.join(',');
 
-    // Handle adding new members
-    addMemberButton.addEventListener("click", function() {
-        const selectedOption = memberDropdown.options[memberDropdown.selectedIndex];
-        const accountId = parseInt(selectedOption.value); // Ensure integer value
-        const accountName = selectedOption.innerText;
+        // Update dropdown based on existing members (exclude existing members)
+        function updateDropdown() {
+            // Filter out the accounts that are already in group_details
+            Array.from(memberDropdown.options).forEach(option => {
+                if (selectedAccounts.includes(parseInt(option.value))) {
+                    option.disabled = true; // Disable options already added
+                } else {
+                    option.disabled = false;
+                }
+            });
+        }
 
-        if (!selectedAccounts.includes(accountId)) {
-            selectedAccounts.push(accountId);
-            accountsInput.value = selectedAccounts.join(',');
+        // Call the function to update the dropdown options when the modal is opened
+        updateDropdown();
 
-            const newRow = document.createElement("tr");
-            newRow.innerHTML = `
+        // Handle adding new members
+        addMemberButton.addEventListener("click", function() {
+            const selectedOption = memberDropdown.options[memberDropdown.selectedIndex];
+            const accountId = parseInt(selectedOption.value); // Ensure integer value
+            const accountName = selectedOption.innerText;
+
+            if (!selectedAccounts.includes(accountId)) {
+                selectedAccounts.push(accountId);
+                accountsInput.value = selectedAccounts.join(',');
+
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
                 <td class="border border-gray-300 px-1 py-1">${anggotaTableBody.rows.length + 1}</td>
                 <td class="border border-gray-300 px-6 py-1">${accountName}</td>
                 <td class="border border-gray-300 px-1 py-1">${selectedOption.dataset.region}</td>
@@ -337,42 +337,121 @@ document.querySelectorAll("[id^=editModal]").forEach((modal) => {
                     </button>
                 </td>
             `;
-            anggotaTableBody.appendChild(newRow);
-            selectedOption.remove();
+                anggotaTableBody.appendChild(newRow);
+                selectedOption.remove();
+                updateDropdown();
+            } else {
+                alert("Member already added.");
+            }
+        });
+
+        // Handle member removal
+        modal.addEventListener("click", function(event) {
+            if (event.target && event.target.classList.contains("remove-member-btn")) {
+                const accountId = event.target.getAttribute("data-account-id");
+                const row = event.target.closest('tr');
+                removeMemberFromGroup(groupId, accountId, row, memberDropdown, selectedAccounts, accountsInput);
+            }
+        });
+
+        // Function to remove a member from selectedAccounts
+        function removeMemberFromGroup(groupId, accountId, row, dropdown, selectedAccounts, accountsInput) {
+            selectedAccounts = selectedAccounts.filter(id => id !== parseInt(accountId));
+            accountsInput.value = selectedAccounts.join(',');
+            row.remove();
+
+            // Re-enable the removed account in the dropdown
+            const accountName = row.cells[1].innerText;
+            const accountRegion = row.cells[2].innerText;
+            const option = document.createElement('option');
+            option.value = accountId;
+            option.setAttribute('data-region', accountRegion);
+            option.textContent = accountName;
+            dropdown.appendChild(option);
+
+            // Update dropdown to reflect changes
             updateDropdown();
-        } else {
-            alert("Member already added.");
         }
     });
 
-    // Handle member removal
-    modal.addEventListener("click", function(event) {
-        if (event.target && event.target.classList.contains("remove-member-btn")) {
-            const accountId = event.target.getAttribute("data-account-id");
-            const row = event.target.closest('tr');
-            removeMemberFromGroup(groupId, accountId, row, memberDropdown, selectedAccounts, accountsInput);
-        }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const addMemberButton = document.getElementById('addMemberButton');
+        const memberDropdown = document.getElementById('memberDropdown');
+        const anggotaTableBody = document.getElementById('anggotaTableBody');
+        const addGroupForm = document.getElementById('addGroupForm');
+
+        // Maintain a list of selected accounts
+        let selectedAccounts = [];
+
+        // Add member on button click
+        addMemberButton.addEventListener('click', () => {
+            const selectedOption = memberDropdown.options[memberDropdown.selectedIndex];
+
+            if (!selectedOption || !selectedOption.value) {
+                alert('Pilih anggota terlebih dahulu.');
+                return;
+            }
+
+            const accountId = selectedOption.value;
+            const accountName = selectedOption.getAttribute('data-name');
+            const accountRegion = selectedOption.getAttribute('data-region');
+
+            // Check if the account is already in the selectedAccounts list
+            if (selectedAccounts.includes(accountId)) {
+                alert('Anggota sudah ditambahkan.');
+                return;
+            }
+
+            // Add account to the selectedAccounts list
+            selectedAccounts.push(accountId);
+
+            // Add the account to the table
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td class="border border-gray-300 px-1 py-1">${selectedAccounts.length}</td>
+                <td class="border border-gray-300 px-6 py-1">${accountName}</td>
+                <td class="border border-gray-300 px-1 py-1">${accountRegion}</td>
+                <td class="border border-gray-300 py-1">
+                    <button type="button" class="remove-member-btn text-red-600" data-account-id="${accountId}">
+                        Remove
+                    </button>
+                </td>
+            `;
+            anggotaTableBody.appendChild(newRow);
+
+            // Remove the added account from the dropdown
+            memberDropdown.remove(memberDropdown.selectedIndex);
+        });
+
+        // Remove member from the table
+        anggotaTableBody.addEventListener('click', (event) => {
+            if (event.target.classList.contains('remove-member-btn')) {
+                const button = event.target;
+                const accountId = button.getAttribute('data-account-id');
+
+                // Remove the account from the selectedAccounts list
+                selectedAccounts = selectedAccounts.filter((id) => id !== accountId);
+
+                // Add the account back to the dropdown
+                const option = document.createElement('option');
+                option.value = accountId;
+                option.textContent = button.closest('tr').children[1].textContent;
+                memberDropdown.appendChild(option);
+
+                // Remove the row from the table
+                button.closest('tr').remove();
+            }
+        });
+
+        // Modify the form submission to include the selected accounts
+        addGroupForm.addEventListener('submit', (event) => {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'accounts';
+            hiddenInput.value = JSON.stringify(selectedAccounts);
+            addGroupForm.appendChild(hiddenInput);
+        });
     });
-
-    // Function to remove a member from selectedAccounts
-    function removeMemberFromGroup(groupId, accountId, row, dropdown, selectedAccounts, accountsInput) {
-        selectedAccounts = selectedAccounts.filter(id => id !== parseInt(accountId));
-        accountsInput.value = selectedAccounts.join(',');
-        row.remove();
-
-        // Re-enable the removed account in the dropdown
-        const accountName = row.cells[1].innerText;
-        const accountRegion = row.cells[2].innerText;
-        const option = document.createElement('option');
-        option.value = accountId;
-        option.setAttribute('data-region', accountRegion);
-        option.textContent = accountName;
-        dropdown.appendChild(option);
-
-        // Update dropdown to reflect changes
-        updateDropdown();
-    }
-});
-
 </script>
 @endsection
