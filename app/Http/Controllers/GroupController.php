@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\Account;
 use App\Models\GroupDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
 
@@ -114,6 +115,7 @@ class GroupController extends Controller
         // Fetch groups and their details
         $groups = Group::with('groupDetails')->get();
 
+
         return view('admin.training.input_anggota_pelatihan', compact('groups'));
     }
 
@@ -138,25 +140,33 @@ class GroupController extends Controller
     public function updateMembers(Request $request, $groupId)
     {
         // Validate the input
-        dd( $request->all());
         $request->validate([
             'member_ids' => 'required|array',
             'member_ids.*' => 'exists:accounts,id',  // Validate that each member ID exists in the accounts table
         ]);
-    
+
+        // Debugging: Log incoming member_ids
+        Log::info('Received member_ids:', $request->input('member_ids')); // Add this line for debugging
+
         // Get the group
         $group = Group::findOrFail($groupId);
-    
+
         // Convert the comma-separated string back into an array (since the JavaScript now joins with commas)
         $memberIds = explode(',', $request->input('member_ids')[0]); // Assuming member_ids is an array of strings
-    
+
+        // Debugging: Log the converted member IDs
+        Log::info('Converted member_ids:', $memberIds); // Add this line for debugging
+
         // Ensure all member IDs are integers
         $memberIds = array_map('intval', $memberIds);
-    
+
         // Sync the group members (this will remove any members not in the new list)
         // First, delete members that are no longer in the list
         $group->groupDetails()->whereNotIn('account_id', $memberIds)->delete();
-    
+
+        // Debugging: Log the result after deletion
+        Log::info('Group members after deletion:', $group->groupDetails()->pluck('account_id')->toArray());
+
         // Then, add members that are not already part of the group
         foreach ($memberIds as $accountId) {
             // Only add the member if it's not already in the group
@@ -166,8 +176,22 @@ class GroupController extends Controller
                 ]);
             }
         }
-    
+
+        // Debugging: Log the final group members
+        Log::info('Final group members:', $group->groupDetails()->pluck('account_id')->toArray());
+
         return redirect()->route('input_anggota_pelatihan')->with('success', 'Group members updated successfully.');
     }
-    
+
+
+    public function getDetails($groupId)
+    {
+        $group = Group::find($groupId);
+        if (!$group) {
+            return response()->json(['error' => 'Group not found'], 404);
+        }
+
+        $groupDetails = $group->members;
+        return response()->json($groupDetails);
+    }
 }
