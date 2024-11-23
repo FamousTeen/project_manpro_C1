@@ -108,33 +108,33 @@ Carbon::now()->endOfWeek(),
 
         <!-- Flexbox for the 7 cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
-                <h4 class="text-xl font-semibold text-[#20252f]">Menjaga ketertiban sakristi</h4>
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#FFFFFF]">Menjaga ketertiban sakristi</h4>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
-                <h4 class="text-xl font-semibold text-[#20252f]">Peka kepada lingkungan sekitar</h4>
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#FFFFFF]">Peka kepada lingkungan sekitar</h4>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
-                <h4 class="text-xl font-semibold text-[#20252f]">5S : Senyum, Sapa, Salam, Sopan, Santun</h4>
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#FFFFFF]">5S : Senyum, Sapa, Salam, Sopan, Santun</h4>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
-                <h4 class="text-xl font-semibold text-[#20252f]">Jaga kebersihan sarana & prasarana yang digunakan oleh
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#FFFFFF]">Jaga kebersihan sarana & prasarana yang digunakan oleh
                     misdinar</h4>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
-                <h4 class="text-xl font-semibold text-[#20252f]">Menuju integritas dalam melayani sesama</h4>
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#FFFFFF]">Menuju integritas dalam melayani sesama</h4>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
-                <h4 class="text-xl font-semibold text-[#20252f]">Kerja cepat tanggap tepat</h4>
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#FFFFFF]">Kerja cepat tanggap tepat</h4>
             </div>
 
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
-                <h4 class="text-xl font-semibold text-[#20252f]">Terbuka, Komunikasi, Kompak, Inisiatif, Peka</h4>
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+                <h4 class="text-xl font-semibold text-[#FFFFFF]">Terbuka, Komunikasi, Kompak, Inisiatif, Peka</h4>
             </div>
         </div>
     </div>
