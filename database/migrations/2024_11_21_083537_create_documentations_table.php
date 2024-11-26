@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('documentations', function (Blueprint $table) {
             $table->id();
             $table->string('foto');
+            $table->bigInteger('status')->default(1);
             $table->timestamps();
         });
     }

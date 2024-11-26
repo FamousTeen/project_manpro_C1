@@ -13,6 +13,8 @@
 @php
 use Carbon\Carbon;
 use App\Models\Misa;
+use App\Models\Documentation;
+$documentations = Documentation::where('status', 1)->get();
 
 Carbon::setLocale('id');
 $all_misas = Misa::all();
@@ -23,32 +25,16 @@ Carbon::now()->endOfWeek(),
 @endphp
 
 <!-- dokumentasi -->
-<div class="bg-blue-500 text-white h-screen flex items-center justify-center" id="documentation">
-
-
+<div class="bg-blue-500 text-white h-[89%] flex items-center justify-center" id="documentation">
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
         <!-- Carousel wrapper -->
-        <div class="relative h-56 overflow-hidden rounded-lg md:h-full">
+        <div class="relative h-56 overflow-hidden md:h-full">
+            @foreach ($documentations as $documentation)
             <!-- Item 1 -->
             <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-                <img src="{{asset('images/foto1.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 object-cover top-1/2 left-1/2" alt="...">
+                <img src="{{asset('images/' . $documentation->foto)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 object-cover top-1/2 left-1/2" alt="...">
             </div>
-            <!-- Item 2 -->
-            <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-                <img src="{{asset('images/foto2.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 3 -->
-            <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-                <img src="{{asset('images/foto3.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 4 -->
-            <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-                <img src="{{asset('images/foto4.jpg')}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div>
-            <!-- Item 5 -->
-            <!-- <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <img src="/docs/images/carousel/carousel-5.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
-            </div> -->
+            @endforeach
         </div>
         <!-- Slider indicators -->
         <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
@@ -76,7 +62,7 @@ Carbon::now()->endOfWeek(),
             </span>
         </button>
     </div>
-    </div>
+</div>
 </div>
 
 <!-- jadwal misa -->
@@ -143,52 +129,69 @@ Carbon::now()->endOfWeek(),
 
 
 <!-- acara yang diadakan -->
-<section class="bg-[#002366] py-16 p-8 text-center" id="section4">
+<section class="bg-[#002366] py-8 p-8 text-center" id="section4">
     <h2 class="text-3xl font-extrabold text-center text-white mb-8">ACARA YANG DIADAKAN</h2>
 
-    <!-- Content Section -->
-    <div class="flex justify-center items-center space-x-4">
-
-        <!-- Left Arrow (Image) -->
-        <div class="flex items-center">
-            <button class="p-2">
-                <img src="../../images/previous_button.png" alt="Previous Event" class="w-8 h-8 hover:opacity-75" />
-            </button>
-        </div>
-
+    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+        <!-- Carousel wrapper -->
         @php
         use App\Models\Event;
-        $events = Event::all();
-        $index = 0;
+        $events = Event::where('status', 1)->get();
         @endphp
+        <div class="relative h-56 overflow-hidden md:h-full">
+            @foreach ($events as $index => $event)
+            <div class="hidden
+            duration-1000 ease-in-out" data-carousel-item>
+                <div class="flex justify-center items-center space-x-4">
+                    <!-- Poster Section (Center) -->
+                    <div class="bg-gray-200 p-6 shadow-lg">
+                        <div class="mb-4">
+                            <img src="/images/{{$event->poster }}" alt="Poster Acara" class="mx-auto w-64" />
+                        </div>
+                        <p class="text-center text-sm mt-2">{{ Carbon::parse($event->date)->translatedFormat('j F Y') }}
+                        </p>
+                    </div>
 
-        <!-- Poster Section (Center) -->
-        <div class="bg-gray-200 p-6 shadow-lg">
-            <div class="mb-4">
-                <img src="/images/{{ $events[$index]->poster }}" alt="Poster Acara" class="mx-auto w-64" />
+                    <!-- Event Details Section (Right) -->
+                    <div class=" p-6 text-left max-w-lg self-start">
+                        <h2 class="text-[#f6f1e3] text-3xl font-semibold mb-4">{{ $event->title }}</h2>
+                        <p class="text-white text-sm">
+                            {!! nl2br(e(urldecode($event->description))) !!}
+                        </p>
+                        <p class="text-white text-sm mt-4">Contact Person: {{ $event->contact_person }}</p>
+                    </div>
+                </div>
             </div>
-            <p class="text-center text-sm mt-2">{{ Carbon::parse($events[$index]->date)->translatedFormat('j F Y') }}
-            </p>
+            @endforeach
         </div>
-
-        <!-- Event Details Section (Right) -->
-        <div class=" p-6 text-left max-w-lg self-start">
-            <h2 class="text-[#f6f1e3] text-3xl font-semibold mb-4">{{ $events[$index]->title }}</h2>
-            <p class="text-white text-sm">
-                {{ $events[$index]->description }}
-            </p>
-            <p class="text-white text-sm mt-4">Contact Person: {{ $events[$index]->contact_person }}</p>
+        <!-- Slider indicators -->
+        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+            @foreach ($events as $index => $event)
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="{{$index == 0 ? true : false}}" aria-label="Slide {{$index+1}}" data-carousel-slide-to="{{$index}}"></button>
+            @endforeach
         </div>
-
-        <!-- Right Arrow (Image) -->
-        <div class="flex items-center">
-            <button class="p-2">
-                <img src="../../images/next_button.png" alt="Next Event" class="w-8 h-8 hover:opacity-75" />
-            </button>
-        </div>
-
+        <!-- Slider controls -->
+        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+                </svg>
+                <span class="sr-only">Previous</span>
+            </span>
+        </button>
+        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                </svg>
+                <span class="sr-only">Next</span>
+            </span>
+        </button>
     </div>
 </section>
+
+</div>
+</div>
 
 <!-- kolekte -->
 <section class="bg-[#f6f1e3] py-16 text-center" id="section5">
@@ -248,11 +251,13 @@ Carbon::now()->endOfWeek(),
     $(document).ready(function() {
         var ElementHeight = $("nav").height();
         var ElementPadding = parseInt($("nav").css('padding').replace("px", ""));
-        var numberMargin = ((ElementHeight + (ElementPadding * 2)) / 27) + 2;
+        var numberMargin = ((ElementHeight + (ElementPadding * 2)) / 26.5) + 2;
         var MarginTop = String(numberMargin) + "rem";
         console.log(MarginTop);
         $("#documentation").css("margin-top", MarginTop);
         console.log($("#documentation").css("margin-top"));
     });
+
+    console.log($('.halo-0').attr('class'));
 </script>
 @endsection
