@@ -223,6 +223,7 @@ Route::get('/input_event', function () {
     $admins = Admin::where('id', '!=', $user->id)->get();
 
     return view('admin/input_event', [
+        'user' => $user,
         'accounts' => $accounts,
         'admins' => $admins
     ]);
@@ -313,7 +314,8 @@ Route::get('/dokumen_pengurus', function () {
 //jadwal
 Route::get('/jadwal_pengurus', function () {
     $meets = Meet::where('permission', 1)->get();
-    return view('admin/khusus_pengurus/jadwal_pengurus', compact('meets'));
+    $user = Auth::guard('admin')->user();
+    return view('admin/khusus_pengurus/jadwal_pengurus', compact('meets', 'user'));
 })->name('jadwal_pengurus');
 
 
@@ -323,8 +325,12 @@ Route::put('updateMeetPengurus', [MeetController::class, 'updatePengurus'])->nam
 
 //jadwal_misa (konfirmasi admin)
 Route::get('/jadwal_misa', function () {
+    $user = Auth::guard('admin')->user();
     $misas = Misa::where('active', 1)->get();
-    return view('admin/jadwal_misa', compact('misas'));
+    return view('admin/jadwal_misa', [
+        'misas' => $misas,
+        'user' => $user
+    ]);
 })->name('jadwal_misa');
 
 //list evaluasi ( admin)
@@ -347,11 +353,13 @@ Route::get('/delete_anggota/{id}', [AdminController::class, 'deleteAnggota'])->n
 
 //jadwal pelatihan(admin)
 Route::get('input_pelatihan', function () {
-    return view('admin/training/input_pelatihan');
+    $user = Auth::guard('admin')->user();
+    return view('admin/training/input_pelatihan', compact('user'));
 })->name('input_pelatihan');
 
 Route::get('/input_anggota_pelatihan', function () {
-    return view('/admin/training/input_anggota_pelatihan');
+    $user = Auth::guard('admin')->user();
+    return view('/admin/training/input_anggota_pelatihan', compact('user'));
 })->name('input_anggota_pelatihan');
 
 Route::post('/store_training', [AdminController::class, 'storeTraining'])->name('store_training');
@@ -369,7 +377,8 @@ Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('gro
 /* DOKUMENTASI */
 // dokumentasi page
 Route::get('/admin/input_dokumentasi', function () {
-    return view('admin/input_foto');
+    $user = Auth::guard('admin')->user();
+    return view('admin/input_foto', compact('user'));
 })->name('documentations');
 // end dokumentasi page
 
@@ -382,6 +391,7 @@ Route::get('/admin/delete_dokumentasi/{id}', [AdminController::class, 'deleteDok
 // end delete dokumentasi
 
 /* END DOKUMENTASI */
+
 Route::get('/groups/members/{group}', [GroupController::class, 'getAvailableMembers'])->name('groups.availableMembers');
 Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create'); // Show the create group modal
 Route::get('/groups/{groupId}/details', [GroupController::class, 'getDetails']);
