@@ -381,6 +381,7 @@ Route::get('/admin/delete_dokumentasi/{id}', [AdminController::class, 'deleteDok
 // end delete dokumentasi
 
 /* END DOKUMENTASI */
+
 Route::get('/groups/members/{group}', [GroupController::class, 'getAvailableMembers'])->name('groups.availableMembers');
 Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create'); // Show the create group modal
 Route::get('/groups/{groupId}/details', [GroupController::class, 'getDetails']);

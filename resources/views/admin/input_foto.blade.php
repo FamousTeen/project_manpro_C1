@@ -7,8 +7,14 @@
                 <h2 class="font-bold text-3xl">Input Foto Dokumentasi</h2>
             </div>
         </div>
-
+        
         <div class="max-w-7xl mx-auto mt-2 p-6">
+            @if (session('success'))
+                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                    role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="bg-[#f6f1e3] p-4 rounded-lg shadow-md mb-6 grid grid-cols-4 gap-4 items-center">
                 <div class="col-span-1">
                     <button onclick="toggleModal()"
