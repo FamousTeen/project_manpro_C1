@@ -93,6 +93,7 @@ Route::put('/trainings/update/{group}/{training}', [TrainingController::class, '
 
 //Jadwal Anggota
 Route::get('/jadwal', [MisaController::class, 'index'])->name('jadwal_anggota');
+Route::get('/search-misas', [MisaController::class, 'search'])->name('misas.search');
 
 //Dashboard
 // Route::get('/dashboard_anggota', [DashboardController::class, 'index'])->name('dashboard_anggota');
