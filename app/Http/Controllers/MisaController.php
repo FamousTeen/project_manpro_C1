@@ -32,7 +32,8 @@ class MisaController extends Controller
             ->keyBy('account_id'); // Key the result by account_id for easier access
 
         if (Auth::guard('admin')->check()) {
-            return view('admin/input_misa', compact('accounts', 'dutyCounts'));
+            $user = Auth::guard('admin')->user();
+            return view('admin/input_misa', compact('accounts', 'dutyCounts', 'user'));
         } elseif (Auth::guard('account')->check()) {
             $user = Auth::guard('account')->user();
             $userData = Account::query()->where(

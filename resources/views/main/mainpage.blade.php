@@ -129,7 +129,7 @@ Carbon::now()->endOfWeek(),
 
 
 <!-- acara yang diadakan -->
-<section class="bg-[#002366] py-8 p-8 text-center" id="section4">
+<section class="bg-[#002366] pt-16 px-8 text-center" id="section4">
     <h2 class="text-3xl font-extrabold text-center text-white mb-8">ACARA YANG DIADAKAN</h2>
 
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
@@ -140,9 +140,8 @@ Carbon::now()->endOfWeek(),
         @endphp
         <div class="relative h-56 overflow-hidden md:h-full">
             @foreach ($events as $index => $event)
-            <div class="hidden
-            duration-1000 ease-in-out" data-carousel-item>
-                <div class="flex justify-center items-center space-x-4">
+            <div class="hidden duration-1000 ease-in-out" data-carousel-item>
+                <div class="bg-[#002366] flex justify-center items-center space-x-4">
                     <!-- Poster Section (Center) -->
                     <div class="bg-gray-200 p-6 shadow-lg">
                         <div class="mb-4">
@@ -165,7 +164,7 @@ Carbon::now()->endOfWeek(),
             @endforeach
         </div>
         <!-- Slider indicators -->
-        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+        <div class="absolute z-30 flex -translate-x-1/2 bottom-24 left-1/2 space-x-3 rtl:space-x-reverse">
             @foreach ($events as $index => $event)
             <button type="button" class="w-3 h-3 rounded-full" aria-current="{{$index == 0 ? true : false}}" aria-label="Slide {{$index+1}}" data-carousel-slide-to="{{$index}}"></button>
             @endforeach
