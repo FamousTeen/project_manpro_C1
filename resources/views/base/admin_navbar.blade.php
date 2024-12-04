@@ -17,6 +17,8 @@
             font-family: 'Poltawski Nowy', serif;
             background-color: #FCF1D5;
         }
+
+        
     </style>
 
     @yield('librarycss')
@@ -57,11 +59,11 @@
                     <button id="dropdownButton"
                         class="flex items-center space-x-2 bg-[#20252f] hover:bg-[#ae0001] text-[#f6f1e3] p-2 transition duration-300 focus:outline-none rounded">
                         @if (isset($user))
-                            <img src="{{ asset('asset/' . $user->photo) }}" alt="Profile Icon"
-                                class="h-8 w-8 rounded-full bg-[#f6f1e3]">
+                        <img src="{{ asset('asset/' . $user->photo) }}" alt="Profile Icon"
+                            class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @else
-                            <img src="../../../asset/profile-circle.256x256.png" alt="Profile Icon"
-                                class="h-8 w-8 rounded-full bg-[#f6f1e3]">
+                        <img src="../../../asset/profile-circle.256x256.png" alt="Profile Icon"
+                            class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @endif
 
                         <span>

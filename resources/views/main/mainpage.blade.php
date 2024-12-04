@@ -1,5 +1,6 @@
 @extends('base.main_navbar')
 
+
 @section('content')
 
 <!-- Colors:
@@ -25,7 +26,7 @@ Carbon::now()->endOfWeek(),
 @endphp
 
 <!-- dokumentasi -->
-<div class="bg-blue-500 text-white h-[89%] flex items-center justify-center" id="documentation">
+<div class="bg-blue-500 text-white h-[89%] flex items-center justify-center w-full max-w-fullx" id="documentation">
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-56 overflow-hidden md:h-full">
@@ -66,9 +67,9 @@ Carbon::now()->endOfWeek(),
 </div>
 
 <!-- jadwal misa -->
-<section class="bg-[#002366] h-screen p-8" id="jadwal-misa">
+<section class="bg-[#002366] h-fit p-8" id="jadwal-misa">
     <h2 class="text-3xl font-extrabold mb-4 text-center my-8 text-white">Jadwal Misa</h2>
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-4xl mx-auto grid grid-cols-2 gap-12">
         @foreach ($misas as $misa)
         <!-- Card 1 -->
         <div class="my-8 bg-[#f6f1e3] text-[#20252f] rounded-xl shadow-lg p-4">
