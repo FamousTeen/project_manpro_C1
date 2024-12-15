@@ -26,14 +26,14 @@ Carbon::now()->endOfWeek(),
 @endphp
 
 <!-- dokumentasi -->
-<div class="bg-blue-500 text-white h-[89%] flex items-center justify-center w-full max-w-fullx" id="documentation">
+<div class="bg-blue-500 text-white h-1/2 lg:h-[89%] flex items-center justify-center w-full max-w-full" id="documentation">
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
         <!-- Carousel wrapper -->
-        <div class="relative h-56 overflow-hidden md:h-full">
+        <div class="relative h-full overflow-hidden md:h-full">
             @foreach ($documentations as $documentation)
             <!-- Item 1 -->
             <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-                <img src="{{asset('images/' . $documentation->foto)}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 object-cover top-1/2 left-1/2" alt="...">
+                <img src="{{asset('images/' . $documentation->foto)}}" class="absolute block w-full h-full -translate-x-1/2 object-cover -translate-y-1/2 top-1/2 left-1/2" alt="...">
             </div>
             @endforeach
         </div>
@@ -69,13 +69,13 @@ Carbon::now()->endOfWeek(),
 <!-- jadwal misa -->
 <section class="bg-[#002366] h-fit p-8" id="jadwal-misa">
     <h2 class="text-3xl font-extrabold mb-4 text-center my-8 text-white">Jadwal Misa</h2>
-    <div class="max-w-4xl mx-auto grid grid-cols-2 gap-12">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
         @foreach ($misas as $misa)
         <!-- Card 1 -->
         <div class="my-8 bg-[#f6f1e3] text-[#20252f] rounded-xl shadow-lg p-4">
-            <h3 class="ml-12 text-xl font-semibold mb-2">{{ $misa->title }}</h3>
+            <h3 class="text-xl font-semibold">{{ $misa->title }}</h3>
             <hr class="border-[#ae0001] mb-4">
-            <div class="flex ml-12 space-x-32">
+            <div class="flex space-x-32">
                 <div>
                     <div>
                         <p>{{ Carbon::parse($misa->activity_datetime)->translatedFormat('l, j F Y') }}</p>
@@ -143,10 +143,10 @@ Carbon::now()->endOfWeek(),
       @endphp
   
       <!-- Carousel Wrapper -->
-      <div class="relative h-auto overflow-hidden md:h-full">
+      <div class="relative h-full overflow-hidden md:h-1/2 lg:h-[89%]">
         @foreach ($events as $index => $event)
           <div class="{{ $index == 0 ? '' : 'hidden' }} duration-1000 ease-in-out carousel-item" data-carousel-item>
-            <div class="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-x-4">
+            <div class="flex flex-col h-full items-center justify-center space-y-4 md:flex-row md:space-x-4">
               <!-- Poster Section -->
                 <div class="bg-white shadow-lg pb-4 mb-4 p-2 w-fit ">
                   <img src="/images/{{ $event->poster ?: 'default-poster.png' }}" alt="Poster Acara" class="mx-auto w-[256px] h-auto" />
@@ -154,7 +154,7 @@ Carbon::now()->endOfWeek(),
                 </div>
   
               <!-- Event Details Section -->
-              <div class="p-6 text-left max-w-lg md:self-start md:w-1/2 ">
+              <div class="p-6 text-left max-w-lg md:self-center md:w-1/2 ">
                 <h2 class="text-[#f6f1e3] text-3xl font-semibold mb-4">{{ $event->title }}</h2>
                 <p class="text-white text-sm">
                   {!! nl2br(e(urldecode($event->description))) !!}
@@ -167,7 +167,7 @@ Carbon::now()->endOfWeek(),
       </div>
   
       <!-- Indicators -->
-      <div class="absolute z-30 flex -translate-x-1/2 bottom-24 left-1/2 space-x-3 rtl:space-x-reverse">
+      <div class="absolute z-30 flex min-[320px]:bottom-12 -translate-x-1/2 bottom-24 left-1/2 space-x-3 rtl:space-x-reverse">
         @foreach ($events as $index => $event)
           <button type="button" class="w-3 h-3 rounded-full {{ $index == 0 ? 'bg-white' : 'bg-gray-400' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}" data-carousel-slide-to="{{ $index }}"></button>
         @endforeach
