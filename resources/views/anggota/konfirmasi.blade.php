@@ -51,7 +51,7 @@
   @endphp
 
   <!-- Jadwal Misa Section -->
-  <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-16 m-6 mt-5">
+  <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-center gap-16 m-6 mt-5">
     @foreach ($dataMisa as $misa)
     <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[350px] mx-auto resize-y">
       <div class="flex flex-row items-center gap-x-6">

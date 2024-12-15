@@ -27,7 +27,7 @@ Carbon::setLocale('id');
     @endphp
     <!-- Jadwal Misa Section -->
     <div
-        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-16 m-12 mt-10">
+        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center gap-16 m-12 mt-10">
         @foreach ($misa as $m)
         <?php
 

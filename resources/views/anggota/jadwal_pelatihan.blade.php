@@ -29,7 +29,7 @@
   </div>
 
   <!-- Jadwal Misa Section -->
-  <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 m-12 mt-5">
+  <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16 m-12 mt-5">
     <!-- Card 1 -->
     <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px] h-[250px] mx-auto">
       <div class="flex justify-end text-sm text-gray-500" onclick="openModal('modal1')">
