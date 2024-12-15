@@ -18,8 +18,12 @@ use App\Models\Training;
     <div class="grid grid-cols-12">
         <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
             <h1 class="font-bold text-4xl text-center">DASHBOARD</h1>
+            <div class="block lg:hidden text-center mt-4">
+                <h2 class="font-bold text-lg ">Hi, {{ $data->name }}</h2>
+            <p class="font-normal text-sm" id="currentDatePhone"></p>
+            </div>
         </div>
-        <div class="col-start-11 col-span-2 text-right mr-16 mt-8">
+        <div class="col-start-11 col-span-2 text-right mr-16 mt-8 hidden lg:block">
             <h2 class="font-bold text-xl ">Hi, {{ $data->name }}</h2>
             <p class="font-normal text-sm" id="currentDate"></p>
         </div>
@@ -31,7 +35,7 @@ use App\Models\Training;
         <!-- Left Side: Tugas, Panitia, and Pengumuman -->
         <div>
             <!-- Tugas and Panitia Section -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 ml-12 ">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
                 <div
                     class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
                     <div>
@@ -57,8 +61,8 @@ use App\Models\Training;
             </div>
 
             <!-- Pengumuman Section -->
-            <h2 class="font-bold text-xl mb-4 ml-12">Pengumuman</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 ml-12">
+            <h2 class="font-bold text-xl mb-4">Pengumuman</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
                 <?php
 
@@ -123,6 +127,7 @@ use App\Models\Training;
         day: 'numeric'
     };
     document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
+    document.getElementById('currentDatePhone').innerText = today.toLocaleDateString(undefined, options);
 
     // Function to generate the calendar for a specific month and year
     function generateCalendar(year, month) {
