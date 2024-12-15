@@ -46,7 +46,9 @@
                 </button>
                 <a href="{{route('main_page')}}" class="flex items-center ml-4">
                     <img src="../../../images/LOGO_MISDINAR.png" alt="Logo" class="h-12 w-12 mr-2">
-                    <span class="font-bold text-xl">MISDINAR ST. TARSISIUS GEREJA KATOLIK ROH KUDUS</span>
+                    <span class="font-bold text-xl sm:text-lg md:text-base text-xs">
+                        MISDINAR ST. TARSISIUS GEREJA KATOLIK ROH KUDUS
+                    </span>
                 </a>
             </div>
 
