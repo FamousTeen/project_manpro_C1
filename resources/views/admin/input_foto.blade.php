@@ -15,14 +15,14 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <div class="bg-[#f6f1e3] p-4 rounded-lg shadow-md mb-6 grid grid-cols-4 gap-4 items-center">
-                <div class="col-span-1">
+            <div class="bg-[#f6f1e3] p-4 rounded-lg shadow-md mb-6 grid grid-cols-4 gap-4 items-center md:grid-cols-4 md:gap-4">
+                <div class="col-span-4 mb-4 md:col-span-1 md:mb-0 order-2 md:order-1">
                     <button onclick="toggleModal()"
-                        class="flex items-center bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded-md font-semibold ml-12">
+                        class="flex items-center justify-center bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded-md font-semibold w-full md:w-auto">
                         <span class="mr-2">+</span> Tambahkan Foto
                     </button>
                 </div>
-                <div class="text-sm text-[#20252f] border border-gray-300 p-4 rounded-lg bg-white col-span-3 mr-8">
+                <div class="col-span-4 text-sm text-[#20252f] border border-gray-300 p-4 rounded-lg bg-white md:col-span-3 order-1 md:order-2">
                     <p class="font-semibold mb-1">Syarat & Ketentuan Foto</p>
                     <ul class="list-disc ml-4">
                         <li>Ukuran Foto 800x400</li>
@@ -31,6 +31,7 @@
                     </ul>
                 </div>
             </div>
+            
 
             <div class="bg-white border border-gray-300 p-4 rounded-lg">
                 <table class="w-full text-center table-auto">

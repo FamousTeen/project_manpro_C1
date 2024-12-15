@@ -118,8 +118,7 @@
                             </form>
                         </div>
                     </div>
-
-                    <!-- Confirmation Pop-Up for Deletion -->
+                    
                     <div id="deleteConfirm{{ $announcement->id }}"
                         class="hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
                         <div class="bg-white p-6 rounded-lg w-1/3">

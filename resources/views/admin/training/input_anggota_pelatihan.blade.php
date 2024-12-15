@@ -11,15 +11,15 @@ $accounts = App\Models\Account::all();
     <div class="grid">
         <h1 class="text-2xl font-bold text-[#20252f]">Input Anggota Pelatihan</h1>
         <!-- Input Button -->
-        <button id="addButton" class="px-6 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg justify-self-end">+ Add</button>
+        <button id="addButton" class="px-6 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg justify-self-end">+ Add Group</button>
     </div>
 </header>
 
 @foreach ($groups as $group)
 <div class="bg-[#f6f1e3] rounded-lg shadow-lg p-6 mx-16 mb-8 misa-card">
-    <div class="flex justify-between">
+    <div class="flex flex-col md:flex-row justify-between">
         <!-- Group Name -->
-        <div class="flex-1 basis-1/4">
+        <div class="flex-1 basis-1/4 mb-4 md:mb-0">
             <div class="flex items-start space-x-4">
                 <div class="flex-1">
                     <h2 class="text-xl font-semibold">{{ $group->name }}</h2>
@@ -76,6 +76,7 @@ $accounts = App\Models\Account::all();
         </form>
     </div>
 </div>
+
 
 <!-- Modal Tambah Kelompok -->
 <div id="addModal" class="hidden fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 z-50">

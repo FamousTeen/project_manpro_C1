@@ -26,77 +26,96 @@
 
     $accounts = Account::where('id', '!=', $chief->id)->get();
     @endphp
-    <form class="mt-6 rounded-xl py-6 pe-6 ps-12 ms-5 flex bg-[#f6f1e3]" method="POST" action="{{ route('events.update', ['event' => $event]) }}" enctype="multipart/form-data">
-        @csrf
-        @method('put')
-        <img src="{{asset('images/contoh_poster.jpg')}}" class="w-64" alt="">
-        <div class="grid ms-10 gap-4 gap-y-2 grid-cols-2 w-3/4">
-            <div>
-                <label for="title">
-                    Judul Acara
-                </label>
-                <input type="text" id="title" name="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value="{{ $event->title}}" />
-            </div>
+    <div class="container-fluid">
+        <form class="rounded-xl py-6 px-6 flex flex-col lg:flex-row bg-[#f6f1e3]" 
+              method="POST" 
+              action="{{ route('events.update', ['event' => $event]) }}" 
+              enctype="multipart/form-data">
+              
+            <!-- Gambar Poster -->
+            <img src="{{ asset('images/contoh_poster.jpg') }}" 
+                 class="w-64 mx-auto lg:mx-0 mb-6 lg:mb-0 lg:mr-10" 
+                 alt="">
 
-            <div>
-                <label for="date" class="mt-2">
-                    Tanggal Acara
-                </label>
-                <input type="date" id="date" name="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required value="{{ Carbon::parse($event->date)->translatedFormat('Y-m-d') }}" />
-            </div>
+            <!-- Grid Form -->
+            <div class="grid grid-cols-1 gap-4 w-full lg:grid-cols-2">
+                <!-- Judul Acara -->
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700">Judul Acara</label>
+                    <input type="text" id="title" name="title" 
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                           required value="{{ $event->title }}">
+                </div>
 
-            <div>
-                <label for="start_time" class="mt-2">
-                    Waktu Mulai
-                </label>
-                <input type="time" id="start_time" name="start_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ Carbon::parse($event->start_time)->translatedFormat('H:i') }}" required />
-            </div>
+                <!-- Tanggal Acara -->
+                <div>
+                    <label for="date" class="block text-sm font-medium text-gray-700">Tanggal Acara</label>
+                    <input type="date" id="date" name="date" 
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                           required value="{{ Carbon::parse($event->date)->translatedFormat('Y-m-d') }}">
+                </div>
 
-            <div>
-                <label for="finished_time" class="mt-2">
-                    Waktu Selesai
-                </label>
-                <input type="time" id="finished_time" name="finished_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ Carbon::parse($event->finished_time)->translatedFormat('H:i') }}" required />
-            </div>
+                <!-- Waktu Mulai -->
+                <div>
+                    <label for="start_time" class="block text-sm font-medium text-gray-700">Waktu Mulai</label>
+                    <input type="time" id="start_time" name="start_time" 
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                           value="{{ Carbon::parse($event->start_time)->translatedFormat('H:i') }}" required>
+                </div>
 
-            <div>
-                <label for="event_chief" class="mt-2">
-                    Ketua Acara
-                </label>
-                <select id="chiefs" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" name="event_chief">
-                    <option value="{{$chief->id}}" selected>{{$chief->name}}</option>
-                    @foreach ($accounts as $account)
-                    <option value="{{$account->id}}">{{$account->name}}</option>
-                    @endforeach
-                </select>
-            </div>
+                <!-- Waktu Selesai -->
+                <div>
+                    <label for="finished_time" class="block text-sm font-medium text-gray-700">Waktu Selesai</label>
+                    <input type="time" id="finished_time" name="finished_time" 
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                           value="{{ Carbon::parse($event->finished_time)->translatedFormat('H:i') }}" required>
+                </div>
 
-            <div>
-                <label for="contact_person" class="mt-2">
-                    Contact Person
-                </label>
-                <input type="text" id="contact_person" name="contact_person" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{$event->contact_person}}" required />
-            </div>
+                <!-- Ketua Acara -->
+                <div>
+                    <label for="chiefs" class="block text-sm font-medium text-gray-700">Ketua Acara</label>
+                    <select id="chiefs" 
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                            name="event_chief">
+                        <option value="{{ $chief->id }}" selected>{{ $chief->name }}</option>
+                        @foreach ($accounts as $account)
+                        <option value="{{ $account->id }}">{{ $account->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-            <div>
-                <label for="phone_number" class="mt-2">
-                    Phone Number
-                </label>
-                <input type="text" id="phone_number" name="phone_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{$event->phone_number}}" required />
-            </div>
+                <!-- Contact Person -->
+                <div>
+                    <label for="contact_person" class="block text-sm font-medium text-gray-700">Contact Person</label>
+                    <input type="text" id="contact_person" name="contact_person" 
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                           value="{{ $event->contact_person }}" required>
+                </div>
 
-            <div>
-                <label for="place" class="mt-2">
-                    Tempat Acara
-                </label>
-                <input type="text" id="place" name="place" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{$event->place}}" required />
-            </div>
+                <!-- Phone Number -->
+                <div>
+                    <label for="phone_number" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="text" id="phone_number" name="phone_number" 
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                           value="{{ $event->phone_number }}" required>
+                </div>
 
-            <div class="flex col-span-2 mt-4 items-start justify-center">
-                <button type="submit" class="text-white bg-[#002366] hover:bg-[#20252f] font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2">Simpan</button>
+                <!-- Tempat Acara -->
+                <div>
+                    <label for="place" class="block text-sm font-medium text-gray-700">Tempat Acara</label>
+                    <input type="text" id="place" name="place" 
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                           value="{{ $event->place }}" required>
+                </div>
+
+                <!-- Tombol Simpan -->
+                <div class="col-span-1 lg:col-span-2 mt-4 flex justify-center">
+                    <button type="submit" 
+                            class="text-white bg-[#002366] hover:bg-[#20252f] font-medium rounded-lg text-sm px-12 py-2.5 text-center">Simpan</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 
     @php
     $meets = Meet::where('event_id', $event->id)->get();

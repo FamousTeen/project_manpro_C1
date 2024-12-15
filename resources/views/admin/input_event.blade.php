@@ -34,7 +34,7 @@
                     <label for="title" class="block text-sm font-medium">Nama Acara</label>
                     <input type="text" name="title" id="title" class="mt-1 block w-full border-gray-300 rounded-md" required>
                 </div>
-                <div class="flex space-x-4">
+                <div class="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
                     <div>
                         <label for="date" class="block text-sm font-medium">Tanggal</label>
                         <input type="date" name="date" id="date" class="mt-1 block w-full border-gray-300 rounded-md" required>
@@ -52,7 +52,7 @@
                     <label for="place" class="block text-sm font-medium">Tempat</label>
                     <input type="text" name="place" id="place" class="mt-1 block w-full border-gray-300 rounded-md" required>
                 </div>
-                <div class="flex space-x-4">
+                <div class="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
                     <div>
                         <label for="contact_person" class="block text-sm font-medium">Contact Person</label>
                         <input type="text" name="contact_person" id="contact_person" class="mt-1 block w-full border-gray-300 rounded-md" required>
@@ -70,7 +70,7 @@
         </div>
 
         <!-- Right Column: Poster Acara and Pengurus Acara Section -->
-        <div class="grid grid-cols-1 gap-2">
+        <div class="grid grid-cols-1 gap-6">
             <div>
                 <div class="bg-[#f6f1e3] p-6 rounded-lg h-56 relative">
                     <h3 class="text-xl font-bold absolute top-4 left-6">Poster Acara</h3>
@@ -88,7 +88,7 @@
             </div>
 
             <!-- Pengurus Acara -->
-            <div class="bg-[#f6f1e3] p-6 rounded-lg grid grid-cols-2 gap-4" id="">
+            <div class="bg-[#f6f1e3] p-6 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="pengurus">
                     <label for="chief" class="block text-sm font-medium">Ketua Acara</label>
                     <select id="chief" name="chief" class="mt-1 block w-full border-gray-300 rounded-md" required>
@@ -174,7 +174,6 @@
             </div>
         </div>
 
-
         <!-- Rundown Upload -->
         <div class="grid grid-cols-1 gap-2">
             <div>
@@ -185,68 +184,26 @@
                             <svg id="upload-icon" class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
-                            <span id="upload-text">Tekan untuk unggah foto</span>
-                            <input id="file-upload" name="rundown_image" type="file" class="hidden" accept=".jpg, .png, .jpeg" onchange="handleFileUpload(event)" required />
+                            <span id="upload-text">Tekan untuk unggah file</span>
+                            <input id="file-upload" name="rundown" type="file" class="hidden" accept=".pdf,.doc,.docx" onchange="handleFileUpload(event)" required />
                             <span id="file-name" class="hidden mt-2 text-gray-800 font-semibold"></span>
                         </label>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-center mt-8">
+        <button type="submit" class="bg-[#002366] hover:bg-[#20252f] text-white px-6 py-2 rounded-lg text-lg font-semibold">
+            Simpan Acara
+        </button>
+    </div>
+</form>
+</div>
 
 
-        <!-- Akses Input Section -->
-        <div class="bg-[#f6f1e3] h-72 p-6 rounded-lg">
-            <input type="hidden" name="selectedAdmin[]" id="selectedAdminInput">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold">Akses Input</h2>
-                <button type="button" onclick="openSearchModal()" class="bg-[#002366] hover:bg-[#20252f] text-white text-sm px-4 py-1 rounded">Tambah +</button>
-            </div>
-            <div class="no-scrollbar overflow-y-auto max-h-52">
-                <table class="w-full">
-                    <thead>
-                        <tr class="text-left border-b-2 border-black">
-                            <th class="pb-2">Nama</th>
-                            <th class="pb-2">Wilayah</th>
-                            <th class="pb-2">Email</th>
-                            <th class="pb-2">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-admin-content"></tbody>
-                </table>
-            </div>
-        </div>
-
-
-        <!-- Jadwal Rapat Input Section -->
-        <div class="bg-[#f6f1e3] h-72 p-6 rounded-lg">
-            <input type="hidden" name="selectedRapat[]" id="selectedRapatInput">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold">Jadwal Rapat</h2>
-                <button type="button" onclick="openRapatModal()" class="bg-[#002366] hover:bg-[#20252f] text-white text-sm px-4 py-1 rounded">Tambah +</button>
-            </div>
-            <div class="no-scrollbar overflow-y-auto max-h-52">
-                <table class="w-full">
-                    <thead>
-                        <tr class="text-left border-b-2 border-black">
-                            <th class="pb-2">Kegiatan</th>
-                            <th class="pb-2">Tanggal & Waktu</th>
-                            <th class="pb-2">Tempat</th>
-                            <th class="pb-2"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="rapat-table-body">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
-        <!-- Save Button -->
-        <div class="text-center col-span-2 mt-4 mb-12">
-            <button type="submit" class="bg-[#002366] hover:bg-[#20252f] w-64 text-white px-6 py-3 rounded-md">Simpan</button>
-        </div>
-        </form>
 
 
         <!-- Panitia Modal -->

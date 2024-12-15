@@ -13,7 +13,8 @@
             <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
                 <h1 class="font-bold text-4xl text-center">EVALUASI</h1>
             </div>
-            <div class="flex flex-col w-full place-items-center col-start-11 col-span-2 text-right mr-16 mt-8">
+            <!-- Responsive Search Bar -->
+            <div class="flex flex-col w-full place-items-center col-span-12 sm:col-span-12 md:col-start-11 md:col-span-2 text-right mr-16 mt-8 sm:mt-4">
                 <div class="flex w-full justify-between sm:w-[250px] md:w-[250px] lg:w-[250px] mt-4">
                     <div class="flex flex-row items-center text-gray-500">
                         <div>
@@ -34,7 +35,7 @@
                 </div>
             </div>
         </div>
-    </div>
+        
 
     <!-- Jadwal Misa Section -->
     <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-16 m-12 mt-10">

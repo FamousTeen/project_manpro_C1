@@ -6,14 +6,6 @@
     
     Carbon::setLocale('id');
     ?>
-    <!-- Colors:
-                                                                                                        1. #740001 - merah gelap
-                                                                                                        2. #ae0001 - merah terang
-                                                                                                        3. #f6f1e3 - netral
-                                                                                                        4. #002366 - biru terang
-                                                                                                        5. #20252f - biru gelap
-                                                                                                    -->
-
     <div class="container mx-auto py-8 mt-8">
         <!-- Input Pengumuman Section -->
         <div class="p-6 mb-8 bg-[#f6f1e3] border border-[#002366] shadow-lg">

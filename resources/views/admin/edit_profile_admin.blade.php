@@ -15,9 +15,9 @@
             <form action="{{ route('update_profile_admin') }}" method="POST">
                 @csrf
                 @method('put')
-                <div class="flex">
+                <div class="flex flex-col sm:flex-row"> <!-- Flex Column for small screens -->
                     <!-- Profile Image Section -->
-                    <div class="relative w-1/3 p-4 ml-8 mt-16">
+                    <div class="relative w-full sm:w-1/3 p-4 ml-8 mt-16 mb-8 sm:mb-0 sm:mt-0"> <!-- Add mb-8 for small screens -->
                         <div class="bg-gray-300 rounded-lg h-48 w-full flex justify-center items-center">
                             <!-- Placeholder for profile image -->
                             <img src="asset/{{ $user->photo }}" class="rounded-lg" alt="">
@@ -35,8 +35,8 @@
                     </div>
 
                     <!-- Profile Information Section -->
-                    <div class="w-2/3 p-4">
-                        <div class="grid grid-cols-2 ml-8 gap-y-8">
+                    <div class="w-full sm:w-2/3 p-4 sm:ml-8">
+                        <div class="grid grid-cols-2 gap-y-8">
                             <div class="text-gray-600 font-semibold">Nama Panggilan</div>
                             <input type="text" class="border border-gray-300 rounded-lg p-2 text-gray-700"
                                 value="{{ $user->name }}" name="name" />

@@ -31,7 +31,7 @@
                     </select>
                 </div>
 
-                <div class="flex space-x-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label for="date" class="block text-sm font-medium">Tanggal Pelatihan</label>
                         <input type="date" name="training_date" id="date"
@@ -43,12 +43,14 @@
                             class="mt-1 block w-full border-gray-300 rounded-md" required>
                     </div>
                 </div>
+
                 <div>
                     <label for="place" class="block text-sm font-medium">Tempat</label>
                     <input type="text" name="place" id="place" class="mt-1 block w-full border-gray-300 rounded-md"
                         required>
                 </div>
-                <div class="flex space-x-4">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label for="contact_person" class="block text-sm font-medium">Contact Person</label>
                         <input type="text" name="contact_person" id="contact_person"
@@ -60,11 +62,13 @@
                             class="mt-1 block w-full border-gray-300 rounded-md" required>
                     </div>
                 </div>
+
                 <div>
                     <label for="description" class="block text-sm font-medium">Catatan</label>
                     <textarea id="description" class="mt-1 block w-full border-gray-300 rounded-md h-24" oninput="readTextarea()"></textarea>
                     <input type="hidden" name="description" value="halo" id="eventDesc" required></input>
                 </div>
+
                 <div class="text-center mt-4">
                     <button type="submit"
                         class="px-8 py-2 bg-[#002366] hover:bg-[#20252f] text-white font-semibold rounded-md transition duration-300">

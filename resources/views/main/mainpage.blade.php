@@ -93,37 +93,40 @@ Carbon::now()->endOfWeek(),
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-extrabold text-center text-[#20252f] mb-8">7 PILAR</h2>
 
-        <!-- Flexbox for the 7 cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6">
-            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+        <!-- Grid layout for 7 cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-6">
+            <!-- First row with 3 cards -->
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center min-h-[150px]">
                 <h4 class="text-xl font-semibold text-[#FFFFFF]">Menjaga ketertiban sakristi</h4>
             </div>
 
-            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center min-h-[150px]">
                 <h4 class="text-xl font-semibold text-[#FFFFFF]">Peka kepada lingkungan sekitar</h4>
             </div>
 
-            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center min-h-[150px]">
                 <h4 class="text-xl font-semibold text-[#FFFFFF]">5S : Senyum, Sapa, Salam, Sopan, Santun</h4>
             </div>
+        </div>
 
-            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
-                <h4 class="text-xl font-semibold text-[#FFFFFF]">Jaga kebersihan sarana & prasarana yang digunakan oleh
-                    misdinar</h4>
+        <!-- Second row with 4 cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center min-h-[150px]">
+                <h4 class="text-xl font-semibold text-[#FFFFFF]">Jaga kebersihan sarana & prasarana yang digunakan oleh misdinar</h4>
             </div>
 
-            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center min-h-[150px]">
                 <h4 class="text-xl font-semibold text-[#FFFFFF]">Menuju integritas dalam melayani sesama</h4>
             </div>
 
-            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center min-h-[150px]">
                 <h4 class="text-xl font-semibold text-[#FFFFFF]">Kerja cepat tanggap tepat</h4>
             </div>
 
-            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center">
+            <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center min-h-[150px]">
                 <h4 class="text-xl font-semibold text-[#FFFFFF]">Terbuka, Komunikasi, Kompak, Inisiatif, Peka</h4>
             </div>
-        </div>
+        </div>  
     </div>
 </section>
 
@@ -132,80 +135,75 @@ Carbon::now()->endOfWeek(),
 <!-- acara yang diadakan -->
 <section class="bg-[#002366] pt-16 px-8 text-center" id="section4">
     <h2 class="text-3xl font-extrabold text-center text-white mb-8">ACARA YANG DIADAKAN</h2>
-
+  
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
-        <!-- Carousel wrapper -->
-        @php
-        use App\Models\Event;
-        $events = Event::where('status', 1)->get();
-        @endphp
-        <div class="relative h-56 overflow-hidden md:h-full">
-            @foreach ($events as $index => $event)
-            <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-                <div class="bg-[#002366] flex justify-center items-center space-x-4">
-                    <!-- Poster Section (Center) -->
-                    <div class="bg-gray-200 p-6 shadow-lg">
-                        <div class="mb-4">
-                            <img src="/images/{{$event->poster }}" alt="Poster Acara" class="mx-auto w-64" />
-                        </div>
-                        <p class="text-center text-sm mt-2">{{ Carbon::parse($event->date)->translatedFormat('j F Y') }}
-                        </p>
-                    </div>
-
-                    <!-- Event Details Section (Right) -->
-                    <div class=" p-6 text-left max-w-lg self-start">
-                        <h2 class="text-[#f6f1e3] text-3xl font-semibold mb-4">{{ $event->title }}</h2>
-                        <p class="text-white text-sm">
-                            {!! nl2br(e(urldecode($event->description))) !!}
-                        </p>
-                        <p class="text-white text-sm mt-4">Contact Person: {{ $event->contact_person }}</p>
-                    </div>
+      @php
+      use App\Models\Event;
+      $events = Event::where('status', 1)->select('title', 'date', 'poster', 'description', 'contact_person')->get();
+      @endphp
+  
+      <!-- Carousel Wrapper -->
+      <div class="relative h-auto overflow-hidden md:h-full">
+        @foreach ($events as $index => $event)
+          <div class="{{ $index == 0 ? '' : 'hidden' }} duration-1000 ease-in-out carousel-item" data-carousel-item>
+            <div class="flex flex-col items-center justify-center space-y-4 md:flex-row md:space-x-4">
+              <!-- Poster Section -->
+                <div class="bg-white shadow-lg pb-4 mb-4 p-2 w-fit ">
+                  <img src="/images/{{ $event->poster ?: 'default-poster.png' }}" alt="Poster Acara" class="mx-auto w-[256px] h-auto" />
+                  <p class="text-center text-sm mt-2">{{ Carbon::parse($event->date)->translatedFormat('j F Y') }}</p>
                 </div>
+  
+              <!-- Event Details Section -->
+              <div class="p-6 text-left max-w-lg md:self-start md:w-1/2 ">
+                <h2 class="text-[#f6f1e3] text-3xl font-semibold mb-4">{{ $event->title }}</h2>
+                <p class="text-white text-sm">
+                  {!! nl2br(e(urldecode($event->description))) !!}
+                </p>
+                <p class="text-white text-sm mt-4">Contact Person: {{ $event->contact_person }}</p>
+              </div>
             </div>
-            @endforeach
-        </div>
-        <!-- Slider indicators -->
-        <div class="absolute z-30 flex -translate-x-1/2 bottom-24 left-1/2 space-x-3 rtl:space-x-reverse">
-            @foreach ($events as $index => $event)
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="{{$index == 0 ? true : false}}" aria-label="Slide {{$index+1}}" data-carousel-slide-to="{{$index}}"></button>
-            @endforeach
-        </div>
-        <!-- Slider controls -->
-        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
-                </svg>
-                <span class="sr-only">Previous</span>
-            </span>
-        </button>
-        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
-                </svg>
-                <span class="sr-only">Next</span>
-            </span>
-        </button>
+          </div>
+        @endforeach
+      </div>
+  
+      <!-- Indicators -->
+      <div class="absolute z-30 flex -translate-x-1/2 bottom-24 left-1/2 space-x-3 rtl:space-x-reverse">
+        @foreach ($events as $index => $event)
+          <button type="button" class="w-3 h-3 rounded-full {{ $index == 0 ? 'bg-white' : 'bg-gray-400' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}" data-carousel-slide-to="{{ $index }}"></button>
+        @endforeach
+      </div>
+  
+      <!-- Navigation Buttons -->
+      <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/75">
+          <svg aria-hidden="true" class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </span>
+      </button>
+      <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/75">
+          <svg aria-hidden="true" class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </span>
+      </button>
+  
     </div>
-</section>
-
-</div>
-</div>
+  </section>
+  
 
 <!-- kolekte -->
 <section class="bg-[#f6f1e3] py-16 text-center" id="section5">
 
     <h2 class="text-3xl font-bold text-[#20252f] mb-8">PERSEMBAHAN KASIH / KOLEKTE</h2>
 
-    <div class="container mx-auto px-4 flex items-center justify-center space-x-4 ml-24">
-        <!-- QR Code Section (Left) -->
+    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
         <div class="w-[300px] flex-shrink-0">
-            <img src="../../images/QRIS_MISDINAR_RK.png" alt="QR Code" class="w-64 h-full object-cover rounded-lg">
+            <img src="../../images/QRIS_MISDINAR_RK.png" alt="QR Code" class="w-64 h-full object-cover rounded-lg mx-auto">
         </div>
 
-        <!-- Description Section (Right) -->
-        <div class="w-[450px] text-left self-start mt-4">
+        <div class="w-[450px] text-center mt-4">
             <p class="font-bold text-[#ae0001] text-xl">
                 Dapat melalui Transfer
             </p><br>
@@ -220,30 +218,36 @@ Carbon::now()->endOfWeek(),
 </section>
 
 
+
 <!-- follow us -->
 <section class="bg-[#002366] py-16 p-8 text-center" id="section6">
-    <div class="flex justify-center items-center space-x-16  mr-16">
-        <h1 class="text-[#f6f1e3] text-3xl font-bold mb-6">FOLLOW US ON</h1>\
+    <div class="container mx-auto">
+        <!-- Title -->
+        <h1 class="text-[#f6f1e3] text-3xl font-bold mb-6">FOLLOW US ON</h1>
 
-        <!-- Instagram Card -->
-        <div class="bg-[#f6f1e3] p-6 rounded-xl shadow-lg w-48 h-60">
-            <a href="https://www.instagram.com/misdinar_rk?igsh=Nnh5bmF1MGZmNnJj">
-                <h2 class="text-pink-600 text-2xl font-semibold mb-4">Instagram</h2>
-                <img src="../../images/logoIG.png" alt="Instagram Logo" class="mx-auto w-64 mb-2">
-                <p class="text-black font-semibold">@misdinar_rk
-                </p>
-            </a>
-        </div>
+        <!-- Cards Section -->
+        <div class="flex flex-col sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 md:flex-wrap items-center space-y-4">
+            <!-- Instagram Card -->
+            <div class="bg-[#f6f1e3] p-6 rounded-xl shadow-lg w-full sm:w-48 h-60">
+                <a href="https://www.instagram.com/misdinar_rk?igsh=Nnh5bmF1MGZmNnJj">
+                    <h2 class="text-pink-600 text-2xl font-semibold mb-4">Instagram</h2>
+                    <img src="../../images/logoIG.png" alt="Instagram Logo" class="mx-auto w-24 mb-2">
+                    <p class="text-black font-semibold">@misdinar_rk</p>
+                </a>
+            </div>
 
-        <!-- TIKTOK Card -->
-        <div class="bg-[#f6f1e3] p-6 rounded-xl shadow-lg w-48 h-60">
-            <a href="https://www.tiktok.com/@misdinar_rk/">
-                <h2 class="text-gray-800 text-2xl font-semibold mb-4">Tiktok</h2>
-                <img src="../../images/logoTiktok.png" alt="YouTube Logo" class="mx-auto w-48 mb-6">
-                <p class="text-black font-semibold">@misdinar_rk</p>
-            </a>
+            <!-- Tiktok Card -->
+            <div class="bg-[#f6f1e3] p-6 rounded-xl shadow-lg w-full sm:w-48 h-60">
+                <a href="https://www.tiktok.com/@misdinar_rk/">
+                    <h2 class="text-gray-800 text-2xl font-semibold mb-4">Tiktok</h2>
+                    <img src="../../images/logoTiktok.png" alt="TikTok Logo" class="mx-auto w-24 mb-6">
+                    <p class="text-black font-semibold">@misdinar_rk</p>
+                </a>
+            </div>
         </div>
+    </div>
 </section>
+
 
 @section('libraryjs')
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

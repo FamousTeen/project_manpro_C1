@@ -44,7 +44,7 @@
                             d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </button>
-                <a href="#" class="flex items-center ml-4">
+                <a href="{{route('main_page')}}" class="flex items-center ml-4">
                     <img src="../../../images/LOGO_MISDINAR.png" alt="Logo" class="h-12 w-12 mr-2">
                     <span class="font-bold text-xl">MISDINAR ST. TARSISIUS GEREJA KATOLIK ROH KUDUS</span>
                 </a>

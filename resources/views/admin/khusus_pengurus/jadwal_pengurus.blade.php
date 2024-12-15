@@ -2,12 +2,12 @@
 
 @section('content')
 <!-- Colors:
-                1. #740001 - merah gelap
-                2. #ae0001 - merah terang
-                3. #f6f1e3 - netral
-                4. #002366 - biru terang
-                5. #20252f - biru gelap
-            -->
+    1. #740001 - merah gelap
+    2. #ae0001 - merah terang
+    3. #f6f1e3 - netral
+    4. #002366 - biru terang
+    5. #20252f - biru gelap
+-->
 
 <div class="container mx-auto py-8 mt-8 flex items-center">
     <h2 class="ml-4 p-6 mt-4 text-2xl font-semibold flex-1">Jadwal Khusus Pengurus</h2>
@@ -15,8 +15,7 @@
 </div>
 
 @if (session('success'))
-<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-    role="alert">
+<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
     {{ session('success') }}
 </div>
 @endif
@@ -28,7 +27,7 @@ Carbon::setLocale('id');
 @endphp
 
 <!-- Card Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mx-16">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mx-16">
     @foreach ($meets as $meet)
     <div class="bg-[#f6f1e3] border border-[#002366] rounded-lg shadow-md p-6 space-y-2">
         <h2 class="text-lg font-semibold text-gray-800">{{$meet->title}}</h2>
@@ -62,7 +61,6 @@ Carbon::setLocale('id');
                     <input name="waktuJadwal" id="editWaktuJadwal{{$meet->id}}" type="time" class="border border-gray-300 rounded-lg w-full p-2 mb-4">
                 </div>
             </div>
-
 
             <label class="block mb-2">Lokasi:</label>
             <input name="lokasiJadwal" id="editLokasiJadwal{{$meet->id}}" type="text" class="border border-gray-300 rounded-lg w-full p-2 mb-4" placeholder="Masukkan lokasi">
@@ -118,6 +116,7 @@ Carbon::setLocale('id');
     <div class="bg-white rounded-lg p-6 w-96 flex flex-col items-center">
         <h2 class="text-lg font-semibold mb-4 text-center">Konfirmasi Penghapusan</h2>
         <p id="deleteMessage" class="mb-4 text-center">Apakah Anda yakin ingin menghapus "<span id="scheduleName"></span>"?</p>
+       
         <div class="flex justify-center w-full">
             <button id="cancelDelete" class="bg-[#ae0001] hover:bg-[#740001] text-white font-semibold px-4 py-2 rounded-lg mr-2">Batal</button>
             <button id="confirmDelete" class="bg-[#002366] hover:bg-[#20252f] text-white font-semibold px-4 py-2 rounded-lg">Hapus</button>
