@@ -8,7 +8,7 @@
                         4. #002366 - biru terang
                         5. #20252f - biru gelap
                     -->
-    <div class="container-fluid m-12 me-0 mt-24">
+    <div class="container-fluid ms-0 m-12 me-0 mt-24">
         <!-- Header Section -->
         <div class="grid grid-cols-12">
             <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
@@ -30,7 +30,7 @@
             <!-- Left Side: Tugas, Panitia, and Pengumuman -->
             <div>
                 <!-- Tugas and Panitia Section -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 ml-4 md:ml-16">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 mx-4">
                     <a href="{{ route('list_anggota') }}">
                         <div
                             class="bg-[#f6f1e3] p-6 rounded-xl flex justify-between gap-x-3 md:gap-x-12 border border-[#002366]">
@@ -70,8 +70,8 @@
                 </div>
 
                 <!-- Pengumuman Section -->
-                <h2 class="font-bold text-xl mb-4 ml-16 text-center">THIS WEEK</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ml-4 md:ml-16">
+                <h2 class="font-bold text-xl mb-4 text-center mx-4">THIS WEEK</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-4">
 
                 @php
 

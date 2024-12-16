@@ -29,7 +29,7 @@
     -->
 
 <body class="bg-white overflow-x-hidden">
-    <nav class="bg-[#20252f] text-white p-4 fixed top-0 left-0 right-0 z-50">
+    <nav class="bg-[#20252f] text-white p-4 fixed top-0 left-0 right-0 z-50z">
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo Section -->
             <a href="{{route('main_page')}}" class="flex items-center">
