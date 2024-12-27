@@ -145,7 +145,7 @@ Carbon::now()->endOfWeek(),
       <!-- Carousel Wrapper -->
       <div class="relative h-full overflow-hidden md:h-1/2 lg:h-[89%]">
         @foreach ($events as $index => $event)
-          <div class="{{ $index == 0 ? '' : 'hidden' }} duration-1000 ease-in-out carousel-item" data-carousel-item>
+          <div class="{{ $index == 0 ? '' : 'hidden' }} duration-1000 ease-in-out carousel-item bg-[#002366]" data-carousel-item>
             <div class="flex flex-col h-full items-center justify-center space-y-4 md:flex-row md:space-x-4">
               <!-- Poster Section -->
                 <div class="bg-white shadow-lg pb-4 mb-4 p-2 w-fit ">
