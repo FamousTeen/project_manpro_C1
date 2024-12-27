@@ -3,6 +3,9 @@
 @section('librarycss')
 <link href="./node_modules/pagedone/src/css/pagedone.css" rel="stylesheet" />
 @endsection
+@php
+    $data=Auth::guard('account')->user();
+@endphp
 
 <!-- Colors:
                 1. #740001 - merah gelap
@@ -17,13 +20,17 @@
   <!-- Header Section -->
   <div class="grid grid-cols-12">
     <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
-      <h1 class="font-bold text-4xl text-center">KONFIRMASI MISA</h1>
+        <h1 class="font-bold text-4xl text-center">KONFIRMASI</h1>
+        <div class="block lg:hidden text-center mt-4">
+            <h2 class="font-bold text-lg ">Hi, {{ $data->name }}</h2>
+        <p class="font-normal text-sm" id="currentDatePhone"></p>
+        </div>
     </div>
-    <div class="col-start-11 col-span-2 text-right mr-16 mt-8">
-      <h2 class="font-bold text-xl ">Hi, Shasa</h2>
-      <p class="font-normal text-sm" id="currentDate"></p>
+    <div class="col-start-11 col-span-2 text-right mr-16 mt-8 hidden lg:block">
+        <h2 class="font-bold text-xl ">Hi, {{ $data->name }}</h2>
+        <p class="font-normal text-sm" id="currentDate"></p>
     </div>
-  </div>
+</div>
 
   <div class="grid grid-cols-1 md:grid-cols-3 justify-center mx-32 mt-5 mb-4">
     @if (session()->has('success'))
@@ -193,6 +200,7 @@
       day: 'numeric'
     };
     document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
+    document.getElementById('currentDatePhone').innerText = today.toLocaleDateString(undefined, options);
 
     // Modal open function
     function openModal(modalId) {

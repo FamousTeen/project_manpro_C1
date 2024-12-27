@@ -1,17 +1,24 @@
 @extends('base/anggota_navbar')
 
 @section('content')
+@php
+    $data=Auth::guard('account')->user();
+@endphp
 <div class="container-fluid m-12 mt-24">
   <!-- Header Section -->
   <div class="grid grid-cols-12">
     <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
-      <h1 class="font-bold text-4xl text-center">JADWAL</h1>
+        <h1 class="font-bold text-4xl text-center">JADWAL</h1>
+        <div class="block lg:hidden text-center mt-4">
+            <h2 class="font-bold text-lg ">Hi, {{ $data->name }}</h2>
+        <p class="font-normal text-sm" id="currentDatePhone"></p>
+        </div>
     </div>
-    <div class="col-start-11 col-span-2 text-right mr-16 mt-8">
-      <h2 class="font-bold text-xl">Hi, Shasa</h2>
-      <p class="font-normal text-sm" id="currentDate"></p>
+    <div class="col-start-11 col-span-2 text-right mr-16 mt-8 hidden lg:block">
+        <h2 class="font-bold text-xl ">Hi, {{ $data->name }}</h2>
+        <p class="font-normal text-sm" id="currentDate"></p>
     </div>
-  </div>
+</div>
 
   <div class="flex flex-row justify-end items-center mt-10 me-40 text-gray-500">
     <form class="w-[200px] max-w-sm" id="searchForm">
@@ -132,6 +139,7 @@
       day: 'numeric'
     };
     document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
+    document.getElementById('currentDatePhone').innerText = today.toLocaleDateString(undefined, options);
 
     function openModal(modalId) {
       document.getElementById(modalId).classList.remove('hidden');

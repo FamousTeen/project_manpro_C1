@@ -1,6 +1,9 @@
 @extends('base/anggota_navbar')
 
 @section('content')
+@php
+    $data=Auth::guard('account')->user();
+@endphp
 
 <!-- Colors: 
         1. #740001 - merah gelap 
