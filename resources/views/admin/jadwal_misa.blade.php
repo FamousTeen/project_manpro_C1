@@ -8,12 +8,12 @@ $accounts = App\Models\Account::all();
 
 <header class="mt-16 p-8">
     <h1 class="text-2xl font-semibold text-[#20252f]">JADWAL MISA</h1>
-    <div class="flex space-x-4 mt-4 ml-8">
+    <div class="flex space-x-4 mt-4 justify-center w-full">
         <!-- Status Filter Buttons -->
-        <button class="px-4 py-2 rounded-lg bg-[#740001] text-white status-filter-button" data-status="all">Semua</button>
-        <button class="px-4 py-2 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button" data-status="Proses">Proses</button>
-        <button class="px-4 py-2 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button" data-status="Tertunda">Tertunda</button>
-        <button class="px-4 py-2 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button" data-status="Berhasil">Berhasil</button>
+        <button class="w-1/4 flex-shrink-0 px-3 py-1 rounded-lg bg-[#740001] text-white status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3">Semua</button>
+        <button class="w-1/4 flex-shrink-0 px-3 py-1 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3">Proses</button>
+        <button class="w-1/4 flex-shrink-0 px-3 py-1 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3">Tertunda</button>
+        <button class="w-1/4 flex-shrink-0 px-3 py-1 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3">Berhasil</button>
     </div>
 </header>
 
