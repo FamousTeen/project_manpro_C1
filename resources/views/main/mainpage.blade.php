@@ -126,7 +126,7 @@ Carbon::now()->endOfWeek(),
             <div class="bg-[#740001] p-6 rounded-lg shadow-lg text-center flex items-center justify-center min-h-[150px]">
                 <h4 class="text-xl font-semibold text-[#FFFFFF]">Terbuka, Komunikasi, Kompak, Inisiatif, Peka</h4>
             </div>
-        </div>  
+        </div>
     </div>
 </section>
 
@@ -135,63 +135,63 @@ Carbon::now()->endOfWeek(),
 <!-- acara yang diadakan -->
 <section class="bg-[#002366] pt-16 px-8 text-center" id="section4">
     <h2 class="text-3xl font-extrabold text-center text-white mb-8">ACARA YANG DIADAKAN</h2>
-  
+
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
-      @php
-      use App\Models\Event;
-      $events = Event::where('status', 1)->select('title', 'date', 'poster', 'description', 'contact_person')->get();
-      @endphp
-  
-      <!-- Carousel Wrapper -->
-      <div class="relative h-full overflow-hidden md:h-1/2 lg:h-[89%]">
-        @foreach ($events as $index => $event)
-          <div class="{{ $index == 0 ? '' : 'hidden' }} duration-1000 ease-in-out carousel-item bg-[#002366]" data-carousel-item>
-            <div class="flex flex-col h-full items-center justify-center space-y-4 md:flex-row md:space-x-4">
-              <!-- Poster Section -->
-                <div class="bg-white shadow-lg pb-4 mb-4 p-2 w-fit ">
-                  <img src="/images/{{ $event->poster ?: 'default-poster.png' }}" alt="Poster Acara" class="mx-auto w-[256px] h-auto" />
-                  <p class="text-center text-sm mt-2">{{ Carbon::parse($event->date)->translatedFormat('j F Y') }}</p>
+        @php
+        use App\Models\Event;
+        $events = Event::where('status', 1)->select('title', 'date', 'poster', 'description', 'contact_person')->get();
+        @endphp
+
+        <!-- Carousel Wrapper -->
+        <div class="relative h-full overflow-hidden md:h-1/2 lg:h-[89%]">
+            @foreach ($events as $index => $event)
+            <div class="{{ $index == 0 ? '' : 'hidden' }} duration-1000 ease-in-out carousel-item bg-[#002366]" data-carousel-item>
+                <div class="flex flex-col h-full items-center justify-center space-y-4 md:flex-row md:space-x-4">
+                    <!-- Poster Section -->
+                    <div class="bg-white shadow-lg pb-4 mb-4 p-2 w-fit ">
+                        <img src="/images/{{ $event->poster ?: 'default-poster.png' }}" alt="Poster Acara" class="mx-auto w-[256px] h-auto" />
+                        <p class="text-center text-sm mt-2">{{ Carbon::parse($event->date)->translatedFormat('j F Y') }}</p>
+                    </div>
+
+                    <!-- Event Details Section -->
+                    <div class="p-6 text-left max-w-lg md:self-center md:w-1/2 ">
+                        <h2 class="text-[#f6f1e3] text-3xl font-semibold mb-4">{{ $event->title }}</h2>
+                        <p class="text-white text-sm">
+                            {!! nl2br(e(urldecode($event->description))) !!}
+                        </p>
+                        <p class="text-white text-sm mt-4">Contact Person: {{ $event->contact_person }}</p>
+                    </div>
                 </div>
-  
-              <!-- Event Details Section -->
-              <div class="p-6 text-left max-w-lg md:self-center md:w-1/2 ">
-                <h2 class="text-[#f6f1e3] text-3xl font-semibold mb-4">{{ $event->title }}</h2>
-                <p class="text-white text-sm">
-                  {!! nl2br(e(urldecode($event->description))) !!}
-                </p>
-                <p class="text-white text-sm mt-4">Contact Person: {{ $event->contact_person }}</p>
-              </div>
             </div>
-          </div>
-        @endforeach
-      </div>
-  
-      <!-- Indicators -->
-      <div class="absolute z-30 flex min-[320px]:bottom-12 -translate-x-1/2 bottom-24 left-1/2 space-x-3 rtl:space-x-reverse">
-        @foreach ($events as $index => $event)
-          <button type="button" class="w-3 h-3 rounded-full {{ $index == 0 ? 'bg-white' : 'bg-gray-400' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}" data-carousel-slide-to="{{ $index }}"></button>
-        @endforeach
-      </div>
-  
-      <!-- Navigation Buttons -->
-      <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/75">
-          <svg aria-hidden="true" class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
-        </span>
-      </button>
-      <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/75">
-          <svg aria-hidden="true" class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </span>
-      </button>
-  
+            @endforeach
+        </div>
+
+        <!-- Indicators -->
+        <div class="absolute z-30 flex min-[320px]:bottom-12 -translate-x-1/2 bottom-24 left-1/2 space-x-3 rtl:space-x-reverse">
+            @foreach ($events as $index => $event)
+            <button type="button" class="w-3 h-3 rounded-full {{ $index == 0 ? 'bg-white' : 'bg-gray-400' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}" data-carousel-slide-to="{{ $index }}"></button>
+            @endforeach
+        </div>
+
+        <!-- Navigation Buttons -->
+        <button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/75">
+                <svg aria-hidden="true" class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </span>
+        </button>
+        <button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/50 group-hover:bg-white/75">
+                <svg aria-hidden="true" class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </span>
+        </button>
+
     </div>
-  </section>
-  
+</section>
+
 
 <!-- kolekte -->
 <section class="bg-[#f6f1e3] py-16 text-center" id="section5">
@@ -254,12 +254,22 @@ Carbon::now()->endOfWeek(),
 <script type="text/javascript">
     $(document).ready(function() {
         var ElementHeight = $("nav").height();
+        var ElementWidth = $("nav").width();
         var ElementPadding = parseInt($("nav").css('padding').replace("px", ""));
-        var numberMargin = ((ElementHeight + (ElementPadding * 2)) / 26.5) + 2;
-        var MarginTop = String(numberMargin) + "rem";
-        console.log(MarginTop);
-        $("#documentation").css("margin-top", MarginTop);
-        console.log($("#documentation").css("margin-top"));
+        if (ElementWidth > 768) {
+            var numberMargin = ((ElementHeight + (ElementPadding * 2)) / 26.5) + 2;
+            var MarginTop = String(numberMargin) + "rem";
+            // console.log(MarginTop);
+            $("#documentation").css("margin-top", MarginTop);
+            // console.log($("#documentation").css("margin-top"));
+        } else {
+            var numberMargin = ((ElementHeight + (ElementPadding * 2)) / 29.5) + 2;
+            var MarginTop = String(numberMargin) + "rem";
+            // console.log(MarginTop);
+            $("#documentation").css("margin-top", MarginTop);
+            // console.log($("#documentation").css("margin-top"));
+        }
+
     });
 
     console.log($('.halo-0').attr('class'));
