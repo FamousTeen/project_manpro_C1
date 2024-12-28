@@ -31,7 +31,7 @@ Carbon::setLocale('id');
     @endphp
     <!-- Jadwal Misa Section -->
     <div
-        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center gap-16 m-12 mt-10">
+        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-16 m-12 mt-10">
         @foreach ($misa as $m)
         <?php
 
@@ -46,7 +46,7 @@ Carbon::setLocale('id');
             ->first()->roles;
         ?>
         <!-- Card 1 -->
-        <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px] mx-auto resize-y">
+        <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px]">
             <div class="flex justify-end text-sm text-gray-500" onclick="openModal('modal{{ $m->id }}')">
                 <a class="mr-1">detail</a>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

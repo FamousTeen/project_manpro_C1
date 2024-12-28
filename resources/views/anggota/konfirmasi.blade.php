@@ -32,7 +32,7 @@
     </div>
 </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 justify-center mx-32 mt-5 mb-4">
+  <div class="flex flex-col w-full place-items-center col-span-12 sm:col-span-12 md:col-start-11 md:col-span-2 text-right mr-16 mt-8 sm:mt-4">
     @if (session()->has('success'))
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
       {{ session('success')}}
@@ -43,9 +43,9 @@
     </div>
     @endif
 
-    <div class="md:col-span-3 text-left">
+    <div class="w-full text-left px-4 md:px-32">
       <h2 class="font-semibold text-md text-gray-500">Perhatikan batas waktu konfirmasi!</h2>
-    </div>
+    </div>    
   </div>
 
   @php
@@ -58,9 +58,9 @@
   @endphp
 
   <!-- Jadwal Misa Section -->
-  <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-center gap-16 m-6 mt-5">
+  <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-16 m-12 mt-10">
     @foreach ($dataMisa as $misa)
-    <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[350px] mx-auto resize-y">
+    <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px]">
       <div class="flex flex-row items-center gap-x-6">
         <p class="text-sm text-gray-600 text-start flex-auto flex-nowrap mb-4">sisa waktu konfirmasi</p>
         <div class="flex flex-row text-sm text-gray-600 countdown">
