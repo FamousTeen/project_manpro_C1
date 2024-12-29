@@ -80,13 +80,15 @@ Route::resource('events', EventController::class)->names([
 
 
 // buat pelatihan
-Route::resource('trainings', TrainingController::class)->names([
+Route::resource('trainings', TrainingController::class)->except(["edit", "update"])->names([
     'index' => 'trainings.index',
     'create' => 'trainings.create',
     'store' => 'trainings.store',
     'show' => 'trainings.show',
     'destroy' => 'trainings.destroy',
 ]);
+
+Route::get('/search-training', [TrainingController::class, 'search'])->name('search-training');
 
 Route::get('/trainings/edit/{group}/{training}', [TrainingController::class, 'edit'])->name('trainings.edit');
 Route::put('/trainings/update/{group}/{training}', [TrainingController::class, 'update'])->name('trainings.update');
@@ -338,7 +340,8 @@ Route::get('/list_evaluasi', [MisaDetailController::class, 'showEvalAdmin'])->na
 
 //jadwal pelatihan(anggota)
 Route::get('/jadwal_pelatihan', function () {
-    return view('anggota/jadwal_pelatihan');
+    $user = Auth::guard('account')->user();
+    return view('anggota/jadwal_pelatihan', ['user' => $user]);
 })->name('jadwal_pelatihan');
 
 /* LIST ANGGOTA DI ADMIN PAGE */

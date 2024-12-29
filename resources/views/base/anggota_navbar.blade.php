@@ -58,7 +58,7 @@
                 <div class="relative">
                     <button id="dropdownButton"
                         class="flex items-center space-x-2 bg-[#20252f] hover:bg-[#ae0001] text-[#f6f1e3] p-2 transition duration-300 focus:outline-none rounded">
-                        @if (isset($user) || isset($data))
+                        @if (isset($user))
                             <img src="../../../asset/{{ $user->photo }}" alt="Profile Icon"
                                 class="h-8 w-8 rounded-full bg-[#f6f1e3]">
                         @else
@@ -67,8 +67,8 @@
                         @endif
 
                         <span>
-                            @if (isset($user) && isset($data))
-                                {{ $data->name }}
+                            @if (isset($user))
+                                {{ $user->name }}
                             @endif
                         </span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Carbon\Carbon;
 use App\Models\Account;
 use App\Models\Training;
@@ -26,7 +27,6 @@ class TrainingController extends Controller
                 'user' => $user,
                 'trainings' => $trainings
             ]);
-
         } elseif (Auth::guard('account')->check()) {
             $user = Auth::guard('account')->user();
 
@@ -128,5 +128,81 @@ class TrainingController extends Controller
         ]);
 
         return redirect()->route('trainings.index')->with('success', 'Pelatihan berhasil dihapus.');
+    }
+
+    public function search(Request $request)
+    {
+        Carbon::setLocale('id');
+        $query = $request->input('query');
+        $user = Auth::guard('account')->user();
+
+        // Daftar translasi nama hari dari Indonesia ke Inggris
+        $dayTranslations = [
+            'minggu' => 'Sunday',
+            'senin' => 'Monday',
+            'selasa' => 'Tuesday',
+            'rabu' => 'Wednesday',
+            'kamis' => 'Thursday',
+            'jumat' => 'Friday',
+            'sabtu' => 'Saturday',
+        ];
+
+        $monthTranslations = [
+            'januari' => 'January',
+            'februari' => 'February',
+            'maret' => 'March',
+            'april' => 'April',
+            'mei' => 'May',
+            'juni' => 'June',
+            'juli' => 'July',
+            'agustus' => 'August',
+            'september' => 'September',
+            'oktober' => 'October',
+            'november' => 'November',
+            'desember' => 'December',
+        ];
+
+        // Cek apakah query adalah nama hari dalam bahasa Indonesia
+        $translatedDay = $dayTranslations[$query] ?? null;
+        $translatedMonth = $monthTranslations[$query] ?? null;
+
+        $trainings = Training::select('id', 'training_date', 'contact_person', 'phone_number') // Kolom yang relevan
+        ->whereHas('trainingDetails', function ($q) use ($user) {
+            $q->where('account_id', $user->id);
+        })
+        ->where(function ($q) use ($query, $translatedDay, $translatedMonth) {
+            $q->where('training_date', 'like', "%$query%"); // Pencarian umum untuk tanggal
+
+            // Pencarian berdasarkan hari
+            if ($translatedDay) {
+                $q->orWhereRaw("DAYNAME(training_date) = ?", [$translatedDay]);
+            }
+
+            // Pencarian berdasarkan bulan
+            if ($translatedMonth) {
+                $q->orWhereRaw("MONTHNAME(training_date) = ?", [$translatedMonth]);
+            }
+
+            // Pencarian berdasarkan tahun
+            if (is_numeric($query) && strlen($query) === 4) {
+                $q->orWhereRaw("YEAR(training_date) = ?", [$query]);
+            }
+
+            // Pencarian berdasarkan jam
+            if (preg_match('/^\d{2}:\d{2}(:\d{2})?$/', $query)) { // Format HH:mm atau HH:mm:ss
+                $q->orWhereRaw("TIME(training_date) = ?", [$query]);
+            }
+
+            // Pencarian berdasarkan contact person
+            $q->orWhere('contact_person', 'like', "%$query%");
+
+            // Pencarian berdasarkan nomor HP
+            $q->orWhere('phone_number', 'like', "%$query%");
+        })
+        ->with(['trainingDetails.account:id,name'])
+        ->distinct() // Memastikan data unik
+        ->get();
+
+        return response()->json($trainings);
     }
 }

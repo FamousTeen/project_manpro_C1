@@ -49,10 +49,10 @@ class TrainingSeeder extends Seeder
 
         DB::table('trainings')->insert([
             'admin_id' => 1,
-            'training_date' => Carbon::now()->addDays(2),
+            'training_date' => Carbon::now()->addDays(2)->addHours(2),
             'place' => 'Lab. Komputer',
             'contact_person' => 'Batagor',
-            'phone_number' => '081929302947',
+            'phone_number' => '081929305555',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce metus erat, feugiat eu hendrerit aliquet, pulvinar eu urna. Curabitur eu sagittis diam. Maecenas faucibus scelerisque.',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
