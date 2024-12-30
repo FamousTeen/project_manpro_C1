@@ -8,13 +8,14 @@ $accounts = App\Models\Account::all();
 
 <header class="mt-16 p-8">
     <h1 class="text-2xl font-semibold text-[#20252f]">JADWAL MISA</h1>
-    <div class="flex space-x-4 mt-4 justify-center w-full">
+    <div class="flex space-x-4 mt-4 justify-center w-full lg:w-3/4 lg:ml-8">
         <!-- Status Filter Buttons -->
-        <button class="w-1/4 flex-shrink-0 px-3 py-1 rounded-lg bg-[#740001] text-white status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3">Semua</button>
-        <button class="w-1/4 flex-shrink-0 px-3 py-1 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3">Proses</button>
-        <button class="w-1/4 flex-shrink-0 px-3 py-1 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3">Tertunda</button>
-        <button class="w-1/4 flex-shrink-0 px-3 py-1 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3">Berhasil</button>
+        <button class="w-1/4 flex-shrink-0 px-3 py-1 rounded-lg bg-[#740001] text-white status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3 active" data-status="all">Semua</button>
+        <button class="w-1/4 flex-shrink-0 px-3 py-1 rounded-lg bg-[#f6f1e3] text-[#20252f] status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3" data-status="Proses">Proses</button>
+        <button class="w-1/4 flex-shrink-0 px-3 py-1 rounded-lg bg-[#f6f1e3] text-[#20252f] status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3" data-status="Tertunda">Tertunda</button>
+        <button class="w-1/4 flex-shrink-0 px-3 py-1 rounded-lg bg-[#f6f1e3] text-[#20252f] status-filter-button text-sm sm:px-4 sm:py-2 lg:px-6 lg:py-3" data-status="Berhasil">Berhasil</button>
     </div>
+    
 </header>
 
 @foreach ($misas as $misa)
@@ -34,15 +35,18 @@ $accounts = App\Models\Account::all();
                     <p class="text-gray-600">{{ Carbon::parse($misa->activity_datetime)->translatedFormat('H:i') }} WIB</p>
                     <p class="mt-2 flex items-center">
                         Status:
-                        <span class="text-black ml-2">
+                        <span class="text-black ml-2 flex items-center">
                             @if ($misa->status == 'Proses')
-                            <span class="text-green-500">{{$misa->status}} ✔</span>
+                                <span class="text-gray-500 mr-1">{{$misa->status}}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#20252f">
+                                    <path d="m614-310 51-51-149-149v-210h-72v240l170 170ZM480-96q-79.38 0-149.19-30T208.5-208.5Q156-261 126-330.96t-30-149.5Q96-560 126-630q30-70 82.5-122t122.46-82q69.96-30 149.5-30t149.55 30.24q70 30.24 121.79 82.08 51.78 51.84 81.99 121.92Q864-559.68 864-480q0 79.38-30 149.19T752-208.5Q700-156 629.87-126T480-96Zm0-384Zm.48 312q129.47 0 220.5-91.5Q792-351 792-480.48q0-129.47-91.02-220.5Q609.95-792 480.48-792 351-792 259.5-700.98 168-609.95 168-480.48 168-351 259.5-259.5T480.48-168Z"/>
+                                </svg>
                             @elseif ($misa->status == 'Tertunda')
-                            <span class="text-yellow-500">{{$misa->status}} ✖</span>
+                                <span class="text-yellow-500 mr-1">{{$misa->status}}</span> ✖
                             @elseif ($misa->status == 'Berhasil')
-                            <span class="text-blue-500">{{$misa->status}} ✔</span>
+                                <span class="text-blue-500 mr-1">{{$misa->status}}</span> ✔
                             @else
-                            <span class="text-gray-500">{{$misa->status}} ✖</span>
+                                <span class="text-gray-500 mr-1">{{$misa->status}}</span> ✖
                             @endif
                         </span>
                     </p>
