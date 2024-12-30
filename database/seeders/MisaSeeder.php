@@ -50,7 +50,7 @@ class MisaSeeder extends Seeder
         ]);
 
         DB::table('misas')->insert([
-            'title' => "Misa Anjay",
+            'title' => "Misa Paskah",
             'category' => "Misa Acara Besar",
             'activity_datetime' => $activityDateTime->subDays(2)->format('Y-m-d H:i:s'),
             'upload_datetime' => Carbon::now()->format('Y-m-d H:i:s'),
