@@ -49,9 +49,6 @@ $misas = App\Models\Misa::all();
                         {{ \Carbon\Carbon::parse($misa->upload_datetime)->format('d-M-Y') }}
                     </p>
                 </div>
-                <div class="mt-4">
-                    <button class="w-full bg-[#002366] text-white py-2 rounded-lg hover:bg-[#20252f] transition-all duration-300">Upload</button>
-                </div>
             </div>
             @endif
 
