@@ -123,6 +123,7 @@ class MisaController extends Controller
             'deadline_datetime' => $request->input('deadline_datetime') ?? null,
             'evaluation' => "",
             'status' => "Proses",
+            'active' => 0,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -136,7 +137,7 @@ class MisaController extends Controller
                 'account_id' => $account_id,
                 'roles' => $role,
                 'participation' => null,
-                'confirmation' => null
+                'confirmation' => null,
             ];
 
             Misa_Detail::create($misaDetailData);
@@ -244,7 +245,7 @@ class MisaController extends Controller
 
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
-            $misas = Misa::where('active', 1)->with('misaDetails')->get();
+            $misas = Misa::with('misaDetails')->get();
 
             // Loop through each misa to update its status
             foreach ($misas as $misa) {
@@ -276,11 +277,14 @@ class MisaController extends Controller
                     $status = "Proses"; // If still pending confirmations and deadline hasn't passed
                 } elseif ($allConfirmed) {
                     $status = "Berhasil"; // If all members have confirmed, set status to 'Berhasil'
+                    $misa->active = 1; // Set active to 1 if status is 'Berhasil'
+
                 } else {
                     $status = "Proses"; // Default status if still in progress
                 }
 
                 // Update the misa status in the database
+                
                 $misa->status = $status;
                 $misa->save();  // Save the updated status to the database
             }
@@ -297,7 +301,7 @@ class MisaController extends Controller
                 ->where('password', $user->password)
                 ->firstOrFail();
 
-            $misas = Misa::query()->where('active', 1)->with('misaDetails')->get();
+            $misas = Misa::with('misaDetails')->get();
 
             // Loop through each misa to update its status
             foreach ($misas as $misa) {
@@ -320,6 +324,8 @@ class MisaController extends Controller
                     $status = "Proses"; // If still pending confirmations and deadline hasn't passed
                 } elseif ($allConfirmed) {
                     $status = "Berhasil"; // If all members have confirmed, set status to 'Berhasil'
+                    $misa->active = 1; // Set active to 1 if status is 'Berhasil'
+
                 } else {
                     $status = "Proses"; // Default status if still in progress
                 }

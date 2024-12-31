@@ -1,4 +1,3 @@
-@ -1,262 +1,145 @@
 @extends('base/admin_navbar')
 
 @section('content')
@@ -19,6 +18,7 @@ $accounts = App\Models\Account::all();
 </header>
 
 @foreach ($misas as $misa)
+@if ($misa->active == '1' || $misa->active == '0')
 <div class="bg-[#f6f1e3] rounded-lg shadow-lg p-6 mx-16 mb-8 misa-card" data-status="{{ $misa->status }}">
     <div class="flex flex-col lg:flex-row justify-between">
         <!-- Schedule Card -->
@@ -96,6 +96,7 @@ $accounts = App\Models\Account::all();
         </form>
     </div>
 </div>
+@endif
 
 
 <!-- Anggota Section Modal for each misa -->

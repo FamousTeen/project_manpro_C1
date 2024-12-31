@@ -29,6 +29,7 @@ $misas = App\Models\Misa::all();
             </div>
 
             @foreach ($misas as $misa)
+            @if ($misa->active == 0)
             <div class="w-64 h-64 bg-[#f6f1e3] p-6 border border-gray-300 rounded-lg shadow-lg flex flex-col justify-between cursor-pointer"
                 onclick="openModal('modal{{ $misa->id }}')">
                 <div class="flex justify-between items-center">
@@ -52,6 +53,7 @@ $misas = App\Models\Misa::all();
                     <button class="w-full bg-[#002366] text-white py-2 rounded-lg hover:bg-[#20252f] transition-all duration-300">Upload</button>
                 </div>
             </div>
+            @endif
 
             <div id="modal{{ $misa->id }}" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal{{ $misa->id }}')">
                 <div class="bg-[#f6f1e3] p-8 rounded-lg w-[700px] h-[400px] relative p-12" onclick="event.stopPropagation()">
@@ -209,8 +211,6 @@ $misas = App\Models\Misa::all();
                                 </form>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
