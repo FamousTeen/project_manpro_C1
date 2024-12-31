@@ -130,8 +130,9 @@ Route::resource('misas', MisaController::class)->names([
     'update' => 'misas.update',
     'destroy' => 'misas.destroy',
 ]);
-Route::get('/jadwal_misa', [MisaController::class, 'showMisaList'])->name('admin.jadwal_misa');
+Route::get('/admin/jadwal_misa', [MisaController::class, 'showMisaList'])->name('admin.jadwal_misa')->middleware('auth:admin');
 Route::post('/misas/{misa}/add-anggota', [MisaController::class, 'addAnggota'])->name('misas.addAnggota');
+
 
 
 // 'edit' => 'misas.edit',

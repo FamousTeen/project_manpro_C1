@@ -123,7 +123,7 @@
                 </button>
                 <!-- Sub-menu -->
                 <ul id="jadwalDropdown" class="ml-8 mt-4 space-y-4 hidden">
-                    <li><a href="{{ route('jadwal_misa') }}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal
+                    <li><a href="{{ route('admin.jadwal_misa') }}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal
                             Misa</a></li>
                     <li><a href="{{ route('events.index') }}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal
                             Acara</a></li>
