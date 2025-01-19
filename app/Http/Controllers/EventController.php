@@ -133,13 +133,15 @@ class EventController extends Controller
         ]);
 
         // Masukin sekretaris
-        EventDetail::create([
-            'event_id' => $event->id,
-            'account_id' => (int)$request->secretary,
-            'roles' => 'Sekretaris',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+        if ($request->secretary != null) {
+            EventDetail::create([
+                'event_id' => $event->id,
+                'account_id' => (int)$request->secretary,
+                'roles' => 'Sekretaris',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        }
 
         if ($request->secretary2 != null) {
             // Masukin sekretaris 2 kalau tidak null
@@ -153,13 +155,15 @@ class EventController extends Controller
         }
 
         // Masukin bendahara
-        EventDetail::create([
-            'event_id' => $event->id,
-            'account_id' => (int)$request->treasurer,
-            'roles' => 'Bendahara',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+        if ($request->treasurer2 != null) {
+            EventDetail::create([
+                'event_id' => $event->id,
+                'account_id' => (int)$request->treasurer,
+                'roles' => 'Bendahara',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        }
 
         if ($request->treasurer2 != null) {
             // Masukin sekretaris 2 kalau tidak null
