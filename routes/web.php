@@ -351,7 +351,12 @@ Route::get('/list_anggota', [AdminController::class, 'showListAnggota'])->name('
 
 // update status anggota
 Route::get('/update_status_anggota/{id}', [AdminController::class, 'updateStatusAnggota'])->name('updateStatusAnggota');
+
+// update role anggota
+Route::get('/update_status_anggota/{id}/{role}', [AdminController::class, 'updateRoleAnggota'])->name('updateRoleAnggota');
 /* END LIST ANGGOTA DI ADMIN PAGE */
+
+
 
 Route::get('/delete_anggota/{id}', [AdminController::class, 'deleteAnggota'])->name('delete_anggota');
 

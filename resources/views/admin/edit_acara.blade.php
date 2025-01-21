@@ -31,6 +31,8 @@
               method="POST" 
               action="{{ route('events.update', ['event' => $event]) }}" 
               enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
               
             <!-- Gambar Poster -->
             <img src="{{ asset('images/contoh_poster.jpg') }}" 

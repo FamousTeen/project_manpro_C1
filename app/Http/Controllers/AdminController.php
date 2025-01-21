@@ -79,7 +79,15 @@ class AdminController extends Controller
         }
         return json_encode($id->status);
     }
+    
+    public function updateRoleAnggota($id, $role)
+    {
+        $id = Account::find($id);
+        $id->update(['roles' => $role]);
+        return response()->json(['role' => $role]);
+    }
 
+    
     public function storeTraining(Request $request)
     {
         $data = $request->all();

@@ -9,7 +9,7 @@
                                                 5. #20252f - biru gelap
                                             -->
 
-    <?php use App\Models\Misa_Detail; ?>
+    <?php use App\Models\Misa_Detail; use App\Models\Account; ?>
     <div class="container mx-auto p-20 mt-8 mb-8 flex flex-col items-center">
         <div class="grid grid-cols-12">
             <div class="col-start-4 col-span-6 mt-8">
@@ -64,6 +64,9 @@
                                 Bertugas
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Role
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Status
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -72,6 +75,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                         $list_anggota = Account::where('status', 1)->get();
+                        @endphp
                         @foreach ($list_anggota as $l)
                             <tr class="odd:bg-white even:bg-gray-100 border-b hover:odd:bg-gray-200 hover:even:bg-gray-200">
                                 <th scope="row" class="px-6 py-4 font-medium text-black whitespace-nowrap">
@@ -97,6 +103,9 @@
                                     ?>
                                     {{ $count }}
                                 </td>
+                                <td id="roleAnggota{{$l->id}}" class="px-6 py-4">
+                                    {{ $l->roles }}
+                                </td>
                                 @if ($l->status == 0)
                                     <td class="px-6 py-4" id="statusCell">
                                         Inactive
@@ -119,11 +128,11 @@
                                     </div>
                                 </td>
                             </tr>
-                            {{-- Modal 1 --}}
+                            {{-- Modal n --}}
                             <div id="modal{{ $l->id }}"
                                 class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
                                 onclick="closeModal('modal{{ $l->id }}')">
-                                <div class="bg-[#f6f1e3] p-8 rounded-lg w-[500px] h-[400px] relative p-12"
+                                <div class="bg-[#f6f1e3] p-8 rounded-lg w-[500px] relative p-12"
                                     onclick="event.stopPropagation()">
                                     <button class="absolute top-4 right-4 text-black"
                                         onclick="closeModal('modal{{ $l->id }}')">
@@ -145,6 +154,26 @@
                                         <div class="flex flex-col mt-5">
                                             <p class="font-bold text-xl">Bertugas: </p>
                                             <p class="font-semibold">{{ $count }}</p>
+                                        </div>
+                                        <div class="flex flex-col mt-5">
+                                            <p class="font-bold text-xl">Role: </p>
+                                            <select id="role_anggota" class="font-semibold border border-gray-300 rounded px-2 py-1" onchange="updateRole('{{ $l->id }}', this.value)">
+                                                @if ($l->roles == 'Anggota')
+                                                    <option value="Anggota" selected>
+                                                        {{ $l->roles }}
+                                                    </option>
+                                                    <option value="Pengurus">
+                                                        Pengurus
+                                                    </option>
+                                                @else
+                                                    <option value="Pengurus" selected>
+                                                        {{ $l->roles }}
+                                                    </option>
+                                                    <option value="Anggota">
+                                                        Anggota
+                                                    </option>
+                                                @endif
+                                            </select>
                                         </div>
                                         <div class="flex flex-col mt-5">
                                             <p class="font-bold text-xl">Status: </p>
@@ -195,6 +224,16 @@
                         document.getElementById('statusLabel').innerHTML = "Active";
                         document.getElementById('statusCell').innerHTML = "Active";
                     }
+                }
+            });
+        }
+
+        function updateRole(id, role) {
+            var url = '{{ url('') }}/update_status_anggota/' + id + "/" + role;
+            $.ajax({
+                url: url,
+                success: function(result) {
+                    document.getElementById(`roleAnggota${id}`).innerHTML = result.role;
                 }
             });
         }
