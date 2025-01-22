@@ -9,9 +9,12 @@ use App\Models\Account;
 use App\Models\EventDetail;
 use App\Models\EventPermission;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use Illuminate\Support\Facades\Validator;
+
+
 
 class EventController extends Controller
 {
@@ -316,5 +319,74 @@ class EventController extends Controller
         ]);
 
         return redirect()->route('events.index')->with('success', 'Acara berhasil dihapus.');
+    }
+
+    /**
+     * Show the form for editing the specified event account.
+     */
+
+
+
+    /**
+     * Update the specified event account.
+     */
+    public function updateEventAccount(Request $request, $accountId)
+    {
+
+        // Validate the incoming data
+        $request->validate([
+            'new_anggota_id' => 'required|exists:accounts,id',
+            'role' => 'required|string' // Define allowed roles
+        ]);
+
+        // Find the event detail associated with the account
+        $eventDetail = EventDetail::where('account_id', $accountId)->first();
+
+        if ($eventDetail) {
+            // Update the account_id and role in the event detail
+            $eventDetail->account_id = $request->new_anggota_id;
+            $eventDetail->roles = $request->role; // Set the new role
+            $eventDetail->save();
+
+            return redirect()->back()->with('success', 'Anggota and role updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Event detail not found.');
+        }
+    }
+
+
+    public function removeEventAccount($eventId, $accountId)
+    {
+        // Find the event detail record
+        $eventDetail = EventDetail::where('event_id', $eventId)
+            ->where('account_id', $accountId)
+            ->firstOrFail();
+
+        // Delete associated event permissions
+        EventPermission::where('event_detail_id', $eventDetail->id)->delete();
+
+        // Delete the event detail record
+        $eventDetail->delete();
+
+        return redirect()->back()->with('success', 'Anggota removed from the event successfully.');
+
+    }
+
+    public function addEventAccount(Request $request, $eventId)
+    {
+        // Validate the incoming data
+        $request->validate([
+            'new_anggota_id' => 'required|exists:accounts,id',
+            'role' => 'required|string' // Ensure the role is a string
+        ]);
+
+        // Create a new EventDetail entry for the event
+        $eventDetail = new EventDetail();
+        $eventDetail->event_id = $eventId;
+        $eventDetail->account_id = $request->new_anggota_id;
+        $eventDetail->roles = $request->role; // Assign the role
+        $eventDetail->save();
+
+        return redirect()->back()->with('success', 'Anggota added to the event successfully.');
     }
 }

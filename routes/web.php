@@ -405,7 +405,6 @@ Route::get('/groups/members/{group}', [GroupController::class, 'getAvailableMemb
 Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create'); // Show the create group modal
 Route::get('/groups/{groupId}/details', [GroupController::class, 'getDetails']);
 
-
 //dokumen BAGIAN ANGGOTA
 Route::get('/dokumen_pengurus', function () {
     return view('anggota/khusus_pengurus/dokumen');
@@ -420,3 +419,15 @@ Route::get('/jadwal_pengurus', function () {
 Route::get('/pengumuman_pengurus', function () {
     return view('anggota/khusus_pengurus/pengumuman');
 })->name('pengumuman_pengurus');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/event-accounts/{id}/edit', [EventController::class, 'editEventAccount'])->name('eventAccounts.edit');
+    
+    Route::delete('/event-accounts/{eventId}/{accountId}/remove', [EventController::class, 'removeEventAccount'])->name('eventAccounts.remove');
+
+});
+Route::put('/admin/eventAccounts/{accountId}/update', [EventController::class, 'updateEventAccount'])->name('admin.eventAccounts.update');
+Route::post('/admin/event/{eventId}/add_anggota', [EventController::class, 'addEventAccount'])->name('admin.eventAccounts.add');
+
+
+Route::post('/meets/store-rapat', [MeetController::class, 'storeRapat'])->name('meets.storeRapat');

@@ -30,8 +30,12 @@ class MeetController extends Controller
      */
     public function store(StoreMeetRequest $request)
     {
+        
+        
         // input rapat pengurus
         $request->validate([
+            
+
             'namaJadwal' => 'required',
             'tanggalJadwal' => 'required|date',
             'waktuJadwal' => 'required',
@@ -42,6 +46,7 @@ class MeetController extends Controller
         $datetime = Carbon::createFromFormat('Y-m-d H:i', $request->tanggalJadwal . ' ' . $request->waktuJadwal);
         
         Meet::create([
+            
             'title' => $request->namaJadwal,
             'date' => $datetime->format('Y-m-d H:i:s'),
             'place' => $request->lokasiJadwal,
@@ -117,5 +122,34 @@ class MeetController extends Controller
     public function destroy(Meet $meet)
     {
         //
+    }
+
+    public function storeRapat(StoreMeetRequest $request)
+    {
+        
+        // input rapat pengurus
+        $request->validate([
+            'event_id' => 'required',
+            'namaJadwal' => 'required',
+            'tanggalJadwal' => 'required|date',
+            'waktuJadwal' => 'required',
+            'lokasiJadwal' => 'required',
+            'meetDesc' => 'required'
+        ]);
+
+        $datetime = Carbon::createFromFormat('Y-m-d H:i', $request->tanggalJadwal . ' ' . $request->waktuJadwal);
+        
+        Meet::create([
+            'title' => $request->namaJadwal,
+            'event_id' => $request->event_id,
+            'date' => $datetime->format('Y-m-d H:i:s'),
+            'place' => $request->lokasiJadwal,
+            'notulen' => $request->meetDesc,
+            'permission' => 1,
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        return redirect()->back()->with('success', 'Rapat pengurus berhasil dibuat.');
     }
 }

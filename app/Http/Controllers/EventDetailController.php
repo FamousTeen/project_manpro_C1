@@ -61,6 +61,6 @@ class EventDetailController extends Controller
      */
     public function destroy(EventDetail $eventDetail)
     {
-        //
+        
     }
 }
