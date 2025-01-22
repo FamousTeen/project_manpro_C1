@@ -2,12 +2,12 @@
 
 @section('content')
     <!-- Colors:
-                                            1. #740001 - merah gelap
-                                            2. #ae0001 - merah terang
-                                            3. #f6f1e3 - netral
-                                            4. #002366 - biru terang
-                                            5. #20252f - biru gelap
-                                        -->
+                                                                        1. #740001 - merah gelap
+                                                                        2. #ae0001 - merah terang
+                                                                        3. #f6f1e3 - netral
+                                                                        4. #002366 - biru terang
+                                                                        5. #20252f - biru gelap
+                                                                    -->
 
     <div class="container-fluid content-body mx-12 ">
         @php
@@ -28,27 +28,13 @@
                     <select id="group" name="group"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required>
-                        @if ($group->name == 'Kelompok 1')
-                            <option value="{{ $group->name }}" selected>{{ $group->name }}</option>
-                            <option value="Kelompok 2">Kelompok 2</option>
-                            <option value="Kelompok 3">Kelompok 3</option>
-                            <option value="Kelompok 4">Kelompok 4</option>
-                        @elseif ($group->name == 'Kelompok 2')
-                            <option value="{{ $group->name }}" selected>{{ $group->name }}</option>
-                            <option value="Kelompok 1">Kelompok 1</option>
-                            <option value="Kelompok 3">Kelompok 3</option>
-                            <option value="Kelompok 4">Kelompok 4</option>
-                        @elseif ($group->name == 'Kelompok 3')
-                            <option value="{{ $group->name }}" selected>{{ $group->name }}</option>
-                            <option value="Kelompok 1">Kelompok 1</option>
-                            <option value="Kelompok 2">Kelompok 2</option>
-                            <option value="Kelompok 4">Kelompok 4</option>
-                        @elseif ($group->name == 'Kelompok 4')
-                            <option value="{{ $group->name }}" selected>{{ $group->name }}</option>
-                            <option value="Kelompok 1">Kelompok 1</option>
-                            <option value="Kelompok 2">Kelompok 2</option>
-                            <option value="Kelompok 3">Kelompok 3</option>
-                        @endif
+                        @foreach ($list_group as $item)
+                            @if ($item->name == $group->name)
+                                <option value="{{ $item->name }}" selected>{{ $item->name }}</option>
+                            @else
+                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                            @endif
+                        @endforeach
                     </select>
                 </div>
 

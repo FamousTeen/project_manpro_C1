@@ -75,8 +75,9 @@ class TrainingController extends Controller
     {
         $trainings = Training::find($training);
         $groups = Group::find($g);
+        $list_group = Group::select('name')->distinct()->get()->sortBy('name');
 
-        return view('admin.training.edit_pelatihan')->with('training', $trainings)->with('group', $groups);
+        return view('admin.training.edit_pelatihan')->with('training', $trainings)->with('group', $groups)->with('list_group', $list_group);
     }
 
     /**
@@ -167,41 +168,41 @@ class TrainingController extends Controller
         $translatedMonth = $monthTranslations[$query] ?? null;
 
         $trainings = Training::select('id', 'training_date', 'contact_person', 'phone_number') // Kolom yang relevan
-        ->whereHas('trainingDetails', function ($q) use ($user) {
-            $q->where('account_id', $user->id);
-        })
-        ->where(function ($q) use ($query, $translatedDay, $translatedMonth) {
-            $q->where('training_date', 'like', "%$query%"); // Pencarian umum untuk tanggal
+            ->whereHas('trainingDetails', function ($q) use ($user) {
+                $q->where('account_id', $user->id);
+            })
+            ->where(function ($q) use ($query, $translatedDay, $translatedMonth) {
+                $q->where('training_date', 'like', "%$query%"); // Pencarian umum untuk tanggal
+    
+                // Pencarian berdasarkan hari
+                if ($translatedDay) {
+                    $q->orWhereRaw("DAYNAME(training_date) = ?", [$translatedDay]);
+                }
 
-            // Pencarian berdasarkan hari
-            if ($translatedDay) {
-                $q->orWhereRaw("DAYNAME(training_date) = ?", [$translatedDay]);
-            }
+                // Pencarian berdasarkan bulan
+                if ($translatedMonth) {
+                    $q->orWhereRaw("MONTHNAME(training_date) = ?", [$translatedMonth]);
+                }
 
-            // Pencarian berdasarkan bulan
-            if ($translatedMonth) {
-                $q->orWhereRaw("MONTHNAME(training_date) = ?", [$translatedMonth]);
-            }
+                // Pencarian berdasarkan tahun
+                if (is_numeric($query) && strlen($query) === 4) {
+                    $q->orWhereRaw("YEAR(training_date) = ?", [$query]);
+                }
 
-            // Pencarian berdasarkan tahun
-            if (is_numeric($query) && strlen($query) === 4) {
-                $q->orWhereRaw("YEAR(training_date) = ?", [$query]);
-            }
+                // Pencarian berdasarkan jam
+                if (preg_match('/^\d{2}:\d{2}(:\d{2})?$/', $query)) { // Format HH:mm atau HH:mm:ss
+                    $q->orWhereRaw("TIME(training_date) = ?", [$query]);
+                }
 
-            // Pencarian berdasarkan jam
-            if (preg_match('/^\d{2}:\d{2}(:\d{2})?$/', $query)) { // Format HH:mm atau HH:mm:ss
-                $q->orWhereRaw("TIME(training_date) = ?", [$query]);
-            }
+                // Pencarian berdasarkan contact person
+                $q->orWhere('contact_person', 'like', "%$query%");
 
-            // Pencarian berdasarkan contact person
-            $q->orWhere('contact_person', 'like', "%$query%");
-
-            // Pencarian berdasarkan nomor HP
-            $q->orWhere('phone_number', 'like', "%$query%");
-        })
-        ->with(['trainingDetails.account:id,name'])
-        ->distinct() // Memastikan data unik
-        ->get();
+                // Pencarian berdasarkan nomor HP
+                $q->orWhere('phone_number', 'like', "%$query%");
+            })
+            ->with(['trainingDetails.account:id,name'])
+            ->distinct() // Memastikan data unik
+            ->get();
 
         return response()->json($trainings);
     }
