@@ -28,7 +28,7 @@
                 role="alert">
                 {{ session('success') }}
             </div>
-        @endif
+        @endif  
 
         <div id="ajaxResult">
             @foreach ($trainings as $training)
@@ -43,7 +43,7 @@
                                     {{ Carbon::parse($training->training_date)->translatedFormat('H.i') }} WIB
                                 </p>
                                 <h1 class="text-xl lg:text-3xl mt-4 mb-4">{{ $g->name }}</h1>
-                                <p class="text-sm lg:text-base">Contact Person : {{ $training->contact_person }} ({{ $training->phone_number }})</p>
+                                <p class="text-sm lg:text-base">Contact Person : {{ $training->contact_person }} ( <a style="color: blue; text-decoration: underline; cursor: pointer;" href="https://wa.me/62{{ $training->phone_number }}">{{ $training->phone_number }}</a>)</p>
                                 <p class="text-sm lg:text-base">Tempat Pelatihan : {{ $training->place }}</p>
                             </div>
                             <!-- Button group for actions -->
@@ -103,7 +103,7 @@
                                         <p class="font-semibold text-lg lg:text-xl">${new Date(result.data[i].training_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                                         <p class="text-sm lg:text-base">${new Date(result.data[i].training_date).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }).replace(":", ".")} WIB</p>
                                         <h1 class="text-xl lg:text-3xl mt-4 mb-4">${result.data[i].groups[0].name}</h1>
-                                        <p class="text-sm lg:text-base">Contact Person : ${result.data[i].contact_person} (${result.data[i].phone_number})</p>
+                                        <p class="text-sm lg:text-base">Contact Person : ${result.data[i].contact_person} (<a style="color: blue; text-decoration: underline; cursor: pointer;" href="https://wa.me/62${result.data[i].phone_number}">${result.data[i].phone_number}</a>)</p>
                                         <p class="text-sm lg:text-base">Tempat Pelatihan : ${result.data[i].place}</p>
                                     </div>
                                     <div class="flex flex-col lg:flex-row lg:items-end lg:justify-end lg:space-x-2 mt-4 lg:mt-0">

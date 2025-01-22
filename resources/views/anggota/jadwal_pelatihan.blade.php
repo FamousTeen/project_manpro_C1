@@ -80,7 +80,7 @@
       <div class="mt-4">
         <p class="font-bold">Contact Person:</p>
         <p>Nama: {{$training->contact_person}}</p>
-        <p>No HP: {{$training->phone_number}}</p>
+        <p>No HP: <a style="color: blue; text-decoration: underline; cursor: pointer;" href="https://wa.me/62{{ $training->phone_number }}">{{ $training->phone_number }}</a></p>
       </div>
     </div>
   </div>
@@ -102,7 +102,7 @@
             <div class="mt-4">
               <p class="font-bold">Contact Person:</p>
               <p>Nama: {{$training->contact_person}}</p>
-              <p>No HP: {{$training->phone_number}}</p>
+              <p>No HP: <a style="color: blue; text-decoration: underline; cursor: pointer;" href="https://wa.me/62{{ $training->phone_number }}">{{ $training->phone_number }}</a></p>
             </div>
           </div>
         </div>
@@ -201,7 +201,7 @@
                     <div class="mt-4">
                         <p class="font-bold">Contact Person:</p>
                         <p>Nama: ${training.contact_person}</p>
-                        <p>No HP: ${training.phone_number}</p>
+                        <p>No HP: <a style="color: blue; text-decoration: underline; cursor: pointer;" href="https://wa.me/62${training.phone_number}">${training.phone_number}</a></p>
                     </div>
                 </div>
             </div>

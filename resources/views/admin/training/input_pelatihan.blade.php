@@ -17,6 +17,13 @@
             <h2 class="ml-4 p-6 mt-4 text-2xl font-semibold">Input Jadwal Pelatihan</h2>
         </div>
 
+        @if (session('success'))
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="bg-[#f6f1e3] p-6 mx-12 rounded-lg mb-8">
             <form method="POST" action="{{ route('store_training') }}" class="grid grid-cols-1 gap-4">
                 @csrf
@@ -57,7 +64,7 @@
                             class="mt-1 block w-full border-gray-300 rounded-md" required>
                     </div>
                     <div>
-                        <label for="phone_number" class="block text-sm font-medium">No. Telepon</label>
+                        <label for="phone_number" class="block text-sm font-medium">No. HP</label>
                         <input type="text" id="phone_number" name="phone_number"
                             class="mt-1 block w-full border-gray-300 rounded-md" required>
                     </div>
