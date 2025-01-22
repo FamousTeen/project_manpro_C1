@@ -420,6 +420,7 @@ Route::get('/pengumuman_pengurus', function () {
     return view('anggota/khusus_pengurus/pengumuman');
 })->name('pengumuman_pengurus');
 
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/event-accounts/{id}/edit', [EventController::class, 'editEventAccount'])->name('eventAccounts.edit');
     
