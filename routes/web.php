@@ -404,3 +404,19 @@ Route::get('/admin/delete_dokumentasi/{id}', [AdminController::class, 'deleteDok
 Route::get('/groups/members/{group}', [GroupController::class, 'getAvailableMembers'])->name('groups.availableMembers');
 Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create'); // Show the create group modal
 Route::get('/groups/{groupId}/details', [GroupController::class, 'getDetails']);
+
+
+//dokumen BAGIAN ANGGOTA
+Route::get('/dokumen_pengurus', function () {
+    return view('anggota/khusus_pengurus/dokumen');
+})->name('dokumen_pengurus');
+
+//jadwal BAGIAN ANGGOTA
+Route::get('/jadwal_pengurus', function () {
+    return view('anggota/khusus_pengurus/jadwal');
+})->name('jadwal_pengurus');
+
+//pengumuman BAGIAN ANGGOTA
+Route::get('/pengumuman_pengurus', function () {
+    return view('anggota/khusus_pengurus/pengumuman');
+})->name('pengumuman_pengurus');
