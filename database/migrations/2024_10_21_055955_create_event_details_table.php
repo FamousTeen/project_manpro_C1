@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('event_id')
                 ->references('id')
                 ->on('events');
-            $table->bigInteger('account_id')->unsigned();
+            $table->bigInteger('account_id')->unsigned()->nullable();
             $table->foreign('account_id')
                 ->references('id')
                 ->on('accounts');

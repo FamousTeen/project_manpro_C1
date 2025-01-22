@@ -11,10 +11,18 @@
 
 <div class="container mx-auto mt-20">
     <h2 class="ml-4 p-6 mt-4 text-2xl font-semibold">Input Acara Misdinar</h2>
-        @if (session('success'))
+    @if (session('success'))
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
         role="alert">
         {{ session('success') }}
+    </div>
+    @elseif ($errors->any())
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
     @endif
 </div>
@@ -101,7 +109,7 @@
                 <div class="pengurus">
                     <label for="chief2" class="block text-sm font-medium">Wakil Ketua Acara</label>
                     <select id="chief2" name="chief2" class="mt-1 block w-full border-gray-300 rounded-md">
-                        <option selected>Pilih Nama Wakil Ketua</option>
+                        <option value="" selected>Pilih Nama Wakil Ketua</option>
                         @foreach ($accounts as $account)
                         <option value="{{$account->id}}">{{$account->name}} - {{$account->region}}</option>
                         @endforeach
@@ -109,8 +117,8 @@
                 </div>
                 <div class="pengurus">
                     <label for="secretary" class="block text-sm font-medium">Sekretaris 1</label>
-                    <select id="secretary" name="secretary" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                        <option selected>Pilih Nama Sekretaris</option>
+                    <select id="secretary" name="secretary" class="mt-1 block w-full border-gray-300 rounded-md">
+                        <option value="" selected>Pilih Nama Sekretaris</option>
                         @foreach ($accounts as $account)
                         <option value="{{$account->id}}">{{$account->name}} - {{$account->region}}</option>
                         @endforeach
@@ -119,7 +127,7 @@
                 <div class="pengurus">
                     <label for="secretary2" class="block text-sm font-medium">Sekretaris 2</label>
                     <select id="secretary2" name="secretary2" class="mt-1 block w-full border-gray-300 rounded-md">
-                        <option selected>Pilih Nama Sekretaris 2</option>
+                        <option value="" selected>Pilih Nama Sekretaris 2</option>
                         @foreach ($accounts as $account)
                         <option value="{{$account->id}}">{{$account->name}} - {{$account->region}}</option>
                         @endforeach
@@ -127,8 +135,8 @@
                 </div>
                 <div class="pengurus">
                     <label for="treasurer" class="block text-sm font-medium">Bendahara 1</label>
-                    <select id="treasurer" name="treasurer" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                        <option selected>Pilih Nama Bendahara</option>
+                    <select id="treasurer" name="treasurer" class="mt-1 block w-full border-gray-300 rounded-md">
+                        <option value="" selected>Pilih Nama Bendahara</option>
                         @foreach ($accounts as $account)
                         <option value="{{$account->id}}">{{$account->name}} - {{$account->region}}</option>
                         @endforeach
@@ -137,7 +145,7 @@
                 <div class="pengurus">
                     <label for="treasurer2" class="block text-sm font-medium">Bendahara 2</label>
                     <select id="treasurer2" name="treasurer2" class="mt-1 block w-full border-gray-300 rounded-md">
-                        <option selected>Pilih Nama Bendahara 2</option>
+                        <option value="" selected>Pilih Nama Bendahara 2</option>
                         @foreach ($accounts as $account)
                         <option value="{{$account->id}}">{{$account->name}} - {{$account->region}}</option>
                         @endforeach
@@ -200,178 +208,178 @@
             Simpan Acara
         </button>
     </div>
-</form>
+    </form>
 </div>
 
 
 
 
-        <!-- Panitia Modal -->
-        <div id="myModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" style="z-index: 1000;">
-            <div class="bg-white rounded-lg p-6 w-96">
-                <h2 class="text-xl font-bold mb-4">Tambah Anggota Panitia</h2>
-                <div class="mb-4 pengurus">
-                    <label for="name-dropdown1" class="block text-sm font-medium">Nama</label>
-                    <select id="name-dropdown1" class="mt-1 block w-full border-gray-300 rounded-md">
-                        <option selected>Pilih Nama Anggota</option>
-                        @foreach ($accounts as $account)
-                        <option value="{{$account->id}}">{{$account->name}} - {{$account->region}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label for="divisi-input" class="block text-sm font-medium">Divisi</label>
-                    <input type="text" id="divisi-input" class="mt-1 block w-full border-gray-300 rounded-md">
-                </div>
-                <div class="flex justify-end">
-                    <button type="button" onclick="closeModal()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded mr-2">Batal</button>
-                    <button type="button" onclick="addAnggota()" class="bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded">Simpan</button>
-                </div>
-            </div>
+<!-- Panitia Modal -->
+<div id="myModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" style="z-index: 1000;">
+    <div class="bg-white rounded-lg p-6 w-96">
+        <h2 class="text-xl font-bold mb-4">Tambah Anggota Panitia</h2>
+        <div class="mb-4 pengurus">
+            <label for="name-dropdown1" class="block text-sm font-medium">Nama</label>
+            <select id="name-dropdown1" class="mt-1 block w-full border-gray-300 rounded-md">
+                <option selected>Pilih Nama Anggota</option>
+                @foreach ($accounts as $account)
+                <option value="{{$account->id}}">{{$account->name}} - {{$account->region}}</option>
+                @endforeach
+            </select>
         </div>
-
-        <!-- Search Modal -->
-        <div id="searchModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" style="z-index: 1000;">
-            <div class="bg-white rounded-lg p-6 w-96 h-64">
-                <h2 class="text-xl font-bold mb-4">Akses Input</h2>
-                <div class="mb-4">
-                    <label for="name-dropdown2" class="block text-sm font-medium">Nama</label>
-                    <select id="name-dropdown2" class="mt-1 block w-full border-gray-300 rounded-md">
-                        <option selected>Pilih Nama Admin</option>
-                        @foreach ($admins as $admin)
-                        <option value="{{$admin->id}}">{{$admin->name}} - {{$admin->region}} - {{$admin->email}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="flex justify-end mt-4">
-                    <button type="button" onclick="addAdmin()" class="bg-[#002366] hover:bg-[#20252f] text-white mt-8 px-4 py-2 rounded">Tambah</button>
-                    <button type="button" onclick="closeSearchModal()" class="bg-gray-300 hover:bg-gray-400 text-black mt-8 px-4 py-2 rounded ml-2">Batal</button>
-                </div>
-            </div>
+        <div class="mb-4">
+            <label for="divisi-input" class="block text-sm font-medium">Divisi</label>
+            <input type="text" id="divisi-input" class="mt-1 block w-full border-gray-300 rounded-md">
         </div>
-
-        <!-- Rapat Input Modal -->
-        <div id="rapatModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" style="z-index: 1000;">
-            <div class="bg-white rounded-lg p-6 w-96">
-                <h2 class="text-xl font-bold mb-4" id="rapat-modal-title">Tambah Jadwal Rapat</h2>
-                <div class="mb-4">
-                    <label for="kegiatan" class="block text-sm font-medium">Kegiatan</label>
-                    <input type="text" id="kegiatan" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                </div>
-                <div class="mb-4">
-                    <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
-                    <input type="date" id="tanggal" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                </div>
-                <div class="mb-4">
-                    <label for="waktu" class="block text-sm font-medium">Waktu</label>
-                    <input type="time" id="waktu" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                </div>
-                <div class="mb-4">
-                    <label for="lokasi" class="block text-sm font-medium">Lokasi</label>
-                    <input type="text" id="lokasi" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                </div>
-                <div class="mb-4">
-                    <label for="catatan" class="block text-sm font-medium">Catatan</label>
-                    <textarea id="catatan" class="mt-1 block w-full border-gray-300 rounded-md" rows="3"></textarea>
-                </div>
-                <div class="flex justify-end mt-4">
-                    <button type="button" onclick="addRapat()" class="bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded">Simpan</button>
-                    <button type="button" onclick="closeRapatModal()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded ml-2">Batal</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Rapat Edit Modal -->
-        <div id="rapatEditModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" style="z-index: 1000;">
-            <div class="bg-white rounded-lg p-6 w-96">
-                <h2 class="text-xl font-bold mb-4" id="rapat-modal-title2">Edit Jadwal Rapat</h2>
-                <div class="mb-4">
-                    <label for="kegiatanEdit" class="block text-sm font-medium">Kegiatan</label>
-                    <input type="text" id="kegiatanEdit" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                </div>
-                <div class="mb-4">
-                    <label for="tanggalEdit" class="block text-sm font-medium">Tanggal</label>
-                    <input type="date" id="tanggalEdit" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                </div>
-                <div class="mb-4">
-                    <label for="waktuEdit" class="block text-sm font-medium">Waktu</label>
-                    <input type="time" id="waktuEdit" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                </div>
-                <div class="mb-4">
-                    <label for="lokasiEdit" class="block text-sm font-medium">Lokasi</label>
-                    <input type="text" id="lokasiEdit" class="mt-1 block w-full border-gray-300 rounded-md" required>
-                </div>
-                <div class="mb-4">
-                    <label for="catatanEdit" class="block text-sm font-medium">Catatan</label>
-                    <textarea id="catatanEdit" class="mt-1 block w-full border-gray-300 rounded-md" rows="3"></textarea>
-                </div>
-                <div class="flex justify-end mt-4">
-                    <button type="button" id="saveEditRapat" class="bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded">Simpan</button>
-                    <button type="button" onclick="closeRapatModal2()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded ml-2">Batal</button>
-                </div>
-            </div>
+        <div class="flex justify-end">
+            <button type="button" onclick="closeModal()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded mr-2">Batal</button>
+            <button type="button" onclick="addAnggota()" class="bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded">Simpan</button>
         </div>
     </div>
-    @endsection
-    @section('libraryjs')
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script>
-        var commmitteeArray = [];
-        var divisiArray = [];
-        var adminArray = [];
-        var rapatArray = [];
+<!-- Search Modal -->
+<div id="searchModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" style="z-index: 1000;">
+    <div class="bg-white rounded-lg p-6 w-96 h-64">
+        <h2 class="text-xl font-bold mb-4">Akses Input</h2>
+        <div class="mb-4">
+            <label for="name-dropdown2" class="block text-sm font-medium">Nama</label>
+            <select id="name-dropdown2" class="mt-1 block w-full border-gray-300 rounded-md">
+                <option selected>Pilih Nama Admin</option>
+                @foreach ($admins as $admin)
+                <option value="{{$admin->id}}">{{$admin->name}} - {{$admin->region}} - {{$admin->email}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="flex justify-end mt-4">
+            <button type="button" onclick="addAdmin()" class="bg-[#002366] hover:bg-[#20252f] text-white mt-8 px-4 py-2 rounded">Tambah</button>
+            <button type="button" onclick="closeSearchModal()" class="bg-gray-300 hover:bg-gray-400 text-black mt-8 px-4 py-2 rounded ml-2">Batal</button>
+        </div>
+    </div>
+</div>
 
-        function readTextarea() {
-            const textareaValue = document.getElementById('description').value;
-            document.getElementById('eventDesc').value = encodeURIComponent(textareaValue);
-            console.log(document.getElementById('eventDesc').value);
-        }
+<!-- Rapat Input Modal -->
+<div id="rapatModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" style="z-index: 1000;">
+    <div class="bg-white rounded-lg p-6 w-96">
+        <h2 class="text-xl font-bold mb-4" id="rapat-modal-title">Tambah Jadwal Rapat</h2>
+        <div class="mb-4">
+            <label for="kegiatan" class="block text-sm font-medium">Kegiatan</label>
+            <input type="text" id="kegiatan" class="mt-1 block w-full border-gray-300 rounded-md" required>
+        </div>
+        <div class="mb-4">
+            <label for="tanggal" class="block text-sm font-medium">Tanggal</label>
+            <input type="date" id="tanggal" class="mt-1 block w-full border-gray-300 rounded-md" required>
+        </div>
+        <div class="mb-4">
+            <label for="waktu" class="block text-sm font-medium">Waktu</label>
+            <input type="time" id="waktu" class="mt-1 block w-full border-gray-300 rounded-md" required>
+        </div>
+        <div class="mb-4">
+            <label for="lokasi" class="block text-sm font-medium">Lokasi</label>
+            <input type="text" id="lokasi" class="mt-1 block w-full border-gray-300 rounded-md" required>
+        </div>
+        <div class="mb-4">
+            <label for="catatan" class="block text-sm font-medium">Catatan</label>
+            <textarea id="catatan" class="mt-1 block w-full border-gray-300 rounded-md" rows="3"></textarea>
+        </div>
+        <div class="flex justify-end mt-4">
+            <button type="button" onclick="addRapat()" class="bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded">Simpan</button>
+            <button type="button" onclick="closeRapatModal()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded ml-2">Batal</button>
+        </div>
+    </div>
+</div>
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const selectElements = document.querySelectorAll(".pengurus select");
+<!-- Rapat Edit Modal -->
+<div id="rapatEditModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" style="z-index: 1000;">
+    <div class="bg-white rounded-lg p-6 w-96">
+        <h2 class="text-xl font-bold mb-4" id="rapat-modal-title2">Edit Jadwal Rapat</h2>
+        <div class="mb-4">
+            <label for="kegiatanEdit" class="block text-sm font-medium">Kegiatan</label>
+            <input type="text" id="kegiatanEdit" class="mt-1 block w-full border-gray-300 rounded-md" required>
+        </div>
+        <div class="mb-4">
+            <label for="tanggalEdit" class="block text-sm font-medium">Tanggal</label>
+            <input type="date" id="tanggalEdit" class="mt-1 block w-full border-gray-300 rounded-md" required>
+        </div>
+        <div class="mb-4">
+            <label for="waktuEdit" class="block text-sm font-medium">Waktu</label>
+            <input type="time" id="waktuEdit" class="mt-1 block w-full border-gray-300 rounded-md" required>
+        </div>
+        <div class="mb-4">
+            <label for="lokasiEdit" class="block text-sm font-medium">Lokasi</label>
+            <input type="text" id="lokasiEdit" class="mt-1 block w-full border-gray-300 rounded-md" required>
+        </div>
+        <div class="mb-4">
+            <label for="catatanEdit" class="block text-sm font-medium">Catatan</label>
+            <textarea id="catatanEdit" class="mt-1 block w-full border-gray-300 rounded-md" rows="3"></textarea>
+        </div>
+        <div class="flex justify-end mt-4">
+            <button type="button" id="saveEditRapat" class="bg-[#002366] hover:bg-[#20252f] text-white px-4 py-2 rounded">Simpan</button>
+            <button type="button" onclick="closeRapatModal2()" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded ml-2">Batal</button>
+        </div>
+    </div>
+</div>
+</div>
+@endsection
+@section('libraryjs')
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    var commmitteeArray = [];
+    var divisiArray = [];
+    var adminArray = [];
+    var rapatArray = [];
+
+    function readTextarea() {
+        const textareaValue = document.getElementById('description').value;
+        document.getElementById('eventDesc').value = encodeURIComponent(textareaValue);
+        console.log(document.getElementById('eventDesc').value);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const selectElements = document.querySelectorAll(".pengurus select");
+
+        selectElements.forEach(select => {
+            select.addEventListener("change", () => {
+                updateOptions();
+            });
+        });
+
+        function updateOptions() {
+            const selectedValues = Array.from(selectElements)
+                .map(select => select.value)
+                .filter(value => !value.includes("Pilih Nama"));
 
             selectElements.forEach(select => {
-                select.addEventListener("change", () => {
-                    updateOptions();
+                Array.from(select.options).forEach(option => {
+                    option.disabled = false;
                 });
             });
 
-            function updateOptions() {
-                const selectedValues = Array.from(selectElements)
-                    .map(select => select.value)
-                    .filter(value => !value.includes("Pilih Nama"));
-
-                selectElements.forEach(select => {
-                    Array.from(select.options).forEach(option => {
-                        option.disabled = false;
-                    });
+            // Disable options based on selected values
+            selectElements.forEach(select => {
+                Array.from(select.options).forEach(option => {
+                    if (selectedValues.includes(option.value) && select.value !== option.value) {
+                        option.disabled = true;
+                    }
                 });
-
-                // Disable options based on selected values
-                selectElements.forEach(select => {
-                    Array.from(select.options).forEach(option => {
-                        if (selectedValues.includes(option.value) && select.value !== option.value) {
-                            option.disabled = true;
-                        }
-                    });
-                });
-            }
-        });
+            });
+        }
+    });
 
 
-        function addAnggota() {
-            var idPanitia = $('#name-dropdown1').val();
-            var identitasPanitia = $('#name-dropdown1 option:selected').html();
-            $('#name-dropdown1 option:selected').prop('disabled', true);
-            var parts = identitasPanitia.split(" - ");
-            var divisi = $('#divisi-input').val();
+    function addAnggota() {
+        var idPanitia = $('#name-dropdown1').val();
+        var identitasPanitia = $('#name-dropdown1 option:selected').html();
+        $('#name-dropdown1 option:selected').prop('disabled', true);
+        var parts = identitasPanitia.split(" - ");
+        var divisi = $('#divisi-input').val();
 
 
-            var name = parts[0].trim();
-            var region = parts[1].trim();
+        var name = parts[0].trim();
+        var region = parts[1].trim();
 
-            $('#table-committee-content').html($('#table-committee-content').html() + `
+        $('#table-committee-content').html($('#table-committee-content').html() + `
                 <tr id="row-${commmitteeArray.length}" class='border-b border-black'>
                     <td class='py-2'>${name}</td>
                     <td class='py-2'>${region}</td>
@@ -382,54 +390,54 @@
                 </tr>
             `);
 
-            commmitteeArray.push(idPanitia);
-            divisiArray.push(divisi);
-            $('#selectedCommitteeInput').val(JSON.stringify(commmitteeArray));
-            $('#selectedDivisionInput').val(JSON.stringify(divisiArray));
-            console.log($('#selectedCommitteeInput').val, $('#selectedDivisionInput').val);
-            $('#name-dropdown1').val('Pilih Nama Anggota')
-            $('#divisi-input').val('')
-            closeModal()
-        }
+        commmitteeArray.push(idPanitia);
+        divisiArray.push(divisi);
+        $('#selectedCommitteeInput').val(JSON.stringify(commmitteeArray));
+        $('#selectedDivisionInput').val(JSON.stringify(divisiArray));
+        console.log($('#selectedCommitteeInput').val, $('#selectedDivisionInput').val);
+        $('#name-dropdown1').val('Pilih Nama Anggota')
+        $('#divisi-input').val('')
+        closeModal()
+    }
 
 
-        //button delete di list tabel anggota panitia
-        function deleteRow(id) {
+    //button delete di list tabel anggota panitia
+    function deleteRow(id) {
 
-            var row = $(`#row-${id}`);
-            row.remove();
+        var row = $(`#row-${id}`);
+        row.remove();
 
-            var selectElement = document.getElementById('name-dropdown1');
-            var options = selectElement.options;
+        var selectElement = document.getElementById('name-dropdown1');
+        var options = selectElement.options;
 
-            console.log(options[0].value, commmitteeArray[id]);
+        console.log(options[0].value, commmitteeArray[id]);
 
-            for (var i = 0; i < options.length; i++) {
-                if (options[i].value == commmitteeArray[id]) {
-                    options[i].disabled = false;
-                    break;
-                }
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].value == commmitteeArray[id]) {
+                options[i].disabled = false;
+                break;
             }
-
-            commmitteeArray[id] = null;
-            divisiArray[id] = null;
-
-            $('#selectedCommitteeInput').val(JSON.stringify(commmitteeArray));
-            $('#selectedDivisionInput').val(JSON.stringify(divisiArray));
-            console.log(commmitteeArray)
         }
 
-        function addAdmin() {
-            var idAdmin = $('#name-dropdown2').val();
-            var identitasAdmin = $('#name-dropdown2 option:selected').html();
-            $('#name-dropdown2 option:selected').prop('disabled', true);
-            var parts = identitasAdmin.split(" - ");
+        commmitteeArray[id] = null;
+        divisiArray[id] = null;
 
-            var name = parts[0].trim();
-            var region = parts[1].trim();
-            var email = parts[2].trim();
+        $('#selectedCommitteeInput').val(JSON.stringify(commmitteeArray));
+        $('#selectedDivisionInput').val(JSON.stringify(divisiArray));
+        console.log(commmitteeArray)
+    }
 
-            $('#table-admin-content').html($('#table-admin-content').html() + `
+    function addAdmin() {
+        var idAdmin = $('#name-dropdown2').val();
+        var identitasAdmin = $('#name-dropdown2 option:selected').html();
+        $('#name-dropdown2 option:selected').prop('disabled', true);
+        var parts = identitasAdmin.split(" - ");
+
+        var name = parts[0].trim();
+        var region = parts[1].trim();
+        var email = parts[2].trim();
+
+        $('#table-admin-content').html($('#table-admin-content').html() + `
                 <tr id="row2-${adminArray.length}" class='border-b border-black'>
                     <td class='py-2'>${name}</td>
                     <td class='py-2'>${region}</td>
@@ -440,47 +448,47 @@
                 </tr>
             `);
 
-            adminArray.push(idAdmin);
-            $('#selectedAdminInput').val(JSON.stringify(adminArray));
-            $('#name-dropdown2').val('Pilih Nama admin')
-            closeSearchModal()
-        }
+        adminArray.push(idAdmin);
+        $('#selectedAdminInput').val(JSON.stringify(adminArray));
+        $('#name-dropdown2').val('Pilih Nama admin')
+        closeSearchModal()
+    }
 
 
-        //button delete di list tabel admin akses
-        function deleteRow2(id) {
+    //button delete di list tabel admin akses
+    function deleteRow2(id) {
 
-            var row = $(`#row2-${id}`);
-            row.remove();
+        var row = $(`#row2-${id}`);
+        row.remove();
 
-            var selectElement = document.getElementById('name-dropdown2');
-            var options = selectElement.options;
+        var selectElement = document.getElementById('name-dropdown2');
+        var options = selectElement.options;
 
-            // console.log(options[0].value, adminArray[id]);
+        // console.log(options[0].value, adminArray[id]);
 
-            for (var i = 0; i < options.length; i++) {
-                if (options[i].value == adminArray[id]) {
-                    options[i].disabled = false;
-                    break;
-                }
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].value == adminArray[id]) {
+                options[i].disabled = false;
+                break;
             }
-
-            adminArray[id] = null;
-
-            $('#selectedAdminInput').val(JSON.stringify(adminArray));
-            console.log(adminArray);
         }
 
-        // var index = 0;
+        adminArray[id] = null;
 
-        function addRapat() {
-            const kegiatan = document.getElementById('kegiatan').value;
-            const tanggal = document.getElementById('tanggal').value;
-            const waktu = document.getElementById('waktu').value;
-            const lokasi = document.getElementById('lokasi').value;
-            const catatan = encodeURIComponent(document.getElementById('catatan').value);
+        $('#selectedAdminInput').val(JSON.stringify(adminArray));
+        console.log(adminArray);
+    }
 
-            $('#rapat-table-body').html($('#rapat-table-body').html() + `
+    // var index = 0;
+
+    function addRapat() {
+        const kegiatan = document.getElementById('kegiatan').value;
+        const tanggal = document.getElementById('tanggal').value;
+        const waktu = document.getElementById('waktu').value;
+        const lokasi = document.getElementById('lokasi').value;
+        const catatan = encodeURIComponent(document.getElementById('catatan').value);
+
+        $('#rapat-table-body').html($('#rapat-table-body').html() + `
                 <tr id="row3-${rapatArray.length}" class='border-b border-black'>
                     <td class='py-2'>${kegiatan}</td>
                     <td class='py-2'>${new Date(tanggal).toLocaleDateString('id-ID', { day: 'numeric', month: 'numeric', year: 'numeric' })} ${waktu}</td>
@@ -495,138 +503,138 @@
                 </tr>
             `);
 
-            rapatArray.push([kegiatan, tanggal, waktu, lokasi, encodeURIComponent(catatan)]);
+        rapatArray.push([kegiatan, tanggal, waktu, lokasi, encodeURIComponent(catatan)]);
+        $('#selectedRapatInput').val(JSON.stringify(rapatArray));
+        console.log(rapatArray);
+        closeRapatModal()
+    }
+
+
+    //button delete di list tabel rapat
+    function deleteRow3(id) {
+        var row = $(`#row3-${id}`);
+        row.remove();
+
+        rapatArray[id] = null;
+
+        $('#selectedAdminInput').val(JSON.stringify(rapatArray));
+        console.log(rapatArray);
+    }
+
+
+    let currentRow;
+
+    function editRapat(button, id) {
+        document.getElementById('rapatEditModal').classList.remove('hidden');
+
+        currentRow = button.closest('tr');
+        document.getElementById('kegiatanEdit').value = currentRow.cells[0].innerText;
+        var dateTime = currentRow.cells[1].innerText.split(" ");
+
+        var dateParts = dateTime[0].split('/');
+        var formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+
+        var timeParts = dateTime[1].split(':');
+        var formattedTime = `${timeParts[0]}:${timeParts[1]}`;
+
+        document.getElementById('tanggalEdit').value = formattedDate
+        document.getElementById('waktuEdit').value = formattedTime;
+
+        document.getElementById('lokasiEdit').value = currentRow.cells[2].innerText;
+        document.getElementById('catatanEdit').value = decodeURIComponent(currentRow.cells[3].innerText);
+
+
+        console.log(currentRow.cells[3].innerText)
+
+        $('#saveEditRapat').on('click', function() {
+            currentRow.cells[0].innerText = document.getElementById('kegiatanEdit').value;
+
+            currentRow.cells[1].innerText = new Date(document.getElementById('tanggalEdit').value).toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'numeric',
+                year: 'numeric'
+            }) + " " + document.getElementById('waktuEdit').value;
+
+            currentRow.cells[2].innerText = document.getElementById('lokasiEdit').value;
+
+            currentRow.cells[3].innerText = encodeURIComponent(document.getElementById('catatanEdit').value);
+
+            rapatArray[id] = [document.getElementById('kegiatanEdit').value, document.getElementById('tanggalEdit').value, document.getElementById('waktuEdit').value, document.getElementById('lokasiEdit').value, encodeURIComponent(document.getElementById('catatanEdit').value)];
             $('#selectedRapatInput').val(JSON.stringify(rapatArray));
+            closeRapatModal2();
+
             console.log(rapatArray);
-            closeRapatModal()
+        });
+    }
+
+    function openModal() {
+        document.getElementById('myModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').classList.add('hidden');
+    }
+
+    function openSearchModal() {
+        document.getElementById('searchModal').classList.remove('hidden');
+    }
+
+    function closeSearchModal() {
+        document.getElementById('searchModal').classList.add('hidden');
+        document.getElementById('name-dropdown2').selectedIndex = 0;
+    }
+
+    function openRapatModal() {
+        document.getElementById('rapatModal').
+        classList.remove('hidden');
+    }
+
+    function closeRapatModal() {
+        document.getElementById('rapatModal').classList.add('hidden');
+    }
+
+    function closeRapatModal2() {
+        document.getElementById('rapatEditModal').classList.add('hidden');
+    }
+
+    // Handle file upload for Rundown Acara
+    function handleFileUpload(event) {
+        var fileInput = event.target;
+        var fileNameSpan = document.getElementById('file-name');
+        var uploadIcon = document.getElementById('upload-icon');
+        var uploadText = document.getElementById('upload-text');
+
+        // Check if file is selected
+        if (fileInput.files.length > 0) {
+            // Hide icon and text
+            uploadIcon.style.display = 'none';
+            uploadText.style.display = 'none';
+
+            // Show file name
+            var fileName = fileInput.files[0].name;
+            fileNameSpan.textContent = fileName;
+            fileNameSpan.style.display = 'block';
         }
+    }
 
+    // Handle file upload for Poster Acara
+    function handleFileUploadPoster(event) {
+        var fileInput = event.target;
+        var fileNameSpan = document.getElementById('file-name-poster');
+        var uploadIcon = document.getElementById('upload-icon-poster');
+        var uploadText = document.getElementById('upload-text-poster');
 
-        //button delete di list tabel rapat
-        function deleteRow3(id) {
-            var row = $(`#row3-${id}`);
-            row.remove();
+        // Check if file is selected
+        if (fileInput.files.length > 0) {
+            // Hide icon and text
+            uploadIcon.style.display = 'none';
+            uploadText.style.display = 'none';
 
-            rapatArray[id] = null;
-
-            $('#selectedAdminInput').val(JSON.stringify(rapatArray));
-            console.log(rapatArray);
+            // Show file name
+            var fileName = fileInput.files[0].name;
+            fileNameSpan.textContent = fileName;
+            fileNameSpan.style.display = 'block';
         }
-
-
-        let currentRow;
-
-        function editRapat(button, id) {
-            document.getElementById('rapatEditModal').classList.remove('hidden');
-
-            currentRow = button.closest('tr');
-            document.getElementById('kegiatanEdit').value = currentRow.cells[0].innerText;
-            var dateTime = currentRow.cells[1].innerText.split(" ");
-
-            var dateParts = dateTime[0].split('/');
-            var formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-
-            var timeParts = dateTime[1].split(':');
-            var formattedTime = `${timeParts[0]}:${timeParts[1]}`;
-
-            document.getElementById('tanggalEdit').value = formattedDate
-            document.getElementById('waktuEdit').value = formattedTime;
-
-            document.getElementById('lokasiEdit').value = currentRow.cells[2].innerText;
-            document.getElementById('catatanEdit').value = decodeURIComponent(currentRow.cells[3].innerText);
-
-
-            console.log(currentRow.cells[3].innerText)
-
-            $('#saveEditRapat').on('click', function() {
-                currentRow.cells[0].innerText = document.getElementById('kegiatanEdit').value;
-
-                currentRow.cells[1].innerText = new Date(document.getElementById('tanggalEdit').value).toLocaleDateString('id-ID', {
-                    day: 'numeric',
-                    month: 'numeric',
-                    year: 'numeric'
-                }) + " " + document.getElementById('waktuEdit').value;
-
-                currentRow.cells[2].innerText = document.getElementById('lokasiEdit').value;
-
-                currentRow.cells[3].innerText = encodeURIComponent(document.getElementById('catatanEdit').value);
-
-                rapatArray[id] = [document.getElementById('kegiatanEdit').value, document.getElementById('tanggalEdit').value, document.getElementById('waktuEdit').value, document.getElementById('lokasiEdit').value, encodeURIComponent(document.getElementById('catatanEdit').value)];
-                $('#selectedRapatInput').val(JSON.stringify(rapatArray));
-                closeRapatModal2();
-
-                console.log(rapatArray);
-            });
-        }
-
-        function openModal() {
-            document.getElementById('myModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('myModal').classList.add('hidden');
-        }
-
-        function openSearchModal() {
-            document.getElementById('searchModal').classList.remove('hidden');
-        }
-
-        function closeSearchModal() {
-            document.getElementById('searchModal').classList.add('hidden');
-            document.getElementById('name-dropdown2').selectedIndex = 0;
-        }
-
-        function openRapatModal() {
-            document.getElementById('rapatModal').
-            classList.remove('hidden');
-        }
-
-        function closeRapatModal() {
-            document.getElementById('rapatModal').classList.add('hidden');
-        }
-
-        function closeRapatModal2() {
-            document.getElementById('rapatEditModal').classList.add('hidden');
-        }
-
-        // Handle file upload for Rundown Acara
-        function handleFileUpload(event) {
-            var fileInput = event.target;
-            var fileNameSpan = document.getElementById('file-name');
-            var uploadIcon = document.getElementById('upload-icon');
-            var uploadText = document.getElementById('upload-text');
-
-            // Check if file is selected
-            if (fileInput.files.length > 0) {
-                // Hide icon and text
-                uploadIcon.style.display = 'none';
-                uploadText.style.display = 'none';
-
-                // Show file name
-                var fileName = fileInput.files[0].name;
-                fileNameSpan.textContent = fileName;
-                fileNameSpan.style.display = 'block';
-            }
-        }
-
-        // Handle file upload for Poster Acara
-        function handleFileUploadPoster(event) {
-            var fileInput = event.target;
-            var fileNameSpan = document.getElementById('file-name-poster');
-            var uploadIcon = document.getElementById('upload-icon-poster');
-            var uploadText = document.getElementById('upload-text-poster');
-
-            // Check if file is selected
-            if (fileInput.files.length > 0) {
-                // Hide icon and text
-                uploadIcon.style.display = 'none';
-                uploadText.style.display = 'none';
-
-                // Show file name
-                var fileName = fileInput.files[0].name;
-                fileNameSpan.textContent = fileName;
-                fileNameSpan.style.display = 'block';
-            }
-        }
-    </script>
-    @endsection
+    }
+</script>
+@endsection

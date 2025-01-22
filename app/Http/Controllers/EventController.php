@@ -59,7 +59,14 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        $validator = Validator::make($request->all(), [
+        $data = $request->all();
+        foreach (['chief2', 'secretary', 'secretary2', 'treasurer', 'treasurer2'] as $nullableField) {
+            if (empty($data[$nullableField])) {
+                $data[$nullableField] = null;
+            }
+        }
+
+        $validator = Validator::make($data, [
             'title' => 'required',
             'date' => 'required',
             'start_time' => 'required',
@@ -73,26 +80,26 @@ class EventController extends Controller
             'chief2' => 'nullable',
             'secretary' => 'nullable',
             'secretary2' => 'nullable',
-            'treasurer' => 'nulllable',
+            'treasurer' => 'nullable',
             'treasurer2' => 'nullable',
-            'rundown_image' => 'required|file|mimes:jpg,jpeg,png',
+            'rundown' => 'required|file|mimes:pdf',
             'selectedCommittee' => 'required|array',
-            'selectedDivision' => 'required|array',
-            'selectedAdmin' => 'required|array',
-            'selectedRapat' => 'required|array'
+            'selectedDivision' => 'required|array'
         ]);
-        
+
         // Check if validation fails
         if ($validator->fails()) {
             // Return the errors with the input back to the form
-            return redirect()->back()->with('success', 'Event error.');
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $poster = $request->file('poster');
         $poster_name = $poster->getClientOriginalName();
         $poster->move(public_path('asset'), $poster_name);
 
-        $rundown = $request->file('rundown_image');
+        $rundown = $request->file('rundown');
         $rundown_name = $rundown->getClientOriginalName();
         $rundown->move(public_path('asset'), $rundown_name);
 
@@ -112,7 +119,7 @@ class EventController extends Controller
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
-        
+
 
         // Masukin ketua
         EventDetail::create([
@@ -123,20 +130,39 @@ class EventController extends Controller
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        // Masukin wakil ketua
-        EventDetail::create([
-            'event_id' => $event->id,
-            'account_id' => (int)$request->chief2,
-            'roles' => 'Wakil Ketua',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
+        if ($request->chief2 != null) {
+            // Masukin wakil ketua
+            EventDetail::create([
+                'event_id' => $event->id,
+                'account_id' => (int)$request->chief2,
+                'roles' => 'Wakil Ketua',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        } else {
+            EventDetail::create([
+                'event_id' => $event->id,
+                'account_id' => null,
+                'roles' => 'Wakil Ketua',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        }
+
 
         // Masukin sekretaris
         if ($request->secretary != null) {
             EventDetail::create([
                 'event_id' => $event->id,
                 'account_id' => (int)$request->secretary,
+                'roles' => 'Sekretaris',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        } else {
+            EventDetail::create([
+                'event_id' => $event->id,
+                'account_id' => null,
                 'roles' => 'Sekretaris',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -155,10 +181,18 @@ class EventController extends Controller
         }
 
         // Masukin bendahara
-        if ($request->treasurer2 != null) {
+        if ($request->treasurer != null) {
             EventDetail::create([
                 'event_id' => $event->id,
                 'account_id' => (int)$request->treasurer,
+                'roles' => 'Bendahara',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ]);
+        } else {
+            EventDetail::create([
+                'event_id' => $event->id,
+                'account_id' => null,
                 'roles' => 'Bendahara',
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -178,8 +212,6 @@ class EventController extends Controller
 
         $selectedCommittee = json_decode($request->input('selectedCommittee')[0], true);
         $selectedDivision = json_decode($request->input('selectedDivision')[0], true);
-        $selectedAdmin = json_decode($request->input('selectedAdmin')[0], true);
-        $selectedRapat = json_decode($request->input('selectedRapat')[0], true);
 
         foreach ($selectedCommittee as $index => $account_id) {
             if ($selectedCommittee[$index] == null) {
@@ -193,43 +225,12 @@ class EventController extends Controller
                 'roles' => $division,
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]); 
+            ]);
         }
 
         $array_event_details = EventDetail::where('event_id', $event->id)->get();
 
         $index_temp = 0;
-
-        foreach ($selectedAdmin as $index => $admin_id) {
-            if ($selectedAdmin[$index] == null) {
-                continue;
-            }
-            foreach ($array_event_details as $event_detail) {
-                EventPermission::create([
-                    'event_detail_id' => (int)$event_detail->id,
-                    'admin_id' => (int) $admin_id,
-                    'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                    'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-                ]);
-            }
-            $index_temp++;
-        }
-
-        foreach ($selectedRapat as $index => [$title, $date, $time, $place, $notulen]) {
-            if ($selectedRapat[$index] == null) {
-                continue;
-            }
-            $meetDateTime = Carbon::createFromFormat('Y-m-d H:i', "$date $time");
-            Meet::create([
-                'event_id' => $event->id,
-                'title' => $title,
-                'date' => $meetDateTime,
-                'place' => $place,
-                'notulen' => $notulen,
-                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-            ]);
-        }
 
         return redirect()->route('input_event')->with('success', 'Event  created successfully.');
     }
