@@ -5,6 +5,7 @@ use App\Models\Misa;
 use App\Models\Admin;
 use App\Models\Event;
 use App\Models\Account;
+use App\Models\Template;
 use App\Models\Training;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -410,7 +411,8 @@ Route::get('/groups/{groupId}/details', [GroupController::class, 'getDetails']);
 //! dokumen BAGIAN ANGGOTA
 Route::get('/dokumen_pengurus_user', function () {
     $user = Auth::guard('account')->user();
-    return view('anggota/khusus_pengurus/dokumen', compact('user'));
+    $templates = Template::where('status', 1)->get();
+    return view('anggota/khusus_pengurus/dokumen', compact('templates', 'user'));
 })->name('dokumen_pengurus_user');
 
 //! jadwal BAGIAN ANGGOTA
