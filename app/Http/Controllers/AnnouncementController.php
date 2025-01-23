@@ -69,11 +69,18 @@ class AnnouncementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function showForPengurus(Announcement $announcement)
+    public function showForAdmin(Announcement $announcement)
     {
         $user = Auth::guard('admin')->user();
         $announcement = Announcement::get()->where('type', 1)->where('status', 1);
         return view('admin.khusus_pengurus.pengumuman_pengurus', compact('announcement', 'user'));
+    }
+
+    public function showForPengurus(Announcement $announcement)
+    {
+        $user = Auth::guard('account')->user();
+        $announcement = Announcement::get()->where('type', 1)->where('status', 1);
+        return view('anggota.khusus_pengurus.pengumuman', compact('announcement', 'user'));
     }
 
     /**

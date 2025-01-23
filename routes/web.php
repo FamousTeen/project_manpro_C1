@@ -234,7 +234,7 @@ Route::get('/input_event', function () {
 
 /* KHUSUS PENGURUS */
 //pengumuman
-Route::get('/pengumuman_pengurus', [AnnouncementController::class, 'showForPengurus'])->name('pengumuman_pengurus');
+Route::get('/pengumuman_pengurus', [AnnouncementController::class, 'showForAdmin'])->name('pengumuman_pengurus');
 
 Route::post('/post_pengumuman_pengurus', [AnnouncementController::class, 'post_pengumuman_pengurus'])->name('post_pengumuman_pengurus');
 
@@ -405,25 +405,30 @@ Route::get('/groups/members/{group}', [GroupController::class, 'getAvailableMemb
 Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create'); // Show the create group modal
 Route::get('/groups/{groupId}/details', [GroupController::class, 'getDetails']);
 
-//dokumen BAGIAN ANGGOTA
-Route::get('/dokumen_pengurus', function () {
-    return view('anggota/khusus_pengurus/dokumen');
-})->name('dokumen_pengurus');
+//TODO : KHUSUS PENGURUS ANGGOTA
 
-//jadwal BAGIAN ANGGOTA
-Route::get('/jadwal_pengurus', function () {
-    return view('anggota/khusus_pengurus/jadwal');
-})->name('jadwal_pengurus');
+//! dokumen BAGIAN ANGGOTA
+Route::get('/dokumen_pengurus_user', function () {
+    $user = Auth::guard('account')->user();
+    return view('anggota/khusus_pengurus/dokumen', compact('user'));
+})->name('dokumen_pengurus_user');
 
-//pengumuman BAGIAN ANGGOTA
-Route::get('/pengumuman_pengurus', function () {
-    return view('anggota/khusus_pengurus/pengumuman');
-})->name('pengumuman_pengurus');
+//! jadwal BAGIAN ANGGOTA
+Route::get('/jadwal_pengurus_user', function () {
+    $meets = Meet::where('permission', 1)->get();
+    $user = Auth::guard('account')->user();
+    return view('anggota/khusus_pengurus/jadwal', compact('meets', 'user'));
+})->name('jadwal_pengurus_user');
+
+// pengumuman BAGIAN ANGGOTA
+Route::get('/pengumuman_pengurus_user', [AnnouncementController::class, 'showForPengurus'])->name('pengumuman_pengurus_user');
+
+//TODO : END KHUSUS PENGURUS ANGGOTA
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/event-accounts/{id}/edit', [EventController::class, 'editEventAccount'])->name('eventAccounts.edit');
-    
+
     Route::delete('/event-accounts/{eventId}/{accountId}/remove', [EventController::class, 'removeEventAccount'])->name('eventAccounts.remove');
 
 });

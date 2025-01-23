@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{env('APP_NAME')}}</title>
+    <title>{{ env('APP_NAME') }}</title>
     @vite('resources/css/app.css')
 
     {{-- For Font --}}
@@ -42,7 +42,7 @@
                             d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </button>
-                <a href="{{route('main_page')}}" class="flex items-center ml-4">
+                <a href="{{ route('main_page') }}" class="flex items-center ml-4">
                     <img src="../../../images/LOGO_MISDINAR.png" alt="Logo" class="h-12 w-12 mr-2">
                     <span class="font-bold text-xl sm:text-lg md:text-base text-xs">
                         MISDINAR ST. TARSISIUS GEREJA KATOLIK ROH KUDUS
@@ -104,7 +104,8 @@
         </div>
         <ul class="space-y-8">
             <li>
-                <a href="{{ route('account.dashboard') }}" class="flex text-[#f6f1e3] items-center hover:text-[#ae0001]">
+                <a href="{{ route('account.dashboard') }}"
+                    class="flex text-[#f6f1e3] items-center hover:text-[#ae0001]">
                     <img src="../../../asset/dashboard.png" alt="Dashboard Icon" class="h-6 w-6 mr-4">
                     Dashboard
                 </a>
@@ -125,8 +126,10 @@
                 <ul id="konfirmasiDropdown" class="mt-2 ml-8 mt-4 space-y-4 hidden">
                     <li><a href="{{ route('jadwal_anggota') }}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal
                             Tugasku</a></li>
-                    <li><a href="{{ route('konfirmasi')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Konfirmasi Tugas</a></li>
-                    <li><a href="{{ route('jadwal_pelatihan')}}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Pelatihan</a></li>
+                    <li><a href="{{ route('konfirmasi') }}" class="block text-[#f6f1e3] hover:text-[#ae0001]">Konfirmasi
+                            Tugas</a></li>
+                    <li><a href="{{ route('jadwal_pelatihan') }}"
+                            class="block text-[#f6f1e3] hover:text-[#ae0001]">Pelatihan</a></li>
                 </ul>
             </li>
             <li>
@@ -143,29 +146,31 @@
                 </a>
             </li>
             {{-- TAMBAHAN KHUSUS PENGURUS --}}
-            <li>
-                <button id="pengurusButton"
-                    class="flex justify-between items-center text-[#f6f1e3] w-full hover:text-[#ae0001] focus:outline-none">
-                    <div class="flex items-center">
-                        <img src="../../../asset/admin_only.png" alt="Add Jadwal Icon" class="h-6 w-6 mr-4">
-                        Khusus Pengurus
-                    </div>
-                    <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                        </path>
-                    </svg>
-                </button>
-                <!-- Sub-menu -->
-                <ul id="pengurusDropdown" class="ml-8 mt-4 space-y-4 hidden">
-                    <li><a href="{{ route('pengumuman_pengurus') }}"
-                            class="block text-[#f6f1e3] hover:text-[#ae0001]">Pengumuman</a></li>
-                    <li><a href="{{ route('jadwal_pengurus') }}"
-                            class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Rapat</a></li>
-                    <li><a href="{{ route('dokumen_pengurus') }}"
-                            class="block text-[#f6f1e3] hover:text-[#ae0001]">Dokumen</a></li>
-                </ul>
-            </li>
+            @if (isset($user) && $user->roles == 'Pengurus')
+                <li>
+                    <button id="pengurusButton"
+                        class="flex justify-between items-center text-[#f6f1e3] w-full hover:text-[#ae0001] focus:outline-none">
+                        <div class="flex items-center">
+                            <img src="../../../asset/admin_only.png" alt="Add Jadwal Icon" class="h-6 w-6 mr-4">
+                            Khusus Pengurus
+                        </div>
+                        <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <!-- Sub-menu -->
+                    <ul id="pengurusDropdown" class="ml-8 mt-4 space-y-4 hidden">
+                        <li><a href="{{ route('pengumuman_pengurus_user') }}"
+                                class="block text-[#f6f1e3] hover:text-[#ae0001]">Pengumuman</a></li>
+                        <li><a href="{{ route('jadwal_pengurus_user') }}"
+                                class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Rapat</a></li>
+                        <li><a href="{{ route('dokumen_pengurus_user') }}"
+                                class="block text-[#f6f1e3] hover:text-[#ae0001]">Dokumen</a></li>
+                    </ul>
+                </li>
+            @endif
         </ul>
     </div>
 
