@@ -26,7 +26,7 @@
                 <div class="col-span-1">
                     <label for="group" class="mt-2">Kelompok</label>
                     <select id="group" name="group"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         required>
                         @foreach ($list_group as $item)
                             @if ($item->name == $group->name)
@@ -41,42 +41,42 @@
                 <div class="col-span-1">
                     <label for="place" class="mt-2">Tempat Pelatihan</label>
                     <input type="text" id="place" name="place"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         value="{{ $training->place }}" required />
                 </div>
 
                 <div class="col-span-1">
                     <label for="date" class="mt-2">Tanggal Pelatihan</label>
                     <input type="date" id="date" name="date"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         required value="{{ Carbon::parse($training->training_date)->translatedFormat('Y-m-d') }}" />
                 </div>
 
                 <div class="col-span-1">
                     <label for="time" class="mt-2">Waktu Pelatihan</label>
                     <input type="time" id="time" name="time"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         value="{{ Carbon::parse($training->training_date)->translatedFormat('H:i') }}" required />
                 </div>
 
                 <div class="col-span-1">
                     <label for="contact_person" class="mt-2">Contact Person</label>
                     <input type="text" id="contact_person" name="contact_person"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         value="{{ $training->contact_person }}" required />
                 </div>
 
                 <div class="col-span-1">
                     <label for="phone_number" class="mt-2">Nomor Telepon</label>
                     <input type="text" id="phone_number" name="phone_number"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         value="{{ $training->phone_number }}" required />
                 </div>
 
                 <div class="col-span-1 sm:col-span-2">
                     <label for="notes" class="mt-2">Catatan</label>
                     <textarea id="eventDesc0" name="description" rows="4"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Tulis catatan jika diperlukan" oninput="readTextarea2()">{!! nl2br(e(urldecode($training->description))) !!}</textarea>
                     <input type="hidden" name="eventDesc" id="eventDesc00">
                 </div>

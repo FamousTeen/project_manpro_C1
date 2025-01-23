@@ -87,6 +87,10 @@ return [
     // ],
 
     'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Account::class,
+        ],
         'accounts' => [
             'driver' => 'eloquent',
             'model' => App\Models\Account::class,
@@ -118,8 +122,14 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'accounts',
             'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'accounts' => [
+            'provider' => 'accounts',
+            'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],

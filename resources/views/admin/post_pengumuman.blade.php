@@ -14,7 +14,7 @@
         <div class="p-6 mb-8 bg-[#f6f1e3] border border-[#002366] shadow-lg">
             <h2 class="ml-4 text-2xl font-semibold mb-2">Input Pengumuman</h2>
             @if (session('success2'))
-                <div class="p-4 ml-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                <div class="p-4 ml-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
                     role="alert">
                     {{ session('success2') }}
                 </div>
@@ -38,7 +38,7 @@
         </div>
 
         @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
                 role="alert">
                 {{ session('success') }}
             </div>

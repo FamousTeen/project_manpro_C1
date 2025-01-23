@@ -437,3 +437,17 @@ Route::post('/admin/event/{eventId}/add_anggota', [EventController::class, 'addE
 
 
 Route::post('/meets/store-rapat', [MeetController::class, 'storeRapat'])->name('meets.storeRapat');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+Route::get('/forgot_password', function () {
+    return view('auth/forgot-password');
+})->name('forgot_password');

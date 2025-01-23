@@ -12,12 +12,12 @@
 <div class="container mx-auto mt-20">
     <h2 class="ml-4 p-6 mt-4 text-2xl font-semibold">Input Acara Misdinar</h2>
     @if (session('success'))
-    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
         role="alert">
         {{ session('success') }}
     </div>
     @elseif ($errors->any())
-    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
         <ul>
             @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>

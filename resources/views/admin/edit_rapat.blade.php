@@ -35,7 +35,7 @@
             <input type="hidden" name="meetNotulen" id="meetNotulen1"></input>
         </div>
         <div class=" flex col-span-2 mt-4 items-start justify-center">
-                <button type="submit" class="text-white bg-[#002366] hover:bg-[#20252f] font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
+                <button type="submit" class="text-white bg-[#002366] hover:bg-[#20252f] font-medium rounded-lg text-sm px-12 py-2.5 text-center me-2 mb-2">Edit</button>
             </div>
     </form>
 </div>
