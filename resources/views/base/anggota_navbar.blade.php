@@ -133,6 +133,29 @@
                 </ul>
             </li>
             <li>
+                <button id="pengurusButton"
+                    class="flex justify-between items-center text-[#f6f1e3] w-full hover:text-[#ae0001] focus:outline-none">
+                    <div class="flex items-center">
+                        <img src="../../../asset/admin_only.png" alt="Add Jadwal Icon" class="h-6 w-6 mr-4">
+                        Khusus Pengurus
+                    </div>
+                    <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                        </path>
+                    </svg>
+                </button>
+                <!-- Sub-menu -->
+                <ul id="pengurusDropdown" class="ml-8 mt-4 space-y-4 hidden">
+                    <li><a href="{{ route('pengumuman_pengurus') }}"
+                            class="block text-[#f6f1e3] hover:text-[#ae0001]">Pengumuman</a></li>
+                    <li><a href="{{ route('jadwal_pengurus') }}"
+                            class="block text-[#f6f1e3] hover:text-[#ae0001]">Jadwal Rapat</a></li>
+                    <li><a href="{{ route('templates.index') }}"
+                            class="block text-[#f6f1e3] hover:text-[#ae0001]">Dokumen</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="{{ route('events.index') }}" class="flex items-center text-[#f6f1e3]  hover:text-[#ae0001]">
                     <img src="../../../asset/event.png" alt="Acara Icon" class="h-6 w-6 mr-4">
                     Acara
