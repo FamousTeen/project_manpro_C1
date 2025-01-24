@@ -71,4 +71,4 @@
         previewArray.push(templateID);
     }
 </script>
-
+@endsection
