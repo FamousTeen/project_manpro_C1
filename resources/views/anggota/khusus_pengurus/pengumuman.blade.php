@@ -12,12 +12,12 @@
           <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
               <h1 class="font-bold text-4xl text-center">PENGUMUMAN KHUSUS PENGURUS</h1>
               <div class="block lg:hidden text-center mt-4">
-                  <h2 class="font-bold text-lg ">Hi, {{ $data->name }}</h2>
+                  <h2 class="font-bold text-lg ">Hi, {{ $user->name }}</h2>
               <p class="font-normal text-sm" id="currentDatePhone"></p>
               </div>
           </div>
           <div class="col-start-11 col-span-2 text-right mr-16 mt-8 hidden lg:block">
-              <h2 class="font-bold text-xl ">Hi, {{ $data->name }}</h2>
+              <h2 class="font-bold text-xl ">Hi, {{ $user->name }}</h2>
               <p class="font-normal text-sm" id="currentDate"></p>
           </div>
       </div>
