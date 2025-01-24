@@ -15,7 +15,7 @@
             <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
                 <h1 class="font-bold text-4xl text-center">DOKUMEN-DOKUMEN KHUSUS PENGURUS</h1>
                 <div class="block lg:hidden text-center mt-4">
-                    <h2 class="font-bold text-lg ">Hi, {{ $data->name }}</h2>
+                    <h2 class="font-bold text-lg ">Hi, {{ $user->name }}</h2>
                 <p class="font-normal text-sm" id="currentDatePhone"></p>
                 </div>
             </div>
