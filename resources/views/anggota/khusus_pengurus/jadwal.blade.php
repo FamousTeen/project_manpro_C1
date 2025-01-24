@@ -20,7 +20,7 @@
               </div>
           </div>
           <div class="col-start-11 col-span-2 text-right mr-16 mt-8 hidden lg:block">
-              <h2 class="font-bold text-xl ">Hi, {{ $data->name }}</h2>
+              <h2 class="font-bold text-xl ">Hi, {{ $user->name }}</h2>
               <p class="font-normal text-sm" id="currentDate"></p>
           </div>
       </div>
