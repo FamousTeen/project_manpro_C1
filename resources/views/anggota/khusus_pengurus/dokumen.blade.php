@@ -9,21 +9,21 @@
                 5. #20252f - biru gelap
             -->
 
-<div class="container-fluid m-12 mt-24">
-    <!-- Header Section -->
-    <div class="grid grid-cols-12">
-        <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
-            <h1 class="font-bold text-4xl text-center">DOKUMEN-DOKUMEN KHUSUS PENGURUS</h1>
-            <div class="block lg:hidden text-center mt-4">
-                <h2 class="font-bold text-lg ">Hi, {{ $user->name }}</h2>
-            <p class="font-normal text-sm" id="currentDatePhone"></p>
+    <div class="container-fluid m-12 mt-24">
+        <!-- Header Section -->
+        <div class="grid grid-cols-12">
+            <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
+                <h1 class="font-bold text-4xl text-center">DOKUMEN-DOKUMEN KHUSUS PENGURUS</h1>
+                <div class="block lg:hidden text-center mt-4">
+                    <h2 class="font-bold text-lg ">Hi, {{ $user->name }}</h2>
+                <p class="font-normal text-sm" id="currentDatePhone"></p>
+                </div>
             </div>
-        </div>
-        <div class="col-start-11 col-span-2 text-right mr-16 mt-8 hidden lg:block">
-            <h2 class="font-bold text-xl ">Hi, {{ $user->name }}</h2>
-            <p class="font-normal text-sm" id="currentDate"></p>
-        </div>
-    </div>       
+            <div class="col-start-11 col-span-2 text-right mr-16 mt-8 hidden lg:block">
+                <h2 class="font-bold text-xl ">Hi, {{ $user->name }}</h2>
+                <p class="font-normal text-sm" id="currentDate"></p>
+            </div>
+        </div>       
 
 <div class="container mx-auto py-8 mt-16">
 
@@ -53,14 +53,14 @@
 @section('libraryjs')
 <script>
     const today = new Date();
-        const options = {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-        };
-        document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
-        document.getElementById('currentDatePhone').innerText = today.toLocaleDateString(undefined, options);
+    const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+    };
+    document.getElementById('currentDate').innerText = today.toLocaleDateString(undefined, options);
+    document.getElementById('currentDatePhone').innerText = today.toLocaleDateString(undefined, options);
 
     function openPreview(templateID) {
         document.getElementById(templateID).classList.remove('hidden');
