@@ -11,7 +11,7 @@
 
     <div class="container mx-auto py-8 mt-8">
         <!-- Input Pengumuman Section -->
-        <div class="p-6 mb-8 bg-[#f6f1e3] border border-[#002366] shadow-lg">
+        <div class="p-6 mt-4 mb-8 bg-[#f6f1e3] border border-[#002366] shadow-lg">
             <h2 class="ml-4 text-2xl font-semibold mb-2">Input Pengumuman</h2>
             @if (session('success2'))
                 <div class="p-4 ml-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
