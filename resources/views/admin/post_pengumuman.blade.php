@@ -84,7 +84,7 @@
                     <div id="modal{{ $announcement->id }}"
                         class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
                         onclick="closeModal('modal{{ $announcement->id }}')">
-                        <div class="bg-white p-8 rounded-lg w-1/2 relative" onclick="event.stopPropagation()">
+                        <div class="bg-white p-4 rounded-lg w-full sm:w-3/4 md:w-2/3 lg:w-1/2 relative" onclick="event.stopPropagation()">
                             <!-- Trash Icon for Deletion -->
                             <button onclick="confirmDelete('deleteConfirm{{ $announcement->id }}')"
                                 class="absolute top-8 right-8 text-red-600 hover:text-red-800">
