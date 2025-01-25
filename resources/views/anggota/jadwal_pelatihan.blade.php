@@ -1,7 +1,7 @@
 @extends('base/anggota_navbar')
 
 @section('content')
-<div class="container-fluid w-full m-12 mt-24">
+<div class="container-fluid m-12 mt-24">
   <!-- Header Section -->
   <div class="grid grid-cols-12">
     <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
@@ -46,7 +46,7 @@
 </div>
 </div>
 
-<!-- Jadwal Pelatihan Section -->
+<!-- Jadwal Misa Section -->
 <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-16 m-12 mt-10">
   @php
   use App\Models\Training;

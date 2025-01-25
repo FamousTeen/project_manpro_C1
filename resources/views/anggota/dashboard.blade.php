@@ -93,7 +93,7 @@ use App\Models\Training;
                 <h1 class="font-bold text-xl">CALENDAR</h1>
             </div>
             <div class="flex items-center justify-center">
-                <div class="lg:w-7/12 md:w-9/12 sm:w-10/12 mx-auto p-4 ps-0 mr-0">
+                <div class="lg:w-7/12 md:w-9/12 sm:w-10/12 mx-auto p-4 ps-0">
                     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
                         <!-- Calendar Header -->
                         <div class="flex items-center justify-between px-6 py-3 bg-[#f6f1e3]">
