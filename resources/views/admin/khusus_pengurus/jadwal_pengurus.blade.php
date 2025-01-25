@@ -80,7 +80,7 @@ Carbon::setLocale('id');
 
 <!-- Modal for Add -->
 <div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-    <form action="{{route('meets.store')}}" method="post" class="bg-white rounded-lg p-6 w-full max-w-sm sm:max-w-md">
+    <form action="{{route('meets.store')}}" method="post" class="bg-white rounded-lg p-6 w-96">
         @csrf
         <h2 id="modalTitle" class="text-lg font-semibold mb-4">Tambahkan Jadwal Khusus Pengurus</h2>
         <label class="block mb-2">Nama Jadwal:</label>
