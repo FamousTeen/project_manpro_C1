@@ -33,7 +33,7 @@
             </div>
             
 
-            <div class="bg-white border border-gray-300 p-4 rounded-lg">
+            <div class="bg-white border border-gray-300 p-4 rounded-lg overflow-x-auto">
                 <table class="w-full text-center table-auto">
                     <thead>
                         <tr>
@@ -75,7 +75,7 @@
 
     <!-- Modal Structure for Uploading Documentation Photo -->
     <div id="photoModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-        <div class="bg-white rounded-lg p-8 w-1/3">
+        <div class="bg-white rounded-lg p-4 w-full max-w-md md:max-w-lg">
             <h2 class="text-xl font-bold text-gray-700 mb-6">Upload Foto Dokumentasi</h2>
             <form action="{{ route('insert_photos') }}" method="POST" enctype="multipart/form-data">
                 @csrf
