@@ -6,9 +6,9 @@ use Carbon\Carbon;
 $accounts = App\Models\Account::all();
 @endphp
 
-<header class="mt-16 p-8">
+<header class="mt-16 p-8 flex flex-col items-center">
     <h1 class="text-2xl font-semibold text-[#20252f]">JADWAL MISA</h1>
-    <div class="flex overflow-x-auto space-x-4 mt-4 ml-8 py-2 scroll-smooth snap-x snap-mandatory">
+    <div class="flex overflow-hidden space-x-4 mt-4 py-2 scroll-smooth snap-x snap-mandatory">
         <!-- Status Filter Buttons -->
         <button class="px-4 py-2 rounded-lg bg-[#740001] text-white status-filter-button" data-status="all">Semua</button>
         <button class="px-4 py-2 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button" data-status="Proses">Proses</button>
@@ -20,7 +20,7 @@ $accounts = App\Models\Account::all();
 <div class="flex flex-col justify-center items-center min-h-screen">
     @foreach ($misas as $misa)
     @if ($misa->active == '1' || $misa->active == '0')
-    <div class="bg-[#f6f1e3] rounded-lg shadow-lg p-6 mx-4 mb-8 w-full max-w-md misa-card" data-status="{{ $misa->status }}">
+    <div class="bg-[#f6f1e3] rounded-lg shadow-lg p-6 mx-16 mb-8 w-full max-w-md misa-card" data-status="{{ $misa->status }}">
         <div class="flex flex-col lg:flex-row justify-between">
             <!-- Schedule Card -->
             <div class="flex-1">
