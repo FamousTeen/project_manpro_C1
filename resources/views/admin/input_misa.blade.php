@@ -107,7 +107,7 @@ $misas = App\Models\Misa::all();
                             <div class="relative mt-6 flex flex-col justify-between min-h-[300px]">
                                 <form id="jadwalMisaForm" class="space-y-4" method="POST" action="{{ route('misas.store') }}">
                                     @csrf
-                                    <div id="jadwalMisaSection" class="hidden w-full px-4 sm:px-6 flex flex-col space-y-4">
+                                    <div id="jadwalMisaSection" class="w-full px-4 sm:px-6 flex flex-col space-y-4">
                                         <div>
                                             <label for="title" class="block text-sm font-medium text-gray-700">Nama Kegiatan</label>
                                             <input type="text" id="title" name="title" class="mt-1 p-2 w-full border border-gray-300 rounded-md" placeholder="Nama Kegiatan">
