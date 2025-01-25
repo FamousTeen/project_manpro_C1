@@ -94,7 +94,7 @@ $misas = App\Models\Misa::all();
             <div id="modalJadwal" class="fixed z-10 inset-0 overflow-y-auto hidden">
                 <div class="flex items-center justify-center min-h-screen">
                     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" onclick="closeModal('modalJadwal')"></div>
-                    <div class="bg-[#f6f1e3] rounded-lg overflow-hidden shadow-xl transform transition-all w-full sm:max-w-lg sm:w-full">
+                    <div class="bg-[#f6f1e3] rounded-lg overflow-hidden shadow-xl transform transition-all w-full mx-2 sm:max-w-lg sm:w-full">
                         <div class="p-6">
                             <div class="mt-4 flex space-x-4">
                                 <button id="btnJadwalMisa" class="w-full bg-[#002366] text-white py-2 rounded-lg hover:bg-[#20252f] transition-all duration-300" onclick="showSection('jadwalMisa')">
