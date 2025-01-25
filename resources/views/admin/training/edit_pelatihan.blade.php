@@ -18,7 +18,7 @@
             Carbon::setLocale('id');
         @endphp
         <h1 class="text-3xl">Edit Jadwal Pelatihan</h1>
-        <form class="mt-6 mb-4 rounded-xl py-6 px-6 bg-[#f6f1e3]" method="POST"
+        <form class="mt-6 mb-6 rounded-xl py-6 px-6 bg-[#f6f1e3]" method="POST"
             action="{{ route('trainings.update', [$group, $training]) }}">
             @csrf
             @method('put')
