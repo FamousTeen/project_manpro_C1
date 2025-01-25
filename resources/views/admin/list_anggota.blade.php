@@ -10,7 +10,7 @@
                                             -->
 
     <?php use App\Models\Misa_Detail; use App\Models\Account; ?>
-    <div class="container mx-auto p-20 mt-8 mb-8 flex flex-col items-center">
+    <div class="container-fluid m-12 mt-24">
         <div class="grid grid-cols-12">
             <div class="col-start-4 col-span-6 mt-8">
                 <h2 class="font-bold text-3xl text-center">Anggota Misdinar</h2>
