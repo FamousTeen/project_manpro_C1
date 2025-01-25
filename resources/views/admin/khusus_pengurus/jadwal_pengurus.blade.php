@@ -43,8 +43,8 @@ Carbon::setLocale('id');
     </div>
 
     <!-- Modal for Edit -->
-    <div id="editModal{{$meet->id}}" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-        <form action="{{route('meets_updatePengurus', ['meet' => $meet])}}" class="bg-white rounded-lg p-6 w-96" method="post">
+    <div id="editModal{{$meet->id}}" class="fixed inset-0  z-20 bg-black bg-opacity-50 flex justify-center items-center hidden">
+        <form action="{{route('meets_updatePengurus', ['meet' => $meet])}}" class="bg-white rounded-lg p-6 w-96 " method="post">
             @csrf
             @method('put')
             <h2 id="modalTitle" class="text-lg font-semibold mb-4">Edit Jadwal Khusus Pengurus</h2>
@@ -79,7 +79,7 @@ Carbon::setLocale('id');
 </div>
 
 <!-- Modal for Add -->
-<div id="addModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+<div id="addModal" class="fixed inset-0 z-20 bg-black bg-opacity-50 flex justify-center items-center hidden">
     <form action="{{route('meets.store')}}" method="post" class="bg-white rounded-lg p-6 w-full max-w-sm sm:max-w-md">
         @csrf
         <h2 id="modalTitle" class="text-lg font-semibold mb-4">Tambahkan Jadwal Khusus Pengurus</h2>
