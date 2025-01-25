@@ -10,16 +10,17 @@
                                             -->
 
     <?php use App\Models\Misa_Detail; use App\Models\Account; ?>
-    <div class="container mx-auto p-20 mt-8 mb-8 flex flex-col items-center">
-        <div class="grid grid-cols-12">
-            <div class="col-start-4 col-span-6 mt-8">
-                <h2 class="font-bold text-3xl text-center">Anggota Misdinar</h2>
+    <div class="container mx-auto p-4 sm:p-10 sm:mt-8 mt-16 mb-8 flex flex-col items-center">
+        <div class="grid grid-cols-12 ">
+            <div class="col-start-2 col-span-10 sm:col-start-4 sm:col-span-6 mt-8">
+                <h2 class="font-bold text-2xl sm:text-3xl text-center">Anggota Misdinar</h2>
             </div>
         </div>
+    
 
-        <div class="flex flex-col w-full place-items-center">
+        <div class="flex flex-col w-full">
             {{-- Search --}}
-            <div class="flex w-full justify-between sm:w-[600px] md:w-[750px] lg:w-[1150px] mt-10">
+            <div class="flex w-full justify-between sm:w-[600px] md:w-[750px] mt-10">
                 <div class="flex flex-row justify-items mt-5text-gray-500">
                     <div class="mt-4">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -40,9 +41,8 @@
             </div>
 
             {{-- Tabel --}}
-            <div
-                class="relative overflow-x-auto shadow-md sm:rounded-md sm:w-[600px] md:w-[750px] lg:w-[1150px] mt-10 content-center">
-                <table class="min-w-full text-sm text-left rtl:text-right text-black" style="table-layout: auto;">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-md w-full mt-10">
+                <table class="min-w-full text-sm text-left rtl:text-right text-black table-auto">
                     <thead class="text-md text-black uppercase bg-gray-300">
                         <tr>
                             <th scope="col" class="px-6 py-3">
