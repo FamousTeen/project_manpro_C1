@@ -59,7 +59,7 @@
   @endphp
   @foreach ($trainings as $training)
   <!-- Card 1 -->
-  <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px] h-[250px] mx-auto">
+  <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px]">
     <div class="flex justify-end text-sm text-gray-500" onclick="openModal('modal{{$training->id}}')">
       <a class="mr-1"><button>detail</button></a>
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3 mt-1">
