@@ -7,9 +7,9 @@ $accounts = App\Models\Account::all();
 
 @endphp
 
-<header class="mt-16 p-8">
+<header class="container mx-auto mt-20">
     <div class="grid">
-        <h1 class="text-2xl font-bold text-[#20252f]">Input Anggota Pelatihan</h1>
+        <h1 class="ml-4 p-6 mt-4 text-2xl font-semibold">Input Anggota Pelatihan</h1>
         <!-- Input Button -->
         <button id="addButton" class="mt-4 px-6 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg justify-self-end">+ Add Group</button>
     </div>
