@@ -29,7 +29,7 @@
 
 
 
-<div class="max-w-full mx-auto px-16 rounded-lg">
+<div class="max-w-full mx-auto mb-6 px-16 rounded-lg">
     <!-- Main Grid Layout -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
