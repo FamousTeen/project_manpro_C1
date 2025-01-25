@@ -8,7 +8,7 @@ $accounts = App\Models\Account::all();
 
 <header class="mt-16 p-8">
     <h1 class="text-2xl font-semibold text-[#20252f]">JADWAL MISA</h1>
-    <div class="flex space-x-4 mt-4 ml-8">
+    <div class="flex overflow-x-auto space-x-4 mt-4 ml-8 py-2 scroll-smooth snap-x snap-mandatory">
         <!-- Status Filter Buttons -->
         <button class="px-4 py-2 rounded-lg bg-[#740001] text-white status-filter-button" data-status="all">Semua</button>
         <button class="px-4 py-2 bg-[#f6f1e3] rounded-lg hover:bg-[#740001] hover:text-white status-filter-button" data-status="Proses">Proses</button>
@@ -17,83 +17,85 @@ $accounts = App\Models\Account::all();
     </div>
 </header>
 
-@foreach ($misas as $misa)
-@if ($misa->active == '1' || $misa->active == '0')
-<div class="bg-[#f6f1e3] rounded-lg shadow-lg p-6 mx-16 mb-8 misa-card" data-status="{{ $misa->status }}">
-    <div class="flex flex-col lg:flex-row justify-between">
-        <!-- Schedule Card -->
-        <div class="flex-1">
-            <div class="flex items-start space-x-4">
-                <div class="text-2xl">
-                    <span class="bg-orange-500 h-5 w-5 rounded-full inline-block"></span>
-                </div>
-                <div class="flex-1">
-                    <h2 class="text-lg font-semibold">
-                        {{ Carbon::parse($misa->activity_datetime)->translatedFormat('j, F Y') }}
-                    </h2>
-                    <p class="text-gray-600">{{$misa->title}}</p>
-                    <p class="text-gray-600">{{ Carbon::parse($misa->activity_datetime)->translatedFormat('H:i') }} WIB</p>
-                    <p class="mt-2 flex items-center">
-                        Status:
-                        <span class="text-black ml-2">
-                            @if ($misa->status == 'Proses')
-                            <span class="text-green-500">{{$misa->status}} ✔</span> <!-- Green check for 'Proses' -->
-                            
-                            @elseif ($misa->status == 'Tertunda')
-                            <span class="text-yellow-500">{{$misa->status}} ✖</span> <!-- Yellow 'X' for 'Tertunda' -->
-                            
-                            @elseif ($misa->status == 'Berhasil')
-                            <span class="text-blue-500">{{$misa->status}} ✔</span> <!-- Blue check for 'Berhasil' -->
-                            
-                            @else
-                            <span class="text-gray-500">{{$misa->status}} ✖</span> <!-- Gray 'X' for any other status -->
-                            
-                            @endif
-                        </span>
-                    </p>
-
-                    <p class="text-gray-500 text-sm">
-                        Berakhir pada: {{ Carbon::parse($misa->deadline_datetime)->translatedFormat('l, j-m-Y') }}
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Task Assignment Section -->
-        <div class="w-full lg:w-1/2 bg-white p-4 rounded-lg mt-4 lg:mt-0">
-            <h3 class="text-[#20252f] font-semibold border-b pb-2">PETUGAS - PETUGAS</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                @php
-                $roles = $misa->misaDetails->pluck('roles')->unique();
-                @endphp
-
-                @foreach ($roles as $role)
-                <div>
-                    <h4 class="text-[#20252f] font-semibold">{{ $role }}</h4>
-                    <ul class="text-gray-600">
-                        @foreach ($misa->misaDetails->where('roles', $role) as $detail)
-                        <li class="flex items-center">
-                            <span class="mr-2 w-6">
-                                @if ($detail->confirmation == 1) ✔
-                                @elseif ($detail->confirmation == 0) ✖
+<div class="flex flex-col justify-center items-center min-h-screen">
+    @foreach ($misas as $misa)
+    @if ($misa->active == '1' || $misa->active == '0')
+    <div class="bg-[#f6f1e3] rounded-lg shadow-lg p-6 mx-4 mb-8 w-full max-w-md misa-card" data-status="{{ $misa->status }}">
+        <div class="flex flex-col lg:flex-row justify-between">
+            <!-- Schedule Card -->
+            <div class="flex-1">
+                <div class="flex items-start space-x-4">
+                    <div class="text-2xl">
+                        <span class="bg-orange-500 h-5 w-5 rounded-full inline-block"></span>
+                    </div>
+                    <div class="flex-1">
+                        <h2 class="text-lg font-semibold">
+                            {{ Carbon::parse($misa->activity_datetime)->translatedFormat('j, F Y') }}
+                        </h2>
+                        <p class="text-gray-600">{{$misa->title}}</p>
+                        <p class="text-gray-600">{{ Carbon::parse($misa->activity_datetime)->translatedFormat('H:i') }} WIB</p>
+                        <p class="mt-2 flex items-center">
+                            Status:
+                            <span class="text-black ml-2">
+                                @if ($misa->status == 'Proses')
+                                <span class="text-green-500">{{$misa->status}} ✔</span> <!-- Green check for 'Proses' -->
+                                
+                                @elseif ($misa->status == 'Tertunda')
+                                <span class="text-yellow-500">{{$misa->status}} ✖</span> <!-- Yellow 'X' for 'Tertunda' -->
+                                
+                                @elseif ($misa->status == 'Berhasil')
+                                <span class="text-blue-500">{{$misa->status}} ✔</span> <!-- Blue check for 'Berhasil' -->
+                                
+                                @else
+                                <span class="text-gray-500">{{$misa->status}} ✖</span> <!-- Gray 'X' for any other status -->
+                                
                                 @endif
                             </span>
-                            {{ $detail->account->name }}
-                        </li>
-                        @endforeach
-                    </ul>
+                        </p>
+
+                        <p class="text-gray-500 text-sm">
+                            Berakhir pada: {{ Carbon::parse($misa->deadline_datetime)->translatedFormat('l, j-m-Y') }}
+                        </p>
+                    </div>
                 </div>
-                @endforeach
+            </div>
+
+            <!-- Task Assignment Section -->
+            <div class="w-full lg:w-1/2 bg-white p-4 rounded-lg mt-4 lg:mt-0">
+                <h3 class="text-[#20252f] font-semibold border-b pb-2">PETUGAS - PETUGAS</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+                    @php
+                    $roles = $misa->misaDetails->pluck('roles')->unique();
+                    @endphp
+
+                    @foreach ($roles as $role)
+                    <div>
+                        <h4 class="text-[#20252f] font-semibold">{{ $role }}</h4>
+                        <ul class="text-gray-600">
+                            @foreach ($misa->misaDetails->where('roles', $role) as $detail)
+                            <li class="flex items-center">
+                                <span class="mr-2 w-6">
+                                    @if ($detail->confirmation == 1) ✔
+                                    @elseif ($detail->confirmation == 0) ✖
+                                    @endif
+                                </span>
+                                {{ $detail->account->name }}
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
-    </div>
-    <div class="flex justify-end space-x-4 mt-4">
-        <button onclick="openEditModal('{{ $misa->id }}')" class="px-6 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg">Edit</button>
-        <form action="{{ route('misas.destroy', ['misa' => $misa]) }}" method="post">
-            @csrf
-            @method('delete')
-            <button class="px-4 py-2 bg-[#ae0001] hover:bg-[#740001] text-white rounded-lg">Delete</button>
-        </form>
+        <div class="flex justify-end space-x-4 mt-4">
+            <button onclick="openEditModal('{{ $misa->id }}')" class="px-6 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg">Edit</button>
+            <form action="{{ route('misas.destroy', ['misa' => $misa]) }}" method="post">
+                @csrf
+                @method('delete')
+                <button class="px-4 py-2 bg-[#ae0001] hover:bg-[#740001] text-white rounded-lg">Delete</button>
+            </form>
+        </div>
     </div>
 </div>
 @endif
