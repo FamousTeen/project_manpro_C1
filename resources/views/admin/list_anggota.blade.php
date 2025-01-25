@@ -10,8 +10,8 @@
                                             -->
 
     <?php use App\Models\Misa_Detail; use App\Models\Account; ?>
-    <div class="container mx-auto p-15 mt-8 mb-8 flex flex-col items-center">
-        <div class="grid grid-cols-12 w-full">
+    <div class="container mx-auto p-20 mt-8 mb-8 flex flex-col items-center">
+        <div class="grid grid-cols-12">
             <div class="col-start-4 col-span-6 mt-8">
                 <h2 class="font-bold text-3xl text-center">Anggota Misdinar</h2>
             </div>
@@ -19,8 +19,8 @@
 
         <div class="flex flex-col w-full place-items-center">
             {{-- Search --}}
-            <div class="flex w-full justify-between sm:w-[500px] md:w-[750px] lg:w-[1150px] mt-10">
-                <div class="flex flex-row justify-items mt-5 text-gray-500">
+            <div class="flex w-full justify-between sm:w-[600px] md:w-[750px] lg:w-[1150px] mt-10">
+                <div class="flex flex-row justify-items mt-5text-gray-500">
                     <div class="mt-4">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-4">
@@ -29,7 +29,7 @@
                         </svg>
                     </div>
 
-                    <form class="w-full sm:w-[250px] md:w-[300px] lg:w-[300px]">
+                    <form class="sm:w-[300px] md:w-[300px] lg:w-[300px]">
                         <div class="flex items-center border-b border-grey-500 py-2">
                             <input
                                 class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
@@ -41,7 +41,7 @@
 
             {{-- Tabel --}}
             <div
-                class="relative overflow-x-auto shadow-md sm:rounded-md sm:w-full md:w-full lg:w-[1150px] mt-10 content-center">
+                class="relative overflow-x-auto shadow-md sm:rounded-md sm:w-[600px] md:w-[750px] lg:w-[1150px] mt-10 content-center">
                 <table class="min-w-full text-sm text-left rtl:text-right text-black" style="table-layout: auto;">
                     <thead class="text-md text-black uppercase bg-gray-300">
                         <tr>
@@ -132,7 +132,7 @@
                             <div id="modal{{ $l->id }}"
                                 class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
                                 onclick="closeModal('modal{{ $l->id }}')">
-                                <div class="bg-[#f6f1e3] p-8 rounded-lg w-[90%] sm:w-[500px] md:w-[600px] lg:w-[500px] relative p-12"
+                                <div class="bg-[#f6f1e3] p-8 rounded-lg w-[500px] relative p-12"
                                     onclick="event.stopPropagation()">
                                     <button class="absolute top-4 right-4 text-black"
                                         onclick="closeModal('modal{{ $l->id }}')">
