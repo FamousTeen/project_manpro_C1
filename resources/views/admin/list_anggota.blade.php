@@ -13,7 +13,7 @@
     <div class="container mx-auto p-20 mt-8 mb-8 flex flex-col items-center">
         <div class="grid grid-cols-12">
             <div class="col-start-4 col-span-6 mt-8">
-                <h2 class="font-bold text-3xl text-center">ANGGOTA MISDINAR</h2>
+                <h2 class="font-bold text-3xl text-center">Anggota Misdinar</h2>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
 
             {{-- Tabel --}}
             <div
-                class="relative overflow-x-auto w-full shadow-md sm:rounded-md sm:w-[600px] md:w-[750px] lg:w-[1150px] mt-10">
+                class="relative overflow-x-auto shadow-md sm:rounded-md sm:w-[600px] md:w-[750px] lg:w-[1150px] mt-10 content-center">
                 <table class="min-w-full text-sm text-left rtl:text-right text-black" style="table-layout: auto;">
                     <thead class="text-md text-black uppercase bg-gray-300">
                         <tr>
