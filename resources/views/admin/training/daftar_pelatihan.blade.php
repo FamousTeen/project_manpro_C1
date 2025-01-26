@@ -32,7 +32,7 @@
         <div id="ajaxResult">
             @foreach ($trainings as $training)
                 @php
-                    dd($training->trainingDetails());
+                    dd($training->trainingDetails);
                 @endphp
                 @if ($training->groups->count() > 0)
                     @foreach ($training->groups as $g)
