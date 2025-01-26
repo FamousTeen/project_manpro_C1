@@ -24,11 +24,10 @@
         </div>
 
         @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
-                role="alert">
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
                 {{ session('success') }}
             </div>
-        @endif  
+        @endif
 
         <div id="ajaxResult">
             @foreach ($trainings as $training)
@@ -46,16 +45,20 @@
                                     {{ Carbon::parse($training->training_date)->translatedFormat('H.i') }} WIB
                                 </p>
                                 <h1 class="text-xl lg:text-3xl mt-4 mb-4">{{ $g->name }}</h1>
-                                <p class="text-sm lg:text-base">Contact Person : {{ $training->contact_person }} ( <a style="color: blue; text-decoration: underline; cursor: pointer;" href="https://wa.me/62{{ $training->phone_number }}">{{ $training->phone_number }}</a>)</p>
+                                <p class="text-sm lg:text-base">Contact Person : {{ $training->contact_person }} ( <a
+                                        style="color: blue; text-decoration: underline; cursor: pointer;"
+                                        href="https://wa.me/62{{ $training->phone_number }}">{{ $training->phone_number }}</a>)
+                                </p>
                                 <p class="text-sm lg:text-base">Tempat Pelatihan : {{ $training->place }}</p>
                             </div>
                             <!-- Button group for actions -->
                             <div class="flex flex-col lg:flex-row lg:items-end lg:justify-end lg:space-x-2 mt-4 lg:mt-0">
-                                <a href="{{ route('trainings.edit', [$training, $g]) }}" 
-                                   class="px-6 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg text-center mb-2 lg:mb-0 lg:mr-2">
+                                <a href="{{ route('trainings.edit', [$training, $g]) }}"
+                                    class="px-6 py-2 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg text-center mb-2 lg:mb-0 lg:mr-2">
                                     Edit
                                 </a>
-                                <form class="mb-0" action="{{ route('trainings.destroy', ['training' => $training]) }}" method="post">
+                                <form class="mb-0" action="{{ route('trainings.destroy', ['training' => $training]) }}"
+                                    method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="submit"
