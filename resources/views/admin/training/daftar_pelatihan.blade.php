@@ -30,10 +30,10 @@
         @endif
 
         <div id="ajaxResult">
-            @php
-                dd($trainings->groups);
-            @endphp
             @foreach ($trainings as $training)
+            @php
+                dd($training->groups);
+            @endphp
                 @if ($training->group->count() > 0)
                     @foreach ($training->group as $g)
                         <div class="my-6 rounded-xl py-6 px-6 flex flex-col lg:flex-row bg-[#f6f1e3]">
