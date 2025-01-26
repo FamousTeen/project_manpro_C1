@@ -34,7 +34,7 @@
                 @if ($training->group->count() > 0)
                     @foreach ($training->group as $g)
                         @php
-                            dd($g);
+                            dd($training->group);
                         @endphp
                         <div class="my-6 rounded-xl py-6 px-6 flex flex-col lg:flex-row bg-[#f6f1e3]">
                             <div class="flex flex-col lg:flex-grow">
