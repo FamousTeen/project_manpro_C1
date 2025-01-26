@@ -23,6 +23,7 @@ class TrainingController extends Controller
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
             $trainings = TrainingDetail::all();
+            dd($trainings);
 
             return view('admin.training.daftar_pelatihan', [
                 'user' => $user,
