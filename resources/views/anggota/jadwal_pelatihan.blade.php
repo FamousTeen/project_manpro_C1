@@ -78,12 +78,9 @@
                 <div class="mt-2">
                     <div class="flex mb-2">
                         <div class="flex flex-col">
-                            <p class="mt-0">{{ Carbon::parse($training->training_date)->translatedFormat('H:i') }} WIB</p>
-                        </div>
-                    </div>
-                    <div class="mt-2">
-                        <div class="flex flex-col">
-                            <p class="mt-0">{{ $training->place }}</p>
+                            <p class="mt-0">{{ Carbon::parse($training->training_date)->translatedFormat('H:i') }} WIB
+                                ({{ $training->place }})
+                            </p>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -113,8 +110,8 @@
                             </div>
                             <div class="ms-2">
                                 <p class="mt-2 text-lg">
-                                    {{ Carbon::parse($training->training_date)->translatedFormat('H:i') }} WIB</p>
-                                <p class="mt-2 text-lg">{{ $training->place }}</p>
+                                    {{ Carbon::parse($training->training_date)->translatedFormat('H:i') }} WIB
+                                    ({{ $training->place }})</p>
                                 <div class="mt-4">
                                     <p class="font-bold">Contact Person:</p>
                                     <p>Nama: {{ $training->contact_person }}</p>
