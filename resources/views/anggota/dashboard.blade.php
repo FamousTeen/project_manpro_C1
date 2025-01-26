@@ -7,12 +7,12 @@
 
 @section('content')
     <!-- Colors:
-                    1. #740001 - merah gelap
-                    2. #ae0001 - merah terang
-                    3. #f6f1e3 - netral
-                    4. #002366 - biru terang
-                    5. #20252f - biru gelap
-                -->
+                            1. #740001 - merah gelap
+                            2. #ae0001 - merah terang
+                            3. #f6f1e3 - netral
+                            4. #002366 - biru terang
+                            5. #20252f - biru gelap
+                        -->
     <div class="container-fluid m-12 mt-24">
         <!-- Header Section -->
         <div class="grid grid-cols-12">
@@ -41,8 +41,14 @@
                         <div>
                             <p class="font-semibold w-fit text-lg">Tugas</p>
                             <p class="w-fit text-md">
-                                {{ Training::where('status', 1)->whereHas('trainingDetails', function ($query) use ($data) {
-                                        $query->where('account_id', $data->id);
+                                @php
+                                    use App\Models\GroupDetail;
+
+                                    $user_group = GroupDetail::where('account_id', $data->id)->get()->first();
+                                @endphp
+
+                                {{ Training::where('status', 1)->whereHas('trainingDetails', function ($query) use ($user_group) {
+                                        $query->where('group_id', $user_group->group_id);
                                     })->count() +
                                     Misa::where('active', 1)->whereHas('misaDetails', function ($query) use ($data) {
                                             $query->where('account_id', $data->id);
