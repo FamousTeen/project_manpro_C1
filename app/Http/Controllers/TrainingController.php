@@ -8,6 +8,7 @@ use App\Models\Training;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTrainingRequest;
 use App\Models\Group;
+use App\Models\TrainingDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +22,7 @@ class TrainingController extends Controller
         $user = null;
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
-            $trainings = Training::where('status', 1)->get();
+            $trainings = TrainingDetail::all();
 
             return view('admin.training.daftar_pelatihan', [
                 'user' => $user,
