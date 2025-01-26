@@ -15,7 +15,7 @@ class Group extends Model
     ];
     
     public function trainingDetails(): HasMany {
-        return $this->hasMany(TrainingDetail::class);
+        return $this->hasMany(TrainingDetail::class, 'group_id', 'id');
     }
     
     

@@ -17,6 +17,6 @@ class TrainingDetail extends Pivot
         return $this->belongsTo(Training::class);
     }
     public function groups(): BelongsTo {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Group::class, 'group_id', 'id');
     }
 }
