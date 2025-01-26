@@ -31,11 +31,11 @@
 
         <div id="ajaxResult">
             @foreach ($trainings as $training)
-            @php
-                dd($training->groups);
-            @endphp
-                @if ($training->group->count() > 0)
-                    @foreach ($training->group as $g)
+                @php
+                    dd($training->trainingDetails());
+                @endphp
+                @if ($training->groups->count() > 0)
+                    @foreach ($training->groups as $g)
                         <div class="my-6 rounded-xl py-6 px-6 flex flex-col lg:flex-row bg-[#f6f1e3]">
                             <div class="flex flex-col lg:flex-grow">
                                 <p class="font-semibold text-lg lg:text-xl">
