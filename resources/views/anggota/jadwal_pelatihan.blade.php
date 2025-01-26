@@ -55,7 +55,9 @@
             $user_group = GroupDetail::where('account_id', $user->id)->get()->first();
             $trainings = Training::whereHas('trainingDetails', function ($query) use ($user_group) {
                 $query->where('group_id', $user_group->group_id);
-            })->get()->sortBy('training_date');
+            })
+                ->get()
+                ->sortBy('training_date');
             Carbon::setLocale('id');
         @endphp
         @foreach ($trainings as $training)
@@ -77,6 +79,11 @@
                     <div class="flex mb-2">
                         <div class="flex flex-col">
                             <p class="mt-0">{{ Carbon::parse($training->training_date)->translatedFormat('H:i') }} WIB</p>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="flex flex-col">
+                            <p class="mt-0">{{ $training->place }}</p>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -107,6 +114,7 @@
                             <div class="ms-2">
                                 <p class="mt-2 text-lg">
                                     {{ Carbon::parse($training->training_date)->translatedFormat('H:i') }} WIB</p>
+                                <p class="mt-2 text-lg">{{ $training->place }}</p>
                                 <div class="mt-4">
                                     <p class="font-bold">Contact Person:</p>
                                     <p>Nama: {{ $training->contact_person }}</p>
