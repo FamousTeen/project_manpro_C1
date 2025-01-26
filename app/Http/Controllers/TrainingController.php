@@ -113,7 +113,7 @@ class TrainingController extends Controller
 
         $training_details = TrainingDetail::where('group_id', $g)->where('training_id', $training)->get()->first();
         $training_details_data = [
-            'name' => $data['group']
+            'group_id' => $data['group']
         ];
         $training_details->update($training_details_data);
 

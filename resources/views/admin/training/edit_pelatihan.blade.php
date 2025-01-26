@@ -30,9 +30,9 @@
                         required>
                         @foreach ($list_group as $item)
                             @if ($item->name == $group->name)
-                                <option value="{{ $item->name }}" selected>{{ $item->name }}</option>
+                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                             @else
-                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endif
                         @endforeach
                     </select>
