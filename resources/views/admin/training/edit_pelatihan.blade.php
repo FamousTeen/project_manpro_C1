@@ -2,12 +2,12 @@
 
 @section('content')
     <!-- Colors:
-                                                                        1. #740001 - merah gelap
-                                                                        2. #ae0001 - merah terang
-                                                                        3. #f6f1e3 - netral
-                                                                        4. #002366 - biru terang
-                                                                        5. #20252f - biru gelap
-                                                                    -->
+    1. #740001 - merah gelap
+    2. #ae0001 - merah terang
+    3. #f6f1e3 - netral
+    4. #002366 - biru terang
+    5. #20252f - biru gelap
+    -->
 
     <div class="container-fluid content-body mx-12 ">
         @php

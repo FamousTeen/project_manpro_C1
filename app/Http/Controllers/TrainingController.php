@@ -8,6 +8,7 @@ use App\Models\Training;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTrainingRequest;
 use App\Models\Group;
+use App\Models\TrainingDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -110,11 +111,11 @@ class TrainingController extends Controller
         ];
         $trainings->update($training_data);
 
-        $group = Group::find($g);
-        $group_data = [
+        $training_details = TrainingDetail::where('group_id', $g)->get();
+        $training_details_data = [
             'name' => $data['group']
         ];
-        $group->update($group_data);
+        $training_details->update($training_details_data);
 
         return redirect()->route('trainings.index')->with('success', 'Pelatihan berhasil diupdate.');
     }
