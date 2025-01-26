@@ -76,7 +76,7 @@ class TrainingController extends Controller
     {
         $trainings = Training::find($training);
         $groups = Group::find($g);
-        $list_group = Group::select('name')->distinct()->get()->sortBy('name');
+        $list_group = Group::get()->distinct()->sortBy('name');
         dd($list_group);
 
         return view('admin.training.edit_pelatihan')->with('training', $trainings)->with('group', $groups)->with('list_group', $list_group);
