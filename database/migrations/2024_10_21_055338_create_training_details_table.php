@@ -17,11 +17,10 @@ return new class extends Migration
             $table->foreign('training_id')
                 ->references('id')
                 ->on('trainings');
-            $table->bigInteger('account_id')->unsigned();
-            $table->foreign('account_id')
+            $table->bigInteger('group_id')->unsigned();
+            $table->foreign('group_id')
                 ->references('id')
-                ->on('accounts');
-            $table->boolean('confirmation')->nullable();
+                ->on('groups');
             $table->timestamps();
         });
     }

@@ -11,12 +11,11 @@ class Group extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'training_id',
         'name',
     ];
     
-    public function training(): BelongsTo {
-        return $this->belongsTo(Training::class);
+    public function trainingDetails(): HasMany {
+        return $this->hasMany(TrainingDetail::class);
     }
     
     
