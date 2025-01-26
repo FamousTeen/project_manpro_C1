@@ -55,7 +55,7 @@
             $user_group = GroupDetail::where('account_id', $user->id)->get()->first();
             $trainings = Training::whereHas('trainingDetails', function ($query) use ($user_group) {
                 $query->where('group_id', $user_group->group_id);
-            })->get();
+            })->get()->sortBy('training_date');
             Carbon::setLocale('id');
         @endphp
         @foreach ($trainings as $training)
