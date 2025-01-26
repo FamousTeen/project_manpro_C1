@@ -21,7 +21,7 @@ class TrainingController extends Controller
         $user = null;
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
-            $trainings = Training::where('status', 1)->get();
+            $trainings = Training::where('status', 1)->get()->sortBy('training_date');
 
             return view('admin.training.daftar_pelatihan', [
                 'user' => $user,
