@@ -30,6 +30,9 @@
         @endif
 
         <div id="ajaxResult">
+            @php
+                dd($trainings->groups);
+            @endphp
             @foreach ($trainings as $training)
                 @if ($training->group->count() > 0)
                     @foreach ($training->group as $g)
