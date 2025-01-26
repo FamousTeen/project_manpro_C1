@@ -120,10 +120,10 @@
                             @php
                                 $training_details = TrainingDetail::where('training_id', $training->id)->get();
                             @endphp
-                            <p class="text-xl font-bold">Yang bertugas saat ini:</p>
+                            <p class="text-xl font-bold">Kelompok yang mengikuti:</p>
                             <ul>
                                 @foreach ($training_details as $training_detail)
-                                    <li>{{ $training_detail->account->name }}</li>
+                                    <li>{{ $training_detail->groups->name }}</li>
                                 @endforeach
                             </ul>
                         </div>
