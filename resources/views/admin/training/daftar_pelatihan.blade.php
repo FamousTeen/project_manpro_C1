@@ -34,8 +34,8 @@
                 @php
                     $training_details = $training->trainingDetails;
                 @endphp
-                @if ($trainingDetails->count() > 0)
-                    @foreach ($trainingDetails->groups as $g)
+                @if ($training_details->count() > 0)
+                    @foreach ($training_details->groups as $g)
                         <div class="my-6 rounded-xl py-6 px-6 flex flex-col lg:flex-row bg-[#f6f1e3]">
                             <div class="flex flex-col lg:flex-grow">
                                 <p class="font-semibold text-lg lg:text-xl">
