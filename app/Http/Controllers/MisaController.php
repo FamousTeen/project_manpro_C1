@@ -42,7 +42,9 @@ class MisaController extends Controller
             )->where('password', $user->password)->firstOrFail();
 
             // Fetch all misas, no restriction
-            $misas = Misa::with('misaDetails')->get();
+            $misas = Misa::with('misaDetails')->whereHas('misaDetails', function ($query) use ($userData) {
+                $query->where('account_id', $userData->id);
+            })->distinct()->get();
 
             return view('anggota/jadwal', [
                 'misas' => $misas,

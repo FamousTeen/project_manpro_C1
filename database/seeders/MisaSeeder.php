@@ -30,7 +30,7 @@ class MisaSeeder extends Seeder
         DB::table('misas')->insert([
             'title' => "Misa Natal",
             'category' => "Misa Acara Besar",
-            'activity_datetime' => $activityDateTime->format('Y-m-d H:i:s'),
+            'activity_datetime' => $activityDateTime->addDays(2)->format('Y-m-d H:i:s'),
             'upload_datetime' => Carbon::now()->format('Y-m-d H:i:s'),
             'evaluation' => "Fusce metus erat, feugiat eu hendrerit aliquet, pulvinar eu urna. Curabitur eu sagittis diam. Maecenas faucibus scelerisque.",
             'status' => "Proses",

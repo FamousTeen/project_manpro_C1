@@ -15,6 +15,14 @@ class MisaDetailSeeder extends Seeder
     public function run(): void
     {
         DB::table('misa_details')->insert([
+            'misa_id' => 3,
+            'account_id' => 1,
+            'roles' => "Pengawas",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('misa_details')->insert([
             'misa_id' => 1,
             'account_id' => 1,
             'roles' => "Petugas",

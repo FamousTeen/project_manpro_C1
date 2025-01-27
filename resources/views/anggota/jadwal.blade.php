@@ -112,7 +112,7 @@
             $roles = [];
 
             foreach ($misa->misaDetails as $detail) {
-            if ($detail->account_id == $loggedInUserId && !in_array($detail->roles, $roles)) {
+            if (!in_array($detail->roles, $roles)) {
             $roles[] = $detail->roles;
             }
             }
@@ -123,7 +123,7 @@
             <ul>
               @php $found = false; @endphp
               @foreach ($misa->misaDetails as $detail)
-              @if ($detail->roles === $role && $detail->account_id == $loggedInUserId)
+              @if ($detail->roles === $role)
               <li>{{ $detail->account->name }}</li>
               @php $found = true; @endphp
               @endif
