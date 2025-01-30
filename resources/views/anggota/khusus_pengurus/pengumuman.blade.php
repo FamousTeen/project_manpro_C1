@@ -28,7 +28,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16">
                 <!-- Example Announcement -->
                 @foreach ($announcement as $ann)
-                    <div class="bg-[#f6f1e3] p-6 shadow-lg w-64 mx-8 border border-[#002366] rounded-lg">
+                    <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px]">
                         <div class="flex justify-between items-center">
                             <h2 class="text-lg font-bold mb-2">
                                 {{ Carbon::parse($ann->upload_time)->translatedFormat('l, j F Y') }}</h2>
