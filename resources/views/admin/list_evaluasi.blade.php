@@ -70,67 +70,67 @@
                 </div>
             </div>
 
-            <!-- Modal Example -->
-            <div id="modal{{ $m->id }}"
-                class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
-                onclick="closeModal('modal{{ $m->id }}')">
-                <div class="bg-[#f6f1e3] p-8 rounded-lg w-[700px] h-[400px] relative p-12"
-                    onclick="event.stopPropagation()">
-                    <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal{{ $m->id }}')">
-                        &#10005;
-                    </button>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="text-left ">
-                            <div class="flex items-center justify-items">
-                                <span class="bg-orange-500 h-7 w-7 rounded-full inline-block"></span>
-                                <h2 class="text-2xl font-bold ml-2">{{ $m->title }}</h2>
-                            </div>
-                            <div class="ms-9">
-                                <p class="mt-2 text-lg">
-                                    {{ Carbon::parse($m->activity_datetime)->translatedFormat('j F Y') }}</p>
-                                <p class="font-bold">{{ date('H.i', strtotime($m->activity_datetime)) }} WIB</p>
-                            </div>
-                            <div class="mt-6 ms-9">
-                                <div class="flex flex-col">
-                                    <p class="font-bold">Evaluasi: </p>
-                                    <p class="mt-0 text-sm text-justify pe-2">{{ $m->evaluation }}</p>
+                <!-- Modal Example -->
+                <div id="modal{{ $m->id }}"
+                    class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
+                    onclick="closeModal('modal{{ $m->id }}')">
+                    <div class="bg-[#f6f1e3] p-8 rounded-lg w-[700px] h-[400px] relative p-12"
+                        onclick="event.stopPropagation()">
+                        <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal{{ $m->id }}')">
+                            &#10005;
+                        </button>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-left ">
+                                <div class="flex items-center justify-items">
+                                    <span class="bg-orange-500 h-7 w-7 rounded-full inline-block"></span>
+                                    <h2 class="text-2xl font-bold ml-2">{{ $m->title }}</h2>
+                                </div>
+                                <div class="ms-9">
+                                    <p class="mt-2 text-lg">
+                                        {{ Carbon::parse($m->activity_datetime)->translatedFormat('j F Y') }}</p>
+                                    <p class="font-bold">{{ date('H.i', strtotime($m->activity_datetime)) }} WIB</p>
+                                </div>
+                                <div class="mt-6 ms-9">
+                                    <div class="flex flex-col">
+                                        <p class="font-bold">Evaluasi: </p>
+                                        <p class="mt-0 text-sm text-justify pe-2 overflow-y-scroll max-h-32">{{ $m->evaluation }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="text-left">
-                            <p class="text-xl font-bold">Yang bertugas saat ini:</p>
-                            <p class="mt-2"><span class="font-bold">Petugas:</span></p>
-                            <?php
-                            $misa_detail = Misa_Detail::get()->where('misa_id', $m->id);
-                            $petugas_id = $misa_detail->where('roles', 'Petugas');
-                            $pengawas_id = $misa_detail->where('roles', 'Pengawas');
-                            $perkap_id = $misa_detail->where('roles', 'Perkap');
-                            $petugas = Account::get()->whereIn('id', $petugas_id->pluck('account_id'));
-                            $pengawas = Account::get()->whereIn('id', $pengawas_id->pluck('account_id'));
-                            $perkap = Account::get()->whereIn('id', $perkap_id->pluck('account_id'));
-                            ?>
-                            <ul class="list-none mr-14">
-                                @foreach ($petugas as $p)
-                                    <li>{{ $p->name }}</li>
-                                @endforeach
-                            </ul>
-                            <p class="mt-2"><span class="font-bold">Pengawas:</span></p>
-                            <ul class="list-none mr-14">
-                                @foreach ($pengawas as $p)
-                                    <li>{{ $p->name }}</li>
-                                @endforeach
-                            </ul>
-                            <p class="mt-2"><span class="font-bold">Perkap:</span></p>
-                            <ul class="list-none mr-14">
-                                @foreach ($perkap as $p)
-                                    <li>{{ $p->name }}</li>
-                                @endforeach
-                            </ul>
+                            <div class="text-left">
+                                <p class="text-xl font-bold">Yang bertugas saat ini:</p>
+                                <p class="mt-2"><span class="font-bold">Petugas:</span></p>
+                                <?php
+                                $misa_detail = Misa_Detail::get()->where('misa_id', $m->id);
+                                $petugas_id = $misa_detail->where('roles', 'Petugas');
+                                $pengawas_id = $misa_detail->where('roles', 'Pengawas');
+                                $perkap_id = $misa_detail->where('roles', 'Perkap');
+                                $petugas = Account::get()->whereIn('id', $petugas_id->pluck('account_id'));
+                                $pengawas = Account::get()->whereIn('id', $pengawas_id->pluck('account_id'));
+                                $perkap = Account::get()->whereIn('id', $perkap_id->pluck('account_id'));
+                                ?>
+                                <ul class="list-none mr-14">
+                                    @foreach ($petugas as $p)
+                                        <li>{{ $p->name }}</li>
+                                    @endforeach
+                                </ul>
+                                <p class="mt-2"><span class="font-bold">Pengawas:</span></p>
+                                <ul class="list-none mr-14">
+                                    @foreach ($pengawas as $p)
+                                        <li>{{ $p->name }}</li>
+                                    @endforeach
+                                </ul>
+                                <p class="mt-2"><span class="font-bold">Perkap:</span></p>
+                                <ul class="list-none mr-14">
+                                    @foreach ($perkap as $p)
+                                        <li>{{ $p->name }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         @endforeach
     </div>
 

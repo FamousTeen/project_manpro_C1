@@ -12,7 +12,7 @@ Carbon::setLocale('id');
 <div class="container-fluid m-12 mt-24">
     <!-- Header Section -->
     <div class="grid grid-cols-12">
-        <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
+        <div class="col-start-4 col-span-6 mt-2 mb-8 justify-items-center">
             <h1 class="font-bold text-4xl text-center">EVALUASI</h1>
             <div class="block lg:hidden text-center mt-4">
                 <h2 class="font-bold text-lg ">Hi, {{ $data->name }}</h2>
@@ -31,7 +31,7 @@ Carbon::setLocale('id');
     @endphp
     <!-- Jadwal Misa Section -->
     <div
-        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-16 m-12 mt-10">
+        class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-16 m-12 mt-2 sm:mt-10">
         @foreach ($misa as $m)
         <?php
 
@@ -77,11 +77,12 @@ Carbon::setLocale('id');
                 </div>
             </div>
         </div>
+        
         <!-- Modal 1 -->
         <div id="modal{{ $m->id }}"
             class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
             onclick="closeModal('modal{{ $m->id }}')">
-            <div class="bg-[#f6f1e3] p-8 rounded-lg w-[700px] h-[400px] relative p-12"
+            <div class="bg-[#f6f1e3] p-4 rounded-lg w-[700px] relative"
                 onclick="event.stopPropagation()">
                 <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal{{ $m->id }}')">
                     &#10005;
@@ -120,7 +121,7 @@ Carbon::setLocale('id');
                                     </form>
                                 </div>
                                 @else
-                                <p class="mt-0 text-sm text-justify pe-2">{{ $m->misa->evaluation }}</p>
+                                <p class="text-sm text-justify pe-2 overflow-y-scroll max-h-32">{{ $m->misa->evaluation }}</p>
                                 @endif
                             </div>
                         </div>

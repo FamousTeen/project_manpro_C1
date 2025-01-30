@@ -43,9 +43,10 @@
         </div>
       </div>
     </div>
+    
     <!-- Modal 1 -->
     <div id="modal1" class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center" onclick="closeModal('modal1')">
-      <div class="bg-[#D1D9D1] p-8 rounded-lg w-[700px] resize-y relative p-12" onclick="event.stopPropagation()">
+      <div class="bg-[#D1D9D1] p-8 rounded-lg w-[700px] relative " onclick="event.stopPropagation()">
           <button class="absolute top-4 right-4 text-black" onclick="closeModal('modal1')">
               &#10005;
           </button>
