@@ -95,7 +95,7 @@
             </div>
 
             <!-- Right Side: Calendar Section -->
-            <div class="items-center">
+            <div>
                 <div class="grid justify-items-center mb-6">
                     <h1 class="font-bold text-xl">CALENDAR</h1>
                 </div>
