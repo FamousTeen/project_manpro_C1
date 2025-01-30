@@ -100,7 +100,7 @@
                     <h1 class="font-bold text-xl">CALENDAR</h1>
                 </div>
                 <div class="flex items-center justify-center">
-                    <div class="lg:w-7/12 md:w-9/12 sm:w-10/12 w-full max-w-full p-4 sm:py-4">
+                    <div class="lg:w-7/12 md:w-9/12 sm:w-10/12 w-full max-w-full p-4 sm:py-1">
                         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
                             <!-- Calendar Header -->
                             <div class="flex items-center justify-between px-6 py-3 bg-[#f6f1e3]">
