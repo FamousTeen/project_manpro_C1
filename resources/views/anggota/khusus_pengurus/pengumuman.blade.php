@@ -24,23 +24,21 @@
     <div class="container mx-auto py-8 mt-16">
 
         <!-- Pengumuman Section -->
-        <div class="flex justify-center mb-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-16">
-                <!-- Example Announcement -->
-                @foreach ($announcement as $ann)
-                    <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px]">
-                        <div class="flex justify-between items-center">
-                            <h2 class="text-lg font-bold mb-2">
-                                {{ Carbon::parse($ann->upload_time)->translatedFormat('l, j F Y') }}</h2>
-                        </div>
-                        <div class="mt-4">
-                            <p class="text-gray-700 text-sm">
-                                {!! nl2br(e(urldecode($ann->description))) !!}
-                            </p>
-                        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-16 m-12 mt-10">
+            <!-- Example Announcement -->
+            @foreach ($announcement as $ann)
+                <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px]">
+                    <div class="flex justify-end text-sm text-gray-500">
+                        <h2 class="text-lg font-bold mb-2">
+                            {{ Carbon::parse($ann->upload_time)->translatedFormat('l, j F Y') }}</h2>
                     </div>
-                @endforeach
-            </div>
+                    <div class="mt-4">
+                        <p class="text-gray-700 text-sm">
+                            {!! nl2br(e(urldecode($ann->description))) !!}
+                        </p>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection
