@@ -66,7 +66,7 @@
                     <div id="modal{{ $ann->id }}"
                         class="modal hidden fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center"
                         onclick="closeModal('modal{{ $ann->id }}')">
-                        <div class="bg-white p-8 rounded-lg w-1/2 relative" onclick="event.stopPropagation()">
+                        <div class="bg-white p-8 rounded-lg w-full mx-2 sm:w-1/2 relative" onclick="event.stopPropagation()">
                             <button class="absolute top-8 right-8 text-red-600 hover:text-red-800"
                                 onclick="confirmDelete('deleteConfirm{{ $ann->id }}')">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"

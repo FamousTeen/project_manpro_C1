@@ -43,7 +43,7 @@ Carbon::setLocale('id');
     </div>
 
     <!-- Modal for Edit -->
-    <div id="editModal{{$meet->id}}" class="fixed inset-0  z-20 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <div id="editModal{{$meet->id}}" class="fixed inset-0 z-20 bg-black bg-opacity-50 flex justify-center items-center hidden">
         <form action="{{route('meets_updatePengurus', ['meet' => $meet])}}" class="bg-white rounded-lg p-6 w-96 " method="post">
             @csrf
             @method('put')
