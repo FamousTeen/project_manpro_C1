@@ -28,9 +28,9 @@
 <div class="container mx-auto py-8 mt-16">
 
 <!-- Card Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mx-16">
+<div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-16 m-12 mt-10">
     <!-- Example Card -->
-    <div class="bg-[#f6f1e3] border border-[#002366] rounded-lg shadow-md p-6 space-y-2">
+    <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px]">
         <h2 class="text-xl font-semibold text-gray-800">Judul Jadwal</h2>
         <p class="text-gray-600">Tanggal: Senin, 01-01-2023</p>
         <p class="text-gray-600">Lokasi: Lokasi Contoh</p>
