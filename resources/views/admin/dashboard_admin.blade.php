@@ -8,7 +8,7 @@
                         4. #002366 - biru terang
                         5. #20252f - biru gelap
                     -->
-    <div class="container-fluid ms-0 m-12 me-0 mt-24">
+    <div class="ontainer-fluid m-12 mt-24">
         <!-- Header Section -->
         <div class="grid grid-cols-12">
             <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
