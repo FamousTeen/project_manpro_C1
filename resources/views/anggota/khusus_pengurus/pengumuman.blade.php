@@ -28,7 +28,7 @@
             <!-- Example Announcement -->
             @foreach ($announcement as $ann)
                 <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px]">
-                    <div class="flex justify-end text-sm text-gray-500">
+                    <div class="flex justify-end text-sm">
                         <h2 class="text-lg font-bold mb-2">
                             {{ Carbon::parse($ann->upload_time)->translatedFormat('l, j F Y') }}</h2>
                     </div>
