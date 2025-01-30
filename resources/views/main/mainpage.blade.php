@@ -196,7 +196,7 @@ Carbon::now()->endOfWeek(),
 <!-- kolekte -->
 <section class="bg-[#f6f1e3] py-16 text-center" id="section5">
 
-    <h2 class="text-3xl font-bold text-[#20252f] mb-8">PERSEMBAHAN KASIH / KOLEKTE</h2>
+    <h2 class="text-3xl font-bold text-[#20252f] mb-8 mx-2">PERSEMBAHAN KASIH / KOLEKTE</h2>
 
     <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
         <div class="w-[300px] flex-shrink-0">
