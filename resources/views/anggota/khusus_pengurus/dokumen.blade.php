@@ -25,7 +25,7 @@
             </div>
         </div>       
 
-<div class="container mx-auto py-8 mt-16">
+<div class="container mx-auto mt-2">
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full max-w-3xl mx-auto p-8">
         @php
