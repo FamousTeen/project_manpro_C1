@@ -11,7 +11,7 @@ $accounts = App\Models\Account::all();
     <div class="grid">
         <h1 class="ml-4 p-6 mt-4 text-2xl font-semibold">Input Anggota Pelatihan</h1>
         <!-- Input Button -->
-        <button id="addButton" class="mt-4 px-6 py-2 mb-3 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg justify-self-end">+ Add Group</button>
+        <button id="addButton" class="mt-4 px-6 py-2 mb-4 bg-[#002366] hover:bg-[#20252f] text-white rounded-lg justify-self-end">+ Add Group</button>
     </div>
 </header>
 
