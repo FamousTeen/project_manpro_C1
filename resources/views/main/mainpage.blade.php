@@ -26,7 +26,7 @@ Carbon::now()->endOfWeek(),
 @endphp
 
 <!-- dokumentasi -->
-<div class="bg-blue-500 text-white h-1/2 lg:h-[89%] flex items-center justify-center w-full max-w-full" id="documentation">
+<div class="bg-black text-white h-1/2 lg:h-[89%] flex items-center justify-center w-full max-w-full" id="documentation">
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
         <!-- Carousel wrapper -->
         <div class="relative h-full overflow-hidden md:h-full">
