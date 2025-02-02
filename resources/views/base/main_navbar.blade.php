@@ -38,7 +38,7 @@
         <div class="max-w-screen w-full mx-auto flex justify-between items-center">
             <!-- Logo Section -->
             <a href="{{route('main_page')}}" class="flex items-center">
-                <img src="../../../images/LOGO_MISDINAR.png" alt="Logo" class="h-10 w-10 md:h-12 md:w-12 mr-2 ml-2 sm:ml-4">
+                <img src="../../../images/LOGO_MISDINAR.png" alt="Logo" class="h-12 w-12 md:h-12 md:w-12 mr-2 ml-2 sm:ml-4">
                 <span class="font-bold text-xs sm:text-sm md:text-md lg:text-lg hidden md:inline">
                     MISDINAR ST. TARSISIUS GEREJA KATOLIK ROH KUDUS
                 </span>
