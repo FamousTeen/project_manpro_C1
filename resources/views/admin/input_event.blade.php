@@ -39,39 +39,39 @@
             <form method="post" action="{{route('events.store')}}" class="grid grid-cols-1 gap-4" enctype="multipart/form-data">
                 @csrf
                 <div>
-                    <label for="title" class="block text-sm font-medium">Nama Acara</label>
+                    <label for="title" class="block text-sm font-medium">Nama Acara*</label>
                     <input type="text" name="title" id="title" class="mt-1 block w-full border-gray-300 rounded-md" required>
                 </div>
                 <div class="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
                     <div>
-                        <label for="date" class="block text-sm font-medium">Tanggal</label>
+                        <label for="date" class="block text-sm font-medium">Tanggal*</label>
                         <input type="date" name="date" id="date" class="mt-1 block w-full border-gray-300 rounded-md" required>
                     </div>
                     <div>
-                        <label for="start_time" class="block text-sm font-medium">Jam Mulai</label>
+                        <label for="start_time" class="block text-sm font-medium">Jam Mulai*</label>
                         <input type="time" name="start_time" id="start_time" class="mt-1 block w-full border-gray-300 rounded-md" required>
                     </div>
                     <div>
-                        <label for="finished_time" class="block text-sm font-medium">Jam Selesai</label>
+                        <label for="finished_time" class="block text-sm font-medium">Jam Selesai*</label>
                         <input type="time" name="finished_time" id="finished_time" class="mt-1 block w-full border-gray-300 rounded-md" required>
                     </div>
                 </div>
                 <div>
-                    <label for="place" class="block text-sm font-medium">Tempat</label>
+                    <label for="place" class="block text-sm font-medium">Tempat*</label>
                     <input type="text" name="place" id="place" class="mt-1 block w-full border-gray-300 rounded-md" required>
                 </div>
                 <div class="flex flex-col lg:flex-row lg:space-x-4 space-y-4 lg:space-y-0">
                     <div>
-                        <label for="contact_person" class="block text-sm font-medium">Contact Person</label>
+                        <label for="contact_person" class="block text-sm font-medium">Contact Person*</label>
                         <input type="text" name="contact_person" id="contact_person" class="mt-1 block w-full border-gray-300 rounded-md" required>
                     </div>
                     <div>
-                        <label for="phone_number" class="block text-sm font-medium">No. Telepon</label>
+                        <label for="phone_number" class="block text-sm font-medium">No. Telepon*</label>
                         <input type="text" id="phone_number" name="phone_number" class="mt-1 block w-full border-gray-300 rounded-md" required>
                     </div>
                 </div>
                 <div>
-                    <label for="description" class="block text-sm font-medium">Narasi Singkat</label>
+                    <label for="description" class="block text-sm font-medium">Narasi Singkat*</label>
                     <textarea id="description" class="mt-1 block w-full border-gray-300 rounded-md h-24" oninput="readTextarea()"></textarea>
                     <input type="hidden" name="description" id="eventDesc" required></input>
                 </div>
@@ -81,7 +81,7 @@
         <div class="grid grid-cols-1 gap-6">
             <div>
                 <div class="bg-[#f6f1e3] p-6 rounded-lg h-56 relative">
-                    <h3 class="text-xl font-bold absolute top-4 left-6">Poster Acara</h3>
+                    <h3 class="text-xl font-bold absolute top-4 left-6">Poster Acara*</h3>
                     <div class="flex items-center justify-center h-36 mt-8">
                         <label for="file-upload-poster" class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-gray-600 flex flex-col items-center justify-center cursor-pointer w-full h-full">
                             <svg id="upload-icon-poster" class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -98,7 +98,7 @@
             <!-- Pengurus Acara -->
             <div class="bg-[#f6f1e3] p-6 rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="pengurus">
-                    <label for="chief" class="block text-sm font-medium">Ketua Acara</label>
+                    <label for="chief" class="block text-sm font-medium">Ketua Acara*</label>
                     <select id="chief" name="chief" class="mt-1 block w-full border-gray-300 rounded-md" required>
                         <option selected>Pilih Nama Ketua</option>
                         @foreach ($accounts as $account)
@@ -162,7 +162,7 @@
         <!-- Anggota Panitia -->
         <div class="bg-[#f6f1e3] h-72 p-6 rounded-lg">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-bold">Anggota Panitia</h2>
+                <h2 class="text-xl font-bold">Anggota Panitia <span class="text-sm font-light">(Minimal 1 anggota)</span></h2>
                 <button type="button" onclick="openModal()" class="bg-[#002366] hover:bg-[#20252f] text-white text-sm px-4 py-1 rounded">Tambah +</button>
             </div>
 
@@ -186,7 +186,7 @@
         <div class="grid grid-cols-1 gap-2">
             <div>
                 <div class="bg-[#f6f1e3] p-6 rounded-lg h-72 relative">
-                    <h3 class="text-xl font-bold absolute top-4 left-6">Rundown Acara</h3>
+                    <h3 class="text-xl font-bold absolute top-4 left-6">Rundown Acara*</h3>
                     <div class="flex items-center justify-center h-52 mt-8">
                         <label for="file-upload" class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-gray-600 flex flex-col items-center justify-center cursor-pointer w-full h-full">
                             <svg id="upload-icon" class="w-10 h-10 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -326,6 +326,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
     var commmitteeArray = [];
+    var commmitteeArray2 = [];
     var divisiArray = [];
     var adminArray = [];
     var rapatArray = [];
@@ -359,8 +360,17 @@
             // Disable options based on selected values
             selectElements.forEach(select => {
                 Array.from(select.options).forEach(option => {
-                    if (selectedValues.includes(option.value) && select.value !== option.value) {
-                        option.disabled = true;
+                    if (commmitteeArray2.length > 0) {
+                        if (commmitteeArray2.includes(option.value)) {
+                            option.disabled = true;
+                        }
+                        if (selectedValues.includes(option.value) && select.value !== option.value) {
+                            option.disabled = true;
+                        }
+                    } else {
+                        if (selectedValues.includes(option.value) && select.value !== option.value) {
+                            option.disabled = true;
+                        } 
                     }
                 });
             });
@@ -391,6 +401,7 @@
             `);
 
         commmitteeArray.push(idPanitia);
+        commmitteeArray2.push(idPanitia);
         divisiArray.push(divisi);
         $('#selectedCommitteeInput').val(JSON.stringify(commmitteeArray));
         $('#selectedDivisionInput').val(JSON.stringify(divisiArray));
