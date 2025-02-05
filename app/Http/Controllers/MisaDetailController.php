@@ -62,11 +62,11 @@ class MisaDetailController extends Controller
         $ministers = [];
         foreach ($misa as $m) {
             // for ($x = 0; $x < sizeof($misa); $x++) {
-            array_push($ministers, Misa_Detail::get()->where('misa_id', $m->misa_id));
+            array_push($ministers, Misa_Detail::get()->where('misa_id', $m->id));
             // }
         }
 
-        dd(vars: $ministers);
+        // dd(vars: $ministers);
 
         return view('anggota.evaluasi', [
             'misa' => $misa,
