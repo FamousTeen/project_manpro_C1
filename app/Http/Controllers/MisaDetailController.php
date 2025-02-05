@@ -66,7 +66,7 @@ class MisaDetailController extends Controller
             // }
         }
 
-        // dd(vars: $ministers);
+        dd(vars: $ministers);
 
         return view('anggota.evaluasi', [
             'misa' => $misa,
