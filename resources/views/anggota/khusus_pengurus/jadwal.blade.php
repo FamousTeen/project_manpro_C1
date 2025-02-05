@@ -52,7 +52,8 @@
                                 {{ Carbon::parse($um->date)->translatedFormat('l, j F Y') }}
                             </p>
                             <p class="text-gray-600">Lokasi: {{ $um->place }}</p>
-                            <p class="text-gray-600">Catatan: {!! nl2br(e(urldecode($um->notulen))) !!}</p>
+                            <p class="text-gray-600">Catatan:</p>
+                            <p class="text-gray-600">{!! nl2br(e(urldecode($um->notulen))) !!}</p>
                             <div class="flex justify-end">
                             </div>
                         </div>
