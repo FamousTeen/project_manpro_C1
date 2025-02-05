@@ -57,7 +57,7 @@ class MisaDetailController extends Controller
         )->where('password', $user->password)->firstOrFail();
 
         $user_misa_details = Misa_Detail::get()->where('account_id', $user->id);
-        $misa = Misa::whereIn('id', $user_misa_details->pluck('misa_id'))->where('activity_datetime', '>=', date('Y-m-d H:i:s'))->get();
+        $misa = Misa::whereIn('id', $user_misa_details->pluck('misa_id'))->where('activity_datetime', '<=', date('Y-m-d H:i:s'))->get();
 
         $ministers = [];
         foreach ($misa as $m) {
