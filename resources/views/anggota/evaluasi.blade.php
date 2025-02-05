@@ -38,7 +38,7 @@
                     } elseif (Auth::guard('account')->check()) {
                         $user = Auth::guard('account')->user();
                     }
-                    $role = Misa_Detail::where('account_id', $user->id)->where('misa_id', $m->misa->id)->first()->roles;
+                    $role = Misa_Detail::where('account_id', $user->id)->where('misa_id', $m->id)->first()->roles;
                 @endphp
                 <!-- Card 1 -->
                 <div class="bg-[#f6f1e3] p-6 shadow-lg border border-[#002366] rounded-xl w-[300px]">
@@ -52,15 +52,15 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <p class="font-bold" style="font-size: 18px">
-                            {{ Carbon::parse($m->misa->activity_datetime)->translatedFormat('l, j F Y') }}
+                            {{ Carbon::parse($m->activity_datetime)->translatedFormat('l, j F Y') }}
                         </p>
                     </div>
                     <div class="mt-2">
                         <div class="flex mb-2">
                             <span class="bg-orange-500 mt-1 h-4 w-4 rounded-full inline-block"></span>
                             <div class="flex flex-col ml-2">
-                                <span>{{ $m->misa->title }}</span>
-                                <p class="mt-0">{{ date('H.i', strtotime($m->misa->activity_datetime)) }} WIB</p>
+                                <span>{{ $m->title }}</span>
+                                <p class="mt-0">{{ date('H.i', strtotime($m->activity_datetime)) }} WIB</p>
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                     <div class="mt-6">
                         <div class="flex flex-col">
                             <p class="font-bold">Evaluasi: </p>
-                            <p class="mt-0 text-sm text-justify">{{ $m->misa->evaluation }}</p>
+                            <p class="mt-0 text-sm text-justify">{{ $m->evaluation }}</p>
                         </div>
                     </div>
                 </div>
@@ -87,13 +87,13 @@
                             <div class="text-left ">
                                 <div class="flex items-center justify-items">
                                     <span class="bg-orange-500 h-7 w-7 rounded-full inline-block"></span>
-                                    <h2 class="text-2xl font-bold ml-2">{{ $m->misa->title }}</h2>
+                                    <h2 class="text-2xl font-bold ml-2">{{ $m->title }}</h2>
                                 </div>
                                 <div class="ms-9">
                                     <p class="mt-2 text-lg">
-                                        {{ Carbon::parse($m->misa->activity_datetime)->translatedFormat('j F Y') }}
+                                        {{ Carbon::parse($m->activity_datetime)->translatedFormat('j F Y') }}
                                     </p>
-                                    <p class="font-bold">{{ date('H.i', strtotime($m->misa->activity_datetime)) }} WIB</p>
+                                    <p class="font-bold">{{ date('H.i', strtotime($m->activity_datetime)) }} WIB</p>
                                 </div>
                                 {{-- Evaluasi --}}
                                 <div class="mt-6 ms-9">
@@ -106,7 +106,7 @@
                                                     @method('put')
                                                     <textarea
                                                         class="w-full h-40 p-4 border border-[#002366] rounded-md focus:outline-none focus:ring-2 focus:ring-[#D2D2D2]"
-                                                        placeholder="Masukkan Evaluasi..." name="evaluation">{{ $m->misa->evaluation }}</textarea>
+                                                        placeholder="Masukkan Evaluasi..." name="evaluation">{{ $m->evaluation }}</textarea>
                                                     <div class="place-items-end">
                                                         <button
                                                             class="bg-[#002366] text-white py-1 px-2 rounded-md hover:bg-[#740001] transition-all duration-300 text-sm mt-2"
@@ -116,7 +116,7 @@
                                             </div>
                                         @else
                                             <p class="text-sm text-justify pe-2 overflow-y-scroll max-h-32">
-                                                {{ $m->misa->evaluation }}</p>
+                                                {{ $m->evaluation }}</p>
                                         @endif
                                     </div>
                                 </div>

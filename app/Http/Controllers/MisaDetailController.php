@@ -46,8 +46,7 @@ class MisaDetailController extends Controller
         $user = null;
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
-        }
-        elseif (Auth::guard('account')->check()) {
+        } elseif (Auth::guard('account')->check()) {
             $user = Auth::guard('account')->user();
         }
 
@@ -57,7 +56,8 @@ class MisaDetailController extends Controller
             $user->email
         )->where('password', $user->password)->firstOrFail();
 
-        $misa = Misa_Detail::get()->where('account_id', $user->id)->where('activity_datetime', '>=', date('Y-m-d H:i:s'));
+        $user_misa_details = Misa_Detail::get()->where('account_id', $user->id);
+        $misa = Misa::whereIn('id', $user_misa_details->pluck('misa_id'))->where('activity_datetime', '>=', date('Y-m-d H:i:s'))->get();
 
         $ministers = [];
         foreach ($misa as $m) {
@@ -76,7 +76,8 @@ class MisaDetailController extends Controller
     }
 
     /* SHOW EVALUATION FOR ADMIN */
-    public function showEvalAdmin() {
+    public function showEvalAdmin()
+    {
         $user = Auth::guard('admin')->user();
         $misa = Misa::all();
         return view('admin.list_evaluasi', compact('misa', 'user'));
@@ -89,20 +90,20 @@ class MisaDetailController extends Controller
         $accounts = Account::all();  // List of all accounts for dropdown selection
         return view('misaDetails.edit', compact('misaDetail', 'accounts'));
     }
-    
+
     public function update(Request $request, $id)
     {
         $misaDetail = Misa_Detail::findOrFail($id);
-    
+
         $validated = $request->validate([
             'account_id' => 'required|exists:accounts,id',
             'roles' => 'required|string',
             'participation' => 'nullable|boolean',
             'confirmation' => 'nullable|boolean',
         ]);
-    
+
         $misaDetail->update($validated);
-    
+
         return redirect()->route('misaDetails.index')->with('success', 'Misa detail updated successfully');
     }
 
@@ -111,11 +112,10 @@ class MisaDetailController extends Controller
         $user = null;
         if (Auth::guard('admin')->check()) {
             $user = Auth::guard('admin')->user();
-        }
-        elseif (Auth::guard('account')->check()) {
+        } elseif (Auth::guard('account')->check()) {
             $user = Auth::guard('account')->user();
         }
-        
+
         $data = $request->all();
         $misaDetail = Misa_Detail::where('id', $request->id)->where('account_id', $user->id)->where('roles', 'Pengawas')->first();
 
@@ -137,10 +137,9 @@ class MisaDetailController extends Controller
             'confirmation' => $answer
         ]);
 
-        if($answer == true){
+        if ($answer == true) {
             return redirect()->route('konfirmasi')->with('success', 'Konfirmasi kehadiran berhasil.');
-        }
-        else {
+        } else {
             return redirect()->route('konfirmasi')->with('decline', 'Konfirmasi kehadiran ditolak.');
         }
     }
