@@ -408,7 +408,7 @@ Route::get('/groups/{groupId}/details', [GroupController::class, 'getDetails']);
 
 //TODO : KHUSUS PENGURUS ANGGOTA
 
-//! dokumen BAGIAN ANGGOTA
+// dokumen BAGIAN ANGGOTA
 Route::get('/dokumen_pengurus_user', function () {
     $user = Auth::guard('account')->user();
     $templates = Template::where('status', 1)->get();
