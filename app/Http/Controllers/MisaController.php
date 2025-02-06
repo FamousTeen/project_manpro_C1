@@ -286,7 +286,7 @@ class MisaController extends Controller
                 }
 
                 // Update the misa status in the database
-                
+
                 $misa->status = $status;
                 $misa->save();  // Save the updated status to the database
             }
@@ -366,7 +366,7 @@ class MisaController extends Controller
     }
 
 
-    
+
 
     public function search(Request $request)
     {
@@ -386,4 +386,38 @@ class MisaController extends Controller
 
         return response()->json($misas);
     }
+
+    public function filter(Request $request)
+{
+    $query = Misa::query();
+
+    // Filter by title
+    if ($request->has('title') && !empty($request->title)) {
+        $query->where('title', 'LIKE', '%' . $request->title . '%');
+    }
+
+    // Filter by date
+    if ($request->has('date') && !empty($request->date)) {
+        $query->whereDate('activity_datetime', $request->date);
+    }
+
+    // Filter by role
+    if ($request->has('role') && !empty($request->role)) {
+        $query->whereHas('misaDetails', function ($q) use ($request) {
+            $q->where('roles', $request->role);
+        });
+    }
+
+    // Sorting
+    if ($request->has('sort') && in_array($request->sort, ['asc', 'desc'])) {
+        $query->orderBy('activity_datetime', $request->sort);
+    } else {
+        $query->orderBy('activity_datetime', 'desc'); // Default order
+    }
+
+    // Get filtered results
+    $misa = $query->get();
+
+    return back()->with(compact('misa'));
+}
 }

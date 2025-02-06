@@ -98,6 +98,7 @@ Route::put('/trainings/update/{group}/{training}', [TrainingController::class, '
 Route::get('/jadwal', [MisaController::class, 'index'])->name('jadwal_anggota');
 Route::get('/search-misas', [MisaController::class, 'search'])->name('misas.search');
 
+
 //Dashboard
 // Route::get('/dashboard_anggota', [DashboardController::class, 'index'])->name('dashboard_anggota');
 
@@ -133,6 +134,7 @@ Route::resource('misas', MisaController::class)->names([
 ]);
 Route::get('/admin/jadwal_misa', [MisaController::class, 'showMisaList'])->name('admin.jadwal_misa')->middleware('auth:admin');
 Route::post('/misas/{misa}/add-anggota', [MisaController::class, 'addAnggota'])->name('misas.addAnggota');
+Route::get('/misa', [MisaController::class, 'filter'])->name('misas.filter');
 
 
 
