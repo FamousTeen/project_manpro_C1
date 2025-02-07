@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Admin;
+use App\Models\Group;
 use App\Models\Account;
 use App\Models\Training;
 use Illuminate\Http\Request;
+use App\Models\Documentation;
+use App\Models\TrainingDetail;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreAdminRequest;
-use App\Models\Documentation;
-use App\Models\Group;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -79,7 +80,7 @@ class AdminController extends Controller
         }
         return json_encode($id->status);
     }
-    
+
     public function updateRoleAnggota($id, $role)
     {
         $id = Account::find($id);
@@ -87,14 +88,18 @@ class AdminController extends Controller
         return response()->json(['role' => $role]);
     }
 
-    
+
     public function storeTraining(Request $request)
     {
+        // Debugging: Show the request data
+        // dd($request->all());
+
         $data = $request->all();
         $admin = Auth::guard('admin')->user();
+
+        // Validate input
         $formfield = Validator::make($data, [
-            'id' => 'required',
-            'training_date' => 'required',
+            'training_date' => 'required|date',
             'start_time' => 'required',
             'place' => 'required',
             'contact_person' => 'required',
@@ -106,26 +111,35 @@ class AdminController extends Controller
             return back()->withErrors($formfield)->withInput();
         }
 
-        $training = [
+        // Store Training
+        $training = Training::create([
             'admin_id' => $admin->id,
             'training_date' => Carbon::parse($data['training_date'] . ' ' . $data['start_time']),
             'place' => $data['place'],
             'contact_person' => $data['contact_person'],
             'phone_number' => $data['phone_number'],
             'description' => $data['description'],
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ];
-
-        $pelatihan = Training::create($training);
-        Group::create([
-            'training_id' => $pelatihan->id,
-            'name' => 'Kelompok ' . $pelatihan->id,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
-        return redirect()->route('input_pelatihan')->with('success', 'Training berhasil di tambahkan');
+        // Store Group
+        $group = Group::create([
+            'training_id' => $training->id,
+            'name' => 'Kelompok ' . $training->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        // Store Training Details
+        TrainingDetail::create([
+            'training_id' => $training->id,
+            'group_id' => $group->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        return redirect()->route('input_pelatihan')->with('success', 'Training berhasil ditambahkan.');
     }
 
     public function insertDokumentasi(Request $request)

@@ -91,7 +91,8 @@ Route::resource('trainings', TrainingController::class)->except(["edit", "update
 
 Route::get('/search-training', [TrainingController::class, 'search'])->name('search-training');
 
-Route::get('/trainings/edit/{group}/{training}', [TrainingController::class, 'edit'])->name('trainings.edit');
+Route::get('/trainings/edit/{group}/{training}', [TrainingController::class, 'edit'])
+    ->name('trainings.edit');
 Route::put('/trainings/update/{group}/{training}', [TrainingController::class, 'update'])->name('trainings.update');
 
 //Jadwal Anggota
