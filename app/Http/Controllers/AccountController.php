@@ -65,6 +65,8 @@ class AccountController extends Controller
             $validatedData['photo'] = 'default.png';
         }
 
+        $validatedData['roles'] = 'Anggota';
+
         $password_encrypt = bcrypt($validatedData['password']);
         $validatedData['password'] = $password_encrypt;
 
