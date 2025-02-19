@@ -3,7 +3,6 @@
 @section('content')
     @php
         $data = Auth::guard('account')->user();
-        dd($misas);
     @endphp
     <div class="container-fluid m-12 mt-24">
         <!-- Header Section -->
@@ -244,11 +243,11 @@
                   misa.misaDetails?.length > 0
                   ? misa.misaDetails.map(
                     (detail) => `
-                          <p class="mt-2"><span class="font-bold">${detail.roles}:</span></p>
-                          <ul>
-                            <li>${detail.account?.name || 'Tidak ada personel'}</li>
-                          </ul>
-                        `
+                                  <p class="mt-2"><span class="font-bold">${detail.roles}:</span></p>
+                                  <ul>
+                                    <li>${detail.account?.name || 'Tidak ada personel'}</li>
+                                  </ul>
+                                `
                   ).join('')
                   : '<p class="mt-2">Tidak ada personel yang bertugas</p>'
                 }
