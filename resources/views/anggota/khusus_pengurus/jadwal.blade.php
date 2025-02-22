@@ -19,7 +19,7 @@
         Carbon::setLocale('id');
     @endphp
 
-    <div class="container-fluid m-12 mt-24">
+    <div class="container-fluid m-4 sm:m-12 mt-24 sm:mt-24">
         <!-- Header Section -->
         <div class="grid grid-cols-12">
             <div class="col-start-4 col-span-6 mt-6 mb-8 justify-items-center">
