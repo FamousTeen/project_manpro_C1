@@ -75,59 +75,39 @@ use App\Models\Training;
                     <img class="w-[50px] h-[50px]" src="{{ asset('asset/people.png') }}" alt="People Icon">
                 </div>
             </div>
-
-            <!-- Pengumuman Section -->
-            <h2 class="font-bold text-xl mb-4">Pengumuman</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-                <?php
-
-                use Carbon\Carbon;
-
-                $announcement_details = $data->announcementDetails->where('account_id', $data->id);
-
-                Carbon::setLocale('id');
-                ?>
-
-                @foreach ($announcement_details as $announcement_detail)
-                <!-- Announcement Card 1 -->
-                <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
-                    <p class="font-semibold mb-4">
-                        {{ Carbon::parse($announcement_detail->announcement->upload_time)->translatedFormat('l, j F Y') }}
-                    </p>
-                    <p class="text-sm">
-                        {!! nl2br(e(urldecode($announcement_detail->announcement->description))) !!}
-                    </p>
-                </div>
-                @endforeach
-            </div>
         </div>
 
-        <!-- Right Side: Calendar Section -->
+        <!-- Right Side: Pengumuman Section -->
         <div>
             <div class="grid justify-items-center mb-6">
-                <h1 class="font-bold text-xl">CALENDAR</h1>
-            </div>
-            <div class="flex items-center justify-center">
-                <div class="lg:w-7/12 md:w-9/12 sm:w-10/12 w-full max-w-full p-4 sm:py-1">
-                    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                        <!-- Calendar Header -->
-                        <div class="flex items-center justify-between px-6 py-3 bg-[#f6f1e3]">
-                            <button id="prevMonth" class="text-[#20252f]">Previous</button>
-                            <h2 id="currentMonth" class="text-[#20252f] text-lg md:text-xl"></h2>
-                            <button id="nextMonth" class="text-[#20252f]">Next</button>
-                        </div>
+                <h2 class="font-bold text-xl mb-4">Pengumuman</h2>
+                <div class="sm:px-16 px-4">
+                    
+                    <?php
 
-                        <!-- Calendar Days Grid -->
-                        <div class="grid grid-cols-7 gap-2 p-4 text-center text-sm md:text-base" id="calendar">
-                            <!-- Calendar Days Go Here -->
-                        </div>
+                    use Carbon\Carbon;
 
+                    $announcement_details = $data->announcementDetails->where('account_id', $data->id);
+
+                    Carbon::setLocale('id');
+                    ?>
+                    <div class="flex flex-col gap-6">
+                        @foreach ($announcement_details as $announcement_detail)
+                        <!-- Announcement Card -->
+                        <div class="bg-[#f6f1e3] p-8 rounded-xl shadow-lg border border-[#002366]">
+                            <p class="font-semibold mb-4">
+                                {{ Carbon::parse($announcement_detail->announcement->upload_time)->translatedFormat('l, j F Y') }}
+                            </p>
+                            <p class="text-sm">
+                                {!! nl2br(e(urldecode($announcement_detail->announcement->description))) !!}
+                            </p>
+                        </div>
+                        @endforeach
                     </div>
+                    
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 @endsection

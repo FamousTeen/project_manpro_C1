@@ -29,7 +29,6 @@
 
             <!-- Left Side: Tugas, Panitia, and Pengumuman -->
             <div>
-                <!-- Tugas and Panitia Section -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 mx-4">
                     <a href="{{ route('list_anggota') }}">
                         <div
@@ -68,7 +67,10 @@
                         <img class="w-[50px] h-[50px]" src="{{ asset('asset/task_complete.png') }}" alt="Task Icon">
                     </div>
                 </div>
+            </div>
 
+            <!-- Right Side: Calendar Section -->
+            <div>
                 <!-- Pengumuman Section -->
                 <h2 class="font-bold text-xl mb-4 text-center mx-4">THIS WEEK</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-4">
@@ -140,31 +142,6 @@
 
                         </div>
                     @endforeach
-                </div>
-            </div>
-
-            <!-- Right Side: Calendar Section -->
-            <div>
-                <div class="grid justify-items-center mb-6">
-                    <h1 class="font-bold text-xl">CALENDAR</h1>
-                </div>
-                <div class="flex items-center justify-center">
-                    <div class="lg:w-7/12 md:w-9/12 sm:w-10/12 w-full max-w-full p-4 sm:py-1">
-                        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-                            <!-- Calendar Header -->
-                            <div class="flex items-center justify-between px-6 py-3 bg-[#f6f1e3]">
-                                <button id="prevMonth" class="text-[#20252f]">Previous</button>
-                                <h2 id="currentMonth" class="text-[#20252f] text-lg md:text-xl"></h2>
-                                <button id="nextMonth" class="text-[#20252f]">Next</button>
-                            </div>
-
-                            <!-- Calendar Days Grid -->
-                            <div class="grid grid-cols-7 gap-2 p-4 text-center text-sm md:text-base" id="calendar">
-                                <!-- Calendar Days Go Here -->
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
 
